@@ -611,14 +611,17 @@ def get_visible_upload(user_id: int, upload_id: int) -> tuple[Path, str] | None:
     if not row:
         return None
     if row["user_id"] != user_id:
-        def contains_image(value: object) -> bool:
+        def contains_image(value: object, owned_urls=False) -> bool:
             if isinstance(value, dict):
-                return int(value.get("image_id") or 0) == upload_id or any(contains_image(child) for child in value.values())
+                return int(value.get("image_id") or 0) == upload_id or any(contains_image(child,owned_urls) for child in value.values())
             if isinstance(value, list):
-                return any(contains_image(child) for child in value)
+                return any(contains_image(child,owned_urls) for child in value)
+            if owned_urls and isinstance(value,str):
+                import re
+                return bool(re.search(r"/api/uploads/"+str(upload_id)+r"(?![0-9])",value))
             return False
         visible = any(
-            contains_image(item.get("content") or {})
+            contains_image(item.get("content") or {}, item.get("user_id")==row["user_id"])
             for item in list_work(user_id)
         )
         if not visible:

@@ -1021,5 +1021,19 @@
   "Arriving from": "En provenance de",
   "Arriving from map": "Carte de provenance",
   "Choose source map": "Choisir la carte de provenance",
-  "Players arriving from the selected map appear at the center of this marker. Place one exit location per source map.": "Les joueurs arrivant de la carte choisie apparaissent au centre de ce repère. Placez un point de sortie par carte de provenance."
+  "Players arriving from the selected map appear at the center of this marker. Place one exit location per source map.": "Les joueurs arrivant de la carte choisie apparaissent au centre de ce repère. Placez un point de sortie par carte de provenance.",
+  "Import campaign": "Importer une campagne",
+  "Download campaign": "Télécharger la campagne",
+  "Preparing campaign download…": "Préparation du téléchargement…",
+  "Campaign downloaded.": "Campagne téléchargée.",
+  "Importing campaign…": "Importation de la campagne…",
+  "Campaign imported.": "Campagne importée.",
+  "Choose a campaign ZIP up to 512 MB.": "Choisissez un fichier ZIP de campagne de 512 Mo maximum.",
+  "Import this file as a new campaign? You will own the copy. Account logins and other players’ private notes are not imported. Invite players again to continue playing.": "Importer ce fichier comme nouvelle campagne ? Vous serez propriétaire de la copie. Les comptes et les notes privées des autres joueurs ne sont pas importés. Invitez de nouveau les joueurs pour continuer.",
+  "Assign players": "Attribuer les joueurs",
+  "Assign imported players": "Attribuer les joueurs importés",
+  "Leave unchanged": "Ne pas modifier",
+  "Save assignments": "Enregistrer les attributions",
+  "Player assignments saved.": "Attributions enregistrées.",
+  "Invite players into this campaign first. After they accept, match their old characters to their accounts here. Saved map positions will be restored.": "Invitez d’abord les joueurs dans cette campagne. Après leur acceptation, associez leurs anciens personnages à leurs comptes. Les positions enregistrées sur les cartes seront restaurées."
 }

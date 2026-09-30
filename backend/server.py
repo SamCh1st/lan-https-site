@@ -33,6 +33,9 @@ import audio_library
 import character_generator
 import ai_effects
 import campaign_maps
+import campaign_transfer
+import tempfile
+import shutil
 import economy
 import equipment
 from tabletop import normalize_tabletop
@@ -314,6 +317,14 @@ class Handler(SimpleHTTPRequestHandler):
         if path == '/api/audio/file':
             self.serve_audio()
             return
+        assign_match = re.fullmatch(r'/api/campaign/(\d+)/imported-players',path)
+        if assign_match:
+            self.assign_imported_players(int(assign_match.group(1)))
+            return
+        export_match = re.fullmatch(r'/api/campaign/(\d+)/export', path)
+        if export_match:
+            self.export_campaign(int(export_match.group(1)))
+            return
         avatar_match = re.fullmatch(r"/api/avatars/(\d+)", path)
         upload_match = re.fullmatch(r"/api/uploads/(\d+)", path)
         if avatar_match:
@@ -440,9 +451,16 @@ class Handler(SimpleHTTPRequestHandler):
         if path == "/api/upload":
             self.upload_image()
             return
+        if path == '/api/campaign/import':
+            self.import_campaign()
+            return
         data = self.read_json()
         if data is None:
             self.send_json(HTTPStatus.BAD_REQUEST, {"error": "Invalid request."})
+            return
+        assign_match = re.fullmatch(r'/api/campaign/(\d+)/imported-players',path)
+        if assign_match:
+            self.assign_imported_players(int(assign_match.group(1)),data.get('mapping',{}))
             return
         if path == "/api/register":
             self.register(data)
@@ -594,6 +612,51 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_json(HTTPStatus.CREATED, {"ok": True})
         else:
             self.send_json(HTTPStatus.NOT_FOUND, {"error": "API route not found."})
+
+
+    def assign_imported_players(self, campaign_id, mapping=None):
+        user=self.require_user()
+        if not user:return
+        try:self.send_json(HTTPStatus.OK,campaign_transfer.player_assignment(user['id'],campaign_id,mapping))
+        except PermissionError as error:self.send_json(HTTPStatus.FORBIDDEN,{'error':str(error)})
+        except ValueError as error:self.send_json(HTTPStatus.BAD_REQUEST,{'error':str(error)})
+
+    def export_campaign(self, campaign_id):
+        user=self.require_user()
+        if not user:return
+        try: archive,title=campaign_transfer.export_campaign(user['id'],campaign_id)
+        except PermissionError as error:self.send_json(HTTPStatus.FORBIDDEN,{'error':str(error)});return
+        except (ValueError,OSError) as error:self.send_json(HTTPStatus.BAD_REQUEST,{'error':str(error)});return
+        with archive:
+            archive.seek(0,2);length=archive.tell();archive.seek(0)
+            self.send_response(HTTPStatus.OK)
+            self.send_header('Content-Type','application/zip')
+            self.send_header('Content-Disposition',f'attachment; filename="campaign-{campaign_id}.zip"')
+            self.send_header('Content-Length',str(length))
+            self.end_headers()
+            shutil.copyfileobj(archive,self.wfile,1024*1024)
+
+    def import_campaign(self):
+        user=self.require_user()
+        if not user:return
+        try:length=int(self.headers.get('Content-Length','0'))
+        except ValueError:length=0
+        if length<=0 or length>campaign_transfer.MAX_ARCHIVE:
+            self.close_connection=True
+            self.send_json(HTTPStatus.REQUEST_ENTITY_TOO_LARGE,{'error':'Choose a campaign ZIP up to 512 MB.'})
+            return
+        try:
+            with tempfile.TemporaryFile() as source:
+                remaining=length
+                while remaining:
+                    block=self.rfile.read(min(1024*1024,remaining))
+                    if not block:raise ValueError('Campaign upload was interrupted.')
+                    source.write(block);remaining-=len(block)
+                source.seek(0)
+                result=campaign_transfer.import_campaign(user['id'],source)
+            self.send_json(HTTPStatus.CREATED,result)
+        except PermissionError as error:self.send_json(HTTPStatus.FORBIDDEN,{'error':str(error)})
+        except (ValueError,OSError) as error:self.send_json(HTTPStatus.BAD_REQUEST,{'error':str(error)})
 
     def design_art(self, user: dict, campaign_id: int, data: dict) -> None:
         campaign = storage.campaign_record(user['id'], campaign_id)

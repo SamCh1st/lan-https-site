@@ -184,7 +184,7 @@ $(function () {
       showImage('#profileImagePreview', user.avatar_id, '♙');
     }
     $('#newWorkButton').toggleClass('d-none', !user);
-    $('#newCampaignButton').toggleClass('d-none', !user);
+    $('#newCampaignButton,#importCampaignButton').toggleClass('d-none', !user);
     $('#newSavedCharacterButton').toggleClass('d-none', !user);
     $('#notificationButton').toggleClass('d-none', !user);
     $('#archiveTools').toggleClass('d-none', !user);
@@ -772,8 +772,15 @@ $(function () {
       orb.find('small').text((content.ai_dm ? 'AI DM · ' : '') + (content.summary || 'Open this campaign'));
       orb.on('click', function () { enterCampaign(campaign.id); });
       orb.on('keydown', function (event) {
+        if (event.target !== this) return;
         if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); enterCampaign(campaign.id); }
       });
+      if (campaign.membership_role === 'creator') {
+        const actions=$('<span class="campaign-transfer-actions"></span>');
+        $('<button type="button" class="campaign-export">Download campaign</button>').on('click',async function(event){event.stopPropagation();await CampaignTransfer.download(campaign,this);}).appendTo(actions);
+        if (content.imported_players?.length) $('<button type="button" class="campaign-export">Assign players</button>').on('click',function(event){event.stopPropagation();CampaignTransfer.assignPlayers(campaign);}).appendTo(actions);
+        orb.find('.campaign-enter').before(actions);
+      }
       if (user.is_host) {
         $('<button class="host-campaign-delete" type="button" aria-label="Delete campaign">×</button>').on('click', async function (event) {
           event.stopPropagation();
@@ -1841,6 +1848,7 @@ $(function () {
     openRecord('chronicle');
   });
   $('#newCampaignButton').on('click', function () { openRecord('campaign'); });
+  CampaignTransfer.setup(async()=>{await loadWork();renderCampaigns();});
   $('#newSavedCharacterButton').on('click', function () { openRecord('character_template'); });
 
   $('#importCharacterTemplate').on('click', function () {

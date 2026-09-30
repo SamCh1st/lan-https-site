@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="map-splines.css?v=20260920-detail-scale">
   <link rel="stylesheet" href="map-opening.css?v=20260920-open-checks-final">
   <link rel="stylesheet" href="map-part-cards.css?v=20260919-catalog">
+  <link rel="stylesheet" href="campaign-transfer.css?v=20260930">
 </head>
 <body>
   <div class="mist"></div>
@@ -115,7 +116,9 @@
 
     <section class="campaign-library" id="workspace">
       <div id="campaignLanding">
-        <div class="library-heading"><div><p class="eyebrow mb-2">YOUR REALMS</p><h2>Campaigns</h2></div><button class="campaign-add d-none" id="newCampaignButton" type="button"><span>＋</span> New campaign</button></div>
+        <div class="library-heading"><div><p class="eyebrow mb-2">YOUR REALMS</p><h2>Campaigns</h2></div><div class="campaign-library-actions"><button class="campaign-add d-none" id="importCampaignButton" type="button">Import campaign</button><button class="campaign-add d-none" id="newCampaignButton" type="button"><span>＋</span> New campaign</button></div></div>
+        <input id="campaignImportFile" type="file" accept=".zip,application/zip" hidden>
+        <p id="campaignTransferStatus" role="status" aria-live="polite"></p>
         <input class="campaign-search" id="campaignSearch" type="search" placeholder="Search campaigns…" aria-label="Search campaigns">
         <div class="campaign-list" id="campaignScroll"></div>
         <section class="character-library" id="characterLibrary">
@@ -426,7 +429,8 @@
   <script src="map-workspace.js?v=20260929-shared-scene"></script>
   <script src="starter-art.js?v=20260922-existing-types"></script>
   <script src="equipment.js?v=20260919-shared-cards"></script>
-  <script src="app.js?v=20260922-scale"></script>
+  <script src="campaign-transfer.js?v=20260930"></script>
+  <script src="app.js?v=20260930-campaign-transfer"></script>
   <script src="audio-library.js?v=20260917"></script>
   <script src="realm-resize.js?v=20260919"></script>
   <script src="realm-container-resize.js?v=20260919-outer-frame"></script>

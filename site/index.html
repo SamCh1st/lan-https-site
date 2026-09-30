@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en" translate="yes">
+<head>
+  <meta charset="utf-8"><script src="browser-translation.js?v=20260921-languages" defer></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#160b06">
+  <meta name="description" content="A private fantasy campaign archive for adventurers on your local network.">
+  <meta name="application-name" content="In-House D&amp;D">
+  <meta property="og:title" content="In-House D&amp;D">
+  <meta property="og:description" content="Enter the keep and manage your private tabletop campaigns.">
+  <meta property="og:type" content="website">
+  <title>Campaigns | In-House D&amp;D</title>
+  <link rel="icon" href="assets/realm-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/realm-mark.svg">
+  <link rel="stylesheet" href="vendor/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="fantasy.css">
+  <link rel="stylesheet" href="tavern.css?v=20260915-persona-panels">
+  <link rel="stylesheet" href="starter-art.css?v=20260919-coins-final">
+  <link rel="stylesheet" href="tabletop.css?v=20260915">
+  <link rel="stylesheet" href="equipment.css?v=20260919">
+  <link rel="stylesheet" href="rail-dice.css?v=20260919-mixed-dice">
+  <link rel="stylesheet" href="spell-atelier.css?v=20260915">
+  <link rel="stylesheet" href="art-atelier.css?v=20260919">
+  <script>try{if(localStorage.getItem('in-house-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(error){}</script>
+  <link rel="stylesheet" href="map-workspace.css?v=20260920-square-palette">
+  <link rel="stylesheet" href="audio-library.css?v=20260917">
+  <link rel="stylesheet" href="realm-layout.css?v=20260919-compact-layout">
+  <link rel="stylesheet" href="map-image-picker.css?v=20260920-square-cards">
+  <link rel="stylesheet" href="map-splines.css?v=20260920-detail-scale">
+  <link rel="stylesheet" href="map-opening.css?v=20260920-open-checks-final">
+  <link rel="stylesheet" href="map-part-cards.css?v=20260919-catalog">
+</head>
+<body>
+  <div class="mist"></div>
+  <button class="realm-menu-button audio-menu-button" id="audioMenuButton" type="button" aria-label="Open audio library" aria-controls="audioSidebar" aria-expanded="false">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M11 4 6 8H3v8h3l5 4z"/><path d="M15 8a6 6 0 0 1 0 8M18 5a10 10 0 0 1 0 14"/></svg>
+  </button>
+  <div class="realm-sidebar-backdrop audio-backdrop" id="audioBackdrop"></div>
+  <aside class="realm-sidebar audio-sidebar" id="audioSidebar" aria-hidden="true" aria-label="Audio library" inert>
+    <div class="realm-sidebar-head"><div><span class="sidebar-kicker">THE REALM'S</span><h2>Audio Library</h2></div><button class="sidebar-close" id="audioClose" type="button" aria-label="Close audio library">×</button></div>
+    <div class="audio-content">
+      <p>Shared across the site. Every track loops until paused.</p>
+      <label for="audioFolder">Import into folder</label>
+      <select id="audioFolder" class="form-select"></select>
+      <label class="btn btn-outline-light audio-import" for="audioFiles" tabindex="0" role="button">Import MP3s</label>
+      <input id="audioFiles" type="file" accept=".mp3,audio/mpeg" multiple hidden>
+      <button id="audioStop" class="btn btn-outline-light" type="button">Stop all</button>
+      <p id="audioStatus" role="status" aria-live="polite"></p>
+      <div id="audioFolders"></div>
+    </div>
+    <div class="realm-sidebar-foot">Shared library · Playback on this device</div>
+  </aside>
+  <button class="realm-menu-button" id="realmMenuButton" type="button" aria-label="Open realm guide" aria-controls="realmSidebar" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="realm-sidebar-backdrop" id="realmSidebarBackdrop"></div>
+  <aside class="realm-sidebar" id="realmSidebar" aria-hidden="true">
+    <div class="realm-sidebar-head">
+      <div><span class="sidebar-kicker">THE ARCHIVIST'S</span><h2>Realm Guide</h2></div>
+      <button class="sidebar-close" id="realmMenuClose" type="button" aria-label="Close realm guide">×</button>
+    </div>
+    <nav class="realm-scroll" aria-label="Campaign records">
+
+      <p class="sidebar-section-title">Campaign</p>
+      <button class="d-none" id="campaignMapButton" type="button"><span class="nav-sigil">⌗</span><span><strong id="campaignCenterNavTitle">Campaign Map</strong><small id="campaignCenterNavHelp">Return to the live adventuring map</small></span></button>
+      <button class="ai-campaign-only d-none" data-record-type="chat"><span class="nav-sigil">☵</span><span><strong>Chats</strong><small>Main story &amp; private conversations</small></span></button>
+      <button data-record-type="campaign"><span class="nav-sigil">♛</span><span><strong>Campaign Overview</strong><small>Premise, setting &amp; party goals</small></span></button>
+      <button data-record-type="session"><span class="nav-sigil">☽</span><span><strong>Session Journal</strong><small>Recaps, dates &amp; next steps</small></span></button>
+      <button data-record-type="quest"><span class="nav-sigil">⌖</span><span><strong>Quests</strong><small>Objectives, leads &amp; rewards</small></span></button>
+      <button data-record-type="encounter"><span class="nav-sigil">⚔</span><span><strong>Encounters</strong><small>Combat, creatures &amp; tactics</small></span></button>
+      <p class="sidebar-section-title">People &amp; World</p>
+      <div class="community-faces" id="communityFaces" aria-label="Site member profiles"></div>
+      <button data-record-type="character"><span class="nav-sigil">♙</span><span><strong>Player Characters</strong><small>Class, level &amp; backstory</small></span></button>
+      <button data-record-type="npc"><span class="nav-sigil">♝</span><span><strong>NPCs</strong><small>Role, motives &amp; relationships</small></span></button>
+      <button data-record-type="location"><span class="nav-sigil">♜</span><span><strong>Locations</strong><small>Places, regions &amp; maps</small></span></button>
+      <button data-record-type="faction"><span class="nav-sigil">⚜</span><span><strong>Factions</strong><small>Goals, allies &amp; rivals</small></span></button>
+      <p class="sidebar-section-title">Archive</p>
+      <button id="artAtelierButton" class="d-none" type="button"><span class="nav-sigil">✎</span><span><strong>Art Atelier</strong><small>Draw item icons &amp; character portraits</small></span></button>
+      <button id="spellAtelierButton" class="d-none" type="button"><span class="nav-sigil">◎</span><span><strong>Spell Atelier</strong><small>Draw, shape &amp; test a magic seal</small></span></button>
+      <button id="tabletopDiceButton" type="button"><span class="nav-sigil">⚄</span><span><strong>Dice &amp; Table Rules</strong><small>Roll dice and check turn reminders</small></span></button>
+      <button data-record-type="item"><span class="nav-sigil">◆</span><span><strong>Items &amp; Treasure</strong><small>Equipment, relics &amp; rewards</small></span></button>
+      <button data-record-type="spell"><span class="nav-sigil">✧</span><span><strong>Spells</strong><small>Magic, casters &amp; encounters</small></span></button>
+      <button data-record-type="attack"><span class="nav-sigil">🗡</span><span><strong>Attacks &amp; Abilities</strong><small>Actions, damage &amp; users</small></span></button>
+<button data-record-type="species"><span class="nav-sigil">♙</span><span><strong>Races &amp; Species</strong><small>Ancestries, lineages &amp; traits</small></span></button>
+<button data-record-type="background"><span class="nav-sigil">☷</span><span><strong>Backgrounds</strong><small>Origins, skills &amp; starting feats</small></span></button>
+<button data-record-type="class"><span class="nav-sigil">⚔</span><span><strong>Classes</strong><small>Hit Dice, abilities &amp; progression</small></span></button>
+<button data-record-type="feat"><span class="nav-sigil">✧</span><span><strong>Feats</strong><small>Benefits, prerequisites &amp; choices</small></span></button>
+      <button data-record-type="map_part"><span class="nav-sigil">▧</span><span><strong>Map Parts</strong><small>Terrain, scenery, props &amp; lights</small></span></button>
+      <button data-record-type="artwork"><span class="nav-sigil">▧</span><span><strong>Artwork</strong><small>Saved images &amp; illustrations</small></span></button>
+      <button data-record-type="lore"><span class="nav-sigil">✦</span><span><strong>Lore &amp; Secrets</strong><small>History, deities &amp; revelations</small></span></button>
+    </nav>
+  </aside>
+  <main class="container-xl position-relative">
+    <nav class="navbar">
+      <a class="navbar-brand d-flex align-items-center gap-2" id="homeLink" href="#workspace"><span class="mark">ᚱ</span> In-House D&amp;D</a>
+      <div class="d-flex align-items-center gap-3">
+        <div class="status"><span></span> Realm Awakened</div>
+        <button class="theme-toggle" id="themeToggle" type="button" aria-pressed="false" title="Switch between normal and dark style"><span aria-hidden="true">☾</span><b>Dark</b></button>
+        <button class="notification-button d-none" id="notificationButton" type="button" aria-label="Open notifications"><span>♢</span><b class="d-none" id="notificationCount">0</b></button>
+        <button class="btn btn-sm btn-outline-light" id="accountButton" type="button">Sign in</button>
+      </div>
+    </nav>
+
+    <section class="hero landing-hero">
+      <p class="eyebrow">A PRIVATE REALM BEYOND THE CLOUD</p>
+      <h1>Enter the keep,<br><em>shape your legend.</em></h1>
+      <p class="intro">A secret stronghold served from this very machine. Gather companions on the same network, keep your chronicles, and forge what comes next.</p>
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <button class="btn btn-accent" id="copyButton" type="button">Copy the realm address</button>
+        <span id="address"></span>
+      </div>
+    </section>
+
+    <section class="campaign-library" id="workspace">
+      <div id="campaignLanding">
+        <div class="library-heading"><div><p class="eyebrow mb-2">YOUR REALMS</p><h2>Campaigns</h2></div><button class="campaign-add d-none" id="newCampaignButton" type="button"><span>＋</span> New campaign</button></div>
+        <input class="campaign-search" id="campaignSearch" type="search" placeholder="Search campaigns…" aria-label="Search campaigns">
+        <div class="campaign-list" id="campaignScroll"></div>
+        <section class="character-library" id="characterLibrary">
+          <div class="library-heading"><div><p class="eyebrow mb-2">YOUR HEROES</p><h2>My Characters</h2><small>Build a reusable adventurer here, then bring a copy into any campaign.</small></div><button class="campaign-add d-none" id="newSavedCharacterButton" type="button"><span>＋</span> New character</button></div>
+          <div class="saved-character-list" id="savedCharacterList"></div>
+        </section>
+      </div>
+      <div class="campaign-view d-none" id="campaignView">
+        <header class="campaign-view-head">
+          <button class="campaign-back" id="campaignBack" type="button">← All campaigns</button>
+          <div class="campaign-title-block"><p class="eyebrow mb-2">CAMPAIGN</p><h2 id="activeCampaignName"></h2></div>
+        </header>
+        <section class="party-shelf">
+          <div class="party-shelf-head"><div><h3>Your party</h3><small>Scroll sideways to see every adventurer</small></div><button class="campaign-add d-none" id="inviteButton" type="button"><span>＋</span> Add player</button></div>
+          <div class="party-scroll" id="partyScroll"></div>
+        </section>
+        <div class="campaign-dashboard" id="campaignDashboard">
+          <aside class="dashboard-rail inventory-rail player-map-tools">
+            <button class="rail-heading inventory-dice-toggle" id="inventoryDiceToggle" type="button" aria-expanded="false" aria-controls="inventoryDicePanel" aria-label="Open dice roller"><span class="rail-title" id="inventoryRailTitle">Inventory</span><strong id="inventoryCount">0</strong><span id="inventoryDiceArrow" aria-hidden="true">▸</span></button>
+            <div class="rail-entry-list" id="inventoryPreview"></div>
+            <section id="inventoryDicePanel" class="rail-dice" aria-label="Character dice roller" hidden>
+              <div class="rail-dice-types"><label for="railDieType">Roll type</label><select id="railDieType"><option value="4">D-4</option><option value="6">D-6</option><option value="8">D-8</option><option value="10">D-10</option><option value="12">D-12</option><option value="20" selected>D-20</option><option value="100">D-100</option></select><label for="railDieCount">Number of dice</label><input id="railDieCount" type="number" min="1" max="100" step="1" value="1" required inputmode="numeric"><div id="railDiceAdditional"></div><button id="railDiceAdd" type="button">+ Add dice type</button></div>
+              <div class="rail-dice-stage"><button id="railDie" type="button" aria-label="Roll D-20"><svg viewBox="0 0 140 140" aria-hidden="true"><path id="railDieOutline"></path><path id="railDieFacets"></path></svg><span id="railDieFace">20</span></button><span class="rail-dice-hint">Click the die to roll</span><output id="railDieResult" aria-live="polite">Ready to roll</output><small id="railDieBreakdown"></small></div>
+              <div class="rail-dice-stats"><strong id="railDiceCharacter">No character selected</strong><label for="railDieStat">Bonus from your sheet</label><select id="railDieStat"><option value="raw">No stat bonus</option></select><div id="railDiceAbilities" class="rail-dice-abilities"></div><small id="railDieBonus"></small><label for="railDieExtra">Other bonus / penalty</label><input id="railDieExtra" type="number" value="0" min="-999" max="999" step="1"><label for="railDieMode">Advantage / disadvantage</label><select id="railDieMode"><option value="normal">Normal roll</option><option value="advantage">Advantage</option><option value="disadvantage">Disadvantage</option></select><small id="railDieConditions"></small><small id="railDieNotice">Advantage and disadvantage cancel. Apply situational effects at the table. Rolls are visible on this device.</small><p id="railDieError" role="alert"></p></div>
+            </section>
+          </aside>
+          <aside class="dashboard-rail map-editor-rail dm-map-tools"><div class="rail-heading"><span class="rail-title">Placeable objects</span></div><input class="map-panel-search" id="mapObjectSearch" type="search" placeholder="Search objects…" aria-label="Search placeable objects"><div class="map-tool-list" id="mapObjectTools"><button type="button" data-map-spline="wall">〰 Wall spline · 1×2</button><button type="button" data-map-spline="foundation">〰 Foundation spline · 1×1</button><button type="button" draggable="true" data-map-object="floor">▦ Timber floor · 1×1</button><button type="button" draggable="true" data-map-object="foundation">▤ Foundation · 1×1</button><button type="button" draggable="true" data-map-object="wall">▥ Stone wall · 1×2</button><button type="button" draggable="true" data-map-object="stairs">≋ Stairs · 1×2</button><button type="button" draggable="true" data-map-object="roof">⌂ Shingled roof · 2×1</button><button type="button" draggable="true" data-map-object="door">▯ Door · 1×2</button><button type="button" draggable="true" data-map-object="pillar">♜ Pillar · 1×2</button><button type="button" draggable="true" data-map-object="tree">♣ Ancient tree · 1×2</button><button type="button" draggable="true" data-map-object="rock">◆ Rock · 1×1</button><button type="button" draggable="true" data-map-object="chest">▣ Chest · 2×1</button><button type="button" draggable="true" data-map-object="barrel">◉ Barrel · 1×1</button><button type="button" draggable="true" data-map-object="campfire">♨ Campfire · 1×1</button><button type="button" draggable="true" data-map-object="torch">† Torch · 1×2</button></div><section class="map-hierarchy-panel"><div><strong>Scene hierarchy</strong><button type="button" id="mapNewFolder">＋ Folder</button></div><input class="map-panel-search" id="mapHierarchySearch" type="search" placeholder="Search hierarchy…" aria-label="Search scene hierarchy"><div class="map-hierarchy" id="mapHierarchy"></div></section></aside>
+          <aside class="dashboard-rail ai-world-rail ai-world-left d-none"><div class="rail-heading"><span class="rail-title">Known scene</span></div><label>Current location<input id="aiWorldLocation" maxlength="120" placeholder="The tavern cellar"></label><label>Time of day<select id="aiWorldTime"><option>Dawn</option><option>Morning</option><option selected>Day</option><option>Evening</option><option>Night</option></select></label><label>Weather<select id="aiWorldWeather"><option selected>Clear</option><option>Cloudy</option><option>Rain</option><option>Storm</option><option>Snow</option><option>Fog</option></select></label><label>Visibility<select id="aiWorldVisibility"><option selected>Clear</option><option>Dim</option><option>Dark</option><option>Obscured</option></select></label></aside>
+          <div class="map-stage">
+            <section class="ai-campaign-panel d-none" id="aiCampaignPanel" aria-label="AI Dungeon Master table">
+              <div class="ai-chat-log" id="aiChatLog" aria-live="polite"></div>
+              <div class="ai-persona-dock" id="aiPersonaDock" aria-label="Choose who Ollama answers as"></div>
+              <form class="ai-chat-form" id="aiChatForm">
+                <div class="ai-undo-delete d-none" id="aiUndoDelete"><span>Message deleted.</span><button type="button">Undo</button></div>
+                <div class="ai-chat-compose"><div class="ai-speaker-picker"><button id="aiSpeakerButton" type="button" aria-expanded="false" title="Choose who you write as">♙</button><div class="ai-speaker-menu d-none" id="aiSpeakerMenu"></div></div><textarea id="aiChatInput" rows="3" maxlength="12000" placeholder="Write dialogue, an action, or table talk…" required></textarea><button class="ai-address-button" type="submit">Send</button></div>
+                <div class="ai-chat-options"><span><label class="ai-address-toggle"><input id="aiAddressToggle" type="checkbox" checked> Address this message to Ollama</label><details class="ai-chat-audience"><summary>Who can hear this?</summary><div id="aiChatAudience"></div></details></span><small>Send only posts the message. Click a character card above when you want Ollama to answer; unchecked table talk is ignored.</small></div>
+                <p class="form-error" id="aiChatError" role="alert"></p>
+              </form>
+            </section>
+            <div class="map-placeholder map-world d-none" id="mapPlaceholder" hidden inert>
+              <canvas id="campaignMapCanvas" aria-label="Interactive three-dimensional campaign map"></canvas>
+              <div class="map-environment-controls d-none" id="mapEnvironmentControls">
+                <div class="map-control-group" aria-label="Time of day">
+                  <span>Time</span><button type="button" data-map-time="morning">Morning</button><button type="button" data-map-time="day">Day</button><button type="button" data-map-time="evening">Evening</button><button type="button" data-map-time="night">Night</button>
+                </div>
+                <div class="map-control-group" aria-label="Weather">
+                  <span>Weather</span><button type="button" data-map-weather="clear">Clear</button><button type="button" data-map-weather="rain">Rain</button><button type="button" data-map-weather="storm">Storm</button>
+                </div>
+              </div>
+              <div class="map-view-controls"><button type="button" id="mapResetView">Reset view</button></div>
+              <button class="map-fullscreen-button" type="button" id="mapFullscreen">Fullscreen</button>
+              <div class="map-weather-layer" aria-hidden="true"></div><div class="map-checkpoint-layer" id="mapCheckpointLayer"></div>
+              <div class="map-player-layer" id="mapPlayerLayer"></div>
+              <div class="map-crosshair" aria-hidden="true">⌖</div>
+              <div class="tt-map-note">Free placement · agree distances and movement with your DM. The map does not spend movement or resolve attacks.</div>
+            </div>
+            <section class="campaign-records d-none" id="campaignRecords">
+              <div class="records-heading"><div><p class="eyebrow mb-2" id="recordsEyebrow">ARCHIVE</p><h3 id="recordsTitle">Records</h3></div><button class="campaign-add d-none" id="addSectionRecord" type="button"><span>＋</span> Add</button></div>
+              <div class="tt-record-search"><input class="form-control" id="recordSearch" type="search" placeholder="Search this archive…" aria-label="Search records"><select class="form-control" id="recordLibraryFilter" aria-label="Filter records"><option value="">All records</option><option value="reference">Rules references</option><option value="campaign">Campaign records</option></select></div>
+              <div id="workList" class="work-list"></div>
+            </section>
+          </div>
+          <aside class="dashboard-rail ai-world-rail ai-world-right d-none"><div class="rail-heading"><span class="rail-title">Scene pressure</span></div><label>Temperature<select id="aiWorldTemperature"><option>Freezing</option><option>Cold</option><option selected>Mild</option><option>Warm</option><option>Hot</option></select></label><label>Danger<select id="aiWorldDanger"><option selected>Safe</option><option>Uneasy</option><option>Dangerous</option><option>Combat</option></select></label><label>Pace<select id="aiWorldPace"><option>Resting</option><option selected>Exploration</option><option>Travel</option><option>Social scene</option><option>Chase</option><option>Combat</option></select></label><label>Public mood<input id="aiWorldMood" maxlength="100" placeholder="Warm but suspicious"></label><button id="aiWorldSave" type="button">Update scene</button><small id="aiWorldStatus"></small></aside>
+          <aside class="map-filter-rail"><span>Icon filter</span><div class="map-icon-filters" id="mapIconFilters"></div><button class="new-map-icon dm-map-tools" id="newMapIcon" type="button">＋ Icon</button></aside>
+          <aside class="dashboard-rail attacks-rail player-map-tools"><div class="rail-heading"><span class="rail-title">Attacks &amp; Spells</span><strong id="attackCount">0</strong></div><div class="rail-entry-list" id="attackPreview"></div></aside>
+          <aside class="dashboard-rail map-editor-rail tool-rail-end dm-map-tools"><div class="rail-heading"><span class="rail-title">Brushes</span></div><input class="map-panel-search" id="mapBrushSearch" type="search" placeholder="Search brushes…" aria-label="Search map brushes"><div class="map-tool-list" id="mapBrushTools"><button type="button" data-map-transform="move">Move object</button><button type="button" data-map-transform="rotate">Rotate object</button><button type="button" data-map-transform="stretch">Stretch object</button><button type="button" data-map-brush="expand">Place grid block</button><button type="button" data-map-brush="erase-grid">Erase grid block</button><button type="button" data-map-brush="grid-path">Grid path</button><button type="button" data-map-brush="grid-grass">Grid grass</button><button type="button" data-map-brush="grid-fog">Grid fog</button><button type="button" data-map-brush="grid-zone">Grid zone</button><button type="button" data-map-brush="grid-water">Grid water</button><button type="button" data-map-brush="path">Smooth path</button><button type="button" data-map-brush="grass">Smooth grass</button><button type="button" data-map-brush="fog">Fog bank</button><button type="button" data-map-brush="zone">Smooth zone</button><button type="button" data-map-brush="erase">Eraser</button><button type="button" data-map-brush="none">Move mode</button></div></aside>
+        </div>
+        <section id="characterLoadout" class="character-loadout" aria-labelledby="characterLoadoutTitle" hidden>
+          <header class="character-loadout-heading">
+            <h2 id="characterLoadoutTitle">Character equipment &amp; abilities</h2>
+            <label id="characterLoadoutPicker">Character<select id="characterLoadoutSelect" class="form-control"></select></label>
+          </header>
+          <p id="characterLoadoutEmpty" hidden>No character available yet.</p>
+          <div id="characterLoadoutColumns" class="character-loadout-columns">
+            <section aria-labelledby="characterInventoryTitle"><h3 id="characterInventoryTitle">Inventory</h3><div id="characterArchiveInventory"></div></section>
+            <section aria-labelledby="characterAbilitiesTitle"><h3 id="characterAbilitiesTitle">Attacks &amp; Spells</h3><div id="characterArchiveAbilities" class="character-ability-cards"></div></section>
+          </div>
+        </section>
+        <section class="ai-director-console d-none" id="aiDirectorConsole">
+          <header class="ai-table-header">
+            <div><p class="eyebrow mb-1">OLLAMA STORY TABLE</p><h3 id="aiChatTitle">Main story</h3><small id="aiDmConnection">Checking the local storyteller…</small></div>
+            <button class="ai-story-toggle d-none" id="aiStoryToggle" type="button">Story controls</button>
+          </header>
+          <section class="ai-story-controls d-none" id="aiStoryControls">
+            <div class="ai-story-settings"><label>Lead Ollama model<select id="aiModel"></select></label><label>Story behavior<select id="aiStoryMode"><option value="adaptive">Adapt story as play changes it</option><option value="fixed">Stay faithful to the story</option></select></label><label class="ai-helper-models">Helper models<select id="aiHelperModels" multiple size="4"></select><small>Select up to three installed models. One helper at a time prepares notes after replies for later turns. The storyteller never waits for notes.</small></label></div>
+            <label>Campaign story<textarea id="aiStory" rows="9" placeholder="The AI DM's private campaign plan…"></textarea></label>
+            <label>Generate or modify with a prompt<textarea id="aiStoryPrompt" rows="3" placeholder="Create a mystery around a drowned keep…"></textarea></label>
+            <div class="ai-story-actions"><button type="button" data-ai-story-action="generate">Generate new story</button><button type="button" data-ai-story-action="modify">Modify current story</button><button type="button" data-ai-story-action="save">Save story settings</button></div>
+            <details><summary>What the AI remembers</summary><textarea id="aiMemory" rows="7" placeholder="Important decisions, discoveries, relationships, promises, and unresolved events are kept here automatically."></textarea></details>
+            <p class="form-error" id="aiStoryError" role="alert"></p><p class="form-success" id="aiStoryStatus" role="status"></p>
+          </section>
+        </section>
+        <section class="campaign-character-area d-none" id="campaignCharacterArea"><div class="campaign-character-heading"><div><p class="eyebrow mb-2" id="campaignCharacterKicker">YOUR ADVENTURER</p><h3 id="campaignCharacterTitle">Character model &amp; skeleton</h3><small id="campaignCharacterHelp">Your changes belong to this campaign character.</small><label class="dm-rig-target d-none" id="dmRigTarget">NPC to model<select id="campaignRigNpcSelect"></select></label></div><div><button class="d-none" type="button" id="createCampaignRigNpc">Create NPC</button><button type="button" id="editCampaignCharacter">Open character sheet</button><button type="button" id="saveCampaignCharacterRig">Save character model</button></div></div><div class="campaign-character-empty d-none" id="campaignCharacterEmpty">Create an NPC to begin building its model and fitting its skeleton.</div><div id="campaignCharacterWorkshopHost"></div><p class="form-success" id="campaignCharacterRigStatus" role="status"></p></section>
+      </div>
+    </section>
+
+    <section class="details landing-details row g-0" aria-label="Connection details">
+      <article class="col-md-4 pe-md-4"><div class="detail-inner">
+        <span class="number">I</span><h2>Within the realm</h2><p>Only travelers connected to this router or Wi‑Fi may enter the keep.</p>
+      </div>
+      </article>
+      <article class="col-md-4 px-md-4"><div class="detail-inner border-start ps-md-4">
+        <span class="number">II</span><h2>Warded passage</h2><p>Every message between the stronghold and its visitors travels under encryption.</p>
+      </div>
+      </article>
+      <article class="col-md-4 ps-md-4"><div class="detail-inner border-start ps-md-4">
+        <span class="number">III</span><h2>Your legend</h2><p>The realm is yours to shape. Change its scrolls and the transformation appears at once.</p>
+      </div>
+      </article>
+    </section>
+  </main>
+  <footer class="container-xl d-flex justify-content-between"><span>IN-HOUSE D&amp;D</span><span id="year"></span></footer>
+  <div class="toast-container position-fixed bottom-0 end-0 p-3"><div id="copyToast" class="toast" role="status"><div class="toast-body">The realm address is copied.</div></div></div>
+  <div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="accountTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title fs-5" id="accountTitle">Adventurer's ledger</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body">
+        <div id="signedOutView">
+          <div class="auth-tabs"><button class="active" data-auth-mode="login">Sign in</button><button data-auth-mode="register">Create account</button></div>
+          <form id="accountForm">
+            <label>Username<input class="form-control" name="username" autocomplete="username" required minlength="3" maxlength="30"></label>
+            <label class="register-only d-none">Email (optional)<input class="form-control" name="email" type="email" autocomplete="email"></label>
+            <label>Password<input class="form-control" name="password" type="password" autocomplete="current-password" required minlength="8"></label>
+            <p class="form-error" id="accountError" role="alert"></p>
+            <button class="btn btn-accent w-100" type="submit">Sign in</button>
+          </form>
+        </div>
+        <div id="signedInView" class="d-none">
+          <p>Signed in as <strong id="currentUsername"></strong>.</p>
+          <form id="settingsForm">
+            <div class="image-uploader profile-image-uploader">
+              <div class="image-preview" id="profileImagePreview"><span>♙</span></div>
+              <div><strong>Profile picture</strong><small>PNG, JPEG, GIF, or WebP · 5 MB maximum</small><label class="image-pick">Choose image<input name="avatar_file" type="file" accept="image/png,image/jpeg,image/gif,image/webp"></label></div>
+              <input name="avatar_id" type="hidden">
+            </div>
+            <label>Username<input class="form-control" name="username" required minlength="3" maxlength="30" autocomplete="username"></label>
+            <label>Email (optional)<input class="form-control" name="email" type="email" autocomplete="email"></label>
+            <label for="accountTranslation">Interface language<select class="form-select" id="accountTranslation" name="ui_language" aria-describedby="translationHelp"><option value="auto">Automatic — browser language</option><option value="en">English</option><option value="fr">Français</option></select></label>
+            <p class="settings-note" id="translationHelp">Automatically uses French for French browsers and English otherwise. Choose a language to override this. Save account settings to remember your choice. AI replies follow your message language. Saved names, notes and conversations are preserved.</p>
+            <hr>
+            <p class="settings-note">Leave the next two fields blank to keep your current password.</p>
+            <label>New password<input class="form-control" name="new_password" type="password" minlength="8" autocomplete="new-password"></label>
+            <label>Repeat new password<input class="form-control" name="confirm_password" type="password" minlength="8" autocomplete="new-password"></label>
+            <hr>
+            <label>Current password <span class="required-note">Required to save</span><input class="form-control" name="current_password" type="password" required autocomplete="current-password"></label>
+            <p class="form-error" id="settingsError" role="alert"></p>
+            <p class="form-success" id="settingsSuccess" role="status"></p>
+            <button class="btn btn-accent w-100" type="submit">Save account settings</button>
+          </form>
+          <button class="btn btn-link text-secondary w-100 mt-3" id="logoutButton" type="button">Sign out</button>
+        </div>
+      </div>
+    </div></div>
+  </div>
+  <div class="modal fade" id="workModal" tabindex="-1" aria-labelledby="workTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"><div class="modal-content"><form id="workForm">
+      <div class="modal-header"><h2 class="modal-title fs-5" id="workTitle">Scribe a chronicle</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body">
+        <input type="hidden" name="id"><input type="hidden" name="category">
+        <div class="row g-2 align-items-center record-editor-heading">
+          <div class="col-md-7"><label id="recordTitleLabel">Title<input class="form-control" name="title" required maxlength="120"></label></div>
+          <div class="col-md-5"><div class="image-uploader">
+            <div class="image-preview record-image-preview" id="recordImagePreview"><span>✦</span></div>
+            <div><strong>Artwork</strong><label class="image-pick">Choose image<input name="image_file" type="file" accept="image/png,image/jpeg,image/gif,image/webp"></label></div>
+            <input name="image_id" type="hidden">
+          </div></div>
+        </div>
+        <details id="characterGenerator" class="tt-section d-none" aria-label="Generate a character"><summary>Create from an idea</summary><label for="characterGenerationPrompt">Character prompt<textarea id="characterGenerationPrompt" class="form-control" rows="3" maxlength="6000" placeholder="A level-1 elven wizard who studies forgotten ruins; shy, curious, and fiercely loyal…"></textarea></label><p class="tt-help">Describe their class, level, appearance and personality. Your campaign’s local AI will fill this form. Review the draft, then Save to create the character. Equipment and spells are proposed in notes.</p><div class="tt-actions"><button id="generateCharacterButton" type="button">Generate character</button></div><p id="characterGenerationStatus" role="status" class="tt-help"></p><p id="characterGenerationError" role="alert" class="form-error"></p></details>
+        <div id="structuredFields"></div>
+        <section class="record-audience d-none" id="recordAudience"><strong>Give this card to specific players</strong><small>Only selected players receive it in their campaign tools. “Revealed to players” still shares it with everyone.</small><div id="recordAudiencePlayers"></div></section>
+        <section class="character-template-import d-none" id="characterTemplateImport">
+          <div><strong>Use a saved character</strong><small>Copy one of your main-page characters into this campaign. The campaign copy can be changed separately.</small></div>
+          <div class="character-template-import-controls"><select class="form-control" id="characterTemplateSelect" aria-label="Saved character"></select><button type="button" id="importCharacterTemplate">Use saved character</button></div>
+          <small class="character-template-import-status" id="characterTemplateImportStatus" role="status"></small>
+        </section>
+        <section class="character-rig-workshop d-none" id="characterRigWorkshop" aria-labelledby="characterRigTitle">
+          <div class="character-rig-heading"><div><span class="record-type-badge">3D creature workshop</span><h3 id="characterRigTitle">Shape your adventurer</h3><small>Drag a joint or part to shape it · drag empty space or right-drag to orbit · scroll to zoom. Fixed animations adapt to the fitted skeleton.</small></div><div class="character-rig-heading-actions"><button type="button" id="characterRigFullscreen" aria-pressed="false">Fullscreen workshop</button><button type="button" id="characterRigReset">Reset skeleton</button></div></div>
+          <div class="character-rig-toolbar"><label>Preview motion<select id="characterRigAnimation"><option value="idle">Idle</option><option value="walk">Walk</option><option value="run">Run</option><option value="swim">Swim</option><option value="climb">Climb</option><option value="fall">Fall</option><option value="spell_attack">Spell attack</option><option value="weapon_attack">Weapon attack</option></select></label><div class="character-transform-tools" aria-label="Selected model transform"><button class="active" type="button" data-character-transform="move">Move</button><button type="button" data-character-transform="rotate">Rotate</button><button type="button" data-character-transform="stretch">Stretch</button></div><button type="button" id="characterRigPreview">▶ Preview fixed animation</button><span id="characterRigJoint">Select a bone joint or mesh</span></div>
+          <div class="character-mesh-palette" aria-label="Add character mesh pieces"><span>Add mesh</span><button type="button" data-character-mesh="head">Head</button><button type="button" data-character-mesh="torso">Torso</button><button type="button" data-character-mesh="body">Body mass</button><button type="button" data-character-mesh="limb">Limb</button><button type="button" data-character-mesh="hand">Hand</button><button type="button" data-character-mesh="foot">Foot</button><button type="button" data-character-mesh="muzzle">Muzzle</button><button type="button" data-character-mesh="ear">Ear</button><button type="button" data-character-mesh="eye">Eye</button><button type="button" data-character-mesh="horn">Horn</button><button type="button" data-character-mesh="claw">Claw</button><button type="button" data-character-mesh="wing">Wing</button><button type="button" data-character-mesh="tail">Tail</button><button type="button" data-character-mesh="shell">Shell</button><button type="button" data-character-mesh="plate">Armor plate</button><button type="button" data-character-mesh="spike">Spike</button></div>
+          <div class="character-builder-layout"><aside class="character-hierarchy-panel"><strong>Model hierarchy</strong><small>Drag a part onto a bone to attach it.</small><div class="character-hierarchy" id="characterHierarchy"></div></aside><div class="character-rig-stage"><canvas id="characterRigCanvas" width="720" height="480" aria-label="Interactive three-dimensional character mesh and skeleton editor"></canvas></div></div>
+          <div class="character-model-controls"><label>Build<input id="characterRigBuild" type="range" min="70" max="145" step="5" value="100"></label><label>Skin<input id="characterRigSkin" type="color" value="#c98f65"></label><label>Armor<input id="characterRigArmor" type="color" value="#38506b"></label><label>Accent<input id="characterRigAccent" type="color" value="#d6a43d"></label><label>Selection depth<input id="characterSelectionDepth" type="range" min="-80" max="80" step="2" value="0" disabled></label><label class="mesh-only-control">Part size<input id="characterMeshSize" type="range" min="16" max="128" step="4" value="48"></label><label class="mesh-only-control">Rotate X<input id="characterMeshRotationX" type="range" min="-180" max="180" step="5" value="0"></label><label class="mesh-only-control">Rotate Y<input id="characterMeshRotation" type="range" min="-180" max="180" step="5" value="0"></label><label class="mesh-only-control">Rotate Z<input id="characterMeshRotationZ" type="range" min="-180" max="180" step="5" value="0"></label><label class="mesh-only-control">Part color<input id="characterMeshColor" type="color" value="#6f4a86"></label><button class="mesh-delete" type="button" id="characterMeshDelete" disabled>Remove selected part</button></div>
+          <input type="hidden" name="character_rig" id="characterRigData">
+        </section>
+        <label class="important-toggle">
+          <input type="checkbox" name="important">
+          <span>Mark as important</span>
+          <small>Shows this record in the Important section with a legendary highlighted card.</small>
+        </label>
+        <label class="important-toggle creator-visibility">
+          <input type="checkbox" name="player_visible">
+          <span>Shared with all players</span>
+          <small>Share this chat with the campaign. For archive cards, select the players who should receive them.</small>
+        </label>
+        <label id="recordSummaryLabel">Description<textarea class="form-control" name="summary" rows="2" maxlength="500"></textarea></label>
+        <label>Tags<input class="form-control" name="tags" maxlength="160" placeholder="Comma-separated"></label>
+        <label id="recordNotesLabel">Detailed notes<textarea class="form-control" name="notes" rows="6"></textarea></label>
+        <section class="character-sheet-fields d-none" id="characterStatsFields" aria-label="Dungeons and Dragons character statistics"></section>
+        <p class="form-error" id="workError" role="alert"></p>
+      </div>
+      <div class="modal-footer"><button class="btn btn-outline-light" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit">Save</button></div>
+    </form></div></div>
+  </div>
+  <div class="modal fade" id="mapDetailsModal" tabindex="-1" aria-labelledby="mapDetailsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title fs-5" id="mapDetailsTitle">Map details</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body"><p id="mapDetailsStatus"></p><form id="mapRenameForm" hidden class="mb-3"><label for="mapRenameTitle" class="form-label">Map name</label><div class="d-flex gap-2"><input id="mapRenameTitle" class="form-control" required maxlength="120"><button type="submit" class="btn btn-accent flex-shrink-0">Save name</button></div></form><dl class="row g-2" id="mapDetailsFields"></dl><p id="mapDetailsHelp" class="modal-intro"></p><p id="mapDetailsError" class="form-error" role="alert"></p></div>
+      <div class="modal-footer"><button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Close</button><button type="button" class="btn btn-accent" id="mapDetailsOpen" hidden>Open map</button></div>
+    </div></div>
+  </div>
+  <div class="modal fade" id="recordDetailModal" tabindex="-1" aria-labelledby="detailTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"><div class="modal-content detail-scroll">
+      <div class="modal-header"><div><div class="record-type-badge mb-2" id="detailType"></div><h2 class="modal-title" id="detailTitle"></h2></div><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body">
+        <div class="detail-hero d-none" id="detailHero"><img id="detailImage" alt=""></div>
+        <p class="detail-description" id="detailDescription"></p>
+        <div class="detail-facts" id="detailFacts"></div>
+        <div class="tt-detail" id="detailTabletop"></div>
+        <section id="detailSharedNotes" class="tt-section d-none"><h4>Rules &amp; shared notes</h4><div class="tt-shared-notes" id="detailSharedNotesText"></div></section>
+        <div class="detail-connections" id="detailConnections"></div>
+        <div class="detail-notes">
+          <div class="detail-notes-heading"><span>Custom notes</span><small>Only visible in this account</small></div>
+          <textarea class="form-control" id="detailNotes" rows="6" placeholder="Add your own notes, reminders, rulings, or discoveries…"></textarea>
+          <p class="form-error" id="detailError" role="alert"></p>
+        </div>
+      </div>
+      <div class="modal-footer"><button class="btn btn-outline-light d-none" id="detailCopyReference" type="button">Create playable copy</button><button class="btn btn-outline-light" id="detailEditButton" type="button">Edit record</button><button class="btn btn-accent" id="detailSaveNotes" type="button">Save notes</button></div>
+    </div></div>
+  </div>
+  <div class="modal fade" id="inviteModal" tabindex="-1" aria-labelledby="inviteTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content"><form id="inviteForm">
+      <div class="modal-header"><h2 class="modal-title fs-5" id="inviteTitle">Invite to campaign</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body"><p class="modal-intro">Invite an existing account by username. The invitation will wait even if they are offline.</p><label>Username<input class="form-control" name="username" required maxlength="30" autocomplete="off"></label><p class="form-error" id="inviteError" role="alert"></p><p class="form-success" id="inviteSuccess" role="status"></p></div>
+      <div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit">Send invitation</button></div>
+    </form></div></div>
+  </div>
+  <div class="modal fade" id="notificationsModal" tabindex="-1" aria-labelledby="notificationsTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content">
+      <div class="modal-header"><h2 class="modal-title fs-5" id="notificationsTitle">Messages &amp; invitations</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div>
+      <div class="modal-body"><div class="notification-list" id="notificationList"></div></div>
+    </div></div>
+  </div>
+  <div class="modal fade" id="mapIconModal" tabindex="-1" aria-labelledby="mapIconTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content"><form id="mapIconForm"><div class="modal-header"><h2 class="modal-title fs-5" id="mapIconTitle">Create map icon</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="image-uploader"><div class="image-preview" id="mapIconPreview"><span>⌖</span></div><div><strong>Icon image</strong><small>Choose the marker shown over checkpoints.</small><label class="image-pick">Choose image<input name="image_file" type="file" accept="image/png,image/jpeg,image/gif,image/webp"></label></div><input name="image_id" type="hidden"></div><label>Name<input class="form-control" name="name" required maxlength="60"></label><label class="important-toggle"><input type="checkbox" name="important"><span>Mark as important</span><small>Uses a brighter legendary marker.</small></label><label>Description<textarea class="form-control" name="description" rows="4" maxlength="500"></textarea></label><p class="form-error" id="mapIconError"></p></div><div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit">Create icon</button></div></form></div></div></div>
+  <div class="modal fade" id="mapCheckpointModal" tabindex="-1" aria-labelledby="mapCheckpointTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><form id="mapCheckpointForm"><div class="modal-header"><h2 class="modal-title fs-5" id="mapCheckpointTitle">Map checkpoint</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><input name="object_id" type="hidden"><label>Checkpoint icon<select class="form-control" name="icon_id"><option value="">No icon</option></select></label><p class="modal-intro">Assign an icon to this map object. Players control its visibility with the icon filter.</p></div><div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit">Save checkpoint</button></div></form></div></div></div>
+  <div class="modal fade" id="aiMessageModal" tabindex="-1" aria-labelledby="aiMessageModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><form id="aiMessageModalForm"><div class="modal-header"><h2 class="modal-title fs-5" id="aiMessageModalTitle">Edit message</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><input name="message_id" type="hidden"><input name="action" type="hidden"><label id="aiMessageModalLabel">Message<textarea class="form-control" name="text" rows="7" maxlength="12000" required></textarea></label><p class="modal-intro" id="aiMessageModalHelp"></p><p class="form-error" id="aiMessageModalError" role="alert"></p></div><div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit" id="aiMessageModalSubmit">Save</button></div></form></div></div></div>
+  <div class="modal fade" id="diceModal" tabindex="-1" aria-labelledby="diceTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5" id="diceTitle">Dice &amp; Table Rules</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body">
+    <form id="diceForm"><div class="tt-grid"><label>Dice expression<input class="form-control" id="diceExpression" value="1d20 + 0" maxlength="100" required></label><label>D20 mode<select class="form-control" id="diceMode"><option value="normal">Normal</option><option value="advantage">Advantage</option><option value="disadvantage">Disadvantage</option></select></label><button class="btn btn-accent" type="submit">Roll dice</button></div><div class="tt-actions"><button type="button" data-dice="4">d4</button><button type="button" data-dice="6">d6</button><button type="button" data-dice="8">d8</button><button type="button" data-dice="10">d10</button><button type="button" data-dice="12">d12</button><button type="button" data-dice="20">d20</button><button type="button" data-dice="100">d100</button></div><output id="diceResult" class="tt-dice-total" aria-live="polite">—</output><p class="form-error" id="diceError" role="alert"></p></form>
+    <p class="tt-help">Local rolls, visible on this device only. Announce the total to the table. This tray does not apply damage or spend resources.</p><ol id="diceHistory" class="tt-roll-history" aria-label="Recent local rolls"></ol>
+    <section class="tt-section"><h4>At a glance · revised fifth edition</h4><p>On your turn: movement up to your Speed and one action; one bonus action if a feature permits it. A reaction needs a trigger and refreshes at the start of your next turn.</p><p>Check or save: d20 + ability modifier + proficiency when applicable, against a DC. An attack targets AC. Ties meet the target. Advantage and disadvantage cancel; neither stacks.</p><p>A critical hit doubles damage dice, not fixed bonuses. A natural 20 does not automatically succeed on every ability check.</p><p>Spell save DC = 8 + proficiency + spellcasting modifier. Maintain only one concentration effect. On a turn, you can expend only one spell slot to cast a spell, unless a specific rule overrides this.</p><p>Short rest: normally 1 hour; spend Hit Dice for healing. Long rest: normally 8 hours; recover HP, spent Hit Dice and eligible resources. Apply interruption rules and class exceptions.</p><p><a href="https://www.dndbeyond.com/sources/dnd/br-2024" target="_blank" rel="noopener noreferrer">Official revised fifth-edition rules</a> · Campaign house rules take precedence at your table.</p></section>
+  </div></div></div></div>
+  <script src="vendor/jquery.min.js"></script>
+  <script src="vendor/bootstrap.bundle.min.js"></script>
+  <script src="map3d.js?v=20260922-scale"></script>
+  <script src="character-rig.js?v=20260916-mobile-memory-final"></script>
+  <script src="tabletop-rules.js?v=20260915"></script>
+  <script src="record-cards.js?v=20260919"></script>
+  <script src="map-trade.js?v=20260929-trade-choice"></script>
+  <script src="tabletop.js?v=20260919-archive-access"></script>
+  <script src="rail-dice.js?v=20260929-required-advantage"></script>
+  <script src="spell-symbols.js?v=20260915"></script>
+<script src="spell-engine.js?v=20260919-readability"></script>
+  <script src="spell-equations.js?v=20260915"></script>
+<script src="spell-preview.js?v=20260915"></script>
+<script src="spell-atelier.js?v=20260915"></script>
+<script src="art-atelier.js?v=20260919-cutout-check"></script>
+  <script src="map-mobile-raster.js?v=20260920-spline-repair3"></script>
+  <script src="map-tile-paint.js?v=20260920-walk-over"></script>
+  <script src="map-art.js?v=20260920-spline-repair3"></script>
+  <script src="map-props.js?v=20260919-outdoor-final"></script>
+  <script src="map-environment.js?v=20260920-painted-farms"></script>
+  <script src="map-sprite-bounds.js?v=20260920-painted-farms"></script>
+  <script src="map-location-stamps.js?v=20260920-location-stamps"></script>
+  <script src="map-item-props.js?v=20260919-item-catalog"></script>
+  <script src="map-building-kit.js?v=20260920-building-kits"></script>
+  <script src="map-settlement.js?v=20260920-painted-farms"></script>
+  <script src="business-catalog.js?v=20260922-existing-types"></script>
+  <script src="character-image-scale.js?v=20260922-scale"></script>
+  <script src="map-sprites.js?v=20260922-existing-types"></script>
+  <script src="map-surface-lighting.js?v=20260921-smooth-scene-scroll"></script>
+  <script src="map-catalog.js?v=20260929-exit-location"></script>
+  <script src="map-part-images.js?v=20260919-catalog"></script>
+  <script src="map-texture-scale.js?v=20260920-spline-repair4"></script>
+  <script src="map-spline-flow.js?v=20260920-spline-repair3"></script>
+  <script src="map-spline-textures.js?v=20260920-spline-repair3"></script>
+  <script src="map-building-details.js?v=20260920-spline-repair3"></script>
+  <script src="map-building-roofs.js?v=20260920-travel-reshape"></script>
+  <script src="map-splines.js?v=20260920-spline-repair3"></script>
+  <script src="map-opening.js?v=20260929-two-gates"></script>
+  <script src="map-open-roll.js?v=20260929-loot-opening"></script>
+  <script src="map-part-cards.js?v=20260922-existing-types"></script>
+  <script src="map-image-picker.js?v=20260920-square-cards"></script>
+  <script src="map-tiled-parts.js?v=20260919-outdoor-final"></script>
+  <script src="map-materials.js?v=20260920-spline-repair3"></script>
+  <script src="map-effects.js?v=20260919-ripple-flow"></script>
+  <script src="map-ambience.js?v=20260920-walk-over"></script>
+  <script src="map-brushes.js?v=20260920-walk-over"></script>
+  <script src="map-building-curves.js?v=20260920-walk-over"></script>
+  <script src="map-buildings.js?v=20260920-walk-over"></script>
+  <script src="map2d-folders.js?v=20260919-marker-hierarchy"></script>
+  <script src="map-silhouettes.js?v=20260920-shadow-edges"></script>
+  <script src="map-visibility.js?v=20260919-outdoor-final"></script>
+  <script src="map-folder-batch.js?v=20260920-spline-repair3"></script>
+  <script src="map-light-compositor.js?v=20260920-cached-lighting"></script>
+  <script src="map-lighting.js?v=20260921-smooth-scene-scroll"></script>
+  <script src="map-scene.js?v=20260920-spline-repair3"></script>
+  <script src="map-token-walk.js?v=20260921-building-walls"></script>
+  <script src="map2d.js?v=20260929-hidden-exits"></script>
+  <script src="map-stats.js?v=20260929-stats"></script>
+  <script src="map-workspace.js?v=20260929-shared-scene"></script>
+  <script src="starter-art.js?v=20260922-existing-types"></script>
+  <script src="equipment.js?v=20260919-shared-cards"></script>
+  <script src="app.js?v=20260922-scale"></script>
+  <script src="audio-library.js?v=20260917"></script>
+  <script src="realm-resize.js?v=20260919"></script>
+  <script src="realm-container-resize.js?v=20260919-outer-frame"></script>
+</body>
+</html>
+
+
+

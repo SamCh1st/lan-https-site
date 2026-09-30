@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');global.window=global;require('../site/map-visibility.js');
+const {index,bounds,intersects}=MapVisibility;
+const part={x:0,y:0,w:200,h:20,rotation:90};const b=bounds(part);
+assert.ok(b.minY<=-90&&b.maxY>=110,'Rotated thin parts retain their full extent');
+const items=Array.from({length:2000},(_,i)=>({id:i,x:i*300,y:i%3*100,w:80,h:80}));
+const huge={id:'huge',x:-10000,y:-10000,w:20000,h:20000};items.push(huge);
+const a=index(items,bounds),expanded=index(items,n=>{const b=bounds(n);return {...b,minX:b.minX-500,maxX:b.maxX+500};});
+const view={minX:-100,minY:-100,maxX:200,maxY:200};
+assert.deepEqual(new Set(a.query(view)),new Set(items.filter(n=>intersects(bounds(n),view))));
+assert.ok(expanded.query(view).length>a.query(view).length,'Shadow reach retains off-screen casters');
+assert.ok(a.query(view).length<5,'Distant parts are rejected');
+assert.equal(a.query({minX:-1e7,minY:-1e7,maxX:1e7,maxY:1e7}).length,items.length,'Huge views use a bounded fallback');
+assert.deepEqual(new Set(a.query(view)),new Set(items.filter(n=>intersects(bounds(n),view))),'Independent indexes must not overwrite bounds');
+console.log('PASS rotated bounds, viewport rejection, off-screen shadow reach, independent indexes and oversized bounds');

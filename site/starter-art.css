@@ -1,0 +1,18 @@
+/* Preserve the source illustrations; frame them within the existing dark cards. */
+img[src^="/assets/starter-art/"] {
+  object-fit: contain !important;
+  background: #000;
+  padding: 10%;
+}
+#detailImage[src^="/assets/starter-art/"] { max-height: 300px; width: 100%; padding: 24px; }
+.starter-art-credit { font-size: .75rem; color: #c3ad7c; }
+.coin-image{width:22px!important;height:22px!important;object-fit:contain;vertical-align:middle;padding:0!important;border-radius:50%;background:#000}
+.coin-cp{filter:sepia(1) saturate(2.2) brightness(.8)}
+.coin-sp{filter:brightness(.85)}
+.coin-gp{filter:sepia(1) saturate(3) brightness(1.05)}
+.coin-balance{display:flex;gap:7px;flex-wrap:wrap;font-size:12px;margin:5px 0}
+.coin-amount{display:inline-flex;align-items:center;gap:3px;white-space:nowrap}
+.coin-inputs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;width:100%}
+.coin-inputs label{min-width:0;font-size:11px!important}
+.coin-inputs input{width:100%;min-width:0!important;font-size:12px!important;padding:5px!important}
+.map-trade-wallet .coin-inputs,.map-trade-wallet .coin-balance{grid-column:1/-1}

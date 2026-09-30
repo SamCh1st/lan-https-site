@@ -1,0 +1,27 @@
+/* Character sheet overlay; writes only edited fields onto the latest record. */
+(function(){
+ let active=null;
+ const numbers=[['character_level','Level',1,20,1],['experience_points','Experience points',0,99999999,0],...['strength','dexterity','constitution','intelligence','wisdom','charisma'].map(k=>[k,k[0].toUpperCase()+k.slice(1),1,30,10]),['armor_class','Armor class',0,99,10],['hp_current','Current HP',0,999999,1],['hp_max','Maximum HP',1,999999,1],['hp_temporary','Temporary HP',0,999999,0],['initiative','Initiative',-50,50,0],['speed','Speed (ft.)',0,999,30],['passive_perception','Passive Perception',0,99,10],['death_save_successes','Death save successes',0,3,0],['death_save_failures','Death save failures',0,3,0]];
+ function close(){active?.hide();}
+ async function open(ctx,preferred){
+  if(active)return;
+  const records=(await ctx.api('/api/work')).items,characters=records.filter(r=>r.content?.category==='character'&&Number(r.content.campaign_id)===Number(ctx.campaign.id)&&(ctx.dm||Number(r.content.owner_user_id)===Number(ctx.user.id)));
+  const modal=document.createElement('div');modal.className='modal';modal.id='mapStatsModal';modal.tabIndex=-1;modal.setAttribute('aria-label','Character stats and notes');
+  modal.innerHTML='<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5">Character stats & notes</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close stats"></button></div><div class="modal-body"><label>Character<select class="form-control" data-stats-character></select></label><form id="mapStatsForm"><div class="character-combat-grid" data-stats-fields></div><label>Character notes<textarea class="form-control" rows="5" name="notes"></textarea></label><label>Private notes<textarea class="form-control" rows="5" name="personal_note" maxlength="50000"></textarea></label></form><p role="status" data-stats-status></p></div><div class="modal-footer"><button type="submit" form="mapStatsForm" class="btn btn-accent" data-stats-save>Save stats & notes</button><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button></div></div></div>';
+  const select=modal.querySelector('select'),form=modal.querySelector('form'),fields=modal.querySelector('[data-stats-fields]'),status=modal.querySelector('[data-stats-status]'),save=modal.querySelector('[data-stats-save]');
+  for(const [key,title,min,max,value] of numbers){const label=document.createElement('label');label.textContent=title;const input=document.createElement('input');Object.assign(input,{name:key,type:'number',min,max,step:1,value,required:true,className:'form-control'});label.append(input);fields.append(label);}
+  for(const [key,title] of [['character_class','Class'],['subclass','Subclass'],['species','Species'],['background','Background'],['hit_die','Hit Die']]){const label=document.createElement('label');label.textContent=title;const input=document.createElement('input');Object.assign(input,{name:key,className:'form-control',maxLength:80});label.append(input);fields.append(label);}
+  characters.forEach(r=>select.add(new Option(r.title,r.id)));select.value=String(characters.find(r=>r.id===Number(preferred))?.id||characters[0]?.id||'');let baseline={};
+  function load(){const record=characters.find(r=>r.id===Number(select.value));if(!record){form.hidden=true;save.disabled=true;status.textContent='Create a character to view stats and take notes.';return;}for(const input of form.elements){const fallback=numbers.find(n=>n[0]===input.name)?.[4]??(input.name==='hit_die'?'d8':'');input.value=input.name==='personal_note'?record.personal_note||'':record.content[input.name]??fallback;}baseline=Object.fromEntries(new FormData(form));status.textContent='';}
+  select.onchange=load;load();
+  form.onsubmit=async event=>{event.preventDefault();if(!form.reportValidity())return;save.disabled=true;select.disabled=true;status.textContent='Saving…';const id=Number(select.value),values=Object.fromEntries(new FormData(form));try{
+   const fresh=(await ctx.api('/api/work')).items.find(r=>r.id===id);if(!fresh)throw Error('This character is no longer available.');if(Number(values.hp_current)>Number(values.hp_max))throw Error('Current HP cannot exceed maximum HP.');const content={...fresh.content};for(const [key,value] of Object.entries(values))if(key!=='personal_note'&&value!==baseline[key])content[key]=numbers.some(n=>n[0]===key)?Number(value):value;
+   content.proficiency_bonus=2+Math.floor(((content.character_level||1)-1)/4);
+   await ctx.api('/api/work/'+id,{method:'PUT',body:JSON.stringify({title:fresh.title,content})});
+   if(values.personal_note!==baseline.personal_note)await ctx.api('/api/notes/'+id,{method:'PUT',body:JSON.stringify({note:values.personal_note})});
+   const record=characters.find(r=>r.id===id);record.content=content;record.personal_note=values.personal_note;baseline=values;await ctx.onRefreshRecords?.();status.textContent='Saved.';
+  }catch(error){status.textContent=error.message;}finally{save.disabled=false;select.disabled=false;}};
+  (document.fullscreenElement||document.body).append(modal);const view=new bootstrap.Modal(modal,{backdrop:'static'});active=view;modal.addEventListener('hidden.bs.modal',()=>{view.dispose();modal.remove();if(active===view)active=null;},{once:true});view.show();
+ }
+ window.MapStats={open,close};
+})();

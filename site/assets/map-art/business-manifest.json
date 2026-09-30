@@ -1,0 +1,3122 @@
+[
+  {
+    "id": "trade_bakery_baker_s_kneading_table",
+    "atlas": "business_bakery",
+    "rect": [
+      18,
+      78,
+      278,
+      180
+    ],
+    "title": "Baker’s Kneading Table",
+    "view": "overhead",
+    "opaque_pixels": 42733
+  },
+  {
+    "id": "trade_bakery_empty_proving_box",
+    "atlas": "business_bakery",
+    "rect": [
+      345,
+      63,
+      252,
+      208
+    ],
+    "title": "Empty Proving Box",
+    "view": "overhead",
+    "opaque_pixels": 46694
+  },
+  {
+    "id": "trade_bakery_empty_bakery_display_tray",
+    "atlas": "business_bakery",
+    "rect": [
+      660,
+      82,
+      250,
+      173
+    ],
+    "title": "Empty Bakery Display Tray",
+    "view": "overhead",
+    "opaque_pixels": 39314
+  },
+  {
+    "id": "trade_bakery_brick_baking_oven",
+    "atlas": "business_bakery",
+    "rect": [
+      966,
+      33,
+      262,
+      266
+    ],
+    "title": "Brick Baking Oven",
+    "view": "overhead",
+    "opaque_pixels": 51905
+  },
+  {
+    "id": "trade_bakery_round_bread_board",
+    "atlas": "business_bakery",
+    "rect": [
+      31,
+      347,
+      253,
+      254
+    ],
+    "title": "Round Bread Board",
+    "view": "overhead",
+    "opaque_pixels": 47090
+  },
+  {
+    "id": "trade_bakery_baker_s_rolling_pin",
+    "atlas": "business_bakery",
+    "rect": [
+      320,
+      440,
+      300,
+      63
+    ],
+    "title": "Baker’s Rolling Pin",
+    "view": "overhead",
+    "opaque_pixels": 12434
+  },
+  {
+    "id": "trade_bakery_empty_mixing_bowl",
+    "atlas": "business_bakery",
+    "rect": [
+      664,
+      354,
+      239,
+      235
+    ],
+    "title": "Empty Mixing Bowl",
+    "view": "overhead",
+    "opaque_pixels": 41024
+  },
+  {
+    "id": "trade_bakery_loose_flour_pile",
+    "atlas": "business_bakery",
+    "rect": [
+      999,
+      388,
+      197,
+      181
+    ],
+    "title": "Loose Flour Pile",
+    "view": "overhead",
+    "opaque_pixels": 20436
+  },
+  {
+    "id": "trade_bakery_country_bread_loaf",
+    "atlas": "business_bakery",
+    "rect": [
+      21,
+      669,
+      271,
+      234
+    ],
+    "title": "Country Bread Loaf",
+    "view": "inventory",
+    "opaque_pixels": 46512
+  },
+  {
+    "id": "trade_bakery_long_bread_loaf",
+    "atlas": "business_bakery",
+    "rect": [
+      323,
+      653,
+      298,
+      265
+    ],
+    "title": "Long Bread Loaf",
+    "view": "inventory",
+    "opaque_pixels": 30826
+  },
+  {
+    "id": "trade_bakery_twisted_pretzel",
+    "atlas": "business_bakery",
+    "rect": [
+      652,
+      682,
+      264,
+      219
+    ],
+    "title": "Twisted Pretzel",
+    "view": "inventory",
+    "opaque_pixels": 38895
+  },
+  {
+    "id": "trade_bakery_butter_crescent",
+    "atlas": "business_bakery",
+    "rect": [
+      958,
+      683,
+      285,
+      219
+    ],
+    "title": "Butter Crescent",
+    "view": "inventory",
+    "opaque_pixels": 35009
+  },
+  {
+    "id": "trade_bakery_oat_flatbread",
+    "atlas": "business_bakery",
+    "rect": [
+      18,
+      980,
+      274,
+      225
+    ],
+    "title": "Oat Flatbread",
+    "view": "inventory",
+    "opaque_pixels": 45439
+  },
+  {
+    "id": "trade_bakery_apple_hand_pie",
+    "atlas": "business_bakery",
+    "rect": [
+      332,
+      993,
+      279,
+      205
+    ],
+    "title": "Apple Hand Pie",
+    "view": "inventory",
+    "opaque_pixels": 40827
+  },
+  {
+    "id": "trade_bakery_baking_flour_sack",
+    "atlas": "business_bakery",
+    "rect": [
+      652,
+      939,
+      265,
+      283
+    ],
+    "title": "Baking Flour Sack",
+    "view": "inventory",
+    "opaque_pixels": 48975
+  },
+  {
+    "id": "trade_bakery_brown_sugar_cone",
+    "atlas": "business_bakery",
+    "rect": [
+      998,
+      973,
+      198,
+      241
+    ],
+    "title": "Brown Sugar Cone",
+    "view": "inventory",
+    "opaque_pixels": 31476
+  },
+  {
+    "id": "trade_tavern_alehouse_bar_counter",
+    "atlas": "business_tavern",
+    "rect": [
+      37,
+      124,
+      303,
+      129
+    ],
+    "title": "Alehouse Bar Counter",
+    "view": "overhead",
+    "opaque_pixels": 33086
+  },
+  {
+    "id": "trade_tavern_round_pub_table",
+    "atlas": "business_tavern",
+    "rect": [
+      374,
+      60,
+      245,
+      245
+    ],
+    "title": "Round Pub Table",
+    "view": "overhead",
+    "opaque_pixels": 44029
+  },
+  {
+    "id": "trade_tavern_pub_bar_stool",
+    "atlas": "business_tavern",
+    "rect": [
+      679,
+      68,
+      225,
+      227
+    ],
+    "title": "Pub Bar Stool",
+    "view": "overhead",
+    "opaque_pixels": 24649
+  },
+  {
+    "id": "trade_tavern_empty_bottle_crate",
+    "atlas": "business_tavern",
+    "rect": [
+      965,
+      74,
+      240,
+      219
+    ],
+    "title": "Empty Bottle Crate",
+    "view": "overhead",
+    "opaque_pixels": 45558
+  },
+  {
+    "id": "trade_tavern_empty_serving_platter",
+    "atlas": "business_tavern",
+    "rect": [
+      37,
+      385,
+      300,
+      190
+    ],
+    "title": "Empty Serving Platter",
+    "view": "overhead",
+    "opaque_pixels": 42208
+  },
+  {
+    "id": "trade_tavern_empty_ale_jug",
+    "atlas": "business_tavern",
+    "rect": [
+      388,
+      369,
+      231,
+      216
+    ],
+    "title": "Empty Ale Jug",
+    "view": "overhead",
+    "opaque_pixels": 34318
+  },
+  {
+    "id": "trade_tavern_empty_pewter_dish",
+    "atlas": "business_tavern",
+    "rect": [
+      671,
+      361,
+      239,
+      235
+    ],
+    "title": "Empty Pewter Dish",
+    "view": "overhead",
+    "opaque_pixels": 41294
+  },
+  {
+    "id": "trade_tavern_alehouse_floor_mat",
+    "atlas": "business_tavern",
+    "rect": [
+      956,
+      346,
+      257,
+      255
+    ],
+    "title": "Alehouse Floor Mat",
+    "view": "overhead",
+    "opaque_pixels": 47906
+  },
+  {
+    "id": "trade_tavern_sealed_ale_bottle",
+    "atlas": "business_tavern",
+    "rect": [
+      94,
+      657,
+      168,
+      266
+    ],
+    "title": "Sealed Ale Bottle",
+    "view": "inventory",
+    "opaque_pixels": 28745
+  },
+  {
+    "id": "trade_tavern_red_wine_bottle",
+    "atlas": "business_tavern",
+    "rect": [
+      428,
+      623,
+      115,
+      313
+    ],
+    "title": "Red Wine Bottle",
+    "view": "inventory",
+    "opaque_pixels": 25714
+  },
+  {
+    "id": "trade_tavern_cider_bottle",
+    "atlas": "business_tavern",
+    "rect": [
+      724,
+      635,
+      129,
+      299
+    ],
+    "title": "Cider Bottle",
+    "view": "inventory",
+    "opaque_pixels": 26792
+  },
+  {
+    "id": "trade_tavern_hard_cheese_wheel",
+    "atlas": "business_tavern",
+    "rect": [
+      956,
+      690,
+      266,
+      214
+    ],
+    "title": "Hard Cheese Wheel",
+    "view": "inventory",
+    "opaque_pixels": 44606
+  },
+  {
+    "id": "trade_tavern_smoked_sausage",
+    "atlas": "business_tavern",
+    "rect": [
+      33,
+      969,
+      260,
+      220
+    ],
+    "title": "Smoked Sausage",
+    "view": "inventory",
+    "opaque_pixels": 22275
+  },
+  {
+    "id": "trade_tavern_pickled_cucumber",
+    "atlas": "business_tavern",
+    "rect": [
+      361,
+      977,
+      241,
+      213
+    ],
+    "title": "Pickled Cucumber",
+    "view": "inventory",
+    "opaque_pixels": 24839
+  },
+  {
+    "id": "trade_tavern_roasted_drumstick",
+    "atlas": "business_tavern",
+    "rect": [
+      659,
+      960,
+      251,
+      245
+    ],
+    "title": "Roasted Drumstick",
+    "view": "inventory",
+    "opaque_pixels": 27529
+  },
+  {
+    "id": "trade_tavern_honey_cake",
+    "atlas": "business_tavern",
+    "rect": [
+      962,
+      979,
+      248,
+      203
+    ],
+    "title": "Honey Cake",
+    "view": "inventory",
+    "opaque_pixels": 38945
+  },
+  {
+    "id": "trade_inn_single_guest_bed",
+    "atlas": "business_inn",
+    "rect": [
+      65,
+      38,
+      197,
+      274
+    ],
+    "title": "Single Guest Bed",
+    "view": "overhead",
+    "opaque_pixels": 46615
+  },
+  {
+    "id": "trade_inn_empty_bedside_cabinet",
+    "atlas": "business_inn",
+    "rect": [
+      373,
+      86,
+      198,
+      176
+    ],
+    "title": "Empty Bedside Cabinet",
+    "view": "overhead",
+    "opaque_pixels": 29759
+  },
+  {
+    "id": "trade_inn_guest_room_bench",
+    "atlas": "business_inn",
+    "rect": [
+      660,
+      121,
+      251,
+      115
+    ],
+    "title": "Guest Room Bench",
+    "view": "overhead",
+    "opaque_pixels": 24267
+  },
+  {
+    "id": "trade_inn_empty_washstand",
+    "atlas": "business_inn",
+    "rect": [
+      994,
+      82,
+      208,
+      189
+    ],
+    "title": "Empty Washstand",
+    "view": "overhead",
+    "opaque_pixels": 25655
+  },
+  {
+    "id": "trade_inn_empty_copper_bath",
+    "atlas": "business_inn",
+    "rect": [
+      57,
+      345,
+      204,
+      268
+    ],
+    "title": "Empty Copper Bath",
+    "view": "overhead",
+    "opaque_pixels": 35629
+  },
+  {
+    "id": "trade_inn_guest_room_runner",
+    "atlas": "business_inn",
+    "rect": [
+      393,
+      320,
+      156,
+      310
+    ],
+    "title": "Guest Room Runner",
+    "view": "overhead",
+    "opaque_pixels": 41712
+  },
+  {
+    "id": "trade_inn_square_seat_cushion",
+    "atlas": "business_inn",
+    "rect": [
+      675,
+      383,
+      220,
+      203
+    ],
+    "title": "Square Seat Cushion",
+    "view": "overhead",
+    "opaque_pixels": 36337
+  },
+  {
+    "id": "trade_inn_empty_chamber_basin",
+    "atlas": "business_inn",
+    "rect": [
+      976,
+      381,
+      243,
+      198
+    ],
+    "title": "Empty Chamber Basin",
+    "view": "overhead",
+    "opaque_pixels": 30071
+  },
+  {
+    "id": "trade_inn_linen_pillow",
+    "atlas": "business_inn",
+    "rect": [
+      16,
+      672,
+      293,
+      239
+    ],
+    "title": "Linen Pillow",
+    "view": "inventory",
+    "opaque_pixels": 43097
+  },
+  {
+    "id": "trade_inn_wool_blanket",
+    "atlas": "business_inn",
+    "rect": [
+      324,
+      679,
+      301,
+      234
+    ],
+    "title": "Wool Blanket",
+    "view": "inventory",
+    "opaque_pixels": 44995
+  },
+  {
+    "id": "trade_inn_bath_towel",
+    "atlas": "business_inn",
+    "rect": [
+      647,
+      673,
+      281,
+      238
+    ],
+    "title": "Bath Towel",
+    "view": "inventory",
+    "opaque_pixels": 39551
+  },
+  {
+    "id": "trade_inn_soap_bar",
+    "atlas": "business_inn",
+    "rect": [
+      986,
+      705,
+      225,
+      174
+    ],
+    "title": "Soap Bar",
+    "view": "inventory",
+    "opaque_pixels": 26865
+  },
+  {
+    "id": "trade_inn_beeswax_taper",
+    "atlas": "business_inn",
+    "rect": [
+      128,
+      949,
+      60,
+      275
+    ],
+    "title": "Beeswax Taper",
+    "view": "inventory",
+    "opaque_pixels": 11565
+  },
+  {
+    "id": "trade_inn_room_key",
+    "atlas": "business_inn",
+    "rect": [
+      370,
+      975,
+      197,
+      222
+    ],
+    "title": "Room Key",
+    "view": "inventory",
+    "opaque_pixels": 12914
+  },
+  {
+    "id": "trade_inn_lavender_sachet",
+    "atlas": "business_inn",
+    "rect": [
+      672,
+      967,
+      198,
+      237
+    ],
+    "title": "Lavender Sachet",
+    "view": "inventory",
+    "opaque_pixels": 30014
+  },
+  {
+    "id": "trade_inn_guest_slipper",
+    "atlas": "business_inn",
+    "rect": [
+      952,
+      988,
+      273,
+      206
+    ],
+    "title": "Guest Slipper",
+    "view": "inventory",
+    "opaque_pixels": 31436
+  },
+  {
+    "id": "trade_blacksmith_smith_s_workbench",
+    "atlas": "business_blacksmith",
+    "rect": [
+      13,
+      89,
+      293,
+      181
+    ],
+    "title": "Smith’s Workbench",
+    "view": "overhead",
+    "opaque_pixels": 43781
+  },
+  {
+    "id": "trade_blacksmith_iron_quench_trough",
+    "atlas": "business_blacksmith",
+    "rect": [
+      326,
+      105,
+      289,
+      152
+    ],
+    "title": "Iron Quench Trough",
+    "view": "overhead",
+    "opaque_pixels": 37530
+  },
+  {
+    "id": "trade_blacksmith_empty_coal_bin",
+    "atlas": "business_blacksmith",
+    "rect": [
+      659,
+      74,
+      248,
+      206
+    ],
+    "title": "Empty Coal Bin",
+    "view": "overhead",
+    "opaque_pixels": 40593
+  },
+  {
+    "id": "trade_blacksmith_round_forge_hearth",
+    "atlas": "business_blacksmith",
+    "rect": [
+      948,
+      38,
+      287,
+      277
+    ],
+    "title": "Round Forge Hearth",
+    "view": "overhead",
+    "opaque_pixels": 55697
+  },
+  {
+    "id": "trade_blacksmith_smith_s_bellows",
+    "atlas": "business_blacksmith",
+    "rect": [
+      21,
+      377,
+      306,
+      193
+    ],
+    "title": "Smith’s Bellows",
+    "view": "overhead",
+    "opaque_pixels": 29479
+  },
+  {
+    "id": "trade_blacksmith_swage_block",
+    "atlas": "business_blacksmith",
+    "rect": [
+      370,
+      365,
+      215,
+      215
+    ],
+    "title": "Swage Block",
+    "view": "overhead",
+    "opaque_pixels": 35841
+  },
+  {
+    "id": "trade_blacksmith_empty_tool_stand",
+    "atlas": "business_blacksmith",
+    "rect": [
+      651,
+      389,
+      266,
+      173
+    ],
+    "title": "Empty Tool Stand",
+    "view": "overhead",
+    "opaque_pixels": 38081
+  },
+  {
+    "id": "trade_blacksmith_leather_floor_pad",
+    "atlas": "business_blacksmith",
+    "rect": [
+      955,
+      377,
+      281,
+      200
+    ],
+    "title": "Leather Floor Pad",
+    "view": "overhead",
+    "opaque_pixels": 51183
+  },
+  {
+    "id": "trade_blacksmith_forge_hammer",
+    "atlas": "business_blacksmith",
+    "rect": [
+      34,
+      655,
+      266,
+      243
+    ],
+    "title": "Forge Hammer",
+    "view": "inventory",
+    "opaque_pixels": 20247
+  },
+  {
+    "id": "trade_blacksmith_smith_s_tongs",
+    "atlas": "business_blacksmith",
+    "rect": [
+      344,
+      644,
+      259,
+      274
+    ],
+    "title": "Smith’s Tongs",
+    "view": "inventory",
+    "opaque_pixels": 16605
+  },
+  {
+    "id": "trade_blacksmith_iron_ingot",
+    "atlas": "business_blacksmith",
+    "rect": [
+      651,
+      679,
+      271,
+      207
+    ],
+    "title": "Iron Ingot",
+    "view": "inventory",
+    "opaque_pixels": 27600
+  },
+  {
+    "id": "trade_blacksmith_copper_ingot",
+    "atlas": "business_blacksmith",
+    "rect": [
+      960,
+      681,
+      270,
+      204
+    ],
+    "title": "Copper Ingot",
+    "view": "inventory",
+    "opaque_pixels": 27485
+  },
+  {
+    "id": "trade_blacksmith_horseshoe",
+    "atlas": "business_blacksmith",
+    "rect": [
+      51,
+      963,
+      229,
+      232
+    ],
+    "title": "Horseshoe",
+    "view": "inventory",
+    "opaque_pixels": 25739
+  },
+  {
+    "id": "trade_blacksmith_iron_nail",
+    "atlas": "business_blacksmith",
+    "rect": [
+      365,
+      963,
+      212,
+      235
+    ],
+    "title": "Iron Nail",
+    "view": "inventory",
+    "opaque_pixels": 12584
+  },
+  {
+    "id": "trade_blacksmith_metal_file",
+    "atlas": "business_blacksmith",
+    "rect": [
+      642,
+      953,
+      288,
+      256
+    ],
+    "title": "Metal File",
+    "view": "inventory",
+    "opaque_pixels": 15709
+  },
+  {
+    "id": "trade_blacksmith_whetstone",
+    "atlas": "business_blacksmith",
+    "rect": [
+      961,
+      980,
+      269,
+      219
+    ],
+    "title": "Whetstone",
+    "view": "inventory",
+    "opaque_pixels": 28355
+  },
+  {
+    "id": "trade_apothecary_apothecary_counter",
+    "atlas": "business_apothecary",
+    "rect": [
+      27,
+      91,
+      313,
+      203
+    ],
+    "title": "Apothecary Counter",
+    "view": "overhead",
+    "opaque_pixels": 55270
+  },
+  {
+    "id": "trade_apothecary_empty_herb_drawer_unit",
+    "atlas": "business_apothecary",
+    "rect": [
+      360,
+      120,
+      265,
+      154
+    ],
+    "title": "Empty Herb Drawer Unit",
+    "view": "overhead",
+    "opaque_pixels": 37087
+  },
+  {
+    "id": "trade_apothecary_empty_drying_rack",
+    "atlas": "business_apothecary",
+    "rect": [
+      653,
+      73,
+      260,
+      251
+    ],
+    "title": "Empty Drying Rack",
+    "view": "overhead",
+    "opaque_pixels": 52610
+  },
+  {
+    "id": "trade_apothecary_empty_reagent_tray",
+    "atlas": "business_apothecary",
+    "rect": [
+      948,
+      112,
+      276,
+      178
+    ],
+    "title": "Empty Reagent Tray",
+    "view": "overhead",
+    "opaque_pixels": 44476
+  },
+  {
+    "id": "trade_apothecary_empty_stone_mortar",
+    "atlas": "business_apothecary",
+    "rect": [
+      59,
+      381,
+      251,
+      254
+    ],
+    "title": "Empty Stone Mortar",
+    "view": "overhead",
+    "opaque_pixels": 47228
+  },
+  {
+    "id": "trade_apothecary_stone_pestle",
+    "atlas": "business_apothecary",
+    "rect": [
+      371,
+      382,
+      239,
+      251
+    ],
+    "title": "Stone Pestle",
+    "view": "overhead",
+    "opaque_pixels": 21462
+  },
+  {
+    "id": "trade_apothecary_empty_glass_retort",
+    "atlas": "business_apothecary",
+    "rect": [
+      639,
+      421,
+      302,
+      175
+    ],
+    "title": "Empty Glass Retort",
+    "view": "overhead",
+    "opaque_pixels": 28489
+  },
+  {
+    "id": "trade_apothecary_empty_porcelain_dish",
+    "atlas": "business_apothecary",
+    "rect": [
+      968,
+      387,
+      259,
+      239
+    ],
+    "title": "Empty Porcelain Dish",
+    "view": "overhead",
+    "opaque_pixels": 43255
+  },
+  {
+    "id": "trade_apothecary_herbal_salve_tin",
+    "atlas": "business_apothecary",
+    "rect": [
+      67,
+      694,
+      226,
+      209
+    ],
+    "title": "Herbal Salve Tin",
+    "view": "inventory",
+    "opaque_pixels": 36393
+  },
+  {
+    "id": "trade_apothecary_mint_tea_packet",
+    "atlas": "business_apothecary",
+    "rect": [
+      366,
+      675,
+      251,
+      242
+    ],
+    "title": "Mint Tea Packet",
+    "view": "inventory",
+    "opaque_pixels": 41770
+  },
+  {
+    "id": "trade_apothecary_dried_lavender_sprig",
+    "atlas": "business_apothecary",
+    "rect": [
+      653,
+      668,
+      256,
+      254
+    ],
+    "title": "Dried Lavender Sprig",
+    "view": "inventory",
+    "opaque_pixels": 16834
+  },
+  {
+    "id": "trade_apothecary_ginger_root",
+    "atlas": "business_apothecary",
+    "rect": [
+      964,
+      694,
+      243,
+      220
+    ],
+    "title": "Ginger Root",
+    "view": "inventory",
+    "opaque_pixels": 32928
+  },
+  {
+    "id": "trade_apothecary_honey_jar",
+    "atlas": "business_apothecary",
+    "rect": [
+      63,
+      938,
+      231,
+      268
+    ],
+    "title": "Honey Jar",
+    "view": "inventory",
+    "opaque_pixels": 45973
+  },
+  {
+    "id": "trade_apothecary_medicinal_alcohol_bottle",
+    "atlas": "business_apothecary",
+    "rect": [
+      412,
+      922,
+      152,
+      286
+    ],
+    "title": "Medicinal Alcohol Bottle",
+    "view": "inventory",
+    "opaque_pixels": 31549
+  },
+  {
+    "id": "trade_apothecary_linen_bandage_roll",
+    "atlas": "business_apothecary",
+    "rect": [
+      646,
+      977,
+      262,
+      215
+    ],
+    "title": "Linen Bandage Roll",
+    "view": "inventory",
+    "opaque_pixels": 34000
+  },
+  {
+    "id": "trade_apothecary_measuring_spoon",
+    "atlas": "business_apothecary",
+    "rect": [
+      971,
+      961,
+      237,
+      223
+    ],
+    "title": "Measuring Spoon",
+    "view": "inventory",
+    "opaque_pixels": 15811
+  },
+  {
+    "id": "trade_tailor_tailor_s_cutting_table",
+    "atlas": "business_tailor",
+    "rect": [
+      38,
+      80,
+      265,
+      203
+    ],
+    "title": "Tailor’s Cutting Table",
+    "view": "overhead",
+    "opaque_pixels": 45784
+  },
+  {
+    "id": "trade_tailor_empty_weaving_frame",
+    "atlas": "business_tailor",
+    "rect": [
+      336,
+      66,
+      274,
+      221
+    ],
+    "title": "Empty Weaving Frame",
+    "view": "overhead",
+    "opaque_pixels": 24583
+  },
+  {
+    "id": "trade_tailor_tailor_s_stool",
+    "atlas": "business_tailor",
+    "rect": [
+      682,
+      88,
+      202,
+      191
+    ],
+    "title": "Tailor’s Stool",
+    "view": "overhead",
+    "opaque_pixels": 30968
+  },
+  {
+    "id": "trade_tailor_empty_thread_organizer",
+    "atlas": "business_tailor",
+    "rect": [
+      952,
+      78,
+      259,
+      205
+    ],
+    "title": "Empty Thread Organizer",
+    "view": "overhead",
+    "opaque_pixels": 49073
+  },
+  {
+    "id": "trade_tailor_empty_fabric_bin",
+    "atlas": "business_tailor",
+    "rect": [
+      30,
+      414,
+      279,
+      146
+    ],
+    "title": "Empty Fabric Bin",
+    "view": "overhead",
+    "opaque_pixels": 36396
+  },
+  {
+    "id": "trade_tailor_flat_sewing_board",
+    "atlas": "business_tailor",
+    "rect": [
+      342,
+      384,
+      264,
+      190
+    ],
+    "title": "Flat Sewing Board",
+    "view": "overhead",
+    "opaque_pixels": 46102
+  },
+  {
+    "id": "trade_tailor_wooden_pattern_ruler",
+    "atlas": "business_tailor",
+    "rect": [
+      680,
+      361,
+      226,
+      228
+    ],
+    "title": "Wooden Pattern Ruler",
+    "view": "overhead",
+    "opaque_pixels": 20031
+  },
+  {
+    "id": "trade_tailor_empty_pin_dish",
+    "atlas": "business_tailor",
+    "rect": [
+      976,
+      374,
+      220,
+      217
+    ],
+    "title": "Empty Pin Dish",
+    "view": "overhead",
+    "opaque_pixels": 34933
+  },
+  {
+    "id": "trade_tailor_tailor_s_shears",
+    "atlas": "business_tailor",
+    "rect": [
+      23,
+      660,
+      291,
+      226
+    ],
+    "title": "Tailor’s Shears",
+    "view": "inventory",
+    "opaque_pixels": 16744
+  },
+  {
+    "id": "trade_tailor_indigo_linen_bolt",
+    "atlas": "business_tailor",
+    "rect": [
+      330,
+      658,
+      288,
+      251
+    ],
+    "title": "Indigo Linen Bolt",
+    "view": "inventory",
+    "opaque_pixels": 42325
+  },
+  {
+    "id": "trade_tailor_cream_wool_bolt",
+    "atlas": "business_tailor",
+    "rect": [
+      639,
+      655,
+      293,
+      258
+    ],
+    "title": "Cream Wool Bolt",
+    "view": "inventory",
+    "opaque_pixels": 46420
+  },
+  {
+    "id": "trade_tailor_red_thread_spool",
+    "atlas": "business_tailor",
+    "rect": [
+      1020,
+      663,
+      155,
+      230
+    ],
+    "title": "Red Thread Spool",
+    "view": "inventory",
+    "opaque_pixels": 26974
+  },
+  {
+    "id": "trade_tailor_bone_sewing_needle",
+    "atlas": "business_tailor",
+    "rect": [
+      53,
+      945,
+      229,
+      250
+    ],
+    "title": "Bone Sewing Needle",
+    "view": "inventory",
+    "opaque_pixels": 5499
+  },
+  {
+    "id": "trade_tailor_brass_thimble",
+    "atlas": "business_tailor",
+    "rect": [
+      380,
+      966,
+      172,
+      214
+    ],
+    "title": "Brass Thimble",
+    "view": "inventory",
+    "opaque_pixels": 25598
+  },
+  {
+    "id": "trade_tailor_leather_patch",
+    "atlas": "business_tailor",
+    "rect": [
+      640,
+      973,
+      284,
+      221
+    ],
+    "title": "Leather Patch",
+    "view": "inventory",
+    "opaque_pixels": 38572
+  },
+  {
+    "id": "trade_tailor_wooden_button",
+    "atlas": "business_tailor",
+    "rect": [
+      998,
+      983,
+      202,
+      198
+    ],
+    "title": "Wooden Button",
+    "view": "inventory",
+    "opaque_pixels": 28914
+  },
+  {
+    "id": "trade_general_store_general_store_counter",
+    "atlas": "business_general_store",
+    "rect": [
+      34,
+      103,
+      278,
+      175
+    ],
+    "title": "General Store Counter",
+    "view": "overhead",
+    "opaque_pixels": 42069
+  },
+  {
+    "id": "trade_general_store_empty_merchandising_bin",
+    "atlas": "business_general_store",
+    "rect": [
+      345,
+      80,
+      278,
+      218
+    ],
+    "title": "Empty Merchandising Bin",
+    "view": "overhead",
+    "opaque_pixels": 55689
+  },
+  {
+    "id": "trade_general_store_empty_glass_jar",
+    "atlas": "business_general_store",
+    "rect": [
+      678,
+      80,
+      225,
+      226
+    ],
+    "title": "Empty Glass Jar",
+    "view": "overhead",
+    "opaque_pixels": 37026
+  },
+  {
+    "id": "trade_general_store_empty_lidded_box",
+    "atlas": "business_general_store",
+    "rect": [
+      960,
+      93,
+      258,
+      201
+    ],
+    "title": "Empty Lidded Box",
+    "view": "overhead",
+    "opaque_pixels": 47441
+  },
+  {
+    "id": "trade_general_store_empty_wicker_hamper",
+    "atlas": "business_general_store",
+    "rect": [
+      39,
+      351,
+      275,
+      272
+    ],
+    "title": "Empty Wicker Hamper",
+    "view": "overhead",
+    "opaque_pixels": 54960
+  },
+  {
+    "id": "trade_general_store_empty_balance_pan",
+    "atlas": "business_general_store",
+    "rect": [
+      361,
+      362,
+      250,
+      250
+    ],
+    "title": "Empty Balance Pan",
+    "view": "overhead",
+    "opaque_pixels": 46205
+  },
+  {
+    "id": "trade_general_store_store_door_mat",
+    "atlas": "business_general_store",
+    "rect": [
+      638,
+      394,
+      304,
+      201
+    ],
+    "title": "Store Door Mat",
+    "view": "overhead",
+    "opaque_pixels": 54772
+  },
+  {
+    "id": "trade_general_store_empty_measuring_bucket",
+    "atlas": "business_general_store",
+    "rect": [
+      974,
+      382,
+      234,
+      220
+    ],
+    "title": "Empty Measuring Bucket",
+    "view": "overhead",
+    "opaque_pixels": 34565
+  },
+  {
+    "id": "trade_general_store_lamp_oil_flask",
+    "atlas": "business_general_store",
+    "rect": [
+      66,
+      646,
+      211,
+      272
+    ],
+    "title": "Lamp Oil Flask",
+    "view": "inventory",
+    "opaque_pixels": 36511
+  },
+  {
+    "id": "trade_general_store_rock_salt_block",
+    "atlas": "business_general_store",
+    "rect": [
+      354,
+      673,
+      250,
+      241
+    ],
+    "title": "Rock Salt Block",
+    "view": "inventory",
+    "opaque_pixels": 41548
+  },
+  {
+    "id": "trade_general_store_chalk_stick",
+    "atlas": "business_general_store",
+    "rect": [
+      680,
+      728,
+      224,
+      160
+    ],
+    "title": "Chalk Stick",
+    "view": "inventory",
+    "opaque_pixels": 15078
+  },
+  {
+    "id": "trade_general_store_twine_ball",
+    "atlas": "business_general_store",
+    "rect": [
+      977,
+      688,
+      245,
+      213
+    ],
+    "title": "Twine Ball",
+    "view": "inventory",
+    "opaque_pixels": 36088
+  },
+  {
+    "id": "trade_general_store_sealing_wax_stick",
+    "atlas": "business_general_store",
+    "rect": [
+      47,
+      952,
+      252,
+      243
+    ],
+    "title": "Sealing Wax Stick",
+    "view": "inventory",
+    "opaque_pixels": 24021
+  },
+  {
+    "id": "trade_general_store_charcoal_piece",
+    "atlas": "business_general_store",
+    "rect": [
+      351,
+      951,
+      245,
+      239
+    ],
+    "title": "Charcoal Piece",
+    "view": "inventory",
+    "opaque_pixels": 29824
+  },
+  {
+    "id": "trade_general_store_clay_oil_lamp",
+    "atlas": "business_general_store",
+    "rect": [
+      661,
+      976,
+      230,
+      189
+    ],
+    "title": "Clay Oil Lamp",
+    "view": "inventory",
+    "opaque_pixels": 28199
+  },
+  {
+    "id": "trade_general_store_wooden_scrub_brush",
+    "atlas": "business_general_store",
+    "rect": [
+      948,
+      953,
+      281,
+      228
+    ],
+    "title": "Wooden Scrub Brush",
+    "view": "inventory",
+    "opaque_pixels": 40077
+  },
+  {
+    "id": "trade_stable_empty_feed_trough",
+    "atlas": "business_stable",
+    "rect": [
+      15,
+      111,
+      291,
+      147
+    ],
+    "title": "Empty Feed Trough",
+    "view": "overhead",
+    "opaque_pixels": 35689
+  },
+  {
+    "id": "trade_stable_empty_water_trough",
+    "atlas": "business_stable",
+    "rect": [
+      331,
+      86,
+      281,
+      192
+    ],
+    "title": "Empty Water Trough",
+    "view": "overhead",
+    "opaque_pixels": 41658
+  },
+  {
+    "id": "trade_stable_empty_tack_chest",
+    "atlas": "business_stable",
+    "rect": [
+      643,
+      83,
+      281,
+      187
+    ],
+    "title": "Empty Tack Chest",
+    "view": "overhead",
+    "opaque_pixels": 47735
+  },
+  {
+    "id": "trade_stable_empty_feed_bin",
+    "atlas": "business_stable",
+    "rect": [
+      983,
+      60,
+      229,
+      237
+    ],
+    "title": "Empty Feed Bin",
+    "view": "overhead",
+    "opaque_pixels": 47620
+  },
+  {
+    "id": "trade_stable_saddle_rack",
+    "atlas": "business_stable",
+    "rect": [
+      37,
+      383,
+      244,
+      200
+    ],
+    "title": "Saddle Rack",
+    "view": "overhead",
+    "opaque_pixels": 34298
+  },
+  {
+    "id": "trade_stable_stable_floor_mat",
+    "atlas": "business_stable",
+    "rect": [
+      330,
+      383,
+      283,
+      192
+    ],
+    "title": "Stable Floor Mat",
+    "view": "overhead",
+    "opaque_pixels": 49928
+  },
+  {
+    "id": "trade_stable_empty_grooming_tray",
+    "atlas": "business_stable",
+    "rect": [
+      638,
+      386,
+      290,
+      194
+    ],
+    "title": "Empty Grooming Tray",
+    "view": "overhead",
+    "opaque_pixels": 43051
+  },
+  {
+    "id": "trade_stable_empty_grain_scoop",
+    "atlas": "business_stable",
+    "rect": [
+      954,
+      423,
+      286,
+      123
+    ],
+    "title": "Empty Grain Scoop",
+    "view": "overhead",
+    "opaque_pixels": 22425
+  },
+  {
+    "id": "trade_stable_horse_grooming_brush",
+    "atlas": "business_stable",
+    "rect": [
+      28,
+      677,
+      281,
+      224
+    ],
+    "title": "Horse Grooming Brush",
+    "view": "inventory",
+    "opaque_pixels": 41122
+  },
+  {
+    "id": "trade_stable_hoof_pick",
+    "atlas": "business_stable",
+    "rect": [
+      354,
+      633,
+      262,
+      286
+    ],
+    "title": "Hoof Pick",
+    "view": "inventory",
+    "opaque_pixels": 15007
+  },
+  {
+    "id": "trade_stable_leather_bridle",
+    "atlas": "business_stable",
+    "rect": [
+      688,
+      629,
+      188,
+      301
+    ],
+    "title": "Leather Bridle",
+    "view": "inventory",
+    "opaque_pixels": 25929
+  },
+  {
+    "id": "trade_stable_riding_saddle",
+    "atlas": "business_stable",
+    "rect": [
+      959,
+      637,
+      265,
+      283
+    ],
+    "title": "Riding Saddle",
+    "view": "inventory",
+    "opaque_pixels": 43127
+  },
+  {
+    "id": "trade_stable_horse_blanket",
+    "atlas": "business_stable",
+    "rect": [
+      19,
+      972,
+      299,
+      239
+    ],
+    "title": "Horse Blanket",
+    "view": "inventory",
+    "opaque_pixels": 51093
+  },
+  {
+    "id": "trade_stable_oat_feed_sack",
+    "atlas": "business_stable",
+    "rect": [
+      346,
+      936,
+      258,
+      290
+    ],
+    "title": "Oat Feed Sack",
+    "view": "inventory",
+    "opaque_pixels": 48961
+  },
+  {
+    "id": "trade_stable_carrot",
+    "atlas": "business_stable",
+    "rect": [
+      659,
+      966,
+      263,
+      254
+    ],
+    "title": "Carrot",
+    "view": "inventory",
+    "opaque_pixels": 17421
+  },
+  {
+    "id": "trade_stable_curry_comb",
+    "atlas": "business_stable",
+    "rect": [
+      958,
+      994,
+      274,
+      199
+    ],
+    "title": "Curry Comb",
+    "view": "inventory",
+    "opaque_pixels": 37595
+  },
+  {
+    "id": "trade_warehouse_empty_packing_bench",
+    "atlas": "business_warehouse",
+    "rect": [
+      21,
+      100,
+      286,
+      143
+    ],
+    "title": "Empty Packing Bench",
+    "view": "overhead",
+    "opaque_pixels": 37294
+  },
+  {
+    "id": "trade_warehouse_empty_shipping_crate",
+    "atlas": "business_warehouse",
+    "rect": [
+      349,
+      45,
+      250,
+      247
+    ],
+    "title": "Empty Shipping Crate",
+    "view": "overhead",
+    "opaque_pixels": 54832
+  },
+  {
+    "id": "trade_warehouse_closed_shipping_chest",
+    "atlas": "business_warehouse",
+    "rect": [
+      648,
+      83,
+      274,
+      187
+    ],
+    "title": "Closed Shipping Chest",
+    "view": "overhead",
+    "opaque_pixels": 45422
+  },
+  {
+    "id": "trade_warehouse_empty_barrel_stand",
+    "atlas": "business_warehouse",
+    "rect": [
+      968,
+      81,
+      255,
+      183
+    ],
+    "title": "Empty Barrel Stand",
+    "view": "overhead",
+    "opaque_pixels": 35910
+  },
+  {
+    "id": "trade_warehouse_wooden_pallet",
+    "atlas": "business_warehouse",
+    "rect": [
+      33,
+      350,
+      261,
+      249
+    ],
+    "title": "Wooden Pallet",
+    "view": "overhead",
+    "opaque_pixels": 55015
+  },
+  {
+    "id": "trade_warehouse_empty_sorting_tray",
+    "atlas": "business_warehouse",
+    "rect": [
+      348,
+      344,
+      250,
+      258
+    ],
+    "title": "Empty Sorting Tray",
+    "view": "overhead",
+    "opaque_pixels": 60113
+  },
+  {
+    "id": "trade_warehouse_platform_scale",
+    "atlas": "business_warehouse",
+    "rect": [
+      636,
+      383,
+      299,
+      177
+    ],
+    "title": "Platform Scale",
+    "view": "overhead",
+    "opaque_pixels": 48908
+  },
+  {
+    "id": "trade_warehouse_empty_packing_basket",
+    "atlas": "business_warehouse",
+    "rect": [
+      960,
+      369,
+      273,
+      209
+    ],
+    "title": "Empty Packing Basket",
+    "view": "overhead",
+    "opaque_pixels": 50555
+  },
+  {
+    "id": "trade_warehouse_shipping_ledger",
+    "atlas": "business_warehouse",
+    "rect": [
+      22,
+      637,
+      279,
+      271
+    ],
+    "title": "Shipping Ledger",
+    "view": "inventory",
+    "opaque_pixels": 44302
+  },
+  {
+    "id": "trade_warehouse_marking_chalk_block",
+    "atlas": "business_warehouse",
+    "rect": [
+      340,
+      677,
+      267,
+      191
+    ],
+    "title": "Marking Chalk Block",
+    "view": "inventory",
+    "opaque_pixels": 30062
+  },
+  {
+    "id": "trade_warehouse_packing_straw_bale",
+    "atlas": "business_warehouse",
+    "rect": [
+      640,
+      646,
+      294,
+      248
+    ],
+    "title": "Packing Straw Bale",
+    "view": "inventory",
+    "opaque_pixels": 52581
+  },
+  {
+    "id": "trade_warehouse_burlap_roll",
+    "atlas": "business_warehouse",
+    "rect": [
+      952,
+      651,
+      289,
+      261
+    ],
+    "title": "Burlap Roll",
+    "view": "inventory",
+    "opaque_pixels": 43322
+  },
+  {
+    "id": "trade_warehouse_iron_padlock",
+    "atlas": "business_warehouse",
+    "rect": [
+      68,
+      947,
+      212,
+      266
+    ],
+    "title": "Iron Padlock",
+    "view": "inventory",
+    "opaque_pixels": 36634
+  },
+  {
+    "id": "trade_warehouse_cargo_hook",
+    "atlas": "business_warehouse",
+    "rect": [
+      348,
+      936,
+      263,
+      279
+    ],
+    "title": "Cargo Hook",
+    "view": "inventory",
+    "opaque_pixels": 21291
+  },
+  {
+    "id": "trade_warehouse_wooden_pulley",
+    "atlas": "business_warehouse",
+    "rect": [
+      679,
+      927,
+      194,
+      291
+    ],
+    "title": "Wooden Pulley",
+    "view": "inventory",
+    "opaque_pixels": 36382
+  },
+  {
+    "id": "trade_warehouse_wax_seal_stamp",
+    "atlas": "business_warehouse",
+    "rect": [
+      981,
+      941,
+      231,
+      271
+    ],
+    "title": "Wax Seal Stamp",
+    "view": "inventory",
+    "opaque_pixels": 23832
+  },
+  {
+    "id": "trade_mill_round_millstone",
+    "atlas": "business_mill",
+    "rect": [
+      39,
+      58,
+      237,
+      238
+    ],
+    "title": "Round Millstone",
+    "view": "overhead",
+    "opaque_pixels": 40533
+  },
+  {
+    "id": "trade_mill_empty_grain_hopper",
+    "atlas": "business_mill",
+    "rect": [
+      336,
+      51,
+      253,
+      248
+    ],
+    "title": "Empty Grain Hopper",
+    "view": "overhead",
+    "opaque_pixels": 54576
+  },
+  {
+    "id": "trade_mill_mill_sorting_table",
+    "atlas": "business_mill",
+    "rect": [
+      639,
+      97,
+      291,
+      160
+    ],
+    "title": "Mill Sorting Table",
+    "view": "overhead",
+    "opaque_pixels": 40104
+  },
+  {
+    "id": "trade_mill_empty_flour_bin",
+    "atlas": "business_mill",
+    "rect": [
+      952,
+      98,
+      292,
+      155
+    ],
+    "title": "Empty Flour Bin",
+    "view": "overhead",
+    "opaque_pixels": 38689
+  },
+  {
+    "id": "trade_mill_empty_bran_basket",
+    "atlas": "business_mill",
+    "rect": [
+      30,
+      356,
+      253,
+      249
+    ],
+    "title": "Empty Bran Basket",
+    "view": "overhead",
+    "opaque_pixels": 46140
+  },
+  {
+    "id": "trade_mill_grain_sieve",
+    "atlas": "business_mill",
+    "rect": [
+      343,
+      352,
+      253,
+      259
+    ],
+    "title": "Grain Sieve",
+    "view": "overhead",
+    "opaque_pixels": 45895
+  },
+  {
+    "id": "trade_mill_empty_mill_scoop",
+    "atlas": "business_mill",
+    "rect": [
+      640,
+      422,
+      296,
+      132
+    ],
+    "title": "Empty Mill Scoop",
+    "view": "overhead",
+    "opaque_pixels": 24338
+  },
+  {
+    "id": "trade_mill_mill_floor_grate",
+    "atlas": "business_mill",
+    "rect": [
+      974,
+      374,
+      246,
+      211
+    ],
+    "title": "Mill Floor Grate",
+    "view": "overhead",
+    "opaque_pixels": 43217
+  },
+  {
+    "id": "trade_mill_wheat_grain_sack",
+    "atlas": "business_mill",
+    "rect": [
+      36,
+      642,
+      244,
+      283
+    ],
+    "title": "Wheat Grain Sack",
+    "view": "inventory",
+    "opaque_pixels": 43563
+  },
+  {
+    "id": "trade_mill_rye_grain_sack",
+    "atlas": "business_mill",
+    "rect": [
+      349,
+      643,
+      241,
+      274
+    ],
+    "title": "Rye Grain Sack",
+    "view": "inventory",
+    "opaque_pixels": 41979
+  },
+  {
+    "id": "trade_mill_barley_grain_sack",
+    "atlas": "business_mill",
+    "rect": [
+      670,
+      641,
+      234,
+      285
+    ],
+    "title": "Barley Grain Sack",
+    "view": "inventory",
+    "opaque_pixels": 42226
+  },
+  {
+    "id": "trade_mill_cornmeal_packet",
+    "atlas": "business_mill",
+    "rect": [
+      1004,
+      668,
+      195,
+      244
+    ],
+    "title": "Cornmeal Packet",
+    "view": "inventory",
+    "opaque_pixels": 35918
+  },
+  {
+    "id": "trade_mill_wooden_mill_mallet",
+    "atlas": "business_mill",
+    "rect": [
+      23,
+      944,
+      267,
+      287
+    ],
+    "title": "Wooden Mill Mallet",
+    "view": "inventory",
+    "opaque_pixels": 28492
+  },
+  {
+    "id": "trade_mill_millwright_chisel",
+    "atlas": "business_mill",
+    "rect": [
+      327,
+      967,
+      275,
+      242
+    ],
+    "title": "Millwright Chisel",
+    "view": "inventory",
+    "opaque_pixels": 15438
+  },
+  {
+    "id": "trade_mill_mill_bearing_ring",
+    "atlas": "business_mill",
+    "rect": [
+      651,
+      979,
+      268,
+      218
+    ],
+    "title": "Mill Bearing Ring",
+    "view": "inventory",
+    "opaque_pixels": 40630
+  },
+  {
+    "id": "trade_mill_lubricating_grease_pot",
+    "atlas": "business_mill",
+    "rect": [
+      998,
+      983,
+      200,
+      221
+    ],
+    "title": "Lubricating Grease Pot",
+    "view": "inventory",
+    "opaque_pixels": 32146
+  },
+  {
+    "id": "trade_farm_farm_potting_bench",
+    "atlas": "business_farm",
+    "rect": [
+      16,
+      74,
+      282,
+      214
+    ],
+    "title": "Farm Potting Bench",
+    "view": "overhead",
+    "opaque_pixels": 49345
+  },
+  {
+    "id": "trade_farm_empty_harvest_crate",
+    "atlas": "business_farm",
+    "rect": [
+      340,
+      78,
+      263,
+      205
+    ],
+    "title": "Empty Harvest Crate",
+    "view": "overhead",
+    "opaque_pixels": 48263
+  },
+  {
+    "id": "trade_farm_empty_seed_tray",
+    "atlas": "business_farm",
+    "rect": [
+      655,
+      79,
+      261,
+      208
+    ],
+    "title": "Empty Seed Tray",
+    "view": "overhead",
+    "opaque_pixels": 50473
+  },
+  {
+    "id": "trade_farm_empty_egg_tray",
+    "atlas": "business_farm",
+    "rect": [
+      970,
+      85,
+      254,
+      199
+    ],
+    "title": "Empty Egg Tray",
+    "view": "overhead",
+    "opaque_pixels": 46880
+  },
+  {
+    "id": "trade_farm_empty_milk_churn",
+    "atlas": "business_farm",
+    "rect": [
+      40,
+      382,
+      231,
+      210
+    ],
+    "title": "Empty Milk Churn",
+    "view": "overhead",
+    "opaque_pixels": 32778
+  },
+  {
+    "id": "trade_farm_empty_field_basket",
+    "atlas": "business_farm",
+    "rect": [
+      320,
+      370,
+      303,
+      220
+    ],
+    "title": "Empty Field Basket",
+    "view": "overhead",
+    "opaque_pixels": 48141
+  },
+  {
+    "id": "trade_farm_milking_stool",
+    "atlas": "business_farm",
+    "rect": [
+      682,
+      381,
+      201,
+      195
+    ],
+    "title": "Milking Stool",
+    "view": "overhead",
+    "opaque_pixels": 26592
+  },
+  {
+    "id": "trade_farm_empty_watering_can",
+    "atlas": "business_farm",
+    "rect": [
+      934,
+      396,
+      299,
+      181
+    ],
+    "title": "Empty Watering Can",
+    "view": "overhead",
+    "opaque_pixels": 27624
+  },
+  {
+    "id": "trade_farm_red_apple",
+    "atlas": "business_farm",
+    "rect": [
+      44,
+      664,
+      226,
+      241
+    ],
+    "title": "Red Apple",
+    "view": "inventory",
+    "opaque_pixels": 38220
+  },
+  {
+    "id": "trade_farm_green_pear",
+    "atlas": "business_farm",
+    "rect": [
+      372,
+      633,
+      196,
+      283
+    ],
+    "title": "Green Pear",
+    "view": "inventory",
+    "opaque_pixels": 32739
+  },
+  {
+    "id": "trade_farm_brown_egg",
+    "atlas": "business_farm",
+    "rect": [
+      680,
+      681,
+      188,
+      229
+    ],
+    "title": "Brown Egg",
+    "view": "inventory",
+    "opaque_pixels": 30699
+  },
+  {
+    "id": "trade_farm_potato",
+    "atlas": "business_farm",
+    "rect": [
+      966,
+      683,
+      257,
+      216
+    ],
+    "title": "Potato",
+    "view": "inventory",
+    "opaque_pixels": 38201
+  },
+  {
+    "id": "trade_farm_onion",
+    "atlas": "business_farm",
+    "rect": [
+      42,
+      945,
+      222,
+      266
+    ],
+    "title": "Onion",
+    "view": "inventory",
+    "opaque_pixels": 36823
+  },
+  {
+    "id": "trade_farm_garlic_bulb",
+    "atlas": "business_farm",
+    "rect": [
+      352,
+      954,
+      234,
+      249
+    ],
+    "title": "Garlic Bulb",
+    "view": "inventory",
+    "opaque_pixels": 34746
+  },
+  {
+    "id": "trade_farm_cabbage_head",
+    "atlas": "business_farm",
+    "rect": [
+      634,
+      941,
+      287,
+      274
+    ],
+    "title": "Cabbage Head",
+    "view": "inventory",
+    "opaque_pixels": 57120
+  },
+  {
+    "id": "trade_farm_small_pumpkin",
+    "atlas": "business_farm",
+    "rect": [
+      961,
+      951,
+      270,
+      252
+    ],
+    "title": "Small Pumpkin",
+    "view": "inventory",
+    "opaque_pixels": 47711
+  },
+  {
+    "id": "trade_carpenter_joiner_s_workbench",
+    "atlas": "business_carpenter",
+    "rect": [
+      17,
+      90,
+      312,
+      154
+    ],
+    "title": "Joiner’s Workbench",
+    "view": "overhead",
+    "opaque_pixels": 40900
+  },
+  {
+    "id": "trade_carpenter_empty_sawhorse",
+    "atlas": "business_carpenter",
+    "rect": [
+      367,
+      90,
+      247,
+      159
+    ],
+    "title": "Empty Sawhorse",
+    "view": "overhead",
+    "opaque_pixels": 26399
+  },
+  {
+    "id": "trade_carpenter_empty_lumber_cradle",
+    "atlas": "business_carpenter",
+    "rect": [
+      651,
+      69,
+      269,
+      181
+    ],
+    "title": "Empty Lumber Cradle",
+    "view": "overhead",
+    "opaque_pixels": 35479
+  },
+  {
+    "id": "trade_carpenter_empty_tool_drawer",
+    "atlas": "business_carpenter",
+    "rect": [
+      972,
+      95,
+      250,
+      151
+    ],
+    "title": "Empty Tool Drawer",
+    "view": "overhead",
+    "opaque_pixels": 34542
+  },
+  {
+    "id": "trade_carpenter_woodworking_floor_pad",
+    "atlas": "business_carpenter",
+    "rect": [
+      30,
+      368,
+      259,
+      195
+    ],
+    "title": "Woodworking Floor Pad",
+    "view": "overhead",
+    "opaque_pixels": 46478
+  },
+  {
+    "id": "trade_carpenter_bench_hook",
+    "atlas": "business_carpenter",
+    "rect": [
+      386,
+      368,
+      190,
+      208
+    ],
+    "title": "Bench Hook",
+    "view": "overhead",
+    "opaque_pixels": 21738
+  },
+  {
+    "id": "trade_carpenter_empty_glue_bowl",
+    "atlas": "business_carpenter",
+    "rect": [
+      694,
+      382,
+      179,
+      181
+    ],
+    "title": "Empty Glue Bowl",
+    "view": "overhead",
+    "opaque_pixels": 23196
+  },
+  {
+    "id": "trade_carpenter_wooden_clamping_frame",
+    "atlas": "business_carpenter",
+    "rect": [
+      963,
+      344,
+      267,
+      250
+    ],
+    "title": "Wooden Clamping Frame",
+    "view": "overhead",
+    "opaque_pixels": 30978
+  },
+  {
+    "id": "trade_carpenter_carpenter_s_hammer",
+    "atlas": "business_carpenter",
+    "rect": [
+      21,
+      655,
+      271,
+      267
+    ],
+    "title": "Carpenter’s Hammer",
+    "view": "inventory",
+    "opaque_pixels": 16631
+  },
+  {
+    "id": "trade_carpenter_hand_saw",
+    "atlas": "business_carpenter",
+    "rect": [
+      341,
+      651,
+      288,
+      271
+    ],
+    "title": "Hand Saw",
+    "view": "inventory",
+    "opaque_pixels": 23522
+  },
+  {
+    "id": "trade_carpenter_wood_plane",
+    "atlas": "business_carpenter",
+    "rect": [
+      654,
+      674,
+      268,
+      235
+    ],
+    "title": "Wood Plane",
+    "view": "inventory",
+    "opaque_pixels": 33164
+  },
+  {
+    "id": "trade_carpenter_woodworking_chisel",
+    "atlas": "business_carpenter",
+    "rect": [
+      971,
+      664,
+      256,
+      245
+    ],
+    "title": "Woodworking Chisel",
+    "view": "inventory",
+    "opaque_pixels": 13605
+  },
+  {
+    "id": "trade_carpenter_joiner_s_square",
+    "atlas": "business_carpenter",
+    "rect": [
+      44,
+      972,
+      223,
+      253
+    ],
+    "title": "Joiner’s Square",
+    "view": "inventory",
+    "opaque_pixels": 17576
+  },
+  {
+    "id": "trade_carpenter_oak_plank",
+    "atlas": "business_carpenter",
+    "rect": [
+      336,
+      971,
+      277,
+      241
+    ],
+    "title": "Oak Plank",
+    "view": "inventory",
+    "opaque_pixels": 26047
+  },
+  {
+    "id": "trade_carpenter_wooden_dowel",
+    "atlas": "business_carpenter",
+    "rect": [
+      655,
+      993,
+      262,
+      197
+    ],
+    "title": "Wooden Dowel",
+    "view": "inventory",
+    "opaque_pixels": 11624
+  },
+  {
+    "id": "trade_carpenter_hide_glue_jar",
+    "atlas": "business_carpenter",
+    "rect": [
+      995,
+      963,
+      194,
+      241
+    ],
+    "title": "Hide Glue Jar",
+    "view": "inventory",
+    "opaque_pixels": 35458
+  },
+  {
+    "id": "trade_market_bare_market_counter",
+    "atlas": "business_market",
+    "rect": [
+      32,
+      106,
+      287,
+      174
+    ],
+    "title": "Bare Market Counter",
+    "view": "overhead",
+    "opaque_pixels": 46097
+  },
+  {
+    "id": "trade_market_empty_fish_tray",
+    "atlas": "business_market",
+    "rect": [
+      340,
+      104,
+      279,
+      175
+    ],
+    "title": "Empty Fish Tray",
+    "view": "overhead",
+    "opaque_pixels": 44908
+  },
+  {
+    "id": "trade_market_butcher_s_block",
+    "atlas": "business_market",
+    "rect": [
+      660,
+      67,
+      247,
+      246
+    ],
+    "title": "Butcher’s Block",
+    "view": "overhead",
+    "opaque_pixels": 44096
+  },
+  {
+    "id": "trade_market_empty_fruit_bin",
+    "atlas": "business_market",
+    "rect": [
+      947,
+      65,
+      273,
+      232
+    ],
+    "title": "Empty Fruit Bin",
+    "view": "overhead",
+    "opaque_pixels": 57454
+  },
+  {
+    "id": "trade_market_empty_spice_organizer",
+    "atlas": "business_market",
+    "rect": [
+      47,
+      391,
+      252,
+      189
+    ],
+    "title": "Empty Spice Organizer",
+    "view": "overhead",
+    "opaque_pixels": 43730
+  },
+  {
+    "id": "trade_market_empty_woven_bread_basket",
+    "atlas": "business_market",
+    "rect": [
+      327,
+      380,
+      302,
+      211
+    ],
+    "title": "Empty Woven Bread Basket",
+    "view": "overhead",
+    "opaque_pixels": 47768
+  },
+  {
+    "id": "trade_market_empty_display_pedestal",
+    "atlas": "business_market",
+    "rect": [
+      661,
+      352,
+      242,
+      249
+    ],
+    "title": "Empty Display Pedestal",
+    "view": "overhead",
+    "opaque_pixels": 52289
+  },
+  {
+    "id": "trade_market_empty_earthenware_bowl",
+    "atlas": "business_market",
+    "rect": [
+      959,
+      358,
+      249,
+      246
+    ],
+    "title": "Empty Earthenware Bowl",
+    "view": "overhead",
+    "opaque_pixels": 45233
+  },
+  {
+    "id": "trade_market_silver_river_fish",
+    "atlas": "business_market",
+    "rect": [
+      29,
+      686,
+      298,
+      224
+    ],
+    "title": "Silver River Fish",
+    "view": "inventory",
+    "opaque_pixels": 27453
+  },
+  {
+    "id": "trade_market_salted_fish",
+    "atlas": "business_market",
+    "rect": [
+      338,
+      639,
+      284,
+      269
+    ],
+    "title": "Salted Fish",
+    "view": "inventory",
+    "opaque_pixels": 28298
+  },
+  {
+    "id": "trade_market_raw_steak",
+    "atlas": "business_market",
+    "rect": [
+      650,
+      681,
+      266,
+      220
+    ],
+    "title": "Raw Steak",
+    "view": "inventory",
+    "opaque_pixels": 34352
+  },
+  {
+    "id": "trade_market_smoked_ham",
+    "atlas": "business_market",
+    "rect": [
+      952,
+      664,
+      273,
+      239
+    ],
+    "title": "Smoked Ham",
+    "view": "inventory",
+    "opaque_pixels": 36558
+  },
+  {
+    "id": "trade_market_orange",
+    "atlas": "business_market",
+    "rect": [
+      55,
+      964,
+      228,
+      226
+    ],
+    "title": "Orange",
+    "view": "inventory",
+    "opaque_pixels": 37849
+  },
+  {
+    "id": "trade_market_pear_preserve_jar",
+    "atlas": "business_market",
+    "rect": [
+      367,
+      933,
+      210,
+      275
+    ],
+    "title": "Pear Preserve Jar",
+    "view": "inventory",
+    "opaque_pixels": 44717
+  },
+  {
+    "id": "trade_market_cinnamon_stick",
+    "atlas": "business_market",
+    "rect": [
+      650,
+      979,
+      260,
+      193
+    ],
+    "title": "Cinnamon Stick",
+    "view": "inventory",
+    "opaque_pixels": 16715
+  },
+  {
+    "id": "trade_market_black_pepper_packet",
+    "atlas": "business_market",
+    "rect": [
+      980,
+      954,
+      223,
+      243
+    ],
+    "title": "Black Pepper Packet",
+    "view": "inventory",
+    "opaque_pixels": 39535
+  },
+  {
+    "id": "trade_household_bare_upholstered_settee",
+    "atlas": "business_household",
+    "rect": [
+      31,
+      60,
+      252,
+      222
+    ],
+    "title": "Bare Upholstered Settee",
+    "view": "overhead",
+    "opaque_pixels": 48160
+  },
+  {
+    "id": "trade_household_empty_wash_tub",
+    "atlas": "business_household",
+    "rect": [
+      320,
+      78,
+      298,
+      203
+    ],
+    "title": "Empty Wash Tub",
+    "view": "overhead",
+    "opaque_pixels": 43667
+  },
+  {
+    "id": "trade_household_bare_kitchen_table",
+    "atlas": "business_household",
+    "rect": [
+      640,
+      73,
+      296,
+      206
+    ],
+    "title": "Bare Kitchen Table",
+    "view": "overhead",
+    "opaque_pixels": 53510
+  },
+  {
+    "id": "trade_household_empty_pantry_cubbies",
+    "atlas": "business_household",
+    "rect": [
+      966,
+      92,
+      262,
+      175
+    ],
+    "title": "Empty Pantry Cubbies",
+    "view": "overhead",
+    "opaque_pixels": 42120
+  },
+  {
+    "id": "trade_household_oval_dining_table",
+    "atlas": "business_household",
+    "rect": [
+      17,
+      368,
+      298,
+      218
+    ],
+    "title": "Oval Dining Table",
+    "view": "overhead",
+    "opaque_pixels": 48387
+  },
+  {
+    "id": "trade_household_empty_terracotta_planter",
+    "atlas": "business_household",
+    "rect": [
+      372,
+      368,
+      204,
+      220
+    ],
+    "title": "Empty Terracotta Planter",
+    "view": "overhead",
+    "opaque_pixels": 32603
+  },
+  {
+    "id": "trade_household_woven_hall_runner",
+    "atlas": "business_household",
+    "rect": [
+      631,
+      396,
+      305,
+      165
+    ],
+    "title": "Woven Hall Runner",
+    "view": "overhead",
+    "opaque_pixels": 46016
+  },
+  {
+    "id": "trade_household_empty_firewood_basket",
+    "atlas": "business_household",
+    "rect": [
+      954,
+      392,
+      284,
+      178
+    ],
+    "title": "Empty Firewood Basket",
+    "view": "overhead",
+    "opaque_pixels": 36117
+  },
+  {
+    "id": "trade_household_wooden_cooking_spoon",
+    "atlas": "business_household",
+    "rect": [
+      42,
+      633,
+      245,
+      281
+    ],
+    "title": "Wooden Cooking Spoon",
+    "view": "inventory",
+    "opaque_pixels": 13779
+  },
+  {
+    "id": "trade_household_iron_ladle",
+    "atlas": "business_household",
+    "rect": [
+      360,
+      629,
+      239,
+      282
+    ],
+    "title": "Iron Ladle",
+    "view": "inventory",
+    "opaque_pixels": 14363
+  },
+  {
+    "id": "trade_household_ceramic_dinner_plate",
+    "atlas": "business_household",
+    "rect": [
+      642,
+      680,
+      288,
+      207
+    ],
+    "title": "Ceramic Dinner Plate",
+    "view": "inventory",
+    "opaque_pixels": 43608
+  },
+  {
+    "id": "trade_household_stoneware_cup",
+    "atlas": "business_household",
+    "rect": [
+      995,
+      668,
+      233,
+      225
+    ],
+    "title": "Stoneware Cup",
+    "view": "inventory",
+    "opaque_pixels": 35182
+  },
+  {
+    "id": "trade_household_hand_broom",
+    "atlas": "business_household",
+    "rect": [
+      42,
+      948,
+      224,
+      259
+    ],
+    "title": "Hand Broom",
+    "view": "inventory",
+    "opaque_pixels": 22655
+  },
+  {
+    "id": "trade_household_clay_pitcher",
+    "atlas": "business_household",
+    "rect": [
+      371,
+      941,
+      206,
+      264
+    ],
+    "title": "Clay Pitcher",
+    "view": "inventory",
+    "opaque_pixels": 35617
+  },
+  {
+    "id": "trade_household_brass_candlestick",
+    "atlas": "business_household",
+    "rect": [
+      695,
+      940,
+      177,
+      261
+    ],
+    "title": "Brass Candlestick",
+    "view": "inventory",
+    "opaque_pixels": 18952
+  },
+  {
+    "id": "trade_household_wooden_comb",
+    "atlas": "business_household",
+    "rect": [
+      983,
+      983,
+      242,
+      208
+    ],
+    "title": "Wooden Comb",
+    "view": "inventory",
+    "opaque_pixels": 26385
+  },
+  {
+    "id": "counter_oak_straight",
+    "atlas": "business_counters",
+    "rect": [
+      34,
+      159,
+      341,
+      161
+    ],
+    "title": "Oak Counter — Straight",
+    "view": "overhead",
+    "opaque_pixels": 50780
+  },
+  {
+    "id": "counter_oak_inner",
+    "atlas": "business_counters",
+    "rect": [
+      396,
+      81,
+      269,
+      245
+    ],
+    "title": "Oak Counter — Inner Corner",
+    "view": "overhead",
+    "opaque_pixels": 47546
+  },
+  {
+    "id": "counter_oak_outer",
+    "atlas": "business_counters",
+    "rect": [
+      692,
+      81,
+      256,
+      244
+    ],
+    "title": "Oak Counter — Outer Corner",
+    "view": "overhead",
+    "opaque_pixels": 53059
+  },
+  {
+    "id": "counter_oak_end",
+    "atlas": "business_counters",
+    "rect": [
+      974,
+      159,
+      250,
+      159
+    ],
+    "title": "Oak Counter — End Section",
+    "view": "overhead",
+    "opaque_pixels": 34064
+  },
+  {
+    "id": "counter_walnut_straight",
+    "atlas": "business_counters",
+    "rect": [
+      34,
+      424,
+      341,
+      163
+    ],
+    "title": "Walnut Counter — Straight",
+    "view": "overhead",
+    "opaque_pixels": 51507
+  },
+  {
+    "id": "counter_walnut_inner",
+    "atlas": "business_counters",
+    "rect": [
+      396,
+      349,
+      269,
+      245
+    ],
+    "title": "Walnut Counter — Inner Corner",
+    "view": "overhead",
+    "opaque_pixels": 47447
+  },
+  {
+    "id": "counter_walnut_outer",
+    "atlas": "business_counters",
+    "rect": [
+      693,
+      349,
+      256,
+      241
+    ],
+    "title": "Walnut Counter — Outer Corner",
+    "view": "overhead",
+    "opaque_pixels": 53308
+  },
+  {
+    "id": "counter_walnut_end",
+    "atlas": "business_counters",
+    "rect": [
+      975,
+      423,
+      250,
+      164
+    ],
+    "title": "Walnut Counter — End Section",
+    "view": "overhead",
+    "opaque_pixels": 35148
+  },
+  {
+    "id": "counter_pine_straight",
+    "atlas": "business_counters",
+    "rect": [
+      34,
+      706,
+      341,
+      167
+    ],
+    "title": "Pine Counter — Straight",
+    "view": "overhead",
+    "opaque_pixels": 52884
+  },
+  {
+    "id": "counter_pine_inner",
+    "atlas": "business_counters",
+    "rect": [
+      396,
+      629,
+      270,
+      246
+    ],
+    "title": "Pine Counter — Inner Corner",
+    "view": "overhead",
+    "opaque_pixels": 47360
+  },
+  {
+    "id": "counter_pine_outer",
+    "atlas": "business_counters",
+    "rect": [
+      692,
+      629,
+      257,
+      246
+    ],
+    "title": "Pine Counter — Outer Corner",
+    "view": "overhead",
+    "opaque_pixels": 53892
+  },
+  {
+    "id": "counter_pine_end",
+    "atlas": "business_counters",
+    "rect": [
+      973,
+      705,
+      251,
+      167
+    ],
+    "title": "Pine Counter — End Section",
+    "view": "overhead",
+    "opaque_pixels": 35722
+  },
+  {
+    "id": "counter_stone_straight",
+    "atlas": "business_counters",
+    "rect": [
+      34,
+      994,
+      341,
+      168
+    ],
+    "title": "Stone Counter — Straight",
+    "view": "overhead",
+    "opaque_pixels": 52909
+  },
+  {
+    "id": "counter_stone_inner",
+    "atlas": "business_counters",
+    "rect": [
+      396,
+      920,
+      269,
+      247
+    ],
+    "title": "Stone Counter — Inner Corner",
+    "view": "overhead",
+    "opaque_pixels": 47285
+  },
+  {
+    "id": "counter_stone_outer",
+    "atlas": "business_counters",
+    "rect": [
+      692,
+      920,
+      256,
+      247
+    ],
+    "title": "Stone Counter — Outer Corner",
+    "view": "overhead",
+    "opaque_pixels": 54081
+  },
+  {
+    "id": "counter_stone_end",
+    "atlas": "business_counters",
+    "rect": [
+      974,
+      994,
+      251,
+      168
+    ],
+    "title": "Stone Counter — End Section",
+    "view": "overhead",
+    "opaque_pixels": 36062
+  }
+]

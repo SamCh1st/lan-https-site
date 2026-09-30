@@ -1,0 +1,31 @@
+{
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
+  "python.testing.unittestEnabled": true,
+  "python.testing.pytestEnabled": false,
+  "python.testing.unittestArgs": [
+    "-v",
+    "-s",
+    "tests",
+    "-p",
+    "test_*.py"
+  ],
+  "files.exclude": {
+    "**/__pycache__": true,
+    ".vs": true
+  },
+  "files.watcherExclude": {
+    "**/local-art/**": true,
+    "**/.venv/**": true,
+    "**/data/**": true
+  },
+  "search.exclude": {
+    "**/local-art": true,
+    "**/.venv": true,
+    "**/data": true,
+    "**/.cert": true,
+    "**/art-source": true
+  },
+  "python.analysis.extraPaths": [
+    "./backend"
+  ]
+}

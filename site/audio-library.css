@@ -1,0 +1,18 @@
+#audioMenuButton{left:auto;right:22px;color:#efc469}
+#audioSidebar{left:auto;right:0;transform:translateX(105%);border-left-width:1px;border-left-style:solid;border-right:0;box-shadow:-25px 0 70px rgba(0,0,0,.72)}
+#audioBackdrop{opacity:0;visibility:hidden}
+.audio-menu-open{overflow:hidden}
+.audio-menu-open #audioSidebar{transform:translateX(0)}
+.audio-menu-open #audioBackdrop{opacity:1;visibility:visible}
+.audio-content{position:relative;overflow:auto;padding:20px 24px;flex:1;color:#e9d7b5;min-height:0}
+.audio-content p{font-size:13px;line-height:1.5}
+.audio-content select{margin:8px 0 12px}
+.audio-import{margin-right:8px}
+#audioStatus{margin-top:12px}
+.audio-content details{border-top:1px solid #98733d66;padding:12px 0}
+.audio-content summary{cursor:pointer;color:#efc469;font-weight:600}
+.audio-track{display:flex;gap:10px;align-items:center;margin-top:10px}
+.audio-track button{flex:none;border:1px solid #a77f45;border-radius:50%;width:34px;height:34px;background:#28170f;color:#efc469}
+.audio-track span{overflow-wrap:anywhere;font-size:14px}
+.audio-empty{opacity:.7;margin:10px 0 0}
+@media(max-width:767.98px){#audioMenuButton{right:14px}.navbar{padding-right:54px!important}}

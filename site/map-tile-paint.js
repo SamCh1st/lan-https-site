@@ -1,0 +1,15 @@
+/* A tile stroke is one paint part, with a compact list of occupied grid cells. */
+(function(root){
+ function between(a,b){const x0=a.x/40,y0=a.y/40,x1=b.x/40,y1=b.y/40,dx=x1-x0,dy=y1-y0,sx=Math.sign(dx),sy=Math.sign(dy),endX=Math.floor(x1),endY=Math.floor(y1);let x=Math.floor(x0),y=Math.floor(y0),tx=dx?((sx>0?x+1:x)-x0)/dx:Infinity,ty=dy?((sy>0?y+1:y)-y0)/dy:Infinity;const result=[[x,y]];while((x!==endX||y!==endY)&&result.length<1000){if(tx<ty){x+=sx;tx+=1/Math.abs(dx);}else if(ty<tx){y+=sy;ty+=1/Math.abs(dy);}else{x+=sx;y+=sy;tx+=1/Math.abs(dx);ty+=1/Math.abs(dy);}result.push([x,y]);}return result;}
+ function setCells(n,cells){const list=[...cells].map(k=>k.split(',').map(Number)),xs=list.map(p=>p[0]),ys=list.map(p=>p[1]),x=Math.min(...xs),y=Math.min(...ys);n.x=x*40;n.y=y*40;n.w=(Math.max(...xs)-x+1)*40;n.h=(Math.max(...ys)-y+1)*40;n.tile_base_w=n.w;n.tile_base_h=n.h;n.tile_cells=list.map(([xx,yy])=>[xx-x,yy-y]);}
+ function erase(n,p){if(!n.tile_cells)return false;const a=-(n.rotation||0)*Math.PI/180,dx=p.x-n.x-n.w/2,dy=p.y-n.y-n.h/2,x=Math.floor((dx*Math.cos(a)-dy*Math.sin(a)+n.w/2)*(n.tile_base_w||n.w)/n.w/40),y=Math.floor((dx*Math.sin(a)+dy*Math.cos(a)+n.h/2)*(n.tile_base_h||n.h)/n.h/40),before=n.tile_cells.length;n.tile_cells=n.tile_cells.filter(([xx,yy])=>xx!==x||yy!==y);return before!==n.tile_cells.length;}
+ function render(n,g,el,fill,source){const sx=n.w/n.tile_base_w,sy=n.h/n.tile_base_h,rows=new Map();for(const [x,y] of n.tile_cells){if(!rows.has(y))rows.set(y,[]);rows.get(y).push(x);}let d='';for(const [y,xs] of rows){xs.sort((a,b)=>a-b);for(let i=0;i<xs.length;){const first=xs[i];let end=first+1;while(++i<xs.length&&xs[i]===end)end++;const x=first*40*sx,yy=y*40*sy,w=(end-first)*40*sx,h=40*sy;d+=`M${x} ${yy}h${w}v${h}h${-w}Z`;}}
+  if(source){const id='tile-paint-'+n.id.replace(/[^a-zA-Z0-9_-]/g,''),defs=el('defs',{},g);el('pattern',{id,href:'#'+source,width:source.startsWith('map-part-image-')?160:640,height:source.startsWith('map-part-image-')?160:640,patternUnits:'userSpaceOnUse',patternTransform:`translate(${-n.x} ${-n.y})`},defs);fill='url(#'+id+')';}
+  el('path',{d,fill,'data-tile-paint':n.tile_cells.length},g);
+ }
+ function merge(nodes,node,locked=n=>n.locked){const index=nodes.indexOf(node),previous=nodes[index-1],plain=n=>n?.tile_cells&&!locked(n)&&!n.hidden&&!n.rotation&&!n.erasures?.length&&!n.contents?.length&&!n.connected_map_id&&!n.light_enabled&&n.w===n.tile_base_w&&n.h===n.tile_base_h&&n.x%40===0&&n.y%40===0;
+  if(!plain(node)||!plain(previous)||(node.walk_over!==false)!==(previous.walk_over!==false)||['type','part_card_id','part_image_id','opacity','effects','folder_id','height_scale','flow_x','flow_y'].some(k=>node[k]!==previous[k]))return nodes;
+  const cells=new Set([previous,node].flatMap(n=>n.tile_cells.map(([x,y])=>(x+n.x/40)+','+(y+n.y/40))));if(cells.size>5000)return nodes;setCells(node,cells);return nodes.filter(n=>n!==previous);
+ }
+ const api={between,setCells,erase,render,merge};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.MapTilePaint=api;
+})(globalThis);

@@ -1,0 +1,52 @@
+# Local accounts, campaigns, uploads, certificates and AI downloads
+/data/
+/.cert/
+/local-art/
+/art-source/
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.db
+*.db-*
+*.sqlite*
+*.gguf
+*.safetensors
+*.onnx
+
+# Python, editors and tools
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.vs/
+*.suo
+*.user
+*.pyproj.user
+node_modules/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+build/
+*.egg-info/
+*.log
+Thumbs.db
+.DS_Store
+
+# Generated review images and browser test output
+/before-*.png
+/tests/artifacts/
+/tests/*.png
+/tests/*-result.json
+/tests/*-output.json
+/tests/*-preview.json
+/tests/art-composed-*.json
+/tests/art-live-*.json
+
+# Local server diagnostics
+/logs/

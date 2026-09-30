@@ -1,0 +1,16 @@
+.map-opening-settings{min-width:0;margin:12px 0;padding:10px;border:1px solid #a0773555;border-radius:4px}
+.map-opening-settings legend{float:none;width:auto;font-size:13px;padding:0 4px}
+.map-opening-settings label{display:block;margin:8px 0;font-size:12px}
+.map-opening-settings input:not([type=checkbox]),.map-opening-settings select{display:block;width:100%;max-width:100%;min-width:0;padding:5px}
+.map-opening-settings [hidden]{display:none!important}
+.map-opening-settings small{display:block;font-size:11px}
+.map-opening-settings [data-open-item-cards]{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(230px,100%),1fr));gap:8px;max-height:260px;overflow:auto}
+.map-opening-settings .map-open-item-card{display:flex;width:100%;min-width:0;gap:9px;padding:10px;text-align:left;border:1px solid #a78346;border-radius:4px;background:var(--realm-panel,#302315);color:var(--realm-ink,#ead29b)}
+.map-opening-settings .map-open-item-card[aria-pressed=true]{border-color:#ffe1a1;background:var(--realm-inset,#59432d)}
+.map-opening-settings .map-open-item-card .rail-entry-image{display:block;flex:0 0 40px;width:40px;height:48px}
+.map-opening-settings .map-open-item-card img{width:100%;height:100%;object-fit:contain}
+.map-opening-settings .map-open-item-card .rail-entry-copy{min-width:0;display:flex;flex-direction:column;gap:4px;white-space:normal;overflow-wrap:anywhere}
+.map-opening-settings .map-open-item-card b{font-size:11px;color:inherit}
+#partRollModal .modal-dialog{max-width:440px}
+#partRollModal .rail-dice-panel{display:block;max-height:none}
+#partRollModal [data-roll-message]{font-weight:600}

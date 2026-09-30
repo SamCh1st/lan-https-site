@@ -1,0 +1,4 @@
+# Website HTTPS support and image processing. Python 3.11+ recommended.
+cryptography>=43,<50
+Pillow>=10.4,<14
+numpy>=1.26,<3

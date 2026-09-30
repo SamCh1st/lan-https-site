@@ -1,0 +1,3138 @@
+[
+  {
+    "id": "trade_bakery_country_bread_loaf",
+    "title": "Country Bread Loaf",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_country_bread_loaf",
+      "summary": "One round scored brown bread loaf.",
+      "notes": "One round scored brown bread loaf.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_bakery_long_bread_loaf",
+    "title": "Long Bread Loaf",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_long_bread_loaf",
+      "summary": "One long crusty baguette.",
+      "notes": "One long crusty baguette.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 4,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_bakery_twisted_pretzel",
+    "title": "Twisted Pretzel",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_twisted_pretzel",
+      "summary": "One golden twisted pretzel.",
+      "notes": "One golden twisted pretzel.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 3,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_bakery_butter_crescent",
+    "title": "Butter Crescent",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_butter_crescent",
+      "summary": "One flaky crescent pastry.",
+      "notes": "One flaky crescent pastry.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 6,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_bakery_oat_flatbread",
+    "title": "Oat Flatbread",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_oat_flatbread",
+      "summary": "One round oat flatbread.",
+      "notes": "One round oat flatbread.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 3,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_bakery_apple_hand_pie",
+    "title": "Apple Hand Pie",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_apple_hand_pie",
+      "summary": "One closed golden apple hand pie.",
+      "notes": "One closed golden apple hand pie.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 8,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_bakery_baking_flour_sack",
+    "title": "Baking Flour Sack",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_baking_flour_sack",
+      "summary": "One tied linen sack of baking flour.",
+      "notes": "One tied linen sack of baking flour.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_bakery_brown_sugar_cone",
+    "title": "Brown Sugar Cone",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_bakery_brown_sugar_cone",
+      "summary": "One solid unwrapped brown sugar cone.",
+      "notes": "One solid unwrapped brown sugar cone.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Bakery, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 800,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_sealed_ale_bottle",
+    "title": "Sealed Ale Bottle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_sealed_ale_bottle",
+      "summary": "One sealed squat brown ale bottle.",
+      "notes": "One sealed squat brown ale bottle.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 200,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_red_wine_bottle",
+    "title": "Red Wine Bottle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_red_wine_bottle",
+      "summary": "One sealed dark green wine bottle.",
+      "notes": "One sealed dark green wine bottle.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_cider_bottle",
+    "title": "Cider Bottle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_cider_bottle",
+      "summary": "One sealed amber cider bottle.",
+      "notes": "One sealed amber cider bottle.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 300,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_hard_cheese_wheel",
+    "title": "Hard Cheese Wheel",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_hard_cheese_wheel",
+      "summary": "One whole uncut ochre-rinded cheese wheel.",
+      "notes": "One whole uncut ochre-rinded cheese wheel.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_smoked_sausage",
+    "title": "Smoked Sausage",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_smoked_sausage",
+      "summary": "One single cured brown sausage.",
+      "notes": "One single cured brown sausage.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 200,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_pickled_cucumber",
+    "title": "Pickled Cucumber",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_pickled_cucumber",
+      "summary": "One pickled cucumber, no jar.",
+      "notes": "One pickled cucumber, no jar.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 3,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_roasted_drumstick",
+    "title": "Roasted Drumstick",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_roasted_drumstick",
+      "summary": "One cooked chicken drumstick.",
+      "notes": "One cooked chicken drumstick.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tavern_honey_cake",
+    "title": "Honey Cake",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tavern_honey_cake",
+      "summary": "One small round honey cake.",
+      "notes": "One small round honey cake.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tavern, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 8,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_linen_pillow",
+    "title": "Linen Pillow",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_linen_pillow",
+      "summary": "One cream linen pillow.",
+      "notes": "One cream linen pillow.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_wool_blanket",
+    "title": "Wool Blanket",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_wool_blanket",
+      "summary": "One neatly folded moss-green wool blanket.",
+      "notes": "One neatly folded moss-green wool blanket.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_bath_towel",
+    "title": "Bath Towel",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_bath_towel",
+      "summary": "One folded plain linen bath towel.",
+      "notes": "One folded plain linen bath towel.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 200,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_soap_bar",
+    "title": "Soap Bar",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_soap_bar",
+      "summary": "One unwrapped ivory soap bar.",
+      "notes": "One unwrapped ivory soap bar.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 2,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_beeswax_taper",
+    "title": "Beeswax Taper",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_beeswax_taper",
+      "summary": "One unlit golden beeswax taper candle, no holder.",
+      "notes": "One unlit golden beeswax taper candle, no holder.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_room_key",
+    "title": "Room Key",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_room_key",
+      "summary": "One plain brass key, no ring or tag.",
+      "notes": "One plain brass key, no ring or tag.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_lavender_sachet",
+    "title": "Lavender Sachet",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_lavender_sachet",
+      "summary": "One closed small linen lavender sachet.",
+      "notes": "One closed small linen lavender sachet.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 50,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_inn_guest_slipper",
+    "title": "Guest Slipper",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_inn_guest_slipper",
+      "summary": "One single brown leather slipper.",
+      "notes": "One single brown leather slipper.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Inn, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 300,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_forge_hammer",
+    "title": "Forge Hammer",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_forge_hammer",
+      "summary": "One short-handled square-headed forge hammer.",
+      "notes": "One short-handled square-headed forge hammer.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_smith_s_tongs",
+    "title": "Smith’s Tongs",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_smith_s_tongs",
+      "summary": "One pair of closed long iron smith tongs.",
+      "notes": "One pair of closed long iron smith tongs.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_iron_ingot",
+    "title": "Iron Ingot",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_iron_ingot",
+      "summary": "One solid iron ingot.",
+      "notes": "One solid iron ingot.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_copper_ingot",
+    "title": "Copper Ingot",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_copper_ingot",
+      "summary": "One solid copper ingot.",
+      "notes": "One solid copper ingot.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 2000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_horseshoe",
+    "title": "Horseshoe",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_horseshoe",
+      "summary": "One plain iron horseshoe.",
+      "notes": "One plain iron horseshoe.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_iron_nail",
+    "title": "Iron Nail",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_iron_nail",
+      "summary": "One large square iron nail.",
+      "notes": "One large square iron nail.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_metal_file",
+    "title": "Metal File",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_metal_file",
+      "summary": "One metal file with a wooden handle.",
+      "notes": "One metal file with a wooden handle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_blacksmith_whetstone",
+    "title": "Whetstone",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_blacksmith_whetstone",
+      "summary": "One rectangular gray sharpening stone.",
+      "notes": "One rectangular gray sharpening stone.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Blacksmith, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_herbal_salve_tin",
+    "title": "Herbal Salve Tin",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_herbal_salve_tin",
+      "summary": "One closed small brass tin of herbal salve.",
+      "notes": "One closed small brass tin of herbal salve.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_mint_tea_packet",
+    "title": "Mint Tea Packet",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_mint_tea_packet",
+      "summary": "One sealed folded paper tea packet, no lettering.",
+      "notes": "One sealed folded paper tea packet, no lettering.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_dried_lavender_sprig",
+    "title": "Dried Lavender Sprig",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_dried_lavender_sprig",
+      "summary": "One dried lavender sprig.",
+      "notes": "One dried lavender sprig.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_ginger_root",
+    "title": "Ginger Root",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_ginger_root",
+      "summary": "One piece of fresh ginger root.",
+      "notes": "One piece of fresh ginger root.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 50,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_honey_jar",
+    "title": "Honey Jar",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_honey_jar",
+      "summary": "One closed amber honey jar.",
+      "notes": "One closed amber honey jar.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_medicinal_alcohol_bottle",
+    "title": "Medicinal Alcohol Bottle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_medicinal_alcohol_bottle",
+      "summary": "One sealed clear glass bottle of alcohol.",
+      "notes": "One sealed clear glass bottle of alcohol.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_linen_bandage_roll",
+    "title": "Linen Bandage Roll",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_linen_bandage_roll",
+      "summary": "One tightly rolled clean linen bandage.",
+      "notes": "One tightly rolled clean linen bandage.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_apothecary_measuring_spoon",
+    "title": "Measuring Spoon",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_apothecary_measuring_spoon",
+      "summary": "One single small brass measuring spoon.",
+      "notes": "One single small brass measuring spoon.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Apothecary, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_tailor_s_shears",
+    "title": "Tailor’s Shears",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_tailor_s_shears",
+      "summary": "One pair of closed brass-handled tailor shears.",
+      "notes": "One pair of closed brass-handled tailor shears.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_indigo_linen_bolt",
+    "title": "Indigo Linen Bolt",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_indigo_linen_bolt",
+      "summary": "One roll of indigo linen, no ties or accessories.",
+      "notes": "One roll of indigo linen, no ties or accessories.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_cream_wool_bolt",
+    "title": "Cream Wool Bolt",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_cream_wool_bolt",
+      "summary": "One roll of cream wool cloth.",
+      "notes": "One roll of cream wool cloth.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 30000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_red_thread_spool",
+    "title": "Red Thread Spool",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_red_thread_spool",
+      "summary": "One spool of muted red thread.",
+      "notes": "One spool of muted red thread.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_bone_sewing_needle",
+    "title": "Bone Sewing Needle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_bone_sewing_needle",
+      "summary": "One single long bone sewing needle.",
+      "notes": "One single long bone sewing needle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_brass_thimble",
+    "title": "Brass Thimble",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_brass_thimble",
+      "summary": "One brass thimble.",
+      "notes": "One brass thimble.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_leather_patch",
+    "title": "Leather Patch",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_leather_patch",
+      "summary": "One flat square brown leather repair patch.",
+      "notes": "One flat square brown leather repair patch.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_tailor_wooden_button",
+    "title": "Wooden Button",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_tailor_wooden_button",
+      "summary": "One single carved wooden button.",
+      "notes": "One single carved wooden button.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Tailor, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_lamp_oil_flask",
+    "title": "Lamp Oil Flask",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_lamp_oil_flask",
+      "summary": "One sealed amber oil flask.",
+      "notes": "One sealed amber oil flask.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_rock_salt_block",
+    "title": "Rock Salt Block",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_rock_salt_block",
+      "summary": "One rough white rock salt block.",
+      "notes": "One rough white rock salt block.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_chalk_stick",
+    "title": "Chalk Stick",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_chalk_stick",
+      "summary": "One short white chalk stick.",
+      "notes": "One short white chalk stick.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_twine_ball",
+    "title": "Twine Ball",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_twine_ball",
+      "summary": "One compact ball of hemp twine.",
+      "notes": "One compact ball of hemp twine.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_sealing_wax_stick",
+    "title": "Sealing Wax Stick",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_sealing_wax_stick",
+      "summary": "One red sealing wax stick.",
+      "notes": "One red sealing wax stick.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 50,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_charcoal_piece",
+    "title": "Charcoal Piece",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_charcoal_piece",
+      "summary": "One chunky black charcoal stick.",
+      "notes": "One chunky black charcoal stick.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_clay_oil_lamp",
+    "title": "Clay Oil Lamp",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_clay_oil_lamp",
+      "summary": "One small unlit clay oil lamp.",
+      "notes": "One small unlit clay oil lamp.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_general_store_wooden_scrub_brush",
+    "title": "Wooden Scrub Brush",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_general_store_wooden_scrub_brush",
+      "summary": "One small wooden bristle scrub brush.",
+      "notes": "One small wooden bristle scrub brush.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "General Store, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 50,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_horse_grooming_brush",
+    "title": "Horse Grooming Brush",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_horse_grooming_brush",
+      "summary": "One oval horse grooming brush.",
+      "notes": "One oval horse grooming brush.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_hoof_pick",
+    "title": "Hoof Pick",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_hoof_pick",
+      "summary": "One iron hoof pick with wood handle.",
+      "notes": "One iron hoof pick with wood handle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_leather_bridle",
+    "title": "Leather Bridle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_leather_bridle",
+      "summary": "One complete plain leather bridle.",
+      "notes": "One complete plain leather bridle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_riding_saddle",
+    "title": "Riding Saddle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_riding_saddle",
+      "summary": "One brown leather riding saddle.",
+      "notes": "One brown leather riding saddle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_horse_blanket",
+    "title": "Horse Blanket",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_horse_blanket",
+      "summary": "One folded dark green horse blanket.",
+      "notes": "One folded dark green horse blanket.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_oat_feed_sack",
+    "title": "Oat Feed Sack",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_oat_feed_sack",
+      "summary": "One closed jute oat feed sack.",
+      "notes": "One closed jute oat feed sack.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_carrot",
+    "title": "Carrot",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_carrot",
+      "summary": "One single orange carrot with short green tops.",
+      "notes": "One single orange carrot with short green tops.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_stable_curry_comb",
+    "title": "Curry Comb",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_stable_curry_comb",
+      "summary": "One oval iron curry comb.",
+      "notes": "One oval iron curry comb.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Stable, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 200,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_shipping_ledger",
+    "title": "Shipping Ledger",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_shipping_ledger",
+      "summary": "One closed brown leather ledger, no writing.",
+      "notes": "One closed brown leather ledger, no writing.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_marking_chalk_block",
+    "title": "Marking Chalk Block",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_marking_chalk_block",
+      "summary": "One rectangular dark red chalk block.",
+      "notes": "One rectangular dark red chalk block.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_packing_straw_bale",
+    "title": "Packing Straw Bale",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_packing_straw_bale",
+      "summary": "One tightly bound compact straw bale.",
+      "notes": "One tightly bound compact straw bale.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_burlap_roll",
+    "title": "Burlap Roll",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_burlap_roll",
+      "summary": "One roll of coarse brown burlap.",
+      "notes": "One roll of coarse brown burlap.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_iron_padlock",
+    "title": "Iron Padlock",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_iron_padlock",
+      "summary": "One closed plain iron padlock.",
+      "notes": "One closed plain iron padlock.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_cargo_hook",
+    "title": "Cargo Hook",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_cargo_hook",
+      "summary": "One curved iron cargo hook with wooden handle.",
+      "notes": "One curved iron cargo hook with wooden handle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_wooden_pulley",
+    "title": "Wooden Pulley",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_wooden_pulley",
+      "summary": "One single wooden pulley block.",
+      "notes": "One single wooden pulley block.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_warehouse_wax_seal_stamp",
+    "title": "Wax Seal Stamp",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_warehouse_wax_seal_stamp",
+      "summary": "One short brass seal stamp with wooden handle.",
+      "notes": "One short brass seal stamp with wooden handle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Warehouse, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_wheat_grain_sack",
+    "title": "Wheat Grain Sack",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_wheat_grain_sack",
+      "summary": "One closed linen wheat grain sack.",
+      "notes": "One closed linen wheat grain sack.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_rye_grain_sack",
+    "title": "Rye Grain Sack",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_rye_grain_sack",
+      "summary": "One closed brown jute rye grain sack.",
+      "notes": "One closed brown jute rye grain sack.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 400,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_barley_grain_sack",
+    "title": "Barley Grain Sack",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_barley_grain_sack",
+      "summary": "One closed pale linen barley grain sack.",
+      "notes": "One closed pale linen barley grain sack.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 400,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_cornmeal_packet",
+    "title": "Cornmeal Packet",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_cornmeal_packet",
+      "summary": "One folded paper cornmeal packet, no lettering.",
+      "notes": "One folded paper cornmeal packet, no lettering.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_wooden_mill_mallet",
+    "title": "Wooden Mill Mallet",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_wooden_mill_mallet",
+      "summary": "One heavy long-handled wooden mill mallet.",
+      "notes": "One heavy long-handled wooden mill mallet.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_millwright_chisel",
+    "title": "Millwright Chisel",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_millwright_chisel",
+      "summary": "One long iron millwright chisel.",
+      "notes": "One long iron millwright chisel.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_mill_bearing_ring",
+    "title": "Mill Bearing Ring",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_mill_bearing_ring",
+      "summary": "One thick brass bearing ring.",
+      "notes": "One thick brass bearing ring.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_mill_lubricating_grease_pot",
+    "title": "Lubricating Grease Pot",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_mill_lubricating_grease_pot",
+      "summary": "One closed small earthenware grease pot.",
+      "notes": "One closed small earthenware grease pot.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Mill & Granary, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 200,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_red_apple",
+    "title": "Red Apple",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_red_apple",
+      "summary": "One ripe red apple with a short stem.",
+      "notes": "One ripe red apple with a short stem.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 2,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_green_pear",
+    "title": "Green Pear",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_green_pear",
+      "summary": "One ripe green pear with a short stem.",
+      "notes": "One ripe green pear with a short stem.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 2,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_brown_egg",
+    "title": "Brown Egg",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_brown_egg",
+      "summary": "One single brown chicken egg.",
+      "notes": "One single brown chicken egg.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_potato",
+    "title": "Potato",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_potato",
+      "summary": "One single dusty brown potato.",
+      "notes": "One single dusty brown potato.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_onion",
+    "title": "Onion",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_onion",
+      "summary": "One single golden onion.",
+      "notes": "One single golden onion.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 1,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_garlic_bulb",
+    "title": "Garlic Bulb",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_garlic_bulb",
+      "summary": "One whole white garlic bulb.",
+      "notes": "One whole white garlic bulb.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 2,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_cabbage_head",
+    "title": "Cabbage Head",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_cabbage_head",
+      "summary": "One single green cabbage head.",
+      "notes": "One single green cabbage head.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 3,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_farm_small_pumpkin",
+    "title": "Small Pumpkin",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_farm_small_pumpkin",
+      "summary": "One single small orange pumpkin.",
+      "notes": "One single small orange pumpkin.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Farm & Barn, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_carpenter_s_hammer",
+    "title": "Carpenter’s Hammer",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_carpenter_s_hammer",
+      "summary": "One iron claw hammer with oak handle.",
+      "notes": "One iron claw hammer with oak handle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_hand_saw",
+    "title": "Hand Saw",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_hand_saw",
+      "summary": "One single steel hand saw with oak handle.",
+      "notes": "One single steel hand saw with oak handle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_wood_plane",
+    "title": "Wood Plane",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_wood_plane",
+      "summary": "One single wooden hand plane with fitted iron blade.",
+      "notes": "One single wooden hand plane with fitted iron blade.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_woodworking_chisel",
+    "title": "Woodworking Chisel",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_woodworking_chisel",
+      "summary": "One single steel chisel with wood handle.",
+      "notes": "One single steel chisel with wood handle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_joiner_s_square",
+    "title": "Joiner’s Square",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_joiner_s_square",
+      "summary": "One single L-shaped brass and wood square.",
+      "notes": "One single L-shaped brass and wood square.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10000,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_oak_plank",
+    "title": "Oak Plank",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_oak_plank",
+      "summary": "One single finished oak plank.",
+      "notes": "One single finished oak plank.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_wooden_dowel",
+    "title": "Wooden Dowel",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_wooden_dowel",
+      "summary": "One single straight wooden dowel.",
+      "notes": "One single straight wooden dowel.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_carpenter_hide_glue_jar",
+    "title": "Hide Glue Jar",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_carpenter_hide_glue_jar",
+      "summary": "One closed ceramic jar of hide glue.",
+      "notes": "One closed ceramic jar of hide glue.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Carpenter, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_silver_river_fish",
+    "title": "Silver River Fish",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_silver_river_fish",
+      "summary": "One whole silver fish, no board or platter.",
+      "notes": "One whole silver fish, no board or platter.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_salted_fish",
+    "title": "Salted Fish",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_salted_fish",
+      "summary": "One whole dried salted fish, no wrapper.",
+      "notes": "One whole dried salted fish, no wrapper.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 15,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_raw_steak",
+    "title": "Raw Steak",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_raw_steak",
+      "summary": "One single cut of raw beef, no board or platter.",
+      "notes": "One single cut of raw beef, no board or platter.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_smoked_ham",
+    "title": "Smoked Ham",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_smoked_ham",
+      "summary": "One whole smoked ham, no board or accessories.",
+      "notes": "One whole smoked ham, no board or accessories.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 500,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_orange",
+    "title": "Orange",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_orange",
+      "summary": "One single ripe orange.",
+      "notes": "One single ripe orange.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 3,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_pear_preserve_jar",
+    "title": "Pear Preserve Jar",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_pear_preserve_jar",
+      "summary": "One sealed glass jar of amber pear preserve.",
+      "notes": "One sealed glass jar of amber pear preserve.\n\nFood or drink; reduce the quantity when consumed. It has no automatic healing effect.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Food",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, food, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_cinnamon_stick",
+    "title": "Cinnamon Stick",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_cinnamon_stick",
+      "summary": "One single cinnamon stick.",
+      "notes": "One single cinnamon stick.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_market_black_pepper_packet",
+    "title": "Black Pepper Packet",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_market_black_pepper_packet",
+      "summary": "One closed folded paper pepper packet, no lettering.",
+      "notes": "One closed folded paper pepper packet, no lettering.\n\nA practical expendable supply. Reduce the quantity when it is used up; the DM adjudicates its use.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Consumable",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Market & Food Stalls, consumable, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_wooden_cooking_spoon",
+    "title": "Wooden Cooking Spoon",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_wooden_cooking_spoon",
+      "summary": "One single long wooden cooking spoon.",
+      "notes": "One single long wooden cooking spoon.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 5,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_iron_ladle",
+    "title": "Iron Ladle",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_iron_ladle",
+      "summary": "One single iron soup ladle.",
+      "notes": "One single iron soup ladle.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_ceramic_dinner_plate",
+    "title": "Ceramic Dinner Plate",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_ceramic_dinner_plate",
+      "summary": "One single empty ivory ceramic dinner plate.",
+      "notes": "One single empty ivory ceramic dinner plate.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_stoneware_cup",
+    "title": "Stoneware Cup",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_stoneware_cup",
+      "summary": "One single empty brown stoneware cup.",
+      "notes": "One single empty brown stoneware cup.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 10,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_hand_broom",
+    "title": "Hand Broom",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_hand_broom",
+      "summary": "One single short straw hand broom.",
+      "notes": "One single short straw hand broom.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 50,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_clay_pitcher",
+    "title": "Clay Pitcher",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_clay_pitcher",
+      "summary": "One single empty cream glazed clay pitcher.",
+      "notes": "One single empty cream glazed clay pitcher.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 100,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_brass_candlestick",
+    "title": "Brass Candlestick",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_brass_candlestick",
+      "summary": "One single empty brass candlestick with no candle.",
+      "notes": "One single empty brass candlestick with no candle.\n\nA household or trade good that can be sold, gifted or used as a crafting material.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Trade good",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, trade good, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 200,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  },
+  {
+    "id": "trade_household_wooden_comb",
+    "title": "Wooden Comb",
+    "content": {
+      "category": "item",
+      "catalog_asset_id": "trade_household_wooden_comb",
+      "summary": "One single carved wooden hair comb.",
+      "notes": "One single carved wooden hair comb.\n\nA practical tool for its ordinary task. Owning this item does not grant proficiency or an automatic bonus.\nOne unit is one pictured object or sealed container. The listed shop value is an editable suggested price.",
+      "item_type": "Tool",
+      "rarity": "Nonmagical",
+      "quantity": 1,
+      "reference_only": true,
+      "player_visible": false,
+      "important": false,
+      "assigned_user_ids": [],
+      "owner_ids": [],
+      "user_ids": [],
+      "encounter_ids": [],
+      "tags": "Household, tool, household, shop stock, sellable goods",
+      "source_name": "Household & business catalog",
+      "source_url": "",
+      "tabletop": {
+        "value_cp": 20,
+        "equipment_state": "Stored",
+        "requires_attunement": false
+      }
+    }
+  }
+]

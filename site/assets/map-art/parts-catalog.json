@@ -1,0 +1,5646 @@
+[
+  {
+    "type": "grass",
+    "group": "terrain",
+    "title": "grass",
+    "light_enabled": false
+  },
+  {
+    "type": "water",
+    "group": "terrain",
+    "title": "water",
+    "light_enabled": false
+  },
+  {
+    "type": "sand",
+    "group": "terrain",
+    "title": "sand",
+    "light_enabled": false
+  },
+  {
+    "type": "stone",
+    "group": "terrain",
+    "title": "stone",
+    "light_enabled": false
+  },
+  {
+    "type": "snow",
+    "group": "terrain",
+    "title": "snow",
+    "light_enabled": false
+  },
+  {
+    "type": "wood",
+    "group": "terrain",
+    "title": "wood",
+    "light_enabled": false
+  },
+  {
+    "type": "path",
+    "group": "terrain",
+    "title": "path",
+    "light_enabled": false
+  },
+  {
+    "type": "marble",
+    "group": "terrain",
+    "title": "marble",
+    "light_enabled": false
+  },
+  {
+    "type": "brick",
+    "group": "terrain",
+    "title": "brick",
+    "light_enabled": false
+  },
+  {
+    "type": "cobble",
+    "group": "terrain",
+    "title": "cobble",
+    "light_enabled": false
+  },
+  {
+    "type": "slate",
+    "group": "terrain",
+    "title": "slate",
+    "light_enabled": false
+  },
+  {
+    "type": "iron",
+    "group": "terrain",
+    "title": "iron",
+    "light_enabled": false
+  },
+  {
+    "type": "moss",
+    "group": "terrain",
+    "title": "moss",
+    "light_enabled": false
+  },
+  {
+    "type": "mud",
+    "group": "terrain",
+    "title": "mud",
+    "light_enabled": false
+  },
+  {
+    "type": "lava",
+    "group": "terrain",
+    "title": "lava",
+    "light_enabled": false
+  },
+  {
+    "type": "swamp",
+    "group": "terrain",
+    "title": "swamp",
+    "light_enabled": false
+  },
+  {
+    "type": "ice",
+    "group": "terrain",
+    "title": "ice",
+    "light_enabled": false
+  },
+  {
+    "type": "gravel",
+    "group": "terrain",
+    "title": "gravel",
+    "light_enabled": false
+  },
+  {
+    "type": "basalt",
+    "group": "terrain",
+    "title": "basalt",
+    "light_enabled": false
+  },
+  {
+    "type": "tiles",
+    "group": "terrain",
+    "title": "tiles",
+    "light_enabled": false
+  },
+  {
+    "type": "carpet",
+    "group": "terrain",
+    "title": "carpet",
+    "light_enabled": false
+  },
+  {
+    "type": "arcane",
+    "group": "terrain",
+    "title": "arcane",
+    "light_enabled": false
+  },
+  {
+    "type": "building",
+    "group": "buildings",
+    "title": "building",
+    "light_enabled": false
+  },
+  {
+    "type": "hall",
+    "group": "buildings",
+    "title": "hall",
+    "light_enabled": false
+  },
+  {
+    "type": "cottage",
+    "group": "buildings",
+    "title": "cottage",
+    "light_enabled": false
+  },
+  {
+    "type": "ruin",
+    "group": "buildings",
+    "title": "ruin",
+    "light_enabled": false
+  },
+  {
+    "type": "door",
+    "group": "dungeon",
+    "title": "door",
+    "light_enabled": false
+  },
+  {
+    "type": "stairs",
+    "group": "dungeon",
+    "title": "stairs",
+    "light_enabled": false
+  },
+  {
+    "type": "stone_pillar",
+    "group": "dungeon",
+    "title": "stone pillar",
+    "light_enabled": false
+  },
+  {
+    "type": "broken_pillar",
+    "group": "dungeon",
+    "title": "broken pillar",
+    "light_enabled": false
+  },
+  {
+    "type": "portcullis",
+    "group": "dungeon",
+    "title": "portcullis",
+    "light_enabled": false
+  },
+  {
+    "type": "trapdoor",
+    "group": "dungeon",
+    "title": "trapdoor",
+    "light_enabled": false
+  },
+  {
+    "type": "spike_pit",
+    "group": "dungeon",
+    "title": "spike pit",
+    "light_enabled": false
+  },
+  {
+    "type": "pressure_plate",
+    "group": "dungeon",
+    "title": "pressure plate",
+    "light_enabled": false
+  },
+  {
+    "type": "lever",
+    "group": "dungeon",
+    "title": "lever",
+    "light_enabled": false
+  },
+  {
+    "type": "bone_pile",
+    "group": "dungeon",
+    "title": "bone pile",
+    "light_enabled": false
+  },
+  {
+    "type": "coffin",
+    "group": "dungeon",
+    "title": "coffin",
+    "light_enabled": false
+  },
+  {
+    "type": "sarcophagus",
+    "group": "dungeon",
+    "title": "sarcophagus",
+    "light_enabled": false
+  },
+  {
+    "type": "cage",
+    "group": "dungeon",
+    "title": "cage",
+    "light_enabled": false
+  },
+  {
+    "type": "table",
+    "group": "furniture",
+    "title": "table",
+    "light_enabled": false
+  },
+  {
+    "type": "round_table",
+    "group": "furniture",
+    "title": "round table",
+    "light_enabled": false
+  },
+  {
+    "type": "chair",
+    "group": "furniture",
+    "title": "chair",
+    "light_enabled": false
+  },
+  {
+    "type": "bench",
+    "group": "furniture",
+    "title": "bench",
+    "light_enabled": false
+  },
+  {
+    "type": "bed",
+    "group": "furniture",
+    "title": "bed",
+    "light_enabled": false
+  },
+  {
+    "type": "bookshelf",
+    "group": "furniture",
+    "title": "bookshelf",
+    "light_enabled": false
+  },
+  {
+    "type": "cupboard",
+    "group": "furniture",
+    "title": "cupboard",
+    "light_enabled": false
+  },
+  {
+    "type": "writing_desk",
+    "group": "furniture",
+    "title": "writing desk",
+    "light_enabled": false
+  },
+  {
+    "type": "rug",
+    "group": "furniture",
+    "title": "rug",
+    "light_enabled": false
+  },
+  {
+    "type": "weapon_rack",
+    "group": "furniture",
+    "title": "weapon rack",
+    "light_enabled": false
+  },
+  {
+    "type": "candle_cluster",
+    "group": "furniture",
+    "title": "candle cluster",
+    "light_enabled": true,
+    "light_radius": 110,
+    "light_color": "#ffe6b2",
+    "light_intensity": 0.8
+  },
+  {
+    "type": "house",
+    "group": "settlement",
+    "title": "house",
+    "light_enabled": false
+  },
+  {
+    "type": "tower",
+    "group": "settlement",
+    "title": "tower",
+    "light_enabled": false
+  },
+  {
+    "type": "market_stall",
+    "group": "settlement",
+    "title": "market stall",
+    "light_enabled": false
+  },
+  {
+    "type": "fountain",
+    "group": "settlement",
+    "title": "fountain",
+    "light_enabled": false
+  },
+  {
+    "type": "well",
+    "group": "settlement",
+    "title": "well",
+    "light_enabled": false
+  },
+  {
+    "type": "cart",
+    "group": "settlement",
+    "title": "cart",
+    "light_enabled": false
+  },
+  {
+    "type": "hay_bale",
+    "group": "settlement",
+    "title": "hay bale",
+    "light_enabled": false
+  },
+  {
+    "type": "forge",
+    "group": "settlement",
+    "title": "forge",
+    "light_enabled": true,
+    "light_radius": 220,
+    "light_color": "#ffab61"
+  },
+  {
+    "type": "anvil",
+    "group": "settlement",
+    "title": "anvil",
+    "light_enabled": false
+  },
+  {
+    "type": "gravestone",
+    "group": "settlement",
+    "title": "gravestone",
+    "light_enabled": false
+  },
+  {
+    "type": "timber_fence",
+    "group": "settlement",
+    "title": "timber fence",
+    "light_enabled": false
+  },
+  {
+    "type": "lantern",
+    "group": "settlement",
+    "title": "lantern",
+    "light_enabled": true,
+    "light_radius": 180,
+    "light_color": "#ffe1a0"
+  },
+  {
+    "type": "brazier",
+    "group": "settlement",
+    "title": "brazier",
+    "light_enabled": true,
+    "light_radius": 220,
+    "light_color": "#ffc477"
+  },
+  {
+    "type": "altar",
+    "group": "magic",
+    "title": "altar",
+    "light_enabled": false
+  },
+  {
+    "type": "ritual_circle",
+    "group": "magic",
+    "title": "ritual circle",
+    "light_enabled": true,
+    "light_radius": 160,
+    "light_color": "#c0a0f0",
+    "light_intensity": 0.55
+  },
+  {
+    "type": "portal",
+    "group": "magic",
+    "title": "portal",
+    "light_enabled": true,
+    "light_radius": 240,
+    "light_color": "#aa99ff",
+    "light_intensity": 0.75
+  },
+  {
+    "type": "crystal_cluster",
+    "group": "magic",
+    "title": "crystal cluster",
+    "light_enabled": true,
+    "light_radius": 150,
+    "light_color": "#98e0e3",
+    "light_intensity": 0.65
+  },
+  {
+    "type": "arcane_obelisk",
+    "group": "magic",
+    "title": "arcane obelisk",
+    "light_enabled": true,
+    "light_radius": 170,
+    "light_color": "#9dccf0",
+    "light_intensity": 0.7
+  },
+  {
+    "type": "summoning_sigil",
+    "group": "magic",
+    "title": "summoning sigil",
+    "light_enabled": true,
+    "light_radius": 160,
+    "light_color": "#eea076",
+    "light_intensity": 0.55
+  },
+  {
+    "type": "potion_table",
+    "group": "magic",
+    "title": "potion table",
+    "light_enabled": false
+  },
+  {
+    "type": "rune_stone",
+    "group": "magic",
+    "title": "rune stone",
+    "light_enabled": true,
+    "light_radius": 140,
+    "light_color": "#8addd1",
+    "light_intensity": 0.65
+  },
+  {
+    "type": "tent",
+    "group": "travel",
+    "title": "tent",
+    "light_enabled": false
+  },
+  {
+    "type": "campfire",
+    "group": "travel",
+    "title": "campfire",
+    "light_enabled": true,
+    "light_radius": 240,
+    "light_color": "#ffc477"
+  },
+  {
+    "type": "torch",
+    "group": "travel",
+    "title": "torch",
+    "light_enabled": true,
+    "light_radius": 160,
+    "light_color": "#ffd58a"
+  },
+  {
+    "type": "bedroll",
+    "group": "travel",
+    "title": "bedroll",
+    "light_enabled": false
+  },
+  {
+    "type": "supply_crates",
+    "group": "travel",
+    "title": "supply crates",
+    "light_enabled": false
+  },
+  {
+    "type": "camp_tarp",
+    "group": "travel",
+    "title": "camp tarp",
+    "light_enabled": false
+  },
+  {
+    "type": "rope_bridge",
+    "group": "travel",
+    "title": "rope bridge",
+    "light_enabled": false
+  },
+  {
+    "type": "bridge",
+    "group": "travel",
+    "title": "bridge",
+    "light_enabled": false
+  },
+  {
+    "type": "boat",
+    "group": "travel",
+    "title": "boat",
+    "light_enabled": false
+  },
+  {
+    "type": "chest",
+    "group": "travel",
+    "title": "chest",
+    "light_enabled": false
+  },
+  {
+    "type": "barrel",
+    "group": "travel",
+    "title": "barrel",
+    "light_enabled": false
+  },
+  {
+    "type": "crate",
+    "group": "travel",
+    "title": "crate",
+    "light_enabled": false
+  },
+  {
+    "type": "tree",
+    "group": "nature",
+    "title": "tree",
+    "light_enabled": false
+  },
+  {
+    "type": "oak",
+    "group": "nature",
+    "title": "oak",
+    "light_enabled": false
+  },
+  {
+    "type": "mountain",
+    "group": "nature",
+    "title": "mountain",
+    "light_enabled": false
+  },
+  {
+    "type": "fallen_log",
+    "group": "nature",
+    "title": "fallen log",
+    "light_enabled": false
+  },
+  {
+    "type": "tree_stump",
+    "group": "nature",
+    "title": "tree stump",
+    "light_enabled": false
+  },
+  {
+    "type": "lily_pads",
+    "group": "nature",
+    "title": "lily pads",
+    "light_enabled": false
+  },
+  {
+    "type": "reeds",
+    "group": "nature",
+    "title": "reeds",
+    "light_enabled": false
+  },
+  {
+    "type": "thorn_bush",
+    "group": "nature",
+    "title": "thorn bush",
+    "light_enabled": false
+  },
+  {
+    "type": "spider_web",
+    "group": "nature",
+    "title": "spider web",
+    "light_enabled": false
+  },
+  {
+    "type": "mossy_boulder",
+    "group": "nature",
+    "title": "mossy boulder",
+    "light_enabled": false
+  },
+  {
+    "type": "rock_outcrop",
+    "group": "nature",
+    "title": "rock outcrop",
+    "light_enabled": false
+  },
+  {
+    "type": "standing_stone",
+    "group": "nature",
+    "title": "standing stone",
+    "light_enabled": false
+  },
+  {
+    "type": "driftwood",
+    "group": "nature",
+    "title": "driftwood",
+    "light_enabled": false
+  },
+  {
+    "type": "fern_patch",
+    "group": "nature",
+    "title": "fern patch",
+    "light_enabled": false
+  },
+  {
+    "type": "cattails",
+    "group": "nature",
+    "title": "cattails",
+    "light_enabled": false
+  },
+  {
+    "type": "tide_pool",
+    "group": "nature",
+    "title": "tide pool",
+    "light_enabled": false
+  },
+  {
+    "type": "ice_crystal",
+    "group": "nature",
+    "title": "ice crystal",
+    "light_enabled": false
+  },
+  {
+    "type": "stalagmite",
+    "group": "nature",
+    "title": "stalagmite",
+    "light_enabled": false
+  },
+  {
+    "type": "fallen_leaves",
+    "group": "nature",
+    "title": "fallen leaves",
+    "light_enabled": false
+  },
+  {
+    "type": "glowing_mushrooms",
+    "group": "nature",
+    "title": "glowing mushrooms",
+    "light_enabled": true,
+    "light_radius": 110,
+    "light_color": "#a2e9bd",
+    "light_intensity": 0.55
+  },
+  {
+    "type": "oak_tree",
+    "group": "ambience",
+    "title": "oak tree",
+    "light_enabled": false
+  },
+  {
+    "type": "pine_tree",
+    "group": "ambience",
+    "title": "pine tree",
+    "light_enabled": false
+  },
+  {
+    "type": "blossom_tree",
+    "group": "ambience",
+    "title": "blossom tree",
+    "light_enabled": false
+  },
+  {
+    "type": "flowers",
+    "group": "ambience",
+    "title": "flowers",
+    "light_enabled": false
+  },
+  {
+    "type": "wildflowers",
+    "group": "ambience",
+    "title": "wildflowers",
+    "light_enabled": false
+  },
+  {
+    "type": "sunflowers",
+    "group": "ambience",
+    "title": "sunflowers",
+    "light_enabled": false
+  },
+  {
+    "type": "grass_tuft",
+    "group": "ambience",
+    "title": "grass tuft",
+    "light_enabled": false
+  },
+  {
+    "type": "foliage",
+    "group": "ambience",
+    "title": "foliage",
+    "light_enabled": false
+  },
+  {
+    "type": "fern",
+    "group": "ambience",
+    "title": "fern",
+    "light_enabled": false
+  },
+  {
+    "type": "pebbles",
+    "group": "ambience",
+    "title": "pebbles",
+    "light_enabled": false
+  },
+  {
+    "type": "rock",
+    "group": "ambience",
+    "title": "rock",
+    "light_enabled": false
+  },
+  {
+    "type": "mushrooms",
+    "group": "ambience",
+    "title": "mushrooms",
+    "light_enabled": false
+  },
+  {
+    "type": "butterfly",
+    "group": "ambience",
+    "title": "butterfly",
+    "light_enabled": false
+  },
+  {
+    "type": "bee",
+    "group": "ambience",
+    "title": "bee",
+    "light_enabled": false
+  },
+  {
+    "type": "dragonfly",
+    "group": "ambience",
+    "title": "dragonfly",
+    "light_enabled": false
+  },
+  {
+    "type": "firefly",
+    "group": "ambience",
+    "title": "firefly",
+    "light_enabled": false
+  },
+  {
+    "type": "ladybug",
+    "group": "ambience",
+    "title": "ladybug",
+    "light_enabled": false
+  },
+  {
+    "type": "road",
+    "group": "paths",
+    "title": "road",
+    "light_enabled": false
+  },
+  {
+    "type": "river",
+    "group": "paths",
+    "title": "river",
+    "light_enabled": false
+  },
+  {
+    "type": "wall",
+    "group": "paths",
+    "title": "wall",
+    "light_enabled": false
+  },
+  {
+    "type": "point_light",
+    "group": "lighting",
+    "title": "Point light",
+    "light_enabled": true
+  },
+  {
+    "type": "label",
+    "group": "notes",
+    "title": "label",
+    "light_enabled": false
+  },
+  {
+    "type": "fog",
+    "group": "notes",
+    "title": "Fog of war",
+    "light_enabled": false
+  },
+  {
+    "type": "zone",
+    "group": "notes",
+    "title": "Area marker",
+    "light_enabled": false
+  },
+  {
+    "type": "npc",
+    "group": "notes",
+    "title": "NPC marker",
+    "light_enabled": false
+  },
+  {
+    "type": "encounter",
+    "group": "notes",
+    "title": "Encounter marker",
+    "light_enabled": false
+  },
+  {
+    "type": "shop",
+    "group": "notes",
+    "title": "shop",
+    "light_enabled": false
+  },
+  {
+    "type": "camera_bounds",
+    "group": "notes",
+    "title": "Player camera boundary",
+    "light_enabled": false
+  },
+  {
+    "type": "book_red",
+    "group": "props",
+    "title": "book red",
+    "light_enabled": false
+  },
+  {
+    "type": "book_blue",
+    "group": "props",
+    "title": "book blue",
+    "light_enabled": false
+  },
+  {
+    "type": "book_green",
+    "group": "props",
+    "title": "book green",
+    "light_enabled": false
+  },
+  {
+    "type": "book_purple",
+    "group": "props",
+    "title": "book purple",
+    "light_enabled": false
+  },
+  {
+    "type": "book_brown",
+    "group": "props",
+    "title": "book brown",
+    "light_enabled": false
+  },
+  {
+    "type": "book_open",
+    "group": "props",
+    "title": "book open",
+    "light_enabled": false
+  },
+  {
+    "type": "ceramic_mug",
+    "group": "props",
+    "title": "ceramic mug",
+    "light_enabled": false
+  },
+  {
+    "type": "pewter_tankard",
+    "group": "props",
+    "title": "pewter tankard",
+    "light_enabled": false
+  },
+  {
+    "type": "plate",
+    "group": "props",
+    "title": "plate",
+    "light_enabled": false
+  },
+  {
+    "type": "wooden_bowl",
+    "group": "props",
+    "title": "wooden bowl",
+    "light_enabled": false
+  },
+  {
+    "type": "goblet",
+    "group": "props",
+    "title": "goblet",
+    "light_enabled": false
+  },
+  {
+    "type": "potion_red",
+    "group": "props",
+    "title": "potion red",
+    "light_enabled": false
+  },
+  {
+    "type": "potion_blue",
+    "group": "props",
+    "title": "potion blue",
+    "light_enabled": false
+  },
+  {
+    "type": "potion_green",
+    "group": "props",
+    "title": "potion green",
+    "light_enabled": false
+  },
+  {
+    "type": "potion_purple",
+    "group": "props",
+    "title": "potion purple",
+    "light_enabled": false
+  },
+  {
+    "type": "scroll",
+    "group": "props",
+    "title": "scroll",
+    "light_enabled": false
+  },
+  {
+    "type": "brass_key",
+    "group": "props",
+    "title": "brass key",
+    "light_enabled": false
+  },
+  {
+    "type": "silver_spoon",
+    "group": "props",
+    "title": "silver spoon",
+    "light_enabled": false
+  },
+  {
+    "type": "item_club",
+    "group": "props",
+    "title": "Club",
+    "light_enabled": false
+  },
+  {
+    "type": "item_dagger",
+    "group": "props",
+    "title": "Dagger",
+    "light_enabled": false
+  },
+  {
+    "type": "item_greatclub",
+    "group": "props",
+    "title": "Greatclub",
+    "light_enabled": false
+  },
+  {
+    "type": "item_handaxe",
+    "group": "props",
+    "title": "Handaxe",
+    "light_enabled": false
+  },
+  {
+    "type": "item_javelin",
+    "group": "props",
+    "title": "Javelin",
+    "light_enabled": false
+  },
+  {
+    "type": "item_light_hammer",
+    "group": "props",
+    "title": "Light Hammer",
+    "light_enabled": false
+  },
+  {
+    "type": "item_mace",
+    "group": "props",
+    "title": "Mace",
+    "light_enabled": false
+  },
+  {
+    "type": "item_quarterstaff",
+    "group": "props",
+    "title": "Quarterstaff",
+    "light_enabled": false
+  },
+  {
+    "type": "item_sickle",
+    "group": "props",
+    "title": "Sickle",
+    "light_enabled": false
+  },
+  {
+    "type": "item_spear",
+    "group": "props",
+    "title": "Spear",
+    "light_enabled": false
+  },
+  {
+    "type": "item_dart",
+    "group": "props",
+    "title": "Dart",
+    "light_enabled": false
+  },
+  {
+    "type": "item_light_crossbow",
+    "group": "props",
+    "title": "Light Crossbow",
+    "light_enabled": false
+  },
+  {
+    "type": "item_shortbow",
+    "group": "props",
+    "title": "Shortbow",
+    "light_enabled": false
+  },
+  {
+    "type": "item_sling",
+    "group": "props",
+    "title": "Sling",
+    "light_enabled": false
+  },
+  {
+    "type": "item_battleaxe",
+    "group": "props",
+    "title": "Battleaxe",
+    "light_enabled": false
+  },
+  {
+    "type": "item_flail",
+    "group": "props",
+    "title": "Flail",
+    "light_enabled": false
+  },
+  {
+    "type": "item_glaive",
+    "group": "props",
+    "title": "Glaive",
+    "light_enabled": false
+  },
+  {
+    "type": "item_greataxe",
+    "group": "props",
+    "title": "Greataxe",
+    "light_enabled": false
+  },
+  {
+    "type": "item_greatsword",
+    "group": "props",
+    "title": "Greatsword",
+    "light_enabled": false
+  },
+  {
+    "type": "item_halberd",
+    "group": "props",
+    "title": "Halberd",
+    "light_enabled": false
+  },
+  {
+    "type": "item_lance",
+    "group": "props",
+    "title": "Lance",
+    "light_enabled": false
+  },
+  {
+    "type": "item_longsword",
+    "group": "props",
+    "title": "Longsword",
+    "light_enabled": false
+  },
+  {
+    "type": "item_maul",
+    "group": "props",
+    "title": "Maul",
+    "light_enabled": false
+  },
+  {
+    "type": "item_morningstar",
+    "group": "props",
+    "title": "Morningstar",
+    "light_enabled": false
+  },
+  {
+    "type": "item_pike",
+    "group": "props",
+    "title": "Pike",
+    "light_enabled": false
+  },
+  {
+    "type": "item_rapier",
+    "group": "props",
+    "title": "Rapier",
+    "light_enabled": false
+  },
+  {
+    "type": "item_scimitar",
+    "group": "props",
+    "title": "Scimitar",
+    "light_enabled": false
+  },
+  {
+    "type": "item_shortsword",
+    "group": "props",
+    "title": "Shortsword",
+    "light_enabled": false
+  },
+  {
+    "type": "item_trident",
+    "group": "props",
+    "title": "Trident",
+    "light_enabled": false
+  },
+  {
+    "type": "item_warhammer",
+    "group": "props",
+    "title": "Warhammer",
+    "light_enabled": false
+  },
+  {
+    "type": "item_war_pick",
+    "group": "props",
+    "title": "War Pick",
+    "light_enabled": false
+  },
+  {
+    "type": "item_whip",
+    "group": "props",
+    "title": "Whip",
+    "light_enabled": false
+  },
+  {
+    "type": "item_blowgun",
+    "group": "props",
+    "title": "Blowgun",
+    "light_enabled": false
+  },
+  {
+    "type": "item_hand_crossbow",
+    "group": "props",
+    "title": "Hand Crossbow",
+    "light_enabled": false
+  },
+  {
+    "type": "item_heavy_crossbow",
+    "group": "props",
+    "title": "Heavy Crossbow",
+    "light_enabled": false
+  },
+  {
+    "type": "item_longbow",
+    "group": "props",
+    "title": "Longbow",
+    "light_enabled": false
+  },
+  {
+    "type": "item_padded",
+    "group": "props",
+    "title": "Padded",
+    "light_enabled": false
+  },
+  {
+    "type": "item_leather_armor",
+    "group": "props",
+    "title": "Leather Armor",
+    "light_enabled": false
+  },
+  {
+    "type": "item_studded_leather",
+    "group": "props",
+    "title": "Studded Leather",
+    "light_enabled": false
+  },
+  {
+    "type": "item_hide_armor",
+    "group": "props",
+    "title": "Hide Armor",
+    "light_enabled": false
+  },
+  {
+    "type": "item_chain_shirt",
+    "group": "props",
+    "title": "Chain Shirt",
+    "light_enabled": false
+  },
+  {
+    "type": "item_scale_mail",
+    "group": "props",
+    "title": "Scale Mail",
+    "light_enabled": false
+  },
+  {
+    "type": "item_breastplate",
+    "group": "props",
+    "title": "Breastplate",
+    "light_enabled": false
+  },
+  {
+    "type": "item_half_plate",
+    "group": "props",
+    "title": "Half Plate",
+    "light_enabled": false
+  },
+  {
+    "type": "item_ring_mail",
+    "group": "props",
+    "title": "Ring Mail",
+    "light_enabled": false
+  },
+  {
+    "type": "item_chain_mail",
+    "group": "props",
+    "title": "Chain Mail",
+    "light_enabled": false
+  },
+  {
+    "type": "item_splint",
+    "group": "props",
+    "title": "Splint",
+    "light_enabled": false
+  },
+  {
+    "type": "item_plate",
+    "group": "props",
+    "title": "Plate",
+    "light_enabled": false
+  },
+  {
+    "type": "item_shield",
+    "group": "props",
+    "title": "Shield",
+    "light_enabled": false
+  },
+  {
+    "type": "item_armor_plus_1",
+    "group": "props",
+    "title": "Armor +1",
+    "light_enabled": false
+  },
+  {
+    "type": "item_shield_plus_1",
+    "group": "props",
+    "title": "Shield +1",
+    "light_enabled": false
+  },
+  {
+    "type": "item_cloak_of_protection",
+    "group": "props",
+    "title": "Cloak of Protection",
+    "light_enabled": false
+  },
+  {
+    "type": "item_backpack",
+    "group": "props",
+    "title": "Backpack",
+    "light_enabled": false
+  },
+  {
+    "type": "item_bedroll",
+    "group": "props",
+    "title": "Bedroll",
+    "light_enabled": false
+  },
+  {
+    "type": "item_rope",
+    "group": "props",
+    "title": "Rope",
+    "light_enabled": false
+  },
+  {
+    "type": "item_torch",
+    "group": "props",
+    "title": "Torch",
+    "light_enabled": false
+  },
+  {
+    "type": "item_tinderbox",
+    "group": "props",
+    "title": "Tinderbox",
+    "light_enabled": false
+  },
+  {
+    "type": "item_rations",
+    "group": "props",
+    "title": "Rations",
+    "light_enabled": false
+  },
+  {
+    "type": "item_waterskin",
+    "group": "props",
+    "title": "Waterskin",
+    "light_enabled": false
+  },
+  {
+    "type": "item_healers_kit",
+    "group": "props",
+    "title": "Healerâ€™s Kit",
+    "light_enabled": false
+  },
+  {
+    "type": "item_thieves_tools",
+    "group": "props",
+    "title": "Thievesâ€™ Tools",
+    "light_enabled": false
+  },
+  {
+    "type": "item_herbalism_kit",
+    "group": "props",
+    "title": "Herbalism Kit",
+    "light_enabled": false
+  },
+  {
+    "type": "item_component_pouch",
+    "group": "props",
+    "title": "Component Pouch",
+    "light_enabled": false
+  },
+  {
+    "type": "item_arcane_focus_wand",
+    "group": "props",
+    "title": "Arcane Focus â€” Wand",
+    "light_enabled": false
+  },
+  {
+    "type": "item_holy_symbol_amulet",
+    "group": "props",
+    "title": "Holy Symbol â€” Amulet",
+    "light_enabled": false
+  },
+  {
+    "type": "item_druidic_focus_sprig_of_mistletoe",
+    "group": "props",
+    "title": "Druidic Focus â€” Sprig of Mistletoe",
+    "light_enabled": false
+  },
+  {
+    "type": "item_spellbook",
+    "group": "props",
+    "title": "Spellbook",
+    "light_enabled": false
+  },
+  {
+    "type": "item_arrows_20",
+    "group": "props",
+    "title": "Arrows (20)",
+    "light_enabled": false
+  },
+  {
+    "type": "item_crossbow_bolts_20",
+    "group": "props",
+    "title": "Crossbow Bolts (20)",
+    "light_enabled": false
+  },
+  {
+    "type": "item_explorers_pack",
+    "group": "props",
+    "title": "Explorerâ€™s Pack",
+    "light_enabled": false
+  },
+  {
+    "type": "item_potion_of_healing",
+    "group": "props",
+    "title": "Potion of Healing",
+    "light_enabled": false
+  },
+  {
+    "type": "item_potion_of_greater_healing",
+    "group": "props",
+    "title": "Potion of Greater Healing",
+    "light_enabled": false
+  },
+  {
+    "type": "item_potion_of_superior_healing",
+    "group": "props",
+    "title": "Potion of Superior Healing",
+    "light_enabled": false
+  },
+  {
+    "type": "item_potion_of_supreme_healing",
+    "group": "props",
+    "title": "Potion of Supreme Healing",
+    "light_enabled": false
+  },
+  {
+    "type": "item_weapon_plus_1",
+    "group": "props",
+    "title": "Weapon +1",
+    "light_enabled": false
+  },
+  {
+    "type": "item_goggles_of_night",
+    "group": "props",
+    "title": "Goggles of Night",
+    "light_enabled": false
+  },
+  {
+    "type": "item_bag_of_holding",
+    "group": "props",
+    "title": "Bag of Holding",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_village",
+    "group": "locations",
+    "title": "village marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_castle",
+    "group": "locations",
+    "title": "castle marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_city",
+    "group": "locations",
+    "title": "city marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_tower",
+    "group": "locations",
+    "title": "tower marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_mountain_pass",
+    "group": "locations",
+    "title": "mountain pass marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_cave",
+    "group": "locations",
+    "title": "cave marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_forest",
+    "group": "locations",
+    "title": "forest marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_ruins",
+    "group": "locations",
+    "title": "ruins marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_temple",
+    "group": "locations",
+    "title": "temple marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_mine",
+    "group": "locations",
+    "title": "mine marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_harbor",
+    "group": "locations",
+    "title": "harbor marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_camp",
+    "group": "locations",
+    "title": "camp marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_graveyard",
+    "group": "locations",
+    "title": "graveyard marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_volcano",
+    "group": "locations",
+    "title": "volcano marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_portal",
+    "group": "locations",
+    "title": "portal marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_waterfall",
+    "group": "locations",
+    "title": "waterfall marker",
+    "light_enabled": false
+  },
+  {
+    "type": "marker_cottage",
+    "title": "Thatched Cottage marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_townhouse",
+    "title": "Timber Townhouse marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_log_cabin",
+    "title": "Log Cabin marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_farmhouse",
+    "title": "Farmhouse marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_tavern",
+    "title": "Tavern marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_inn",
+    "title": "Roadside Inn marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_blacksmith",
+    "title": "Blacksmith marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_bakery",
+    "title": "Bakery marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_apothecary",
+    "title": "Apothecary marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_general_store",
+    "title": "General Store marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_stable",
+    "title": "Stable marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_barn",
+    "title": "Barn marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_windmill",
+    "title": "Windmill marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_watermill",
+    "title": "Watermill marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_chapel",
+    "title": "Chapel marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_wizard_house",
+    "title": "Wizard House marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_library",
+    "title": "Library marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_guildhall",
+    "title": "Guildhall marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_manor",
+    "title": "Manor House marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_watchtower",
+    "title": "Watchtower marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_gatehouse",
+    "title": "Gatehouse marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_lighthouse",
+    "title": "Lighthouse marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_warehouse",
+    "title": "Warehouse marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_hunter_lodge",
+    "title": "Hunter Lodge marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_stone_circle",
+    "title": "Standing Stone Circle marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_ancient_tree",
+    "title": "Ancient Sacred Tree marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_oasis",
+    "title": "Desert Oasis marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_ruined_keep",
+    "title": "Ruined Keep marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_stone_bridge",
+    "title": "Stone Bridge marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_quarry",
+    "title": "Stone Quarry marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_shipwreck",
+    "title": "Shipwreck marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "marker_dragon_lair",
+    "title": "Dragon Lair marker",
+    "group": "locations",
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "world_dock",
+    "title": "Wooden Dock",
+    "group": "building_kits",
+    "height_scale": 1,
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "world_ruined_tower",
+    "title": "Ruined Tower Foundation",
+    "group": "building_kits",
+    "height_scale": 1,
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "world_stone_steps",
+    "title": "Wide Stone Steps",
+    "group": "building_kits",
+    "height_scale": 1,
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "kit_chimney",
+    "title": "Stone Chimney",
+    "group": "building_kits",
+    "height_scale": 1,
+    "light_enabled": false,
+    "part_width": 32,
+    "part_height": 32
+  },
+  {
+    "type": "kit_roof_hatch",
+    "title": "Roof Hatch",
+    "group": "building_kits",
+    "height_scale": 1,
+    "light_enabled": false,
+    "part_width": 32,
+    "part_height": 32
+  },
+  {
+    "type": "kit_window_wall",
+    "title": "Window Wall Section",
+    "group": "building_kits",
+    "height_scale": 1,
+    "light_enabled": false,
+    "part_width": 64,
+    "part_height": 64
+  },
+  {
+    "type": "kit_corner_buttress",
+    "title": "Stone Corner Buttress",
+    "group": "building_kits",
+    "height_scale": 1,
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40
+  },
+  {
+    "type": "thatched_house",
+    "group": "settlement",
+    "title": "thatched house",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "stone_house",
+    "group": "settlement",
+    "title": "stone house",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "timber_house",
+    "group": "settlement",
+    "title": "timber house",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "red_roof_house",
+    "group": "settlement",
+    "title": "red roof house",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "blue_roof_house",
+    "group": "settlement",
+    "title": "blue roof house",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "small_hut",
+    "group": "settlement",
+    "title": "small hut",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "longhouse",
+    "group": "settlement",
+    "title": "longhouse",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "townhouse",
+    "group": "settlement",
+    "title": "townhouse",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "row_houses",
+    "group": "settlement",
+    "title": "row houses",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "courtyard_house",
+    "group": "settlement",
+    "title": "courtyard house",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "manor_house",
+    "group": "settlement",
+    "title": "manor house",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "tavern_building",
+    "group": "settlement",
+    "title": "tavern building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "inn_building",
+    "group": "settlement",
+    "title": "inn building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "bakery_building",
+    "group": "settlement",
+    "title": "bakery building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "blacksmith_building",
+    "group": "settlement",
+    "title": "blacksmith building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "apothecary_building",
+    "group": "settlement",
+    "title": "apothecary building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "tailor_building",
+    "group": "settlement",
+    "title": "tailor building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "warehouse_building",
+    "group": "settlement",
+    "title": "warehouse building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "stable_building",
+    "group": "settlement",
+    "title": "stable building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "barn_building",
+    "group": "settlement",
+    "title": "barn building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "granary_building",
+    "group": "settlement",
+    "title": "granary building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "windmill_building",
+    "group": "settlement",
+    "title": "windmill building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "watermill_building",
+    "group": "settlement",
+    "title": "watermill building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "chapel_building",
+    "group": "settlement",
+    "title": "chapel building",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "town_hall",
+    "group": "settlement",
+    "title": "town hall",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "guardhouse",
+    "group": "settlement",
+    "title": "guardhouse",
+    "light_enabled": false,
+    "part_width": 160,
+    "part_height": 160
+  },
+  {
+    "type": "market_canopy",
+    "group": "settlement",
+    "title": "market canopy",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "vegetable_patch",
+    "group": "settlement",
+    "title": "Empty vegetable plot",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80,
+    "height_scale": 0
+  },
+  {
+    "type": "wheat_field",
+    "group": "settlement",
+    "title": "Empty furrowed field",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80,
+    "height_scale": 0
+  },
+  {
+    "type": "flower_planter",
+    "group": "settlement",
+    "title": "flower planter",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "hedge_segment",
+    "group": "settlement",
+    "title": "hedge segment",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "picket_fence",
+    "group": "settlement",
+    "title": "picket fence",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "town_signpost",
+    "group": "settlement",
+    "title": "town signpost",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "notice_board",
+    "group": "settlement",
+    "title": "notice board",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "village_statue",
+    "group": "settlement",
+    "title": "village statue",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "washing_line",
+    "group": "settlement",
+    "title": "washing line",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "water_trough",
+    "group": "settlement",
+    "title": "water trough",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "firewood_stack",
+    "group": "settlement",
+    "title": "firewood stack",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "rain_barrel",
+    "group": "settlement",
+    "title": "rain barrel",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "beehive",
+    "group": "settlement",
+    "title": "beehive",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "roadside_shrine",
+    "group": "settlement",
+    "title": "roadside shrine",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "stone_ruins",
+    "group": "settlement",
+    "title": "stone ruins",
+    "light_enabled": false,
+    "part_width": 80,
+    "part_height": 80
+  },
+  {
+    "type": "empty_tilled_plot",
+    "group": "settlement",
+    "title": "empty tilled plot",
+    "light_enabled": false,
+    "part_width": 200,
+    "part_height": 160,
+    "height_scale": 0
+  },
+  {
+    "type": "empty_furrowed_plot",
+    "group": "settlement",
+    "title": "empty furrowed plot",
+    "light_enabled": false,
+    "part_width": 200,
+    "part_height": 160,
+    "height_scale": 0
+  },
+  {
+    "type": "empty_raised_bed",
+    "group": "settlement",
+    "title": "empty raised bed",
+    "light_enabled": false,
+    "part_width": 200,
+    "part_height": 160,
+    "height_scale": 0
+  },
+  {
+    "type": "empty_round_plot",
+    "group": "settlement",
+    "title": "empty round plot",
+    "light_enabled": false,
+    "part_width": 200,
+    "part_height": 160,
+    "height_scale": 0
+  },
+  {
+    "type": "empty_stone_bed",
+    "group": "settlement",
+    "title": "empty stone bed",
+    "light_enabled": false,
+    "part_width": 200,
+    "part_height": 160,
+    "height_scale": 0
+  },
+  {
+    "type": "empty_fenced_plot",
+    "group": "settlement",
+    "title": "empty fenced plot",
+    "light_enabled": false,
+    "part_width": 200,
+    "part_height": 160,
+    "height_scale": 0
+  },
+  {
+    "type": "crop_cabbage",
+    "group": "settlement",
+    "title": "cabbage plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_lettuce",
+    "group": "settlement",
+    "title": "lettuce plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_carrot",
+    "group": "settlement",
+    "title": "carrot plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_potato",
+    "group": "settlement",
+    "title": "potato plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_tomato",
+    "group": "settlement",
+    "title": "tomato plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_wheat",
+    "group": "settlement",
+    "title": "wheat plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_corn",
+    "group": "settlement",
+    "title": "corn plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_pumpkin",
+    "group": "settlement",
+    "title": "pumpkin plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_grapevine",
+    "group": "settlement",
+    "title": "grapevine plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_basil",
+    "group": "settlement",
+    "title": "basil plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_strawberry",
+    "group": "settlement",
+    "title": "strawberry plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "crop_sunflower",
+    "group": "settlement",
+    "title": "sunflower plant",
+    "light_enabled": false,
+    "part_width": 40,
+    "part_height": 40,
+    "height_scale": 0.3
+  },
+  {
+    "type": "trade_bakery_baker_s_kneading_table",
+    "group": "furniture",
+    "title": "Baker’s Kneading Table",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare rectangular oak worktable.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 77.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_empty_proving_box",
+    "group": "furniture",
+    "title": "Empty Proving Box",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty wooden dough proving box with four compartments.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 99.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_empty_bakery_display_tray",
+    "group": "props",
+    "title": "Empty Bakery Display Tray",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty shallow wicker display tray.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 31.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_brick_baking_oven",
+    "group": "settlement",
+    "title": "Brick Baking Oven",
+    "catalog_pack": "business-2026-09",
+    "summary": "Compact round brick oven, overhead roof and chimney only.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 121.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_round_bread_board",
+    "group": "props",
+    "title": "Round Bread Board",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare round wooden bread board.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_baker_s_rolling_pin",
+    "group": "props",
+    "title": "Baker’s Rolling Pin",
+    "catalog_pack": "business-2026-09",
+    "summary": "Single clean wooden rolling pin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 15.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_empty_mixing_bowl",
+    "group": "props",
+    "title": "Empty Mixing Bowl",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty cream ceramic mixing bowl.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_loose_flour_pile",
+    "group": "props",
+    "title": "Loose Flour Pile",
+    "catalog_pack": "business-2026-09",
+    "summary": "One small mound of white flour with no container.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Bakery, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 41.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_country_bread_loaf",
+    "group": "props",
+    "title": "Country Bread Loaf",
+    "catalog_pack": "business-2026-09",
+    "summary": "One round scored brown bread loaf.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 38.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_long_bread_loaf",
+    "group": "props",
+    "title": "Long Bread Loaf",
+    "catalog_pack": "business-2026-09",
+    "summary": "One long crusty baguette.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 40.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_twisted_pretzel",
+    "group": "props",
+    "title": "Twisted Pretzel",
+    "catalog_pack": "business-2026-09",
+    "summary": "One golden twisted pretzel.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 37.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_butter_crescent",
+    "group": "props",
+    "title": "Butter Crescent",
+    "catalog_pack": "business-2026-09",
+    "summary": "One flaky crescent pastry.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 34.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_oat_flatbread",
+    "group": "props",
+    "title": "Oat Flatbread",
+    "catalog_pack": "business-2026-09",
+    "summary": "One round oat flatbread.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 37.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_apple_hand_pie",
+    "group": "props",
+    "title": "Apple Hand Pie",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed golden apple hand pie.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 33.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_baking_flour_sack",
+    "group": "props",
+    "title": "Baking Flour Sack",
+    "catalog_pack": "business-2026-09",
+    "summary": "One tied linen sack of baking flour.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 48.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_bakery_brown_sugar_cone",
+    "group": "props",
+    "title": "Brown Sugar Cone",
+    "catalog_pack": "business-2026-09",
+    "summary": "One solid unwrapped brown sugar cone.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Bakery, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 54.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_alehouse_bar_counter",
+    "group": "furniture",
+    "title": "Alehouse Bar Counter",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare long oak bar counter.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 51.1,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_round_pub_table",
+    "group": "furniture",
+    "title": "Round Pub Table",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare small round oak pub table.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 120.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_pub_bar_stool",
+    "group": "furniture",
+    "title": "Pub Bar Stool",
+    "catalog_pack": "business-2026-09",
+    "summary": "One round leather-topped bar stool.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 121.1,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_empty_bottle_crate",
+    "group": "travel",
+    "title": "Empty Bottle Crate",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty wooden bottle crate with square dividers.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 109.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_empty_serving_platter",
+    "group": "props",
+    "title": "Empty Serving Platter",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty oval pewter serving platter.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 28.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_empty_ale_jug",
+    "group": "props",
+    "title": "Empty Ale Jug",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty brown stoneware jug viewed into mouth.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_empty_pewter_dish",
+    "group": "props",
+    "title": "Empty Pewter Dish",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty shallow pewter dish.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_alehouse_floor_mat",
+    "group": "furniture",
+    "title": "Alehouse Floor Mat",
+    "catalog_pack": "business-2026-09",
+    "summary": "Flat woven straw floor mat.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tavern, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.6,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_sealed_ale_bottle",
+    "group": "props",
+    "title": "Sealed Ale Bottle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One sealed squat brown ale bottle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 71.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_red_wine_bottle",
+    "group": "props",
+    "title": "Red Wine Bottle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One sealed dark green wine bottle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 122.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_cider_bottle",
+    "group": "props",
+    "title": "Cider Bottle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One sealed amber cider bottle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 104.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_hard_cheese_wheel",
+    "group": "props",
+    "title": "Hard Cheese Wheel",
+    "catalog_pack": "business-2026-09",
+    "summary": "One whole uncut ochre-rinded cheese wheel.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_smoked_sausage",
+    "group": "props",
+    "title": "Smoked Sausage",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single cured brown sausage.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 38.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_pickled_cucumber",
+    "group": "props",
+    "title": "Pickled Cucumber",
+    "catalog_pack": "business-2026-09",
+    "summary": "One pickled cucumber, no jar.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_roasted_drumstick",
+    "group": "props",
+    "title": "Roasted Drumstick",
+    "catalog_pack": "business-2026-09",
+    "summary": "One cooked chicken drumstick.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tavern_honey_cake",
+    "group": "props",
+    "title": "Honey Cake",
+    "catalog_pack": "business-2026-09",
+    "summary": "One small round honey cake.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tavern, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_single_guest_bed",
+    "group": "furniture",
+    "title": "Single Guest Bed",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare wooden single bed with one fixed cream mattress, no loose bedding.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 166.9,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_empty_bedside_cabinet",
+    "group": "furniture",
+    "title": "Empty Bedside Cabinet",
+    "catalog_pack": "business-2026-09",
+    "summary": "Small closed oak bedside cabinet with bare top.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 106.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_guest_room_bench",
+    "group": "furniture",
+    "title": "Guest Room Bench",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare narrow oak luggage bench.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 55.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_empty_washstand",
+    "group": "furniture",
+    "title": "Empty Washstand",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare small round wooden washstand, no basin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 109.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_empty_copper_bath",
+    "group": "furniture",
+    "title": "Empty Copper Bath",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty oval copper bathtub.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 157.6,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_guest_room_runner",
+    "group": "furniture",
+    "title": "Guest Room Runner",
+    "catalog_pack": "business-2026-09",
+    "summary": "Flat muted blue wool runner rug.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 89.4,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_square_seat_cushion",
+    "group": "props",
+    "title": "Square Seat Cushion",
+    "catalog_pack": "business-2026-09",
+    "summary": "One loose square burgundy cushion.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 41.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_empty_chamber_basin",
+    "group": "props",
+    "title": "Empty Chamber Basin",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty white ceramic chamber basin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Inn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_linen_pillow",
+    "group": "props",
+    "title": "Linen Pillow",
+    "catalog_pack": "business-2026-09",
+    "summary": "One cream linen pillow.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_wool_blanket",
+    "group": "props",
+    "title": "Wool Blanket",
+    "catalog_pack": "business-2026-09",
+    "summary": "One neatly folded moss-green wool blanket.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 35.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_bath_towel",
+    "group": "props",
+    "title": "Bath Towel",
+    "catalog_pack": "business-2026-09",
+    "summary": "One folded plain linen bath towel.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 38.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_soap_bar",
+    "group": "props",
+    "title": "Soap Bar",
+    "catalog_pack": "business-2026-09",
+    "summary": "One unwrapped ivory soap bar.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 34.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_beeswax_taper",
+    "group": "props",
+    "title": "Beeswax Taper",
+    "catalog_pack": "business-2026-09",
+    "summary": "One unlit golden beeswax taper candle, no holder.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 128.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_room_key",
+    "group": "props",
+    "title": "Room Key",
+    "catalog_pack": "business-2026-09",
+    "summary": "One plain brass key, no ring or tag.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 50.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_lavender_sachet",
+    "group": "props",
+    "title": "Lavender Sachet",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed small linen lavender sachet.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 53.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_inn_guest_slipper",
+    "group": "props",
+    "title": "Guest Slipper",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single brown leather slipper.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Inn, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 34.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_smith_s_workbench",
+    "group": "furniture",
+    "title": "Smith’s Workbench",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare thick oak smith workbench with integral iron vise.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 74.1,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_iron_quench_trough",
+    "group": "furniture",
+    "title": "Iron Quench Trough",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty rectangular iron quenching trough.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 63.1,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_empty_coal_bin",
+    "group": "furniture",
+    "title": "Empty Coal Bin",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty square iron coal bin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 99.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_round_forge_hearth",
+    "group": "settlement",
+    "title": "Round Forge Hearth",
+    "catalog_pack": "business-2026-09",
+    "summary": "Cold round stone forge hearth, empty center.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 115.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_smith_s_bellows",
+    "group": "props",
+    "title": "Smith’s Bellows",
+    "catalog_pack": "business-2026-09",
+    "summary": "One leather and wood bellows lying flat.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 28.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_swage_block",
+    "group": "props",
+    "title": "Swage Block",
+    "catalog_pack": "business-2026-09",
+    "summary": "One square iron swage block with various holes.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_empty_tool_stand",
+    "group": "furniture",
+    "title": "Empty Tool Stand",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty low wooden tool stand with drilled holes.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 78.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_leather_floor_pad",
+    "group": "furniture",
+    "title": "Leather Floor Pad",
+    "catalog_pack": "business-2026-09",
+    "summary": "Flat heavy rectangular leather floor pad.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Blacksmith, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 32.0,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_forge_hammer",
+    "group": "props",
+    "title": "Forge Hammer",
+    "catalog_pack": "business-2026-09",
+    "summary": "One short-handled square-headed forge hammer.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 41.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_smith_s_tongs",
+    "group": "props",
+    "title": "Smith’s Tongs",
+    "catalog_pack": "business-2026-09",
+    "summary": "One pair of closed long iron smith tongs.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 47.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_iron_ingot",
+    "group": "props",
+    "title": "Iron Ingot",
+    "catalog_pack": "business-2026-09",
+    "summary": "One solid iron ingot.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 34.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_copper_ingot",
+    "group": "props",
+    "title": "Copper Ingot",
+    "catalog_pack": "business-2026-09",
+    "summary": "One solid copper ingot.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 34.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_horseshoe",
+    "group": "props",
+    "title": "Horseshoe",
+    "catalog_pack": "business-2026-09",
+    "summary": "One plain iron horseshoe.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_iron_nail",
+    "group": "props",
+    "title": "Iron Nail",
+    "catalog_pack": "business-2026-09",
+    "summary": "One large square iron nail.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 49.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_metal_file",
+    "group": "props",
+    "title": "Metal File",
+    "catalog_pack": "business-2026-09",
+    "summary": "One metal file with a wooden handle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 40.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_blacksmith_whetstone",
+    "group": "props",
+    "title": "Whetstone",
+    "catalog_pack": "business-2026-09",
+    "summary": "One rectangular gray sharpening stone.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Blacksmith, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_apothecary_counter",
+    "group": "furniture",
+    "title": "Apothecary Counter",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare dark walnut apothecary counter.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 77.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_empty_herb_drawer_unit",
+    "group": "furniture",
+    "title": "Empty Herb Drawer Unit",
+    "catalog_pack": "business-2026-09",
+    "summary": "Low wooden apothecary unit seen overhead with bare top.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 69.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_empty_drying_rack",
+    "group": "furniture",
+    "title": "Empty Drying Rack",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty flat wooden herb drying rack with mesh base.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 115.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_empty_reagent_tray",
+    "group": "props",
+    "title": "Empty Reagent Tray",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty shallow brass reagent tray.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 29.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_empty_stone_mortar",
+    "group": "props",
+    "title": "Empty Stone Mortar",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty granite mortar bowl, no pestle.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_stone_pestle",
+    "group": "props",
+    "title": "Stone Pestle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single granite pestle.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 47.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_empty_glass_retort",
+    "group": "props",
+    "title": "Empty Glass Retort",
+    "catalog_pack": "business-2026-09",
+    "summary": "One clear empty glass retort lying horizontally.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 26.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_empty_porcelain_dish",
+    "group": "props",
+    "title": "Empty Porcelain Dish",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty white porcelain evaporating dish.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Apothecary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 41.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_herbal_salve_tin",
+    "group": "props",
+    "title": "Herbal Salve Tin",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed small brass tin of herbal salve.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 41.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_mint_tea_packet",
+    "group": "props",
+    "title": "Mint Tea Packet",
+    "catalog_pack": "business-2026-09",
+    "summary": "One sealed folded paper tea packet, no lettering.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_dried_lavender_sprig",
+    "group": "props",
+    "title": "Dried Lavender Sprig",
+    "catalog_pack": "business-2026-09",
+    "summary": "One dried lavender sprig.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_ginger_root",
+    "group": "props",
+    "title": "Ginger Root",
+    "catalog_pack": "business-2026-09",
+    "summary": "One piece of fresh ginger root.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 40.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_honey_jar",
+    "group": "props",
+    "title": "Honey Jar",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed amber honey jar.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 52.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_medicinal_alcohol_bottle",
+    "group": "props",
+    "title": "Medicinal Alcohol Bottle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One sealed clear glass bottle of alcohol.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 84.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_linen_bandage_roll",
+    "group": "props",
+    "title": "Linen Bandage Roll",
+    "catalog_pack": "business-2026-09",
+    "summary": "One tightly rolled clean linen bandage.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_apothecary_measuring_spoon",
+    "group": "props",
+    "title": "Measuring Spoon",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single small brass measuring spoon.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Apothecary, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_tailor_s_cutting_table",
+    "group": "furniture",
+    "title": "Tailor’s Cutting Table",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare broad rectangular cutting table with no cloth or tools.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 91.9,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_empty_weaving_frame",
+    "group": "furniture",
+    "title": "Empty Weaving Frame",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty wooden horizontal loom frame, no cloth thread or shuttle.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 96.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_tailor_s_stool",
+    "group": "furniture",
+    "title": "Tailor’s Stool",
+    "catalog_pack": "business-2026-09",
+    "summary": "One small square burgundy upholstered stool.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 113.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_empty_thread_organizer",
+    "group": "furniture",
+    "title": "Empty Thread Organizer",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty open-top wooden organizer with many small compartments.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 95.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_empty_fabric_bin",
+    "group": "furniture",
+    "title": "Empty Fabric Bin",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty long shallow wicker fabric bin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 62.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_flat_sewing_board",
+    "group": "props",
+    "title": "Flat Sewing Board",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare rectangular beech sewing board.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 32.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_wooden_pattern_ruler",
+    "group": "props",
+    "title": "Wooden Pattern Ruler",
+    "catalog_pack": "business-2026-09",
+    "summary": "One plain L-shaped wooden pattern ruler.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_empty_pin_dish",
+    "group": "props",
+    "title": "Empty Pin Dish",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty shallow brass pin dish.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Tailor, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_tailor_s_shears",
+    "group": "props",
+    "title": "Tailor’s Shears",
+    "catalog_pack": "business-2026-09",
+    "summary": "One pair of closed brass-handled tailor shears.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 34.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_indigo_linen_bolt",
+    "group": "props",
+    "title": "Indigo Linen Bolt",
+    "catalog_pack": "business-2026-09",
+    "summary": "One roll of indigo linen, no ties or accessories.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_cream_wool_bolt",
+    "group": "props",
+    "title": "Cream Wool Bolt",
+    "catalog_pack": "business-2026-09",
+    "summary": "One roll of cream wool cloth.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_red_thread_spool",
+    "group": "props",
+    "title": "Red Thread Spool",
+    "catalog_pack": "business-2026-09",
+    "summary": "One spool of muted red thread.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 66.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_bone_sewing_needle",
+    "group": "props",
+    "title": "Bone Sewing Needle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single long bone sewing needle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 49.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_brass_thimble",
+    "group": "props",
+    "title": "Brass Thimble",
+    "catalog_pack": "business-2026-09",
+    "summary": "One brass thimble.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 56.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_leather_patch",
+    "group": "props",
+    "title": "Leather Patch",
+    "catalog_pack": "business-2026-09",
+    "summary": "One flat square brown leather repair patch.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 35.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_tailor_wooden_button",
+    "group": "props",
+    "title": "Wooden Button",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single carved wooden button.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Tailor, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_general_store_counter",
+    "group": "furniture",
+    "title": "General Store Counter",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare plain rectangular pine shop counter.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 75.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_empty_merchandising_bin",
+    "group": "furniture",
+    "title": "Empty Merchandising Bin",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty six-compartment wooden merchandising bin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 94.1,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_empty_glass_jar",
+    "group": "props",
+    "title": "Empty Glass Jar",
+    "catalog_pack": "business-2026-09",
+    "summary": "One wide-mouthed empty glass storage jar.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_empty_lidded_box",
+    "group": "props",
+    "title": "Empty Lidded Box",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed wooden storage box with bare lid.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 35.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_empty_wicker_hamper",
+    "group": "furniture",
+    "title": "Empty Wicker Hamper",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty deep round wicker hamper, no lid.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 118.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_empty_balance_pan",
+    "group": "props",
+    "title": "Empty Balance Pan",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty round brass balance pan, no scales.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_store_door_mat",
+    "group": "furniture",
+    "title": "Store Door Mat",
+    "catalog_pack": "business-2026-09",
+    "summary": "Flat coarse rectangular hemp door mat.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 29.8,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_empty_measuring_bucket",
+    "group": "props",
+    "title": "Empty Measuring Bucket",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty small wooden measuring bucket.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "General Store, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_lamp_oil_flask",
+    "group": "props",
+    "title": "Lamp Oil Flask",
+    "catalog_pack": "business-2026-09",
+    "summary": "One sealed amber oil flask.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 58.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_rock_salt_block",
+    "group": "props",
+    "title": "Rock Salt Block",
+    "catalog_pack": "business-2026-09",
+    "summary": "One rough white rock salt block.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_chalk_stick",
+    "group": "props",
+    "title": "Chalk Stick",
+    "catalog_pack": "business-2026-09",
+    "summary": "One short white chalk stick.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 32.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_twine_ball",
+    "group": "props",
+    "title": "Twine Ball",
+    "catalog_pack": "business-2026-09",
+    "summary": "One compact ball of hemp twine.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_sealing_wax_stick",
+    "group": "props",
+    "title": "Sealing Wax Stick",
+    "catalog_pack": "business-2026-09",
+    "summary": "One red sealing wax stick.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_charcoal_piece",
+    "group": "props",
+    "title": "Charcoal Piece",
+    "catalog_pack": "business-2026-09",
+    "summary": "One chunky black charcoal stick.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_clay_oil_lamp",
+    "group": "props",
+    "title": "Clay Oil Lamp",
+    "catalog_pack": "business-2026-09",
+    "summary": "One small unlit clay oil lamp.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 37.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_general_store_wooden_scrub_brush",
+    "group": "props",
+    "title": "Wooden Scrub Brush",
+    "catalog_pack": "business-2026-09",
+    "summary": "One small wooden bristle scrub brush.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "General Store, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_empty_feed_trough",
+    "group": "settlement",
+    "title": "Empty Feed Trough",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty long wooden animal feed trough.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 60.6,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_empty_water_trough",
+    "group": "settlement",
+    "title": "Empty Water Trough",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty oval stone livestock water trough.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 82.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_empty_tack_chest",
+    "group": "travel",
+    "title": "Empty Tack Chest",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed wooden tack chest with bare lid.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 79.9,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_empty_feed_bin",
+    "group": "furniture",
+    "title": "Empty Feed Bin",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty square wooden feed bin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 124.2,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_saddle_rack",
+    "group": "furniture",
+    "title": "Saddle Rack",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare low wooden saddle rack, no saddle.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 98.4,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_stable_floor_mat",
+    "group": "furniture",
+    "title": "Stable Floor Mat",
+    "catalog_pack": "business-2026-09",
+    "summary": "Flat rectangular woven rush stable mat.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 30.5,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_empty_grooming_tray",
+    "group": "props",
+    "title": "Empty Grooming Tray",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty shallow oval wooden grooming tray.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 30.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_empty_grain_scoop",
+    "group": "props",
+    "title": "Empty Grain Scoop",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty wooden grain scoop lying flat.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Stable, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 19.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_horse_grooming_brush",
+    "group": "props",
+    "title": "Horse Grooming Brush",
+    "catalog_pack": "business-2026-09",
+    "summary": "One oval horse grooming brush.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 35.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_hoof_pick",
+    "group": "props",
+    "title": "Hoof Pick",
+    "catalog_pack": "business-2026-09",
+    "summary": "One iron hoof pick with wood handle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 49.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_leather_bridle",
+    "group": "props",
+    "title": "Leather Bridle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One complete plain leather bridle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 72.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_riding_saddle",
+    "group": "props",
+    "title": "Riding Saddle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One brown leather riding saddle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 48.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_horse_blanket",
+    "group": "props",
+    "title": "Horse Blanket",
+    "catalog_pack": "business-2026-09",
+    "summary": "One folded dark green horse blanket.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_oat_feed_sack",
+    "group": "props",
+    "title": "Oat Feed Sack",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed jute oat feed sack.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 50.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_carrot",
+    "group": "props",
+    "title": "Carrot",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single orange carrot with short green tops.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_stable_curry_comb",
+    "group": "props",
+    "title": "Curry Comb",
+    "catalog_pack": "business-2026-09",
+    "summary": "One oval iron curry comb.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Stable, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 32.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_empty_packing_bench",
+    "group": "furniture",
+    "title": "Empty Packing Bench",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare long utilitarian packing bench.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 60.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_empty_shipping_crate",
+    "group": "travel",
+    "title": "Empty Shipping Crate",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty large square wooden shipping crate.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 118.6,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_closed_shipping_chest",
+    "group": "travel",
+    "title": "Closed Shipping Chest",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed iron-banded shipping chest, bare lid.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 81.9,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_empty_barrel_stand",
+    "group": "furniture",
+    "title": "Empty Barrel Stand",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty low wooden barrel cradle.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 86.1,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_wooden_pallet",
+    "group": "props",
+    "title": "Wooden Pallet",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare rectangular wooden pallet.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_empty_sorting_tray",
+    "group": "props",
+    "title": "Empty Sorting Tray",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty square sorting tray with nine compartments.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 46.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_platform_scale",
+    "group": "furniture",
+    "title": "Platform Scale",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare rectangular mechanical scale platform with integral dial.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 71.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_empty_packing_basket",
+    "group": "props",
+    "title": "Empty Packing Basket",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty rectangular wicker packing basket.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Warehouse, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 34.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_shipping_ledger",
+    "group": "props",
+    "title": "Shipping Ledger",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed brown leather ledger, no writing.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_marking_chalk_block",
+    "group": "props",
+    "title": "Marking Chalk Block",
+    "catalog_pack": "business-2026-09",
+    "summary": "One rectangular dark red chalk block.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 32.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_packing_straw_bale",
+    "group": "props",
+    "title": "Packing Straw Bale",
+    "catalog_pack": "business-2026-09",
+    "summary": "One tightly bound compact straw bale.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 38.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_burlap_roll",
+    "group": "props",
+    "title": "Burlap Roll",
+    "catalog_pack": "business-2026-09",
+    "summary": "One roll of coarse brown burlap.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 40.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_iron_padlock",
+    "group": "props",
+    "title": "Iron Padlock",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed plain iron padlock.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 56.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_cargo_hook",
+    "group": "props",
+    "title": "Cargo Hook",
+    "catalog_pack": "business-2026-09",
+    "summary": "One curved iron cargo hook with wooden handle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 47.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_wooden_pulley",
+    "group": "props",
+    "title": "Wooden Pulley",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single wooden pulley block.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 67.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_warehouse_wax_seal_stamp",
+    "group": "props",
+    "title": "Wax Seal Stamp",
+    "catalog_pack": "business-2026-09",
+    "summary": "One short brass seal stamp with wooden handle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Warehouse, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 52.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_round_millstone",
+    "group": "settlement",
+    "title": "Round Millstone",
+    "catalog_pack": "business-2026-09",
+    "summary": "One horizontal round grooved millstone with central hole.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 120.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_empty_grain_hopper",
+    "group": "settlement",
+    "title": "Empty Grain Hopper",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty wooden square grain hopper with tapered interior.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 117.6,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_mill_sorting_table",
+    "group": "furniture",
+    "title": "Mill Sorting Table",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare narrow oak sorting table.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 66.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_empty_flour_bin",
+    "group": "furniture",
+    "title": "Empty Flour Bin",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty long wooden flour bin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 63.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_empty_bran_basket",
+    "group": "props",
+    "title": "Empty Bran Basket",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty shallow round wicker bran basket.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_grain_sieve",
+    "group": "props",
+    "title": "Grain Sieve",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty round wooden grain sieve.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 46.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_empty_mill_scoop",
+    "group": "props",
+    "title": "Empty Mill Scoop",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty broad wooden flour scoop.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 20.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_mill_floor_grate",
+    "group": "props",
+    "title": "Mill Floor Grate",
+    "catalog_pack": "business-2026-09",
+    "summary": "One flat rectangular wooden slatted floor grate.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Mill & Granary, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 38.6,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_wheat_grain_sack",
+    "group": "props",
+    "title": "Wheat Grain Sack",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed linen wheat grain sack.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 52.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_rye_grain_sack",
+    "group": "props",
+    "title": "Rye Grain Sack",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed brown jute rye grain sack.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 51.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_barley_grain_sack",
+    "group": "props",
+    "title": "Barley Grain Sack",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed pale linen barley grain sack.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 54.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_cornmeal_packet",
+    "group": "props",
+    "title": "Cornmeal Packet",
+    "catalog_pack": "business-2026-09",
+    "summary": "One folded paper cornmeal packet, no lettering.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 56.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_wooden_mill_mallet",
+    "group": "props",
+    "title": "Wooden Mill Mallet",
+    "catalog_pack": "business-2026-09",
+    "summary": "One heavy long-handled wooden mill mallet.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 48.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_millwright_chisel",
+    "group": "props",
+    "title": "Millwright Chisel",
+    "catalog_pack": "business-2026-09",
+    "summary": "One long iron millwright chisel.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_mill_bearing_ring",
+    "group": "props",
+    "title": "Mill Bearing Ring",
+    "catalog_pack": "business-2026-09",
+    "summary": "One thick brass bearing ring.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 36.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_mill_lubricating_grease_pot",
+    "group": "props",
+    "title": "Lubricating Grease Pot",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed small earthenware grease pot.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Mill & Granary, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 49.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_farm_potting_bench",
+    "group": "furniture",
+    "title": "Farm Potting Bench",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare rough timber potting bench.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 91.1,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_empty_harvest_crate",
+    "group": "travel",
+    "title": "Empty Harvest Crate",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty slatted wooden harvest crate.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 93.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_empty_seed_tray",
+    "group": "props",
+    "title": "Empty Seed Tray",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty flat wooden seed tray with twelve compartments.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 35.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_empty_egg_tray",
+    "group": "props",
+    "title": "Empty Egg Tray",
+    "catalog_pack": "business-2026-09",
+    "summary": "Empty wooden egg tray with circular recesses.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 35.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_empty_milk_churn",
+    "group": "props",
+    "title": "Empty Milk Churn",
+    "catalog_pack": "business-2026-09",
+    "summary": "One open empty metal milk churn viewed into its round mouth.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 40.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_empty_field_basket",
+    "group": "props",
+    "title": "Empty Field Basket",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty broad oval woven field basket.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 32.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_milking_stool",
+    "group": "furniture",
+    "title": "Milking Stool",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare small round wooden milking stool.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 116.4,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_empty_watering_can",
+    "group": "props",
+    "title": "Empty Watering Can",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty metal watering can viewed overhead.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Farm & Barn, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 27.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_red_apple",
+    "group": "props",
+    "title": "Red Apple",
+    "catalog_pack": "business-2026-09",
+    "summary": "One ripe red apple with a short stem.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 48.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_green_pear",
+    "group": "props",
+    "title": "Green Pear",
+    "catalog_pack": "business-2026-09",
+    "summary": "One ripe green pear with a short stem.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 65.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_brown_egg",
+    "group": "props",
+    "title": "Brown Egg",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single brown chicken egg.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 54.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_potato",
+    "group": "props",
+    "title": "Potato",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single dusty brown potato.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 37.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_onion",
+    "group": "props",
+    "title": "Onion",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single golden onion.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 53.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_garlic_bulb",
+    "group": "props",
+    "title": "Garlic Bulb",
+    "catalog_pack": "business-2026-09",
+    "summary": "One whole white garlic bulb.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 47.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_cabbage_head",
+    "group": "props",
+    "title": "Cabbage Head",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single green cabbage head.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_farm_small_pumpkin",
+    "group": "props",
+    "title": "Small Pumpkin",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single small orange pumpkin.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Farm & Barn, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_joiner_s_workbench",
+    "group": "furniture",
+    "title": "Joiner’s Workbench",
+    "catalog_pack": "business-2026-09",
+    "summary": "Bare oak joiners workbench with integral wood vise.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 59.2,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_empty_sawhorse",
+    "group": "furniture",
+    "title": "Empty Sawhorse",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare wooden sawhorse viewed directly overhead.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 77.2,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_empty_lumber_cradle",
+    "group": "furniture",
+    "title": "Empty Lumber Cradle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty low wooden lumber cradle.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 80.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_empty_tool_drawer",
+    "group": "props",
+    "title": "Empty Tool Drawer",
+    "catalog_pack": "business-2026-09",
+    "summary": "One open empty rectangular wooden tool drawer.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 27.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_woodworking_floor_pad",
+    "group": "furniture",
+    "title": "Woodworking Floor Pad",
+    "catalog_pack": "business-2026-09",
+    "summary": "One flat rectangular cork floor pad.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 33.9,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_bench_hook",
+    "group": "props",
+    "title": "Bench Hook",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare L-shaped wooden bench hook.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 49.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_empty_glue_bowl",
+    "group": "props",
+    "title": "Empty Glue Bowl",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty small wooden glue bowl.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 45.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_wooden_clamping_frame",
+    "group": "props",
+    "title": "Wooden Clamping Frame",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty rectangular wood clamping frame.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Carpenter, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_carpenter_s_hammer",
+    "group": "props",
+    "title": "Carpenter’s Hammer",
+    "catalog_pack": "business-2026-09",
+    "summary": "One iron claw hammer with oak handle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_hand_saw",
+    "group": "props",
+    "title": "Hand Saw",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single steel hand saw with oak handle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_wood_plane",
+    "group": "props",
+    "title": "Wood Plane",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single wooden hand plane with fitted iron blade.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_woodworking_chisel",
+    "group": "props",
+    "title": "Woodworking Chisel",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single steel chisel with wood handle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_joiner_s_square",
+    "group": "props",
+    "title": "Joiner’s Square",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single L-shaped brass and wood square.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 51.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_oak_plank",
+    "group": "props",
+    "title": "Oak Plank",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single finished oak plank.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_wooden_dowel",
+    "group": "props",
+    "title": "Wooden Dowel",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single straight wooden dowel.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 33.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_carpenter_hide_glue_jar",
+    "group": "props",
+    "title": "Hide Glue Jar",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed ceramic jar of hide glue.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Carpenter, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 55.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_bare_market_counter",
+    "group": "furniture",
+    "title": "Bare Market Counter",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare portable wooden market counter with no canopy.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 72.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_empty_fish_tray",
+    "group": "props",
+    "title": "Empty Fish Tray",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty shallow rectangular zinc fish tray.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 28.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_butcher_s_block",
+    "group": "furniture",
+    "title": "Butcher’s Block",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare thick round wooden butcher block.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 119.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_empty_fruit_bin",
+    "group": "furniture",
+    "title": "Empty Fruit Bin",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty low four-compartment wooden fruit bin.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 102.0,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_empty_spice_organizer",
+    "group": "props",
+    "title": "Empty Spice Organizer",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty small wooden spice organizer with six compartments.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 33.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_empty_woven_bread_basket",
+    "group": "props",
+    "title": "Empty Woven Bread Basket",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty oval wicker bread basket.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 31.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_empty_display_pedestal",
+    "group": "furniture",
+    "title": "Empty Display Pedestal",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare square oak display pedestal.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 123.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_empty_earthenware_bowl",
+    "group": "props",
+    "title": "Empty Earthenware Bowl",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty glazed brown earthenware bowl.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Market & Food Stalls, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_silver_river_fish",
+    "group": "props",
+    "title": "Silver River Fish",
+    "catalog_pack": "business-2026-09",
+    "summary": "One whole silver fish, no board or platter.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 33.8,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_salted_fish",
+    "group": "props",
+    "title": "Salted Fish",
+    "catalog_pack": "business-2026-09",
+    "summary": "One whole dried salted fish, no wrapper.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 42.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_raw_steak",
+    "group": "props",
+    "title": "Raw Steak",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single cut of raw beef, no board or platter.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 37.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_smoked_ham",
+    "group": "props",
+    "title": "Smoked Ham",
+    "catalog_pack": "business-2026-09",
+    "summary": "One whole smoked ham, no board or accessories.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 39.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_orange",
+    "group": "props",
+    "title": "Orange",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single ripe orange.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 44.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_pear_preserve_jar",
+    "group": "props",
+    "title": "Pear Preserve Jar",
+    "catalog_pack": "business-2026-09",
+    "summary": "One sealed glass jar of amber pear preserve.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Food, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 58.9,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_cinnamon_stick",
+    "group": "props",
+    "title": "Cinnamon Stick",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single cinnamon stick.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 33.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_market_black_pepper_packet",
+    "group": "props",
+    "title": "Black Pepper Packet",
+    "catalog_pack": "business-2026-09",
+    "summary": "One closed folded paper pepper packet, no lettering.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Market & Food Stalls, Consumable, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 49.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_bare_upholstered_settee",
+    "group": "furniture",
+    "title": "Bare Upholstered Settee",
+    "catalog_pack": "business-2026-09",
+    "summary": "One oak settee with fixed green upholstery, no loose pillows or blankets.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 105.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_empty_wash_tub",
+    "group": "furniture",
+    "title": "Empty Wash Tub",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty oval wooden wash tub.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 81.7,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_bare_kitchen_table",
+    "group": "furniture",
+    "title": "Bare Kitchen Table",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare rectangular oak kitchen table.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 83.5,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_empty_pantry_cubbies",
+    "group": "furniture",
+    "title": "Empty Pantry Cubbies",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty six-compartment low pantry organizer.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 80.2,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_oval_dining_table",
+    "group": "furniture",
+    "title": "Oval Dining Table",
+    "catalog_pack": "business-2026-09",
+    "summary": "One bare oval oak dining table.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, furniture, interior, business, household, modular",
+    "part_width": 120,
+    "part_height": 87.8,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_empty_terracotta_planter",
+    "group": "props",
+    "title": "Empty Terracotta Planter",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty round terracotta pot with no plant soil or saucer.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 48.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_woven_hall_runner",
+    "group": "furniture",
+    "title": "Woven Hall Runner",
+    "catalog_pack": "business-2026-09",
+    "summary": "One flat burgundy and ochre wool runner rug.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 24.3,
+    "walk_over": true,
+    "height_scale": 0,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_empty_firewood_basket",
+    "group": "props",
+    "title": "Empty Firewood Basket",
+    "catalog_pack": "business-2026-09",
+    "summary": "One empty oval wicker firewood basket.",
+    "notes": "Independent overhead map furnishing/prop. Place, rotate and resize separately. Bare furniture and empty containers can be dressed with other props.",
+    "tags": "Household, props, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 28.2,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_wooden_cooking_spoon",
+    "group": "props",
+    "title": "Wooden Cooking Spoon",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single long wooden cooking spoon.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 51.6,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_iron_ladle",
+    "group": "props",
+    "title": "Iron Ladle",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single iron soup ladle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 53.1,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_ceramic_dinner_plate",
+    "group": "props",
+    "title": "Ceramic Dinner Plate",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single empty ivory ceramic dinner plate.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 32.3,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_stoneware_cup",
+    "group": "props",
+    "title": "Stoneware Cup",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single empty brown stoneware cup.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 43.5,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_hand_broom",
+    "group": "props",
+    "title": "Hand Broom",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single short straw hand broom.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 52.0,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_clay_pitcher",
+    "group": "props",
+    "title": "Clay Pitcher",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single empty cream glazed clay pitcher.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 57.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_brass_candlestick",
+    "group": "props",
+    "title": "Brass Candlestick",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single empty brass candlestick with no candle.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Trade good, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 66.4,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "trade_household_wooden_comb",
+    "group": "props",
+    "title": "Wooden Comb",
+    "catalog_pack": "business-2026-09",
+    "summary": "One single carved wooden hair comb.",
+    "notes": "Independent inventory-art item prop. Place, rotate and resize separately. Inventory artwork intentionally uses a three-quarter view.",
+    "tags": "Household, Tool, interior, business, household, modular",
+    "part_width": 45,
+    "part_height": 38.7,
+    "walk_over": true,
+    "height_scale": 0.2,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_oak_straight",
+    "group": "furniture",
+    "title": "Oak Counter — Straight",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm honey oak planks countertop, horizontal rectangular straight section with a two-to-one length-to-depth ratio.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_oak_inner",
+    "group": "furniture",
+    "title": "Oak Counter — Inner Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm honey oak planks countertop, concave L-shaped inside corner with a square transparent notch cut from the lower-right quarter; two equal-width perpendicular arms.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 80,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_oak_outer",
+    "group": "furniture",
+    "title": "Oak Counter — Outer Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm honey oak planks countertop, convex outside corner section with a smoothly rounded outer quarter-circle front edge, square back corner, two perpendicular flat connector edges.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 40,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_oak_end",
+    "group": "furniture",
+    "title": "Oak Counter — End Section",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm honey oak planks countertop, short terminal counter section with one semicircular closed end and one flat connector end.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 60,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_walnut_straight",
+    "group": "furniture",
+    "title": "Walnut Counter — Straight",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare dark walnut planks with narrow brass trim countertop, horizontal rectangular straight section with a two-to-one length-to-depth ratio.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_walnut_inner",
+    "group": "furniture",
+    "title": "Walnut Counter — Inner Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare dark walnut planks with narrow brass trim countertop, concave L-shaped inside corner with a square transparent notch cut from the lower-right quarter; two equal-width perpendicular arms.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 80,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_walnut_outer",
+    "group": "furniture",
+    "title": "Walnut Counter — Outer Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare dark walnut planks with narrow brass trim countertop, convex outside corner section with a smoothly rounded outer quarter-circle front edge, square back corner, two perpendicular flat connector edges.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 40,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_walnut_end",
+    "group": "furniture",
+    "title": "Walnut Counter — End Section",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare dark walnut planks with narrow brass trim countertop, short terminal counter section with one semicircular closed end and one flat connector end.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 60,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_pine_straight",
+    "group": "furniture",
+    "title": "Pine Counter — Straight",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare pale scrubbed pine planks countertop, horizontal rectangular straight section with a two-to-one length-to-depth ratio.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_pine_inner",
+    "group": "furniture",
+    "title": "Pine Counter — Inner Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare pale scrubbed pine planks countertop, concave L-shaped inside corner with a square transparent notch cut from the lower-right quarter; two equal-width perpendicular arms.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 80,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_pine_outer",
+    "group": "furniture",
+    "title": "Pine Counter — Outer Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare pale scrubbed pine planks countertop, convex outside corner section with a smoothly rounded outer quarter-circle front edge, square back corner, two perpendicular flat connector edges.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 40,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_pine_end",
+    "group": "furniture",
+    "title": "Pine Counter — End Section",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare pale scrubbed pine planks countertop, short terminal counter section with one semicircular closed end and one flat connector end.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 60,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_stone_straight",
+    "group": "furniture",
+    "title": "Stone Counter — Straight",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm pale limestone slab with subtle stone grain countertop, horizontal rectangular straight section with a two-to-one length-to-depth ratio.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_stone_inner",
+    "group": "furniture",
+    "title": "Stone Counter — Inner Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm pale limestone slab with subtle stone grain countertop, concave L-shaped inside corner with a square transparent notch cut from the lower-right quarter; two equal-width perpendicular arms.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 80,
+    "part_height": 80,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_stone_outer",
+    "group": "furniture",
+    "title": "Stone Counter — Outer Corner",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm pale limestone slab with subtle stone grain countertop, convex outside corner section with a smoothly rounded outer quarter-circle front edge, square back corner, two perpendicular flat connector edges.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 40,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "counter_stone_end",
+    "group": "furniture",
+    "title": "Stone Counter — End Section",
+    "catalog_pack": "business-2026-09",
+    "summary": "A bare warm pale limestone slab with subtle stone grain countertop, short terminal counter section with one semicircular closed end and one flat connector end.",
+    "notes": "Bare modular counter top. Standard counter depth: 40 map units. Rotate pieces in 90-degree increments and align their flat connector edges. Straight: 80 × 40; inner corner: 80 × 80; outer corner: 40 × 40; end: 60 × 40. No props are attached.",
+    "tags": "Modular Counters, furniture, interior, business, household, modular",
+    "part_width": 60,
+    "part_height": 40,
+    "walk_over": false,
+    "height_scale": 0.7,
+    "light_enabled": false
+  },
+  {
+    "type": "exit_location",
+    "group": "notes",
+    "title": "Exit location",
+    "summary": "Arrival point for players entering from a selected map.",
+    "notes": "Place this on the destination map. In its map settings, select the map players arrive from. Players entering from that map appear at the center of this marker.",
+    "part_width": 40,
+    "part_height": 40,
+    "walk_over": true,
+    "height_scale": 0
+  }
+]

@@ -1,0 +1,77 @@
+/* Angled location artwork: individual buildings and larger landmarks. */
+window.MapLocationStamps={
+  "collections": {
+    "location_buildings_a": [
+      "marker_cottage",
+      "marker_townhouse",
+      "marker_log_cabin",
+      "marker_farmhouse",
+      "marker_tavern",
+      "marker_inn",
+      "marker_blacksmith",
+      "marker_bakery",
+      "marker_apothecary",
+      "marker_general_store",
+      "marker_stable",
+      "marker_barn",
+      "marker_windmill",
+      "marker_watermill",
+      "marker_chapel",
+      "marker_wizard_house"
+    ],
+    "location_buildings_b": [
+      "marker_library",
+      "marker_guildhall",
+      "marker_manor",
+      "marker_watchtower",
+      "marker_gatehouse",
+      "marker_lighthouse",
+      "marker_warehouse",
+      "marker_hunter_lodge"
+    ],
+    "location_landmarks": [
+      "marker_stone_circle",
+      "marker_ancient_tree",
+      "marker_oasis",
+      "marker_ruined_keep",
+      "marker_stone_bridge",
+      "marker_quarry",
+      "marker_shipwreck",
+      "marker_dragon_lair"
+    ]
+  },
+  "labels": {
+    "marker_cottage": "Thatched Cottage marker",
+    "marker_townhouse": "Timber Townhouse marker",
+    "marker_log_cabin": "Log Cabin marker",
+    "marker_farmhouse": "Farmhouse marker",
+    "marker_tavern": "Tavern marker",
+    "marker_inn": "Roadside Inn marker",
+    "marker_blacksmith": "Blacksmith marker",
+    "marker_bakery": "Bakery marker",
+    "marker_apothecary": "Apothecary marker",
+    "marker_general_store": "General Store marker",
+    "marker_stable": "Stable marker",
+    "marker_barn": "Barn marker",
+    "marker_windmill": "Windmill marker",
+    "marker_watermill": "Watermill marker",
+    "marker_chapel": "Chapel marker",
+    "marker_wizard_house": "Wizard House marker",
+    "marker_library": "Library marker",
+    "marker_guildhall": "Guildhall marker",
+    "marker_manor": "Manor House marker",
+    "marker_watchtower": "Watchtower marker",
+    "marker_gatehouse": "Gatehouse marker",
+    "marker_lighthouse": "Lighthouse marker",
+    "marker_warehouse": "Warehouse marker",
+    "marker_hunter_lodge": "Hunter Lodge marker",
+    "marker_stone_circle": "Standing Stone Circle marker",
+    "marker_ancient_tree": "Ancient Sacred Tree marker",
+    "marker_oasis": "Desert Oasis marker",
+    "marker_ruined_keep": "Ruined Keep marker",
+    "marker_stone_bridge": "Stone Bridge marker",
+    "marker_quarry": "Stone Quarry marker",
+    "marker_shipwreck": "Shipwreck marker",
+    "marker_dragon_lair": "Dragon Lair marker"
+  }
+};

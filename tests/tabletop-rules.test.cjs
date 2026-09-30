@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict');
+const r=require('../site/tabletop-rules.js');
+assert.equal(r.modifier(9),-1);assert.equal(r.modifier(20),5);
+assert.equal(r.proficiency(1),2);assert.equal(r.proficiency(5),3);assert.equal(r.proficiency(20),6);
+let seq=[4,6];assert.equal(r.roll('2d6 + 3','normal',()=>seq.shift()).total,13);
+seq=[2,17];assert.equal(r.roll('1d20 + 5','advantage',()=>seq.shift()).total,22);
+seq=[2,17];assert.equal(r.roll('1d20 - 1','disadvantage',()=>seq.shift()).total,1);
+assert.equal(r.roll('1d100','normal',()=>100).total,100);
+for(const expr of ['0d6','101d6','1d3','alert(1)','1d6+','1d20++3'])assert.throws(()=>r.roll(expr));
+assert.throws(()=>r.roll('2d6','advantage'));
+assert.deepEqual(r.damage({hp_current:10,hp_max:15,hp_temporary:4},6),{hp_current:8,hp_temporary:0});
+assert.deepEqual(r.damage({hp_current:10,hp_max:15,hp_temporary:4},20),{hp_current:0,hp_temporary:0});
+console.log('Dice, proficiency, advantage, input bounds and temporary HP checks passed.');

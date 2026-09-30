@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <ProjectGuid>{D54D8E13-A6F0-4D1A-A3C3-A910E90D7B87}</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>server.py</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>LAN-HTTPS-Site</Name>
+    <RootNamespace>LanHttpsSite</RootNamespace>
+    <SearchPath>backend;tests</SearchPath>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <CommandLineArguments>--port 8443</CommandLineArguments>
+    <EnableNativeCodeDebugging>False</EnableNativeCodeDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="server.py" />
+    <Compile Include="backend\**\*.py" />
+    <Compile Include="scripts\*.py" />
+    <Compile Include="tests\**\*.py" />
+    <Content Include="site\**\*" />
+    <Content Include="tests\*.cjs" />
+    <Content Include="scripts\*.ps1" />
+    <Content Include="docs\*.md" />
+    <Content Include="*.md;*.txt;*.cmd;*.ps1;*.code-workspace;.gitignore;.gitattributes" />
+    <Content Include=".vscode\*.json" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>

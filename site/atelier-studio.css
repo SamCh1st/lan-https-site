@@ -1,0 +1,49 @@
+/* Prompt-first Art Atelier. Theme changes colors, never layout. */
+html #artAtelier.aa-studio{padding:clamp(12px,2.5vw,28px);max-width:1400px;margin-inline:auto;background:var(--realm-paper,#f2e5c8);color:var(--realm-ink,#35271d)}
+html #artAtelier.aa-studio:fullscreen{max-width:none;width:100%;height:100dvh;box-sizing:border-box;overflow:auto}
+html #artAtelier.aa-studio>*{max-width:1160px;margin-inline:auto}
+html #artAtelier .aa-studio-header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+html #artAtelier .aa-studio-header h2{margin:0;font-size:28px}
+html #artAtelier .aa-composer{margin-block:24px;padding:clamp(14px,2vw,24px);background:var(--realm-panel,#ead7af);border:1px solid var(--realm-border,#a78751);border-radius:16px}
+html #artAtelier .aa-prompt{gap:10px;font-weight:600;margin-top:0}
+html #artAtelier #aaPrompt{font:18px/1.55 system-ui;min-height:140px;resize:vertical;border-radius:12px;padding:16px;width:100%;box-sizing:border-box}
+html #artAtelier .aa-quick-controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-block:18px}
+html #artAtelier .aa-quick-controls label{display:flex;flex-direction:column;align-items:stretch;gap:8px;min-width:0;padding:12px;background:var(--realm-inset,#fff5dc);border-radius:12px}
+html #artAtelier .aa-quick-controls select{width:100%;min-width:0;min-height:44px;border-radius:24px;padding:8px 12px}
+html #artAtelier .aa-generation,html #artAtelier .aa-reference-options{margin:0;padding:12px 0;border:0;border-top:1px solid var(--realm-rule,#b79c70);background:none}
+html #artAtelier .aa-generation summary,html #artAtelier .aa-reference-options summary,html #artAtelier #aaDrawing>summary{font-weight:600;min-height:32px}
+html #artAtelier .aa-generate-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:22px}
+html #artAtelier #aaGenerate{min-width:220px;border-radius:32px;padding:12px 28px;font:600 19px/1.4 system-ui;background:var(--realm-accent,#663d24);color:var(--realm-paper,#fff3d5)}
+html #artAtelier #aaStopAI{border-radius:28px;padding:10px 18px}
+html #artAtelier #aaAIStatus{text-align:center;min-height:24px;margin-top:14px;overflow-wrap:anywhere}
+html #artAtelier #aaGallery{margin-block:24px}
+html #artAtelier .aa-gallery-heading h3{margin:0;font:24px Georgia,serif}
+html #artAtelier .aa-gallery-heading p,html #artAtelier #aaGalleryEmpty{color:var(--realm-muted,#65553b)}
+html #artAtelier .aa-results{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:18px}
+html #artAtelier .aa-result{border:1px solid var(--realm-border,#a78751);border-radius:14px;background:var(--realm-panel,#ead7af);padding:10px;min-width:0;overflow:hidden}
+html #artAtelier .aa-result-preview{aspect-ratio:1;display:grid;place-items:center;border-radius:9px;background:var(--realm-inset,#fff5dc);overflow:hidden}
+html #artAtelier .aa-result-preview img{width:100%;height:100%;object-fit:contain}
+html #artAtelier .aa-pending .aa-result-preview::after{content:'';width:32px;height:32px;border:3px solid var(--realm-rule,#b79c70);border-top-color:var(--realm-accent,#663d24);border-radius:50%;animation:aa-spin 1s linear infinite}
+@keyframes aa-spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){html #artAtelier .aa-pending .aa-result-preview::after{animation:none}}
+html #artAtelier .aa-result h4{font:600 15px system-ui;margin:12px 0 6px}
+html #artAtelier .aa-result p{font-size:13px;overflow-wrap:anywhere}
+html #artAtelier .aa-result-actions{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px}
+html #artAtelier .aa-result-actions button{min-height:44px;font-size:12px;border-radius:8px}
+html #artAtelier #aaDrawing{border:1px solid var(--realm-border,#a78751);border-radius:14px;padding:16px;margin-block:26px}
+html #artAtelier #aaDrawing[open]>summary{margin-bottom:16px}
+html #artAtelier #aaEditor{grid-template-columns:240px minmax(0,1fr)}
+html #artAtelier .aa-tool-panel{border-radius:10px}
+html #artAtelier #aaCanvas{height:min(65vh,660px);min-height:320px}
+html #artAtelier #aaReferenceControls{margin:12px 0 0;border:0;padding:0}
+html #artAtelier #aaReferenceControls legend{display:none}
+html #artAtelier .aa-reference-list{display:flex;flex-wrap:wrap;gap:10px;align-items:flex-start}
+html #artAtelier .aa-reference-tile{display:flex;flex-direction:column;gap:6px;width:104px;padding:6px;border-radius:10px;text-align:left;min-width:0}
+html #artAtelier .aa-reference-tile img{width:90px;height:90px;object-fit:cover;border-radius:6px;background:var(--realm-inset,#fff5dc)}
+html #artAtelier .aa-reference-tile span{display:block;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+html #artAtelier .aa-reference-tile[aria-expanded=true]{outline:2px solid var(--realm-gold,#af8436);outline-offset:2px}
+html #artAtelier .aa-reference-detail{flex:0 0 100%;box-sizing:border-box;min-width:0;padding:12px;border-radius:10px;background:var(--realm-inset,#fff5dc);overflow-wrap:anywhere}
+html #artAtelier .aa-reference-detail label{display:flex;flex-direction:column;align-items:stretch;gap:8px}
+html #artAtelier .aa-reference-detail textarea{width:100%;box-sizing:border-box}
+@media(max-width:850px){html #artAtelier .aa-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){html #artAtelier .aa-quick-controls{grid-template-columns:1fr 1fr;gap:8px}html #artAtelier .aa-quick-controls label:first-child{grid-column:1/-1}html #artAtelier .aa-results{grid-template-columns:minmax(0,1fr)}html #artAtelier #aaEditor{grid-template-columns:minmax(0,1fr)}html #artAtelier .aa-canvas-panel{grid-row:2}html #artAtelier .aa-tool-panel{grid-row:1;max-height:none}html #artAtelier #aaCanvas{height:360px;min-height:280px}html #artAtelier #aaDrawing{padding:10px}html #artAtelier .aa-composer{padding:12px}html #artAtelier .aa-studio-header h2{font-size:24px}html #artAtelier .aa-result-actions button{font-size:14px}}

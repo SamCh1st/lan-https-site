@@ -202,7 +202,14 @@ def best_lan_ip() -> str:
         probe.close()
 
 
+def computer_hostname() -> str:
+    """Use the current host name, so copies and renamed computers adapt on startup."""
+    return socket.gethostname().rstrip(".").encode("idna").decode("ascii")
+
+
 def ensure_certificate(ip_text: str) -> tuple[Path, Path]:
+    hostname = computer_hostname()
+    dns_names = {"localhost", hostname.lower()}
     CERT_DIR.mkdir(exist_ok=True)
     cert_path = CERT_DIR / "lan-cert.pem"
     key_path = CERT_DIR / "lan-key.pem"
@@ -211,13 +218,17 @@ def ensure_certificate(ip_text: str) -> tuple[Path, Path]:
         try:
             cert = x509.load_pem_x509_certificate(cert_path.read_bytes())
             sans = cert.extensions.get_extension_for_class(x509.SubjectAlternativeName).value
-            if ipaddress.ip_address(ip_text) in sans.get_values_for_type(x509.IPAddress):
+            now = dt.datetime.now(dt.timezone.utc)
+            valid_until = cert.not_valid_after_utc
+            if (ipaddress.ip_address(ip_text) in sans.get_values_for_type(x509.IPAddress)
+                    and dns_names.issubset({name.lower() for name in sans.get_values_for_type(x509.DNSName)})
+                    and valid_until > now + dt.timedelta(days=1)):
                 return cert_path, key_path
         except (ValueError, x509.ExtensionNotFound):
             pass
 
     key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
-    name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, ip_text)])
+    name = x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, hostname)])
     now = dt.datetime.now(dt.timezone.utc)
     cert = (
         x509.CertificateBuilder()
@@ -230,7 +241,7 @@ def ensure_certificate(ip_text: str) -> tuple[Path, Path]:
         .add_extension(
             x509.SubjectAlternativeName([
                 x509.IPAddress(ipaddress.ip_address(ip_text)),
-                x509.DNSName("localhost"),
+                *[x509.DNSName(name) for name in sorted(dns_names)],
             ]),
             critical=False,
         )
@@ -1731,7 +1742,9 @@ def main() -> None:
 
     print("\n  LAN HTTPS site is running")
     print(f"  This computer: https://localhost:{args.port}")
-    print(f"  Other devices: https://{lan_ip}:{args.port}")
+    print(f"  Other devices: https://{computer_hostname()}:{args.port}")
+    print(f"  IP fallback: https://{lan_ip}:{args.port}")
+    print("  If the computer name does not resolve on a device, use the IP fallback.")
     print(f"  Database: {storage.DB_PATH}")
     print("\n  Keep this window open. Press Ctrl+C to stop.\n")
     try:

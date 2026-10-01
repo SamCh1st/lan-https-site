@@ -21,7 +21,7 @@ A local multiplayer tabletop site for campaigns, characters, maps, inventories, 
 1. Double-click **[START SITE.cmd](START%20SITE.cmd)**.
 2. Keep the server terminal open.
 3. On the host computer, open **https://localhost:8443**.
-4. Give players the **Other devices** address printed in the terminal, such as `https://192.168.1.20:8443`. Their devices must be on the same LAN or Wi-Fi.
+4. Give players the **Other devices** address printed in the terminal, such as `https://SamuelPortable:8443`. Their devices must be on the same LAN or Wi-Fi. The address uses the hosting computer’s current name automatically; on another host, it uses that computer’s name. Restart after renaming the computer. If a device cannot resolve the name, use the printed **IP fallback** address. HTTPS certificates are refreshed automatically when the host name or LAN IP changes. Switching from an IP address to the computer-name URL requires signing in again because browsers treat them as separate sites; browser-local drawing drafts remain at the old address.
 5. Press **Ctrl+C** in the server terminal when you want to stop the site.
 
 The site uses a self-signed HTTPS certificate. On the first visit, continue through the browser warning only if you recognize the host address. If Windows asks about network access, allow Python on **Private networks**.

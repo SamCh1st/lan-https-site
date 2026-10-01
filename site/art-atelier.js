@@ -24,21 +24,63 @@ for(const id of ['aaCopy','aaDelete','aaFront','aaScale','aaAngle']){
 }
 for(const node of editorChildren.filter(e=>e.parentElement===editor))canvasPanel.append(node);
 editor.append(toolPanel,canvasPanel);
+// A prompt-first workspace; existing editor controls retain their handlers.
+root.classList.add('aa-studio');
+const studioHeader=document.createElement('header');studioHeader.className='aa-studio-header';
+studioHeader.append(root.querySelector('h2'),$('aaFullscreen'));root.prepend(studioHeader);
+root.querySelector(':scope > p').textContent='Describe an idea, compare variations, and make it your own.';
+const composer=document.createElement('section');composer.className='aa-composer';
+composer.setAttribute('aria-label','Generate artwork');root.insertBefore(composer,editor);
+composer.append($('aaPrompt').closest('label'));
+const quick=document.createElement('div');quick.className='aa-quick-controls';
+quick.innerHTML='<label>Art style<select id="aaStyle"><option value="">As described</option><option value="Painterly fantasy illustration">Painted fantasy</option><option value="Painted anime illustration">Painted anime</option><option value="Realistic digital illustration">Realistic</option><option value="Ink and watercolor illustration">Ink &amp; watercolor</option><option value="Pixel art">Pixel art</option></select></label><label>How many?<select id="aaBatchSize"><option>1</option><option>2</option><option selected>4</option><option>6</option></select></label>';
+quick.insertBefore($('aaImageSize').closest('label'),quick.lastElementChild);
+composer.append(quick);
+aiDetails.querySelector('summary').textContent='Generation options';aiDetails.open=false;
+const referenceDetails=document.createElement('details');referenceDetails.className='aa-reference-options';
+referenceDetails.innerHTML='<summary>Reference images</summary>';referenceDetails.append($('aaReferenceControls'));
+composer.append(aiDetails,referenceDetails);
+const generateBar=document.createElement('div');generateBar.className='aa-generate-actions';
+$('aaGenerate').textContent='Generate images';$('aaStopAI').textContent='Stop generation';
+generateBar.append($('aaGenerate'),$('aaStopAI'));composer.append(generateBar,$('aaAIStatus'),$('aaSources'),$('aaAIExplanation'));
+root.insertBefore(composer,editor);
+const gallery=document.createElement('section');gallery.id='aaGallery';gallery.setAttribute('aria-label','Generated images');
+gallery.innerHTML='<div class="aa-gallery-heading"><h3>Your variations</h3><p>Keep favorites in the archive, download them, or open one to draw.</p></div><div id="aaResults" class="aa-results"></div><p id="aaGalleryEmpty">Your generated images will appear here.</p>';
+root.insertBefore(gallery,editor);
+const drawingDetails=document.createElement('details');drawingDetails.id='aaDrawing';drawingDetails.innerHTML='<summary>Drawing studio</summary>';
+editor.before(drawingDetails);drawingDetails.append(editor);
+selectionDetails.open=false;
+for(const details of toolPanel.querySelectorAll('details'))details.open=false;
+const brushDetails=document.createElement('details');brushDetails.innerHTML='<summary>Drawing tools</summary>';brushDetails.open=true;
+brushDetails.append(toolPanel.firstElementChild);toolPanel.prepend(brushDetails);
+const updateRenderer=()=>{const vector=$('aaRenderer').value==='vector';$('aaStyle').disabled=vector;$('aaBatchSize').disabled=vector; $('aaGenerate').textContent=vector?'Draw vector sketch':'Generate images';};
+$('aaRenderer').addEventListener('change',updateRenderer);
+document.addEventListener('fullscreenchange',()=>{$('aaFullscreen').textContent=document.fullscreenElement===root?'Exit fullscreen':'Fullscreen';});
+
 let nodes=[],selected=-1,history=[],cursor=0,key='',options={},gesture=null,clipboard=null,view={x:-40,y:-40,w:592},busy=false;
 let imageReferences=[],referenceLoading=false;
+let selectedReference=-1;
 function renderReferences(){
- $('aaReferenceList').replaceChildren();
+ const list=$('aaReferenceList');list.replaceChildren();
+ if(selectedReference>=imageReferences.length)selectedReference=-1;
  imageReferences.forEach((reference,index)=>{
-  const card=document.createElement('div');card.className='aa-reference-card';
+  const tile=document.createElement('button');tile.type='button';tile.className='aa-reference-tile';
+  tile.setAttribute('aria-expanded',String(index===selectedReference));tile.setAttribute('aria-controls','aaReferenceDetail');
   const image=document.createElement('img');image.src='/api/uploads/'+reference.image_id;image.alt=reference.name;
-  const name=document.createElement('strong');name.textContent='Reference '+(index+1)+' · '+reference.name;
-  const label=document.createElement('label');label.textContent='How should this image help?';
-  const note=document.createElement('textarea');note.rows=2;note.maxLength=500;note.placeholder='Use this armor, match the colors, borrow the pose…';note.value=reference.note;note.oninput=()=>{reference.note=note.value;reference.description='';};label.append(note);
-  const description=document.createElement('p');description.className='aa-reference-description';description.textContent=reference.description||'The image helper will describe this reference when you generate.';
-  const remove=document.createElement('button');remove.type='button';remove.textContent='Remove reference '+(index+1);remove.onclick=()=>{imageReferences.splice(index,1);renderReferences();};
-  card.append(image,name,label,description,remove);$('aaReferenceList').append(card);
+  const name=document.createElement('span');name.textContent=reference.name;tile.title=reference.name;
+  tile.append(image,name);tile.onclick=()=>{selectedReference=selectedReference===index?-1:index;renderReferences();list.querySelectorAll('.aa-reference-tile')[index]?.focus();};list.append(tile);
  });
+ const reference=imageReferences[selectedReference];if(!reference)return;
+ const panel=document.createElement('div');panel.className='aa-reference-detail';panel.id='aaReferenceDetail';
+ const name=document.createElement('strong');name.textContent=reference.name;
+ const label=document.createElement('label');label.textContent='How should this image help?';
+ const note=document.createElement('textarea');note.rows=2;note.maxLength=500;note.placeholder='Use this armor, match the colors, borrow the pose…';note.value=reference.note;
+ const description=document.createElement('p');description.className='aa-reference-description';description.textContent=reference.description||'The image helper will describe this reference when you generate.';
+ note.oninput=()=>{reference.note=note.value;reference.description='';description.textContent='The image helper will describe this reference when you generate.';};label.append(note);
+ const remove=document.createElement('button');remove.type='button';remove.textContent='Remove reference';remove.onclick=()=>{imageReferences.splice(selectedReference,1);selectedReference=-1;renderReferences();};
+ panel.append(name,label,description,remove);list.append(panel);
 }
+
 let referencePicker;
 function referenceChoices(){
  if(!referencePicker)referencePicker=window.MapImagePicker.create($('aaReferencePicker'),{
@@ -174,10 +216,117 @@ async function fetchArtwork(url,signal){
     $('aaAIStatus').textContent='Reconnecting to load your finished image...';await new Promise(resolve=>setTimeout(resolve,500*(attempt+1)));
   }
 }
-function aiControls(running){$('aaReferenceControls').disabled=running||referenceLoading;$('aaEditor').disabled=running;$('aaGenerate').disabled=running;$('aaStopAI').disabled=!running;$('aaPrompt').disabled=running;$('aaResearch').disabled=running;$('aaHelpers').disabled=running;$('aaTransparent').disabled=running;$('aaAppend').disabled=running;$('aaRenderer').disabled=running;$('aaImageSize').disabled=running;root.classList.toggle('aa-generating',running);}
-function stopAI(){if(!aiRun)return;const run=aiRun;aiRun=null;run.controller.abort();if(run.changed)commit();aiControls(false);$('aaAIStatus').textContent=run.changed?'Drawing stopped. Partial artwork kept; Undo restores your previous drawing.':'Drawing stopped. Your previous artwork is unchanged.';}
+function aiControls(running){$('aaStyle').disabled=running||$('aaRenderer').value==='vector';$('aaBatchSize').disabled=running||$('aaRenderer').value==='vector';$('aaReferenceControls').disabled=running||referenceLoading;$('aaEditor').disabled=running;$('aaGenerate').disabled=running;$('aaStopAI').disabled=!running;$('aaPrompt').disabled=running;$('aaResearch').disabled=running;$('aaHelpers').disabled=running;$('aaTransparent').disabled=running;$('aaAppend').disabled=running;$('aaRenderer').disabled=running;$('aaImageSize').disabled=running;root.classList.toggle('aa-generating',running);}
+function stopAI(){if(!aiRun)return;const run=aiRun;aiRun=null;run.controller.abort();if(run.batch){stopBatch(run);aiControls(false);return;}if(run.changed)commit();aiControls(false);$('aaAIStatus').textContent=run.changed?'Drawing stopped. Partial artwork kept; Undo restores your previous drawing.':'Drawing stopped. Your previous artwork is unchanged.';}
 $('aaStopAI').onclick=stopAI;
+// Each batch takes one immutable snapshot, including the same drawing reference.
+// Two requests can prepare concurrently; the server serializes GPU work.
+let batchSerial=0;
+const artText=text=>window.SiteI18n?.translate?.(text)||text;
+function resultButton(label,handler){const b=document.createElement('button');b.type='button';b.textContent=artText(label);b.onclick=handler;return b;}
+function stopBatch(run){
+  run.controller.abort();
+  for(const result of run.results)if(!result.finished){result.finished=true;result.message.textContent=artText('Stopped');result.card.classList.remove('aa-pending');}
+  $('aaAIStatus').textContent=artText('Generation stopped. Finished images are still available.');
+}
+async function generateBatch(){
+  const prompt=$('aaPrompt').value.trim();
+  if(!prompt){$('aaAIStatus').textContent=artText('Describe the artwork first.');$('aaPrompt').focus();return;}
+  finish();
+  const campaignKey=key,archive=options.archive;
+  const run={controller:new AbortController(),batch:true,results:[],changed:false};
+  const count=Number($('aaBatchSize').value)||1;
+  const payload={prompt:prompt+($('aaStyle').value?'\nArt style: '+$('aaStyle').value:''),renderer:'local-image',image_size:Number($('aaImageSize').value),research:$('aaResearch').checked,use_helpers:$('aaHelpers').checked,transparent_background:$('aaTransparent').checked,edit:$('aaAppend').checked,image_references:imageReferences.map(({image_id,name,note})=>({image_id,name,note}))};
+  const endpoint='/api/campaign/'+artCampaign+'/art/design';
+  const valid=()=>aiRun===run&&key===campaignKey&&!run.controller.signal.aborted;
+  aiRun=run;aiControls(true);$('aaGalleryEmpty').hidden=true;$('aaSources').replaceChildren();$('aaAIExplanation').textContent='';
+  const batch=++batchSerial;
+  for(let i=0;i<Math.min(6,count);i++){
+    const card=document.createElement('article');card.className='aa-result aa-pending';
+    const preview=document.createElement('div');preview.className='aa-result-preview';
+    const title=document.createElement('h4');title.textContent=artText('Variation')+' '+batch+'.'+(i+1);
+    const message=document.createElement('p');message.textContent=artText('Waiting to generate…');message.setAttribute('role','status');
+    card.append(preview,title,message);$('aaResults').append(card);
+    run.results.push({card,preview,message,title,index:i,finished:false});
+  }
+  const completeResult=async(result,imageId,description)=>{
+    const response=await fetchArtwork('/api/uploads/'+imageId,run.controller.signal);
+    if(!response.ok)throw new Error('Could not load the generated image.');
+    const blob=await response.blob();
+    const src=await new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=()=>reject(new Error('Could not read the image.'));r.readAsDataURL(blob);});
+    const image=new Image();image.src=src;image.alt=prompt;await image.decode();
+    if(!valid())return;
+    if(payload.transparent_background){
+      const check=document.createElement('canvas');check.width=image.naturalWidth;check.height=image.naturalHeight;
+      const ctx=check.getContext('2d',{willReadFrequently:true});ctx.drawImage(image,0,0);const pixels=ctx.getImageData(0,0,check.width,check.height).data;
+      let clear=0,solid=0;for(let i=3;i<pixels.length;i+=4){if(pixels[i]<10)clear++;if(pixels[i]>128)solid++;}
+      if(clear<check.width*check.height*.01||!solid)throw new Error('The image still has a background. Try again or disable background removal.');
+    }
+    result.preview.append(image);result.card.classList.remove('aa-pending');result.finished=true;result.success=true;result.message.textContent=artText('Ready');
+    const actions=document.createElement('div');actions.className='aa-result-actions';
+    const keep=resultButton('Keep in archive',async()=>{
+      if(key!==campaignKey||keep.disabled)return;
+      if(!archive){result.message.textContent=artText('Open this atelier from your campaign to save an artwork card.');return;}
+      keep.disabled=true;
+      try{await archive(prompt.slice(0,95)+' · '+result.title.textContent,description||prompt,blob);if(key!==campaignKey)return;keep.textContent=artText('Kept in archive');result.message.textContent=artText('Saved to your campaign.');}
+      catch(error){keep.disabled=false;result.message.textContent=error.message;}
+    });
+    const edit=resultButton('Open in drawing studio',()=>{
+      if(aiRun||key!==campaignKey){result.message.textContent=artText('Wait for generation to finish, or stop it before editing.');return;}
+      finish();const imageNode=validate([{type:'image',name:prompt.slice(0,60),src,x:256,y:256,w:512,h:512,scale:1,angle:0,ink:'#000000',fill:'none',width:1}])[0];
+      nodes=[imageNode];selected=0;commit();drawingDetails.open=true;drawingDetails.scrollIntoView({behavior:'smooth',block:'start'});status(artText('Image opened. Undo restores your previous drawing.'));
+    });
+    const downloadButton=resultButton('Download PNG',()=>download(blob,'artwork-'+batch+'-'+(result.index+1)+'.png'));
+    const discard=resultButton('Discard',()=>{result.card.remove();$('aaGalleryEmpty').hidden=!!$('aaResults').children.length;});
+    actions.append(keep,edit,downloadButton,discard);result.card.append(actions);
+  };
+  async function generateOne(result){
+    result.message.textContent=artText('Starting…');
+    let reader;
+    try{
+      const response=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:run.controller.signal});
+      if(!response.ok){const error=await response.json().catch(()=>({}));throw new Error(error.error||'The AI drawing service is unavailable.');}
+      reader=response.body.getReader();const decoder=new TextDecoder();let buffer='',imageId=null,done=false,description='';
+      const event=line=>{
+        if(!line.trim()||!valid())return;const e=JSON.parse(line);
+        if(e.event==='error')throw new Error(e.message);
+        if(e.event==='status')result.message.textContent=e.message;
+        if(e.event==='image'){if(!Number.isInteger(e.image_id)||e.image_id<1)throw new Error('Invalid generated image.');imageId=e.image_id;}
+        if(e.event==='done'){done=true;description=[e.description,e.interpretation].filter(Boolean).join(' ');}
+        if(e.event==='image_reference'&&imageReferences[e.index]){imageReferences[e.index].description=e.description;renderReferences();}
+      };
+      while(valid()){
+        const part=await reader.read();buffer+=decoder.decode(part.value||new Uint8Array(),{stream:!part.done});
+        if(buffer.length>250000)throw new Error('Drawing response exceeded its size limit.');
+        let end;while((end=buffer.indexOf('\n'))>=0){event(buffer.slice(0,end));buffer=buffer.slice(end+1);}
+        if(part.done){if(buffer.trim())event(buffer);break;}
+      }
+      if(!valid())return;
+      if(!done||!imageId)throw new Error('The AI stopped before completing this image.');
+      await completeResult(result,imageId,description);
+    }catch(error){if(valid()){result.finished=true;result.card.classList.remove('aa-pending');result.card.classList.add('aa-failed');result.message.textContent=error.message;}}
+    finally{if(reader)await reader.cancel().catch(()=>{});}
+  }
+  try{
+    if(payload.edit){
+      if(nodes.some(n=>n.locked&&!n.hidden))throw new Error('Unlock visible layers before asking the image model to edit the whole canvas.');
+      $('aaAIStatus').textContent=artText('Preparing your drawing reference…');
+      const blob=await png(payload.image_size);
+      const upload=await fetch('/api/upload',{method:'POST',headers:{'Content-Type':'image/png'},body:blob,signal:run.controller.signal});
+      const result=await upload.json();if(!upload.ok)throw new Error(result.error||'Could not upload the canvas reference.');payload.source_image_id=result.image_id;
+    }
+    let next=0;
+    const worker=async()=>{while(valid()&&next<run.results.length){const result=run.results[next++];await generateOne(result);if(valid())$('aaAIStatus').textContent=run.results.filter(r=>r.finished).length+' / '+run.results.length+' '+artText('finished');}};
+    await Promise.all([worker(),worker()]);
+    if(valid())$('aaAIStatus').textContent=run.results.filter(r=>r.success).length+' / '+run.results.length+' '+artText('images ready. Keep your favorites below.');
+  }catch(error){if(valid()){$('aaAIStatus').textContent=error.message;for(const result of run.results)if(!result.finished){result.finished=true;result.card.classList.remove('aa-pending');result.message.textContent=error.message;}}}
+  finally{if(aiRun===run){run.controller.abort();aiRun=null;aiControls(false);}}
+}
+
 $('aaGenerate').onclick=async()=>{
+  if(aiRun||busy||referenceLoading)return;
+  if($('aaRenderer').value==='local-image')return generateBatch();
+  drawingDetails.open=true;
   if(aiRun||busy||referenceLoading)return;if(imageReferences.length&&$('aaRenderer').value!=='local-image'){$('aaAIStatus').textContent='Choose Local image model to use image references.';return;}const prompt=$('aaPrompt').value.trim();if(!prompt){$('aaAIStatus').textContent='Describe the artwork first.';return;}
   imageReferences.forEach(reference=>{reference.description='';});renderReferences();
   finish();const run={controller:new AbortController(),changed:false,append:$('aaAppend').checked,transparent:$('aaTransparent').checked,renderer:$('aaRenderer').value,count:0,stage:'connecting to the AI service'};aiRun=run;aiControls(true);$('aaAIStatus').textContent='Connecting to your campaign AI…';$('aaSources').replaceChildren();$('aaAIExplanation').textContent='';
@@ -244,5 +393,5 @@ $('aaGenerate').onclick=async()=>{
   finally{if(aiRun===run){run.controller.abort();aiRun=null;if(run.changed)commit();aiControls(false);}}
 };
 
-window.ArtAtelier={setActive(on,campaign,user,config){if(!on){stopAI();finish();root.hidden=true;host.classList.remove('art-mode');if(document.fullscreenElement===root)document.exitFullscreen();return;}options=config||{};artCampaign=campaign;if(root.hidden)stamps();const next=`art-atelier:v1:${user}:${campaign}`;if(key!==next){stopAI();finish();$('aaPrompt').value='';$('aaAIStatus').textContent='';$('aaSources').replaceChildren();$('aaAIExplanation').textContent='';key=next;imageReferences=[];renderReferences();$('aaReferenceStatus').textContent='';try{nodes=JSON.parse(localStorage.getItem(key)||'[]');nodes=validate(nodes);}catch{nodes=[];}selected=-1;history=[clone(nodes)];cursor=0;view={x:-40,y:-40,w:592};setView();status('Draft saved locally as you draw.');}referenceChoices();const target=$('aaTarget').value;$('aaTarget').replaceChildren();for(const item of options.records||[]){const o=document.createElement('option');o.value=item.id;o.textContent=item.title+' · '+item.content.category;$('aaTarget').append(o);}if([...$('aaTarget').options].some(o=>o.value===target))$('aaTarget').value=target;root.hidden=false;host.classList.add('art-mode');render();}};
+window.ArtAtelier={setActive(on,campaign,user,config){if(!on){stopAI();finish();root.hidden=true;host.classList.remove('art-mode');if(document.fullscreenElement===root)document.exitFullscreen();return;}options=config||{};artCampaign=campaign;if(root.hidden)stamps();const next=`art-atelier:v1:${user}:${campaign}`;if(key!==next){stopAI();finish();selectedReference=-1;$('aaResults').replaceChildren();$('aaGalleryEmpty').hidden=false;$('aaPrompt').value='';$('aaAIStatus').textContent='';$('aaSources').replaceChildren();$('aaAIExplanation').textContent='';key=next;imageReferences=[];renderReferences();$('aaReferenceStatus').textContent='';try{nodes=JSON.parse(localStorage.getItem(key)||'[]');nodes=validate(nodes);}catch{nodes=[];}selected=-1;history=[clone(nodes)];cursor=0;view={x:-40,y:-40,w:592};setView();status('Draft saved locally as you draw.');}referenceChoices();const target=$('aaTarget').value;$('aaTarget').replaceChildren();for(const item of options.records||[]){const o=document.createElement('option');o.value=item.id;o.textContent=item.title+' · '+item.content.category;$('aaTarget').append(o);}if([...$('aaTarget').options].some(o=>o.value===target))$('aaTarget').value=target;root.hidden=false;host.classList.add('art-mode');render();}};
 })();

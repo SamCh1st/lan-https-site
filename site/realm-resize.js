@@ -93,8 +93,8 @@
       if (columns.length !== (def.two ? 2 : 3) || columns.some(n => !Number.isFinite(n))) {
         Object.values(state.handles).forEach(h => h.hidden = true); state.key = ''; continue;
       }
-      const full = root.matches('.map-workspace-fullscreen,:fullscreen');
-      const key = def.id + (full ? ':full' : ':page') + (root.classList.contains('map-contents-open') ? ':trade' : '') + ':' + (columns[0]>1 ? 'L' : '') + (!def.two && columns[2]>1 ? 'R' : '');
+      const full = root.matches('.map-workspace-fullscreen,.chat-fullscreen,:fullscreen');
+      const key = def.id + (root.classList.contains('chat-fullscreen') ? ':chat-full' : full ? ':full' : ':page') + (root.classList.contains('map-contents-open') ? ':trade' : '') + ':' + (columns[0]>1 ? 'L' : '') + (!def.two && columns[2]>1 ? 'R' : '');
       const surface = def.surface ? root.querySelector(def.surface) : center;
       state.canHeight = !fullscreen && !full;
       const width = columns.reduce((a,b) => a+b,0), minCenter = def.two ? 360 : 320;

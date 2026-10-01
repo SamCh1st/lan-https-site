@@ -11,7 +11,7 @@ $(function () {
   const aiMessageModal = new bootstrap.Modal('#aiMessageModal');
   // Native fullscreen only paints descendants of the fullscreen element.
   const modalHomes = new Map();
-  const fullscreenHost = () => document.fullscreenElement || document.querySelector('#campaignDashboard.map-workspace-fullscreen-fallback');
+  const fullscreenHost = () => document.fullscreenElement || document.querySelector('#campaignDashboard.map-workspace-fullscreen-fallback,#campaignDashboard.chat-fullscreen-fallback');
   $(document).on('show.bs.modal', '.modal', function () {
     const host = fullscreenHost();
     if (host && !host.contains(this)) { modalHomes.set(this,this.parentNode); host.append(this); }
@@ -256,15 +256,7 @@ $(function () {
   }
 
   function appendAiMessageText(container, message) {
-    const pattern = /\*([\s\S]*?)\*/g;
-    let cursor = 0;
-    let match;
-    while ((match = pattern.exec(message))) {
-      if (match.index > cursor) $('<span class="ai-dialogue"></span>').text(message.slice(cursor, match.index)).appendTo(container);
-      $('<span class="ai-thought"></span>').text(match[1]).appendTo(container);
-      cursor = pattern.lastIndex;
-    }
-    if (cursor < message.length) $('<span class="ai-dialogue"></span>').text(message.slice(cursor)).appendTo(container);
+    ChatFormat.append(container[0], message);
   }
 
   function aiAudienceNames(ids) {
@@ -274,16 +266,41 @@ $(function () {
     return names.length ? 'Private: ' + names.join(', ') : 'Private conversation';
   }
 
+  const messageEditors = new Map();
+  const editorKey = id => activeCampaignId + ':' + (activeAiChatId || '') + ':' + id;
+  function editMessageInline(card, entry) {
+    const campaignId = activeCampaignId, chatId = activeAiChatId, key = editorKey(entry.id);
+    messageEditors.set(key, card);
+    ChatEditor.open(card, entry, {
+      complete: draft => api('/api/campaign/' + campaignId + '/ai/continue', {method:'POST', body:JSON.stringify({message_id:entry.id, draft})}),
+      save: (message, image_ids) => api('/api/campaign/' + campaignId + '/ai/message/' + entry.id, {method:'PUT', body:JSON.stringify({message, image_ids, expected_message:entry.message, expected_image_ids:entry.image_ids || []})}),
+      close: async () => {
+        if (messageEditors.get(key) !== card) return;
+        messageEditors.delete(key);
+        if (activeCampaignId === campaignId && activeAiChatId === chatId) {
+          renderAiMessages(aiState.messages || [], false);
+          await loadAiCampaign(false);
+        }
+      }
+    });
+  }
+
   function renderAiMessages(messages, forceLatest) {
     const log = $('#aiChatLog');
+    const imageCampaignId = activeCampaignId;
+    const focusedDraft = log.find('.chat-message-draft:focus')[0];
+    const selection = focusedDraft ? [focusedDraft.selectionStart, focusedDraft.selectionEnd] : null;
     const nearBottom = !!forceLatest || !log[0] || log[0].scrollHeight - log.scrollTop() - log.outerHeight() < 90;
+    log.children('.ai-message-editing').detach();
     log.empty();
     if (!messages.length) {
       log.html('<div class="ai-chat-empty">The table is quiet. Choose who writes, choose who the AI answers as, then begin the tale.</div>');
       return;
     }
     messages.forEach(function (entry) {
-      const card = $('<article class="ai-message"><header class="ai-message-head"><span class="ai-message-avatar"></span><span><strong></strong><small></small></span><span class="ai-message-tools"></span></header><p class="ai-message-copy"></p><div class="ai-message-audience"></div></article>');
+      const editor = messageEditors.get(editorKey(entry.id));
+      if (editor) {log.append(editor); return;}
+      const card = $('<article class="ai-message"><header class="ai-message-head"><span class="ai-message-avatar"></span><span><strong></strong><small></small></span><span class="ai-message-tools"></span></header><div class="ai-message-copy"></div><div class="ai-message-media"></div><div class="ai-message-audience"></div></article>');
       const streaming = entry.generation_status === 'streaming';
       card.attr('data-message-id', entry.id).toggleClass('ai-message-dm', entry.persona_type === 'dm').toggleClass('ai-message-streaming', streaming).toggleClass('ai-message-error', entry.generation_status === 'error');
       const image = aiPersonaImage(entry.persona_type, entry.persona_id);
@@ -291,7 +308,19 @@ $(function () {
       else card.find('.ai-message-avatar').text('♛');
       card.find('.ai-message-head strong').text(entry.persona_name);
       card.find('.ai-message-head small').text((entry.author_username ? 'Written by ' + entry.author_username + ' · ' : '') + entry.created_at);
-      appendAiMessageText(card.find('.ai-message-copy'), entry.message || '');
+      ChatArt.render(card.find('.ai-message-copy')[0], entry, {
+        text: (host, text) => ChatFormat.append(host, text, 0, entry.generation_status === 'streaming'),
+        action: async (id, values) => {
+          await api('/api/campaign/' + imageCampaignId + '/ai/art/' + id, {method:'POST', body:JSON.stringify(values)});
+          if (values.action === 'save') await loadWork();
+        },
+        refresh: async () => {
+          if (activeCampaignId !== imageCampaignId) return;
+          await loadAiCampaign(false);
+          if (aiState) renderAiMessages(aiState.messages || [], false);
+        }
+      });
+      ChatImages.display(card.find('.ai-message-media')[0], entry.image_ids);
       const audience = entry.audience_user_ids || [];
       card.find('.ai-message-audience').text(aiAudienceNames(audience));
       if (entry.addressed_to_ai) $('<span class="ai-addressed-mark" title="This was sent to Ollama">✦ AI</span>').prependTo(card.find('.ai-message-audience'));
@@ -299,9 +328,14 @@ $(function () {
       if (canChange) $('<button type="button" data-ai-message-action="regenerate" title="Regenerate with guidance">↻</button>').appendTo(card.find('.ai-message-tools'));
       if (canChange) $('<button type="button" data-ai-message-action="edit" title="Edit message">✎</button>').appendTo(card.find('.ai-message-tools'));
       if (canChange) $('<button type="button" data-ai-message-action="delete" title="Delete message">×</button>').appendTo(card.find('.ai-message-tools'));
+      if (canChange) card.on('dblclick', function (event) {
+        if ($(event.target).closest('button,a,input,textarea,.chat-art').length) return;
+        editMessageInline(card[0], entry);
+      });
       log.append(card);
     });
-    if (nearBottom && log[0]) {
+    if (focusedDraft && document.contains(focusedDraft)) {focusedDraft.focus({preventScroll:true}); focusedDraft.setSelectionRange(...selection);}
+    if (nearBottom && !focusedDraft && log[0]) {
       log.scrollTop(log[0].scrollHeight);
       requestAnimationFrame(function () { if (log[0]) log.scrollTop(log[0].scrollHeight); });
     }
@@ -324,24 +358,27 @@ $(function () {
 
   function aiPersonas() {
     const participants = aiState && aiState.chat && (aiState.chat.content || {}).participant_ids;
-    const characters = Array.isArray(participants) && participants.length ? aiCharacters().filter(function (character) { return participants.map(Number).includes(character.id); }) : aiCharacters();
-    return [{ type: 'dm', id: null, name: 'AI Dungeon Master', summary: 'Narrator and world' }].concat(characters.map(function (character) {
+    const characters = Array.isArray(participants) ? aiCharacters().filter(function (character) { return participants.map(Number).includes(character.id); }) : aiCharacters();
+    return (aiState?.conversation_mode && aiState.conversation_mode !== 'dnd' ? [] : [{ type: 'dm', id: null, name: 'AI Dungeon Master', summary: 'Narrator and world' }]).concat(characters.map(function (character) {
       return { type: 'character', id: character.id, name: character.title, summary: (character.content || {}).summary || 'Campaign character', owner_user_id: Number((character.content || {}).owner_user_id) || null };
     }));
   }
 
   function renderAiPersonas() {
+    $('#aiConversationMode').prop('disabled', !aiState?.can_change_mode || aiReplyBusy);
     const personas = aiPersonas();
-    if (!personas.some(function (persona) { return persona.type === activeAiReplyPersona.type && Number(persona.id || 0) === Number(activeAiReplyPersona.id || 0); })) activeAiReplyPersona = personas[0];
-    if (!personas.some(function (persona) { return persona.type === activeAiSpeaker.type && Number(persona.id || 0) === Number(activeAiSpeaker.id || 0); })) activeAiSpeaker = personas[0];
+    const fallback = personas[0] || {type:'none',id:null,name:'Choose a character'};
+    if (!personas.some(function (persona) { return persona.type === activeAiReplyPersona.type && Number(persona.id || 0) === Number(activeAiReplyPersona.id || 0); })) activeAiReplyPersona = fallback;
+    if (!personas.some(function (persona) { return persona.type === activeAiSpeaker.type && Number(persona.id || 0) === Number(activeAiSpeaker.id || 0); })) activeAiSpeaker = fallback;
     const dock = $('#aiPersonaDock').empty();
-    activeAiToolsPersona = personas.find(function (persona) { return persona.type === activeAiToolsPersona.type && Number(persona.id || 0) === Number(activeAiToolsPersona.id || 0); }) || personas[0];
+    activeAiToolsPersona = activeAiSpeaker;
     personas.forEach(function (persona) {
       const selected = persona.type === activeAiReplyPersona.type && Number(persona.id || 0) === Number(activeAiReplyPersona.id || 0);
       makeAiPersonaCard(persona, selected, false).attr('title', 'Ask Ollama to answer as ' + persona.name).prop('disabled', aiReplyBusy).on('click', function () {
         requestAiResponse(persona);
       }).appendTo(dock);
     });
+    if (!personas.length) dock.text('Add a character to this chat to begin.');
     const menu = $('#aiSpeakerMenu').empty();
     personas.forEach(function (persona) {
       const selected = persona.type === activeAiSpeaker.type && Number(persona.id || 0) === Number(activeAiSpeaker.id || 0);
@@ -354,6 +391,7 @@ $(function () {
       });
       menu.append(button);
     });
+    $('#aiChatForm button[type=submit]').prop('disabled', activeAiSpeaker.type === 'none');
     $('#aiSpeakerButton').attr('title', 'You will write as ' + activeAiSpeaker.name).empty();
     const speakerImage = aiPersonaImage(activeAiSpeaker.type, activeAiSpeaker.id);
     if (speakerImage) $('<img alt="">').attr('src', speakerImage).on('error', function () { this.src = 'assets/profile-placeholder.svg'; }).appendTo('#aiSpeakerButton');
@@ -397,7 +435,6 @@ $(function () {
     if (aiReplyBusy || !activeCampaignId || !persona) return;
     aiReplyBusy = true;
     activeAiReplyPersona = persona;
-    activeAiToolsPersona = persona;
     clearAiUndo();
     $('#aiChatError').text('');
     renderAiPersonas();
@@ -454,10 +491,15 @@ $(function () {
   }
 
   function renderAiState(forceFields, forceLatest) {
+    chatAttachments.setScope(String(activeCampaignId) + ':' + String(activeAiChatId), items.filter(item => Number(item.content?.campaign_id) === Number(activeCampaignId) && item.content?.image_id));
     $('#aiChatTitle').text(aiState.chat ? aiState.chat.title : 'Main story');
+    window.ChatFullscreen?.setTitle(aiState.chat ? aiState.chat.title : 'Main story');
     renderAiMessages(aiState.messages || [], forceLatest);
     renderAiPersonas();
     renderAiPersonaRecords();
+    $('#aiConversationMode').val(aiState.conversation_mode || 'dnd').prop('disabled', !aiState.can_change_mode || aiReplyBusy);
+    $('#aiConversationModeHelp').text({dnd:'Talk with the DM, ask questions, or continue the adventure.',medieval:'Natural character conversation in a medieval world.',modern:'Everyday contemporary conversation, guided by each character’s personality.'}[aiState.conversation_mode || 'dnd'] + (aiState.can_change_mode ? '' : ' The campaign creator sets this chat’s style.'));
+    $('#aiConversationMode').attr('title', $('#aiConversationModeHelp').text());
     $('#aiStoryToggle').toggleClass('d-none', !aiState.creator);
     if (displayedAiWorld !== JSON.stringify([activeCampaignId, aiState.world || {}]) && !$('.ai-world-rail input,.ai-world-rail select').is(':focus')) setAiWorld(aiState.world || {});
     if (forceFields) {
@@ -487,7 +529,7 @@ $(function () {
     aiSyncBusy = true;
     try {
       const state = await api('/api/campaign/' + activeCampaignId + '/ai' + (activeAiChatId ? '?chat_id=' + activeAiChatId : ''));
-      const signature = JSON.stringify({ messages: (state.messages || []).map(function (entry) { return [entry.id, entry.message, entry.generation_status]; }), world: state.world || {} });
+      const signature = JSON.stringify({ messages: (state.messages || []).map(function (entry) { return [entry.id, entry.message, entry.generation_status, entry.image_ids, entry.art]; }), world: state.world || {}, mode: state.conversation_mode, canChangeMode: state.can_change_mode, participants: state.chat?.content?.participant_ids });
       const firstLoad = !aiState;
       aiState = state;
       if (aiUndoDeletion && Number(aiUndoDeletion.chatId || 0) === Number(activeAiChatId || 0)) {
@@ -503,6 +545,9 @@ $(function () {
   }
 
   function stopAiSync() {
+    messageEditors.clear();
+    window.ChatFullscreen?.exit();
+    chatAttachments.clear();
     clearInterval(aiSyncTimer);
     aiSyncTimer = null;
     aiSyncBusy = false;
@@ -511,6 +556,7 @@ $(function () {
   }
 
   async function selectAiChat(chatId) {
+    chatAttachments.clear();
     clearAiUndo();
     activeAiChatId = Number(chatId) || null;
     activeSection = null;
@@ -632,6 +678,7 @@ $(function () {
     if (window.MapWorkspace) window.MapWorkspace.setVisible(!!activeCampaignId && !isAiCampaign() && !activeSection);
     if (window.SpellAtelier) window.SpellAtelier.setActive(activeSection === 'atelier' && !!activeCampaignId, activeCampaignId, user && user.id);
     if (window.ArtAtelier) window.ArtAtelier.setActive(activeSection === 'art' && !!activeCampaignId, activeCampaignId, user && user.id, {
+      referenceRecords: items.filter(item => Number(item.content?.campaign_id) === Number(activeCampaignId) && Number(item.content?.image_id) > 0),
       records: items.filter(item => user && ['item','character','npc'].includes((item.content || {}).category) && Number(item.content.campaign_id) === activeCampaignId && (item.user_id === user.id || Number(item.content.owner_user_id) === Number(user.id) || items.find(c => c.id === activeCampaignId)?.membership_role === 'creator')),
       archive: async function(title, description, blob) {
         const campaignId=artworkCampaignId;
@@ -852,6 +899,7 @@ $(function () {
     $('.ai-world-rail').toggleClass('d-none', !aiDm);
     $('.ai-campaign-only').toggleClass('d-none', !aiDm);
     $('#aiDirectorConsole').toggleClass('d-none', !aiDm);
+    $('#aiConversationStyle').toggleClass('d-none', !aiDm);
     $('#campaignDashboard').toggleClass('player-map-mode', !aiDm && campaign.membership_role !== 'creator').toggleClass('ai-dm-mode', aiDm);
     $('#campaignMapButton').removeClass('d-none');
     $('#spellAtelierButton,#artAtelierButton').removeClass('d-none');
@@ -946,7 +994,7 @@ $(function () {
 
   function renderDashboard() {
     const aiCampaign = isAiCampaign(activeCampaign());
-    const playerTools = aiCampaign && activeAiToolsPersona.type === 'character';
+    const playerTools = aiCampaign && (activeAiSpeaker.type === 'character' || aiState?.conversation_mode && aiState.conversation_mode !== 'dnd');
     $('#campaignDashboard').toggleClass('ai-player-tools-active', playerTools);
     if (aiCampaign) {
       $('.ai-world-rail').toggleClass('d-none', playerTools);
@@ -1177,7 +1225,7 @@ $(function () {
       entry[1].forEach(function (name) { $('<span class="connection-chip">').text(name).appendTo(block.find('div')); });
       block.appendTo('#detailConnections');
     });
-    if (!refresh) detailModal.show();
+    if (!refresh) {CharacterMemory.mount(item, api, {chatId:activeAiChatId}); detailModal.show();}
   }
 
   function renderDynamicFilters() {
@@ -1573,29 +1621,60 @@ $(function () {
     finally { button.prop('disabled', !aiState || !aiState.creator); }
   });
 
+  ChatFormat.guide(document.querySelector('#aiChatExtras'), '#aiChatInput');
+  ChatFormat.guide(document.querySelector('#aiMessageModalForm .modal-body'), '#aiMessageModalForm [name=text]');
+  const chatAttachments = ChatImages.create(document.querySelector('#aiChatImages'), {
+    upload: uploadImage, error: message => $('#aiChatError').text(message),
+    changed: count => $('#aiChatImageCount').text(count ? ' · ' + count + (count === 1 ? ' image' : ' images') : '')
+  });
+  new MutationObserver(() => {if ($('#aiChatError').text()) document.querySelector('#aiChatExtras').open = true;}).observe(document.querySelector('#aiChatError'), {childList:true,characterData:true,subtree:true});
+  $('#aiConversationMode').on('change', async function () {
+    const campaign = activeCampaignId, chat = activeAiChatId;
+    $(this).prop('disabled', true);
+    try {
+      await api('/api/campaign/' + campaign + '/ai/mode', {method:'POST',body:JSON.stringify({mode:this.value,chat_id:chat})});
+      if (campaign === activeCampaignId && chat === activeAiChatId) await loadAiCampaign(false);
+    } catch (error) { $('#aiChatError').text(error.message); if (campaign === activeCampaignId && chat === activeAiChatId) renderAiState(false,false); }
+  });
   $('#aiChatForm').on('submit', async function (event) {
     event.preventDefault();
+    if (activeAiSpeaker.type === 'none') return;
     const message = $('#aiChatInput').val().trim();
-    if (!message || !activeAiSpeaker) return;
+    if ((!message && !chatAttachments.ids().length) || !activeAiSpeaker) return;
+    if (chatAttachments.busy()) {$('#aiChatError').text('Wait for the images to finish importing.'); return;}
+    const attachmentScope = String(activeCampaignId) + ':' + String(activeAiChatId);
+    chatAttachments.lock(true);
     const audience = $('#aiChatAudience input:checked').map(function () { return this.value === 'all' ? 'all' : Number(this.value); }).get();
     const send = $(this).find('button[type=submit]').prop('disabled', true);
     clearAiUndo();
     $('#aiChatError').text('');
     try {
-      await api('/api/campaign/' + activeCampaignId + '/ai/message', { method: 'POST', body: JSON.stringify({ message: message, chat_id: activeAiChatId, persona_type: activeAiSpeaker.type, persona_id: activeAiSpeaker.id, addressed_to_ai: $('#aiAddressToggle').prop('checked'), audience_user_ids: audience }) });
-      $('#aiChatInput').val('');
+      await api('/api/campaign/' + activeCampaignId + '/ai/message', { method: 'POST', body: JSON.stringify({ message: message, image_ids: chatAttachments.ids(), chat_id: activeAiChatId, persona_type: activeAiSpeaker.type, persona_id: activeAiSpeaker.id, addressed_to_ai: $('#aiAddressToggle').prop('checked'), audience_user_ids: audience }) });
+      if (attachmentScope === String(activeCampaignId) + ':' + String(activeAiChatId)) {$('#aiChatInput').val(''); chatAttachments.clear();}
       await loadAiCampaign(false);
     } catch (error) {
       $('#aiChatError').text(error.message);
       await loadAiCampaign(true);
-    } finally { send.prop('disabled', false); }
+    } finally { send.prop('disabled', activeAiSpeaker.type === 'none'); chatAttachments.lock(false); }
   });
 
-  $('#aiChatLog').on('click', '[data-ai-message-action]', async function () {
+  let editImageIds = [];
+  function renderEditImages() {
+    const host = document.querySelector('#aiMessageEditImages'); host.replaceChildren();
+    editImageIds.forEach(id => {
+      const tile = document.createElement('div'); tile.className = 'chat-image-tile';
+      const image = new Image(); image.src = '/api/uploads/' + id; image.alt = 'Attached image';
+      const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = '×'; remove.setAttribute('aria-label', 'Remove attached image');
+      remove.onclick = () => {editImageIds = editImageIds.filter(value => value !== id); renderEditImages();};
+      tile.append(image, remove); host.append(tile);
+    });
+  }
+  $('#aiChatLog').on('click', '[data-ai-message-action]' , async function () {
     const action = $(this).data('ai-message-action');
     const messageId = Number($(this).closest('.ai-message').data('message-id'));
     const entry = (aiState.messages || []).find(function (value) { return Number(value.id) === messageId; });
     if (!entry) return;
+    if (action === 'edit') {editMessageInline($(this).closest('.ai-message')[0], entry); return;}
     if (action === 'delete') {
       try {
         const result = await api('/api/campaign/' + activeCampaignId + '/ai/message/' + messageId, { method: 'DELETE' });
@@ -1607,13 +1686,14 @@ $(function () {
       return;
     }
     const regenerate = action === 'regenerate';
+    editImageIds = regenerate ? [] : [...(entry.image_ids || [])]; renderEditImages();
     $('#aiMessageModalForm')[0].reset();
     $('#aiMessageModalForm [name=message_id]').val(messageId);
     $('#aiMessageModalForm [name=action]').val(action);
-    $('#aiMessageModalForm [name=text]').val(regenerate ? '' : entry.message).prop('required', !regenerate);
+    $('#aiMessageModalForm [name=text]').val(regenerate ? '' : entry.message).prop('required', false);
     $('#aiMessageModalTitle').text(regenerate ? 'Regenerate ' + entry.persona_name + "'s reply" : 'Edit message');
     $('#aiMessageModalLabel').contents().first()[0].textContent = regenerate ? 'Guidance for the new response' : 'Message';
-    $('#aiMessageModalHelp').text(regenerate ? 'Optional: tell Ollama what to change, preserve, avoid, or add. Thoughts can be written between *asterisks*.' : 'The raw *asterisks* around thoughts stay visible here, but are hidden in the chat display.');
+    $('#aiMessageModalHelp').text(regenerate ? 'Optional: tell Ollama what to change, preserve, avoid, or add. Thoughts can be written between *asterisks*.' : 'Edit the original text and formatting markers here. Remove an image tag to remove that generated image; use the × to remove an attachment.');
     $('#aiMessageModalSubmit').text(regenerate ? 'Regenerate' : 'Save');
     $('#aiMessageModalError').text('');
     aiMessageModal.show();
@@ -1641,7 +1721,7 @@ $(function () {
     $('#aiMessageModalError').text('');
     try {
       if (values.action === 'regenerate') await api('/api/campaign/' + activeCampaignId + '/ai/regenerate', { method: 'POST', body: JSON.stringify({ message_id: Number(values.message_id), guidance: values.text || '' }) });
-      else await api('/api/campaign/' + activeCampaignId + '/ai/message/' + Number(values.message_id), { method: 'PUT', body: JSON.stringify({ message: values.text }) });
+      else await api('/api/campaign/' + activeCampaignId + '/ai/message/' + Number(values.message_id), { method: 'PUT', body: JSON.stringify({ message: values.text, image_ids: editImageIds }) });
       aiMessageModal.hide();
       await loadAiCampaign(false);
     } catch (error) { $('#aiMessageModalError').text(error.message); }

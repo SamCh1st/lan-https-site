@@ -44,6 +44,13 @@ import spell_designer
 import art_designer
 import art_editor
 import local_art
+import art_references
+import chat_images
+import chat_modes
+import character_memory
+import chat_continue
+import chat_art
+import chat_format
 from helper_advice import advice_cache, scope_key
 
 
@@ -311,6 +318,10 @@ class Handler(SimpleHTTPRequestHandler):
 
     def do_GET(self) -> None:
         path = urlparse(self.path).path
+        memory_match = re.fullmatch(r'/api/campaign/(\d+)/characters/(\d+)/memory',path)
+        if memory_match:
+            self.character_memory_request(*map(int,memory_match.groups()))
+            return
         if path == '/api/audio':
             self.send_json(HTTPStatus.OK, audio_library.listing())
             return
@@ -417,6 +428,8 @@ class Handler(SimpleHTTPRequestHandler):
                     "chat": {"id": chat["id"], "title": chat["title"], "content": chat["content"]} if chat else None,
                     "story": content.get("ai_story", "") if role == "creator" else "",
                     "memory": content.get("ai_memory", "") if role == "creator" else "",
+                    "conversation_mode": chat_modes.get(user["id"],campaign_id,chat_id),
+                    "can_change_mode": chat_modes.can_change(user["id"],campaign_id,chat_id),
                     "story_mode": content.get("ai_story_mode", "adaptive"),
                     "model": content.get("ai_model", ""),
                     "helper_models": content.get("ai_helper_models", []),
@@ -457,6 +470,10 @@ class Handler(SimpleHTTPRequestHandler):
         data = self.read_json()
         if data is None:
             self.send_json(HTTPStatus.BAD_REQUEST, {"error": "Invalid request."})
+            return
+        memory_match = re.fullmatch(r'/api/campaign/(\d+)/characters/(\d+)/memory',path)
+        if memory_match:
+            self.character_memory_request(*map(int,memory_match.groups()),data=data)
             return
         assign_match = re.fullmatch(r'/api/campaign/(\d+)/imported-players',path)
         if assign_match:
@@ -574,15 +591,32 @@ class Handler(SimpleHTTPRequestHandler):
             user = self.require_user()
             if user:
                 self.ai_message(user, int(path.split("/")[3]), data)
+        elif re.fullmatch(r"/api/campaign/\d+/ai/mode", path):
+            user=self.require_user()
+            if user:
+                try:
+                    chat_id=int(data['chat_id']) if data.get('chat_id') else None
+                    mode=chat_modes.set_mode(user['id'],int(path.split('/')[3]),data.get('mode'),chat_id)
+                    self.send_json(HTTPStatus.OK,{'mode':mode})
+                except PermissionError as error:self.send_json(HTTPStatus.FORBIDDEN,{'error':str(error)})
+                except (ValueError,TypeError) as error:self.send_json(HTTPStatus.BAD_REQUEST,{'error':str(error)})
         elif re.fullmatch(r"/api/campaign/\d+/ai/respond", path):
             user = self.require_user()
             if user:
                 data["respond_only"] = True
                 self.ai_message(user, int(path.split("/")[3]), data)
+        elif re.fullmatch(r"/api/campaign/\d+/ai/art/\d+", path):
+            user = self.require_user()
+            if user:
+                self.ai_art_action(user, int(path.split('/')[3]), int(path.split('/')[-1]), data)
         elif re.fullmatch(r"/api/campaign/\d+/ai/story", path):
             user = self.require_user()
             if user:
                 self.ai_story(user, int(path.split("/")[3]), data)
+        elif re.fullmatch(r"/api/campaign/\d+/ai/continue", path):
+            user = self.require_user()
+            if user:
+                self.ai_continue(user, int(path.split("/")[3]), data)
         elif re.fullmatch(r"/api/campaign/\d+/ai/regenerate", path):
             user = self.require_user()
             if user:
@@ -668,6 +702,19 @@ class Handler(SimpleHTTPRequestHandler):
             self.send_json(HTTPStatus.BAD_REQUEST, {'error':'Describe your artwork in 1–3,000 characters.'})
             return
         image_mode = data.get('renderer') == 'local-image'
+        image_references = []
+        vision_model = None
+        try:
+            image_references = art_references.resolve(user['id'], data.get('image_references', []))
+            if image_references:
+                if not image_mode:
+                    raise ValueError('Choose Local image model to use image references.')
+                preferred = campaign['content'].get('ai_helper_models', [])
+                preferred = preferred if isinstance(preferred, list) else []
+                vision_model = art_references.choose_model(self.ai_request, preferred + [campaign['content'].get('ai_model')])
+        except (OSError, ValueError) as error:
+            self.send_json(HTTPStatus.BAD_REQUEST, {'error': str(error)})
+            return
         source = None
         if image_mode and data.get('edit') is True:
             image_id = data.get('source_image_id')
@@ -703,7 +750,7 @@ class Handler(SimpleHTTPRequestHandler):
         except (OSError,ValueError):installed=set()
         helpers=list(dict.fromkeys(h for h in configured if isinstance(h,str) and h in installed and h!=model))[:3]
         if image_mode:
-            events=local_art.design(prompt.strip(),source,data.get('image_size',512),helpers,self.ai_stream,data.get('research') is True,data.get('transparent_background') is not False)
+            events=local_art.design(prompt.strip(),source,data.get('image_size',512),helpers,self.ai_stream,data.get('research') is True,data.get('transparent_background') is not False, image_references=image_references, vision_model=vision_model)
         else:
             events=art_editor.edit(prompt.strip(),model,self.ai_stream,data.get('layers'),helpers,data.get('selected')) if data.get('edit') is True else art_designer.design(prompt.strip(),model,self.ai_stream,data.get('research') is not False,helper_models=helpers)
         try:
@@ -895,6 +942,42 @@ class Handler(SimpleHTTPRequestHandler):
         except (OSError, ValueError, json.JSONDecodeError, urllib.error.URLError) as error:
             self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {"error": "Ollama could not generate the story: " + str(error)})
 
+    def sync_chat_art(self, user_id, campaign_id, message_id):
+        try:
+            chat_art.reconcile(user_id, campaign_id, message_id, self.ai_request, self.ai_stream)
+        except Exception:
+            logging.exception('Could not prepare inline image requests')
+
+    def ai_art_action(self, user, campaign_id, art_id, data):
+        try:
+            action = data.get('action')
+            revision = data.get('revision')
+            if type(revision) is not int:
+                raise ValueError('Reload the image before changing it.')
+            if action == 'save':
+                record_id = chat_art.save(user['id'], campaign_id, art_id, str(data.get('title') or ''), revision)
+                self.send_json(HTTPStatus.OK, {'record_id': record_id})
+            elif action in ('regenerate', 'edit'):
+                chat_art.enqueue(user['id'], campaign_id, art_id, action, str(data.get('prompt') or ''), revision, self.ai_request, self.ai_stream)
+                self.send_json(HTTPStatus.ACCEPTED, {'ok': True})
+            else:
+                raise ValueError('Choose save, regenerate, or edit.')
+        except PermissionError as error:
+            self.send_json(HTTPStatus.FORBIDDEN, {'error': str(error)})
+        except (ValueError, TypeError) as error:
+            self.send_json(HTTPStatus.BAD_REQUEST, {'error': str(error)})
+
+    def character_memory_request(self,campaign_id,character_id,data=None):
+        user=self.require_user()
+        if not user:return
+        try:
+            result=character_memory.state(user['id'],campaign_id,character_id) if data is None else character_memory.change(user['id'],campaign_id,character_id,data)
+            self.send_json(HTTPStatus.OK,result)
+        except PermissionError as error:
+            self.send_json(HTTPStatus.FORBIDDEN,{'error':str(error)})
+        except (ValueError,TypeError) as error:
+            self.send_json(HTTPStatus.BAD_REQUEST,{'error':str(error)})
+
     def ai_message(self, user: dict, campaign_id: int, data: dict) -> None:
         campaign = storage.campaign_record(user["id"], campaign_id)
         if not campaign or not campaign["content"].get("ai_dm"):
@@ -911,6 +994,11 @@ class Handler(SimpleHTTPRequestHandler):
         if chat_id and not chat:
             self.send_json(HTTPStatus.FORBIDDEN, {"error": "That private chat is not available to you."})
             return
+        conversation_mode=chat_modes.get(user['id'],campaign_id,chat_id)
+        selected_type=data.get('reply_as_type','dm') if data.get('respond_only') else data.get('persona_type','character')
+        if conversation_mode!='dnd' and selected_type!='character':
+            self.send_json(HTTPStatus.BAD_REQUEST,{'error':'Choose a character. The DM is available only in D&D mode.'})
+            return
         valid_audience = {member["id"] for member in members if member["role"] == "member"}
         requested_audience = data.get("audience_user_ids", []) if isinstance(data.get("audience_user_ids", []), list) else []
         public_message = any(str(value).casefold() == "all" for value in requested_audience) or not requested_audience
@@ -923,7 +1011,12 @@ class Handler(SimpleHTTPRequestHandler):
         posted = None
         if not respond_only:
             message = str(data.get("message", "")).strip()
-            if not message or len(message) > 12000:
+            try:
+                image_ids = chat_images.validate(user['id'], data.get('image_ids', []))
+            except (OSError, ValueError) as error:
+                self.send_json(HTTPStatus.BAD_REQUEST, {'error': str(error)})
+                return
+            if (not message and not image_ids) or len(message) > 12000:
                 self.send_json(HTTPStatus.BAD_REQUEST, {"error": "Write a message up to 12,000 characters."})
                 return
             persona_type = str(data.get("persona_type", "character"))
@@ -951,7 +1044,8 @@ class Handler(SimpleHTTPRequestHandler):
                 persona_name = character["title"]
                 if audience_ids and owner_id in valid_audience and owner_id not in audience_ids:
                     audience_ids.append(owner_id)
-            posted = storage.add_ai_message(campaign_id, user["id"], persona_type, persona_id, persona_name, message_role, addressed, message, audience_ids, chat_id)
+            posted = storage.add_ai_message(campaign_id, user["id"], persona_type, persona_id, persona_name, message_role, addressed, message, audience_ids, chat_id, image_ids=image_ids)
+            self.sync_chat_art(user['id'], campaign_id, posted['id'])
             self.send_json(HTTPStatus.CREATED, {"message": posted, "ai_replied": False})
             return
         content = campaign["content"]
@@ -1007,24 +1101,29 @@ class Handler(SimpleHTTPRequestHandler):
         history = storage.list_ai_messages(user["id"], campaign_id, addressed_only=True, chat_id=chat_id) or []
         if reply_as_type == "character":
             history = [entry for entry in history if not entry.get("audience_user_ids") or (reply_owner_id and reply_owner_id in entry.get("audience_user_ids", []))]
+            history = [entry for entry in history if not entry.get('audience_user_ids') or (audience_ids and set(audience_ids).issubset(set(entry['audience_user_ids'])))]
         chat_history = []
         for entry in history[-36:]:
             audience_names = [member["username"] for member in members if member["id"] in entry.get("audience_user_ids", [])]
             chat_history.append({
                 "role": "assistant" if entry["role"] == "assistant" else "user",
-                "content": ("Audience: " + (", ".join(audience_names) if audience_names else "everyone") + "\n") + (entry["message"][:2500] if entry["role"] == "assistant" else entry["persona_name"] + ": " + entry["message"][:2500]),
+                "content": ("Audience: " + (", ".join(audience_names) if audience_names else "everyone") + "\n") + (entry["persona_name"] + ": " + entry["message"][:2500]),
             })
-        dm_system = """You are the AI Dungeon Master for a private tabletop fantasy campaign. Only messages in this conversation were explicitly addressed to you; never assume unaddressed table talk. Continue the scene vividly, ask for rolls when appropriate, adjudicate consequences fairly, and respect player agency. Keep secrets from players until revealed. Use asterisks only for public scene description; never expose secret thoughts in visible narration. Return one valid JSON object only with this shape:
+        dm_system = """You are the AI Dungeon Master for a private tabletop fantasy campaign. Only messages in this conversation were explicitly addressed to you; never assume unaddressed table talk. Continue the scene vividly, ask for rolls when appropriate, adjudicate consequences fairly, and respect player agency. Keep secrets from players until revealed. Use #text# for public scene descriptions; never expose hidden campaign secrets in visible narration. Return one valid JSON object only with this shape:
 {"reply":"what the DM says","memory":"compact memory of essential facts, under 1200 characters","story_update":"brief new story development, under 500 characters, only when useful","scene":{},"cards":[],"grants":[]}
 Create cards or grant existing records when events establish something players receive or need to track. Use exact character_ids, not usernames. An empty recipient list with share_with_party false means DM-only. Do not create duplicates of existing cards. Respect the Audience label on every message: characters outside a private audience do not know its details, and you must not reveal those details to them unless they later learn them in play. The story_update field must be empty when story mode is fixed. Put reply first in the JSON so players can see it as you write."""
         player_system = """Roleplay only the selected player character named below. Answer in that character's voice, decisions, dialogue, and actions—not as the Dungeon Master. Do not narrate outcomes controlled by the DM and do not use secret information absent from this character's visible history or assigned cards. Write the character's thoughts between single asterisks, for example *I do not trust this stranger.*, and keep dialogue outside the asterisks. Return one valid JSON object only in this exact shape: {"reply":"the character's response","memory":"","story_update":"","cards":[]}."""
         system = dm_system if reply_as_type == "dm" else player_system
         if reply_as_type == "dm":
             system += ai_effects.INSTRUCTIONS
-            system += '\nRequired JSON schema (use it for every field and recipient):\n' + json.dumps(ai_effects.schema())
+            system += '\nRequired JSON schema (use it for every field and recipient):\n' + json.dumps(chat_modes.reply_schema())
             system += """\nWhen requesting a roll, give the player clear dice instructions in reply: name the character, purpose, exact die and count (D-20 / 1d20 for a check, save, attack, or initiative; the actual damage/healing dice such as 2d6 when established), the ability and skill or saving throw, and Normal / Advantage / Disadvantage with a reason. State the modifier and its breakdown only when the provided character sheet and rules establish it; otherwise ask for the missing bonus, never guess. Include proficiency once, expertise instead of ordinary proficiency, other recorded bonuses, and applicable exhaustion. Advantage/disadvantage rolls two D-20s and keeps the higher/lower, then adds the modifier once; opposing sources cancel and extra sources do not stack. Damage dice do not use advantage. Do not reveal hidden ACs or DCs merely to specify a roll. Ask for an attack before damage, and wait for the player's reported result before deciding the outcome.
 The player's Inventory header toggles to a Dice roller in both normal and AI campaigns. In AI campaigns its sheet belongs to the character selected in player tools. For example: 'Elara, roll D-20, select Dexterity (Stealth), Normal roll, and tell me the total.' The panel lists ability checks, skills and saving throws, applies their saved sheet bonus, and supports an Other bonus / penalty field. Do not tell the player to add a sheet bonus again. For weapon/spell attacks or initiative, use D-20 with No stat bonus and enter the verified complete modifier manually. For damage/healing with multiple dice, direct them to Dice & Table Rules using the complete expression, such as 2d6 + 3, or explain how to sum separate rolls and add the modifier once. Rolls are local to the device: you cannot observe them automatically, so explicitly ask the player to report the total (and natural D-20 for attacks or death saves). Never fabricate a result or proceed as if an unreported roll succeeded. For death saves use a D-20 saving throw without an ability/proficiency bonus, applying only relevant special bonuses/penalties; explain the special natural-1/20 rules when needed."""
-        system += """\nUse the campaign's ruleset and house rules. The default is revised fifth edition (2024). Never invent a player's dice results or claim to update saved HP, slots, XP or levels: those sheet resources remain manual. Only the DM's structured scene/cards/grants can change campaign records and inventory; a player-character reply cannot. Ask for a roll only when the outcome is uncertain and wait for the result before resolving it. Distinguish ability checks, attack rolls against AC, and saves against DC. Natural 20/1 attack rules do not automatically apply to ability checks. Use movement, one action, an eligible bonus action, and triggered reactions; Extra Attack is part of an Attack action. Distinguish character level, class level and spell level. Respect concentration, components, prepared spells, spell slots, attunement, charges, and feature-specific recovery. In the 2024 rules a turn permits only one spell slot spent to cast spells unless a specific exception applies. Treat reference_only cards as library entries, not possessions, learned spells, or granted features. State which resources the player must update after an adjudicated action. Never reveal secret thoughts in the public reply; asterisks are visible to readers, not private storage. Do not claim to know an unprovided spell or item rule; request its text or defer to the human DM."""
+        system += """\nUse the campaign's ruleset and house rules. The default is revised fifth edition (2024). Never invent a player's dice results or claim to update saved HP, slots, XP or levels: those sheet resources remain manual. Only the DM's structured scene/cards/grants can change campaign records and inventory; a player-character reply cannot. Ask for a roll only when the outcome is uncertain and wait for the result before resolving it. Distinguish ability checks, attack rolls against AC, and saves against DC. Natural 20/1 attack rules do not automatically apply to ability checks. Use movement, one action, an eligible bonus action, and triggered reactions; Extra Attack is part of an Attack action. Distinguish character level, class level and spell level. Respect concentration, components, prepared spells, spell slots, attunement, charges, and feature-specific recovery. In the 2024 rules a turn permits only one spell slot spent to cast spells unless a specific exception applies. Treat reference_only cards as library entries, not possessions, learned spells, or granted features. State which resources the player must update after an adjudicated action. Never reveal hidden campaign secrets through narration or thoughts; all formatting is visible to readers. Do not claim to know an unprovided spell or item rule; request its text or defer to the human DM."""
+        if conversation_mode!='dnd':
+            system='Answer only as '+reply_as_name+'. Return JSON only as {"reply":"your response","memory":"","story_update":"","cards":[]}.'
+        system += chat_modes.instructions(conversation_mode,reply_as_type)
+        system += chat_art.INSTRUCTIONS + chat_format.INSTRUCTIONS
         full_story = str(content.get("ai_story", ""))
         compact_story = full_story if len(full_story) <= 14000 else full_story[:10000] + "\n[Earlier story omitted]\n" + full_story[-4000:]
         context = {
@@ -1043,6 +1142,12 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             "answer_as": {"type": reply_as_type, "name": reply_as_name},
             "persona_profile": {key: (reply_character.get("content") or {}).get(key) for key in ("summary", "notes", "role", "affiliation", "character_level", "character_class", "species", "background", "strength", "dexterity", "constitution", "intelligence", "wisdom", "charisma") if (reply_character.get("content") or {}).get(key) is not None} if reply_as_type == "character" else {},
         }
+        context['conversation_mode']=conversation_mode
+        if conversation_mode!='dnd':
+            for key in ('rules','story','story_mode','memory','public_scene','character_sheets','reference_library','record_directory'):
+                context.pop(key,None)
+            context['persona_profile']={k:v for k,v in context['persona_profile'].items() if k in ('summary','notes','role','affiliation')}
+            context['known_cards']=[{k:r[k] for k in ('title','summary','notes','role','affiliation') if k in r} for r in records if r.get('category') in ('character','npc','location')][:12]
         try:
             pending_reply = storage.add_ai_message(
                 campaign_id, None, reply_as_type, reply_as_id, reply_as_name,
@@ -1053,6 +1158,35 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             return
         try:
             model = self.ai_model(content.get("ai_model"))
+            configured_model = model
+            if reply_as_type == 'character':
+                # Long-term recall replaces oversized raw history; keep every supplied speaker named.
+                total=0; recent=[]
+                for entry in reversed(chat_history):
+                    if total+len(entry['content'])>24000:break
+                    recent.append(entry);total+=len(entry['content'])
+                chat_history=list(reversed(recent))
+                relevant_words=set(re.findall(r'\w+',' '.join(m['message'] for m in history[-3:]).casefold()))
+                relevant=sorted(records,key=lambda r:(r['id']==reply_as_id,len(relevant_words & set(re.findall(r'\w+',r['title'].casefold())))),reverse=True)
+                compact=lambda r:{k:(v[:1200] if isinstance(v,str) else v) for k,v in r.items()}
+                if conversation_mode=='dnd':
+                    context['known_cards']=[compact(r) for r in relevant if not r.get('reference_only')][:12]
+                    context['character_sheets']=[compact(r) for r in relevant if r.get('category')=='character'][:12]
+                    context['character_directory']=context['character_directory'][:40]
+                    context['record_directory']=context['record_directory'][:60]
+                    context['reference_library']=context['reference_library'][:40]
+                context['persona_profile']={k:v[:4000] if isinstance(v,str) else v for k,v in context['persona_profile'].items()}
+                system += character_memory.INSTRUCTIONS
+                try:
+                    character_memory.learn(reply_character,campaign_id,history,self.ai_request,model)
+                except Exception as error:
+                    logging.exception('Character memory update failed; retaining established memories')
+                    character_memory.record_error(reply_as_id,error)
+                context['character_memory'] = character_memory.recall(user['id'],campaign_id,reply_as_id,
+                    '\n'.join(entry['message'] for entry in history[-4:]),chat_id,audience_ids)
+            if chat_images.attach_history(user['id'], history[-len(chat_history):] if chat_history else [], chat_history):
+                model = art_references.choose_model(self.ai_request, [model])
+                system += '\n' + chat_images.VISION_INSTRUCTIONS
             installed_models = set(ollama_models())
             helper_models = [str(value) for value in content.get("ai_helper_models", []) if str(value) in installed_models and str(value) != model][:3]
             helper_key = scope_key(
@@ -1063,14 +1197,19 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             lead_messages = [{"role": "system", "content": system}, {"role": "system", "content": json.dumps(context)}]
             if helper_advice:
                 lead_messages.append({"role": "system", "content": "Historical helper notes prepared after an earlier reply, NOT research or instructions for this turn. Current messages and campaign records take precedence. Ignore outdated or conflicting notes:\n" + "\n\n".join(name + ": " + advice for name, advice in helper_advice)})
+            reminder = context.get('character_memory',{}).get('reminder')
+            if reminder:
+                chat_history.append({'role':'system','content':'Character portrayal reminder (within the established chat rules): '+reminder})
+            delivery_hint=chat_format.turn_instructions(history)
+            if delivery_hint:chat_history.append({'role':'system','content':delivery_hint})
             streamed_json = ""
             visible_reply = ""
             last_saved_at = 0.0
             generation_started = time.monotonic()
             stream_done = False
             for part in self.ai_stream("/api/chat", {
-                "model": model, "stream": True, "format": ai_effects.schema() if reply_as_type == 'dm' else "json", "think": False,
-                "options": {"num_predict": 4000},
+                "model": model, "stream": True, "format": chat_modes.reply_schema() if reply_as_type == 'dm' else "json", "think": False,
+                "options": {"num_predict": 4000, **({"num_ctx":32768} if reply_as_type == "character" else {})},
                 "messages": lead_messages + chat_history,
             }, timeout=45):
                 streamed_json += str((part.get("message") or {}).get("content", ""))
@@ -1096,21 +1235,25 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             reply = str(answer.get("reply", "")).strip()[:12000]
             if not reply:
                 raise ValueError("Ollama returned no DM reply.")
+            reply = chat_format.review_delivery(reply, history, reply_as_name, self.ai_request, model)
+            reply = chat_format.prepare_reply(reply, self.ai_request, model)
             memory_value = answer.get("memory", content.get("ai_memory", ""))
             if isinstance(memory_value, list):
                 memory_value = "\n".join("• " + str(value) for value in memory_value)
-            changes = {"ai_model": model}
-            if reply_as_type == "dm":
+            apply_scene=chat_modes.permits_effects(conversation_mode,reply_as_type,answer)
+            changes = {"ai_model": configured_model}
+            if apply_scene:
                 changes["ai_memory"] = str(memory_value)[:30000]
             story_update = str(answer.get("story_update", "")).strip()
-            if reply_as_type == "dm" and content.get("ai_story_mode", "adaptive") == "adaptive" and story_update:
+            if apply_scene and content.get("ai_story_mode", "adaptive") == "adaptive" and story_update:
                 changes["ai_story"] = (full_story + "\n\nDevelopment: " + story_update[:500]).strip()[-50000:]
             storage.update_campaign_ai_state(campaign_id, changes)
-            effects = ai_effects.apply(campaign_id, pending_reply['id'], answer, normalize_character_stats, is_dm=reply_as_type == 'dm')
+            effects = ai_effects.apply(campaign_id, pending_reply['id'], answer, normalize_character_stats, is_dm=apply_scene)
             created_cards = effects['cards']
             if effects['warnings']:
                 reply += "\n\nCampaign update notice: " + "; ".join(dict.fromkeys(effects['warnings']))
             storage.update_ai_generation(campaign_id, pending_reply["id"], reply, "complete")
+            self.sync_chat_art(user['id'], campaign_id, pending_reply['id'])
             ai_post = storage.get_ai_message(campaign_id, pending_reply["id"])
             if ai_post and isinstance(ai_post.get("audience_user_ids"), str):
                 ai_post["audience_user_ids"] = json.loads(ai_post["audience_user_ids"] or "[]")
@@ -1125,6 +1268,23 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             message = "Ollama could not finish the reply. Check the server window and try again."
             storage.update_ai_generation(campaign_id, pending_reply["id"], message, "error")
             self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {"error": message})
+
+    def ai_continue(self, user, campaign_id, data):
+        try:
+            message_id = int(data.get('message_id'))
+            target = chat_art.visible_message(user['id'], campaign_id, message_id)
+            if storage.campaign_role(user['id'], campaign_id) != 'creator' and target.get('user_id') != user['id']:
+                raise PermissionError('You cannot edit that message.')
+            campaign = storage.campaign_record(user['id'], campaign_id)
+            suffix = chat_continue.complete(user['id'], campaign_id, message_id, data.get('draft'),
+                self.ai_request, self.ai_model(campaign['content'].get('ai_model')))
+            self.send_json(HTTPStatus.OK, {'continuation':suffix})
+        except PermissionError as error:
+            self.send_json(HTTPStatus.FORBIDDEN, {'error':str(error)})
+        except (ValueError, TypeError, KeyError) as error:
+            self.send_json(HTTPStatus.BAD_REQUEST, {'error':str(error)})
+        except (OSError, urllib.error.URLError) as error:
+            self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {'error':'Autocomplete could not finish: ' + str(error)})
 
     def ai_regenerate(self, user: dict, campaign_id: int, data: dict) -> None:
         campaign = storage.campaign_record(user["id"], campaign_id)
@@ -1149,13 +1309,29 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             return
         guidance = str(data.get("guidance", "")).strip()[:4000]
         history = storage.list_ai_messages(user["id"], campaign_id, addressed_only=True, chat_id=target.get("chat_id")) or []
+        if target.get('persona_type') == 'character':
+            persona = storage.campaign_character(campaign_id, target.get('persona_id'))
+            owner = int((persona or {}).get('content', {}).get('owner_user_id') or 0)
+            history = [entry for entry in history if not entry.get('audience_user_ids') or owner in entry['audience_user_ids']]
         prior = [entry for entry in history if entry["id"] < message_id][-24:]
         audience = json.loads(target.get("audience_user_ids") or "[]") if isinstance(target.get("audience_user_ids"), str) else target.get("audience_user_ids", [])
         try:
             model = self.ai_model(campaign["content"].get("ai_model"))
-            messages = [{"role": "system", "content": "Rewrite the selected tabletop roleplay message. Answer only as " + target["persona_name"] + ". Return valid JSON only as {\"reply\":\"replacement text\"}. Follow the regeneration guidance and do not add commentary. Preserve private thoughts between single asterisks."}]
+            mode=chat_modes.get(user["id"],campaign_id,target.get("chat_id"))
+            if mode!='dnd' and target.get('persona_type')=='dm':
+                raise ValueError('The DM is available only in D&D mode.')
+            messages = [{"role": "system", "content": "Rewrite the selected conversation message. Answer only as " + target["persona_name"] + ". Return valid JSON only as {\"reply\":\"replacement text\"}. Follow the regeneration guidance and do not add commentary. Preserve the intended meaning and established writing styles."}]
+            messages[0]['content'] += chat_modes.instructions(mode,target.get('persona_type')) + chat_art.INSTRUCTIONS + chat_format.INSTRUCTIONS
+            if target.get('persona_type') == 'character' and target.get('persona_id'):
+                messages[0]['content'] += character_memory.INSTRUCTIONS + '\n' + json.dumps(character_memory.recall(user['id'],campaign_id,target['persona_id'],target['message']+' '+guidance,target.get('chat_id'),audience))
+                prior = [entry for entry in prior if not entry.get('audience_user_ids') or (audience and set(audience).issubset(set(entry['audience_user_ids'])))]
+            messages[0]['content'] += chat_format.turn_instructions(prior)
             messages.extend({"role": "assistant" if entry["role"] == "assistant" else "user", "content": entry["persona_name"] + ": " + entry["message"][:1500]} for entry in prior)
             messages.append({"role": "user", "content": "Original reply:\n" + target["message"][:3500] + "\n\nRegeneration guidance:\n" + (guidance or "Give a different fitting response while preserving continuity.")})
+            target_images = json.loads(target.get('image_ids') or '[]')
+            if chat_images.attach_history(user['id'], prior + [dict(target, image_ids=target_images)], messages[1:]):
+                model = art_references.choose_model(self.ai_request, [model])
+                messages[0]['content'] += '\n' + chat_images.VISION_INSTRUCTIONS
             result = self.ai_request("/api/chat", {"model": model, "stream": False, "format": "json", "think": False, "options": {"num_predict": 1200}, "messages": messages}, timeout=60)
             generated = str((result.get("message") or {}).get("content", ""))
             try:
@@ -1164,7 +1340,10 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
                 replacement = partial_json_string_field(generated, "reply").strip()[:12000]
             if not replacement:
                 raise ValueError("Ollama returned no replacement reply.")
+            replacement = chat_format.review_delivery(replacement, prior + ([{'persona_name':'Regeneration guidance','message':guidance}] if guidance else []), target['persona_name'], self.ai_request, model)
+            replacement = chat_format.prepare_reply(replacement, self.ai_request, model)
             storage.update_ai_message(campaign_id, message_id, replacement)
+            self.sync_chat_art(user['id'], campaign_id, message_id)
             self.send_json(HTTPStatus.OK, {"id": message_id, "message": replacement, "audience_user_ids": audience})
         except (OSError, ValueError, TypeError, json.JSONDecodeError, urllib.error.URLError) as error:
             self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {"error": "Ollama could not regenerate that reply: " + str(error)})
@@ -1342,6 +1521,8 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
                     self.send_json(HTTPStatus.FORBIDDEN, {"error": "Only the person who deleted this message can undo it."})
                     return
                 restored = storage.restore_ai_message(campaign_id, message_id, user["id"])
+                if restored:
+                    self.sync_chat_art(user['id'], campaign_id, message_id)
                 self.send_json(HTTPStatus.OK if restored else HTTPStatus.CONFLICT, {"ok": restored, "error": None if restored else "A new message has already been posted, so this deletion can no longer be undone."})
                 return
             if existing.get("deleted_at"):
@@ -1350,11 +1531,22 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             if role != "creator" and int(existing.get("user_id") or 0) != user["id"]:
                 self.send_json(HTTPStatus.FORBIDDEN, {"error": "You cannot edit that message."})
                 return
+            if ('expected_message' in data and data['expected_message'] != existing['message']) or ('expected_image_ids' in data and data['expected_image_ids'] != json.loads(existing.get('image_ids') or '[]')):
+                self.send_json(HTTPStatus.CONFLICT, {'error':'This message changed while you were editing. Copy your draft, cancel and reopen it.'})
+                return
             message = str(data.get("message", "")).strip()
-            if not message or len(message) > 12000:
+            previous_images = json.loads(existing.get('image_ids') or '[]')
+            image_ids = data.get('image_ids', previous_images)
+            if not isinstance(image_ids, list) or any(type(value) is not int or value not in previous_images for value in image_ids):
+                self.send_json(HTTPStatus.BAD_REQUEST, {'error': 'Only existing attachments can be kept when editing a message.'})
+                return
+            image_ids = list(dict.fromkeys(image_ids))
+            if (not message and not image_ids) or len(message) > 12000:
                 self.send_json(HTTPStatus.BAD_REQUEST, {"error": "Write a message up to 12,000 characters."})
                 return
-            saved = storage.update_ai_message(campaign_id, message_id, message)
+            saved = storage.update_ai_message(campaign_id, message_id, message, image_ids)
+            if saved:
+                self.sync_chat_art(user['id'], campaign_id, message_id)
             self.send_json(HTTPStatus.OK if saved else HTTPStatus.NOT_FOUND, {"ok": saved})
             return
         if re.fullmatch(r'/api/campaign/\d+/maps/\d+(?:/(activate|visit|summon|rename|position|take|meet|trade|open))?',urlparse(self.path).path):

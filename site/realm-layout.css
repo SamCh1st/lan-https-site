@@ -120,18 +120,18 @@ html .campaign-add, html[data-theme] .campaign-add {
 html .campaign-add:hover, html[data-theme] .campaign-add:hover { filter: brightness(1.12); background: var(--realm-accent); color: var(--realm-paper); }
 
 /* Three columns share one row; filters use a compact row beneath the map. */
-#campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) {
+#campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) {
   grid-template-columns: 210px minmax(0,1fr) 210px;
   grid-template-rows: auto auto; gap: 12px; height: auto; min-height: 0; margin-top: 12px;
 }
-#campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-stage { grid-column: 2; grid-row: 1; height: 600px; }
-#campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.inventory-rail,.ai-world-left,.map-editor-rail:not(.tool-rail-end),#mapStoryLeft,#map2Tools,#mapPlayerInventory,#map2ObjectPopup) { grid-column: 1; grid-row: 1; }
-#campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.attacks-rail,.tool-rail-end,.ai-world-right,#mapStoryRight,#map2Inspector,#mapPlayerAbilities) { grid-column: 3; grid-row: 1; }
-#campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.dashboard-rail,.map-custom-rail) {
+#campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-stage { grid-column: 2; grid-row: 1; height: 600px; }
+#campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.inventory-rail,.ai-world-left,.map-editor-rail:not(.tool-rail-end),#mapStoryLeft,#map2Tools,#mapPlayerInventory,#map2ObjectPopup) { grid-column: 1; grid-row: 1; }
+#campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.attacks-rail,.tool-rail-end,.ai-world-right,#mapStoryRight,#map2Inspector,#mapPlayerAbilities) { grid-column: 3; grid-row: 1; }
+#campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.dashboard-rail,.map-custom-rail) {
   height: 600px; max-height: 600px; min-height: 0; width: auto;
   flex-direction: column; align-items: stretch; text-align: left;
 }
-#campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-filter-rail {
+#campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-filter-rail {
   grid-column: 2; grid-row: 2; flex-direction: row; align-items: center; gap: 12px;
   height: auto; min-height: 48px; max-height: 160px; padding: 8px 12px;
 }
@@ -199,7 +199,7 @@ html .ai-message p { font-size: 14px; line-height: 1.7; }
 html .ai-persona-dock .party-card.ai-dm-card strong,
 html .ai-speaker-menu .party-card.ai-dm-card strong { color: #f1d292; }
 html .ai-director-console, html[data-theme] .ai-director-console { border-width: 1px; border-radius: 5px; box-shadow: none; }
-#campaignDashboard:is(.map-workspace-fullscreen,.map-dm-fullscreen) {
+#campaignDashboard:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen) {
   --realm-ink: #f0dfbc; --realm-muted: #bcae95; --realm-paper: #241d1b;
   --realm-panel: #302622; --realm-inset: #171312; --realm-border: #8e7148;
   --realm-rule: #574633; --realm-accent: #d4ad64; --realm-gold: #dfbd75;
@@ -235,17 +235,17 @@ html footer { position: relative; margin-top: 24px; color: #c4ae83; }
 @media (min-width: 901px) and (max-width: 1200px) {
   html main.container-xl { padding-inline: 20px; }
   html .campaign-library { padding: 22px; }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: 180px minmax(0,1fr) 180px; gap: 10px; }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: 180px minmax(0,1fr) 180px; gap: 10px; }
   html .dashboard-rail { padding: 10px; }
 }
 @media (max-width: 900px) {
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: repeat(2,minmax(0,1fr)); }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-stage { grid-column: 1/-1; grid-row: 1; height: 540px; }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-filter-rail { grid-column: 1/-1; grid-row: 2; }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.dashboard-rail,.map-custom-rail,#map2ObjectPopup) {
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-stage { grid-column: 1/-1; grid-row: 1; height: 540px; }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-filter-rail { grid-column: 1/-1; grid-row: 2; }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.dashboard-rail,.map-custom-rail,#map2ObjectPopup) {
     grid-column: auto; grid-row: auto; height: 320px; max-height: 320px;
   }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .ai-world-right { display: block !important; }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .ai-world-right { display: block !important; }
   #campaignDashboard:not(.ai-dm-mode) > .ai-world-right { display: none !important; }
   #campaignDashboard.ai-player-tools-active > .ai-world-right { display: none !important; }
   html .map-tool-list { flex-direction: column; overflow-y: auto; overflow-x: hidden; }
@@ -269,13 +269,13 @@ html footer { position: relative; margin-top: 24px; color: #c4ae83; }
   html .party-scroll .party-card { width: 190px; }
   html .party-shelf { display: block; }
   html .party-shelf-head { flex-direction: row; gap: 8px; margin-bottom: 8px; }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: minmax(0,1fr); }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-stage { height: 460px; }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: minmax(0,1fr); }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > .map-stage { height: 460px; }
   #campaignDashboard.ai-dm-mode:not(:is(.spell-mode,.art-mode)) > .map-stage { height: 640px; }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.dashboard-rail,.map-custom-rail,#map2ObjectPopup) {
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) > :is(.dashboard-rail,.map-custom-rail,#map2ObjectPopup) {
     grid-column: 1; height: auto; min-height: 150px; max-height: 360px;
   }
-  #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen)) > .inventory-rail.dice-open { height: 560px; max-height: 560px; }
+  #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen)) > .inventory-rail.dice-open { height: 560px; max-height: 560px; }
   html .rail-entry-list { flex: 1 1 auto; min-height: 70px; }
   html .map-workspace-header { gap: 6px; padding: 8px; }
   html .map-workspace-header > label { min-width: 0; max-width: 100%; }
@@ -504,7 +504,7 @@ html .character-hierarchy-panel { min-width: 0; }
 
 /* Trading needs room for prices and actions, with wallet editing on demand. */
 @media(min-width:901px) {
-  #campaignDashboard.map-contents-open:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: 320px minmax(0,1fr) 210px; }
+  #campaignDashboard.map-contents-open:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode)) { grid-template-columns: 320px minmax(0,1fr) 210px; }
 }
 #map2ObjectPopup { font: 14px/1.5 system-ui,sans-serif; border-radius: 6px; }
 #map2PopupContents > label { display: grid; gap: 6px; }
@@ -595,10 +595,10 @@ html #spellAtelier .sa-palette { background-image: linear-gradient(#21181299,#21
 html .ai-message p { font: 15px/1.75 system-ui,sans-serif; }
 html .audio-content :is(p,label,button,input,select),html .character-model-controls :is(label,input,select,button) { font: 14px/1.6 system-ui,sans-serif; }
 @media(min-width:1101px) {
- #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode,.map-contents-open)) { grid-template-columns: 240px minmax(0,1fr) 240px; }
+ #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode,.map-contents-open)) { grid-template-columns: 240px minmax(0,1fr) 240px; }
 }
 @media(min-width:901px) and (max-width:1100px) {
- #campaignDashboard:not(:is(.map-workspace-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode,.map-contents-open)) { grid-template-columns: 220px minmax(0,1fr) 220px; }
+ #campaignDashboard:not(:is(.map-workspace-fullscreen,.chat-fullscreen,.map-dm-fullscreen,.spell-mode,.art-mode,.map-contents-open)) { grid-template-columns: 220px minmax(0,1fr) 220px; }
 }
 @media(max-width:600px) {
  html :is(.modal-content,#artAtelier,#spellAtelier,#campaignDashboard) :is(input:not([type=checkbox]):not([type=range]),select,textarea) { font-size:16px; }

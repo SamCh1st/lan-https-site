@@ -131,6 +131,10 @@ def initialize() -> None:
                 result TEXT NOT NULL
             );
         """)
+        from chat_art import initialize as initialize_chat_art
+        initialize_chat_art(db)
+        from character_memory import initialize as initialize_character_memory
+        initialize_character_memory(db)
         columns = {row["name"] for row in db.execute("PRAGMA table_info(users)")}
         from campaign_maps import initialize as initialize_maps
         initialize_maps(db)
@@ -146,6 +150,8 @@ def initialize() -> None:
         if "motion" not in position_columns:
             db.execute("ALTER TABLE campaign_player_positions ADD COLUMN motion TEXT NOT NULL DEFAULT 'idle'")
         ai_message_columns = {row["name"] for row in db.execute("PRAGMA table_info(campaign_ai_messages)")}
+        if "image_ids" not in ai_message_columns:
+            db.execute("ALTER TABLE campaign_ai_messages ADD COLUMN image_ids TEXT NOT NULL DEFAULT '[]'")
         if "audience_user_ids" not in ai_message_columns:
             db.execute("ALTER TABLE campaign_ai_messages ADD COLUMN audience_user_ids TEXT NOT NULL DEFAULT '[]'")
         if "chat_id" not in ai_message_columns:
@@ -625,6 +631,23 @@ def get_visible_upload(user_id: int, upload_id: int) -> tuple[Path, str] | None:
             for item in list_work(user_id)
         )
         if not visible:
+            # Sharing an attachment grants access only to people who can read that message.
+            with connect() as db:
+                shares = db.execute("""SELECT campaign_id, chat_id, audience_user_ids
+                    FROM campaign_ai_messages m WHERE deleted_at IS NULL
+                    AND (EXISTS (SELECT 1 FROM json_each(image_ids) WHERE value = ?)
+                    OR EXISTS (SELECT 1 FROM campaign_chat_art a WHERE a.message_id=m.id AND a.active=1
+                        AND (a.image_id=? OR a.source_image_id=?)))""", (upload_id, upload_id, upload_id)).fetchall()
+            for share in shares:
+                if not has_campaign_access(user_id, share['campaign_id']):
+                    continue
+                if share['chat_id'] and not campaign_chat(user_id, share['campaign_id'], share['chat_id']):
+                    continue
+                audience = json.loads(share['audience_user_ids'] or '[]')
+                if campaign_role(user_id, share['campaign_id']) == 'creator' or not audience or user_id in audience:
+                    visible = True
+                    break
+        if not visible:
             # Party portraits remain visible on the map without exposing character cards.
             with connect() as db:
                 visible=bool(db.execute("""SELECT 1 FROM work_items w
@@ -829,7 +852,7 @@ def list_ai_messages(user_id: int, campaign_id: int, addressed_only: bool = Fals
                       campaign_ai_messages.chat_id, campaign_ai_messages.persona_type, campaign_ai_messages.persona_id,
                       campaign_ai_messages.persona_name, campaign_ai_messages.role,
                       campaign_ai_messages.addressed_to_ai, campaign_ai_messages.audience_user_ids, campaign_ai_messages.message,
-                      campaign_ai_messages.generation_status,
+                      campaign_ai_messages.generation_status, campaign_ai_messages.image_ids,
                       campaign_ai_messages.created_at, users.username AS author_username
                FROM campaign_ai_messages LEFT JOIN users ON users.id = campaign_ai_messages.user_id
                WHERE campaign_ai_messages.campaign_id = ? AND campaign_ai_messages.deleted_at IS NULL""" + clause +
@@ -840,12 +863,15 @@ def list_ai_messages(user_id: int, campaign_id: int, addressed_only: bool = Fals
     result = []
     for row in rows:
         item = dict(row)
+        item["image_ids"] = json.loads(item.get("image_ids") or "[]")
         try:
             item["audience_user_ids"] = [int(value) for value in json.loads(item.get("audience_user_ids") or "[]")]
         except (ValueError, TypeError, json.JSONDecodeError):
             item["audience_user_ids"] = []
         if creator or not item["audience_user_ids"] or user_id in item["audience_user_ids"]:
             result.append(item)
+    from chat_art import for_messages
+    for_messages(user_id, campaign_id, result)
     return result
 
 
@@ -861,21 +887,22 @@ def add_ai_message(
     audience_user_ids: list[int] | None = None,
     chat_id: int | None = None,
     generation_status: str = "complete",
+    image_ids: list[int] | None = None,
 ) -> dict:
     audience = json.dumps(sorted(set(int(value) for value in (audience_user_ids or []))))
     with connect() as db:
         cursor = db.execute(
             """INSERT INTO campaign_ai_messages
-               (campaign_id,chat_id,user_id,persona_type,persona_id,persona_name,role,addressed_to_ai,audience_user_ids,message,generation_status)
-               VALUES (?,?,?,?,?,?,?,?,?,?,?)""",
-            (campaign_id, chat_id, user_id, persona_type, persona_id, persona_name, role, int(addressed_to_ai), audience, message, generation_status),
+               (campaign_id,chat_id,user_id,persona_type,persona_id,persona_name,role,addressed_to_ai,audience_user_ids,message,generation_status,image_ids)
+               VALUES (?,?,?,?,?,?,?,?,?,?,?,?)""",
+            (campaign_id, chat_id, user_id, persona_type, persona_id, persona_name, role, int(addressed_to_ai), audience, message or " ", generation_status, json.dumps(image_ids or [])),
         )
         row = db.execute(
             """SELECT campaign_ai_messages.id, campaign_ai_messages.user_id,
                       campaign_ai_messages.chat_id, campaign_ai_messages.persona_type, campaign_ai_messages.persona_id,
                       campaign_ai_messages.persona_name, campaign_ai_messages.role,
                       campaign_ai_messages.addressed_to_ai, campaign_ai_messages.audience_user_ids, campaign_ai_messages.message,
-                      campaign_ai_messages.generation_status,
+                      campaign_ai_messages.generation_status, campaign_ai_messages.image_ids,
                       campaign_ai_messages.created_at, users.username AS author_username
                FROM campaign_ai_messages LEFT JOIN users ON users.id = campaign_ai_messages.user_id
                WHERE campaign_ai_messages.id = ?""",
@@ -883,6 +910,7 @@ def add_ai_message(
         ).fetchone()
     item = dict(row)
     item["audience_user_ids"] = json.loads(item.get("audience_user_ids") or "[]")
+    item["image_ids"] = json.loads(item.get("image_ids") or "[]")
     return item
 
 
@@ -895,11 +923,11 @@ def get_ai_message(campaign_id: int, message_id: int) -> dict | None:
     return dict(row) if row else None
 
 
-def update_ai_message(campaign_id: int, message_id: int, message: str) -> bool:
+def update_ai_message(campaign_id: int, message_id: int, message: str, image_ids: list[int] | None = None) -> bool:
     with connect() as db:
         cursor = db.execute(
-            "UPDATE campaign_ai_messages SET message = ? WHERE campaign_id = ? AND id = ?",
-            (message, campaign_id, message_id),
+            "UPDATE campaign_ai_messages SET message = ?, image_ids = COALESCE(?, image_ids) WHERE campaign_id = ? AND id = ?",
+            (message or " ", json.dumps(image_ids) if image_ids is not None else None, campaign_id, message_id),
         )
     return cursor.rowcount == 1
 

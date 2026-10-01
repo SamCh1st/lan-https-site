@@ -88,3 +88,17 @@ class LocalArtTests(unittest.TestCase):
             self.assertEqual(design.call_args.args[2],512)
             self.assertEqual(design.call_args.args[3],['helper'] if enabled else [])
             self.assertFalse(design.call_args.args[5])
+
+
+class ModelCacheTests(unittest.TestCase):
+    def test_verified_cache_and_changed_source_fallback(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root=Path(folder)/'original';cache=Path(folder)/'fast';root.mkdir();cache.mkdir();entries={}
+            for name in ('diffusion.gguf','encoder.gguf','vae.safetensors'):
+                source=root/name;target=cache/name;source.write_bytes(b'weights');target.write_bytes(b'weights')
+                a,b=source.stat(),target.stat();entries[name]={'source_size':a.st_size,'source_mtime':a.st_mtime_ns,'cached_size':b.st_size,'cached_mtime':b.st_mtime_ns}
+            (root/'model-cache.json').write_text(json.dumps({'directory':str(cache),'files':entries}))
+            with patch.object(local_art,'ROOT',root):
+                self.assertEqual(local_art.model_directory(),cache)
+                (root/'encoder.gguf').write_bytes(b'updated model')
+                self.assertEqual(local_art.model_directory(),root)

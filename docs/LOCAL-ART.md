@@ -31,3 +31,21 @@ On the 6 GB laptop GPU, test generation took about 27 seconds at 512 pixels and
 helper advice and other GPU activity can change these times.
 
 Sources: [FLUX.2 Klein](https://bfl.ai/models/flux-2-klein), [engine generation and editing instructions](https://github.com/leejet/stable-diffusion.cpp/blob/master/docs/flux2.md).
+
+## Image references
+
+In **Ask AI to draw → Image references**, import up to three PNG, JPEG or WebP images (under 5 MB each), or choose images attached to visible campaign records. Add a note to each image to explain its role, such as armor, colors, pose or style. References are separate from canvas layers and reset when switching campaigns.
+
+With references attached, an installed Ollama vision model reads each image and shows its description. A vision-capable campaign helper is preferred, then the campaign model, then another installed vision model. This step runs even when optional **Helper advice** is off. If image analysis fails, generation stops with an error instead of silently ignoring references.
+
+The local image generator receives the actual images, their descriptions, your per-image notes and your artwork prompt. **Edit / add to current drawing** also includes the current canvas as the first image. Image references require **Local image model**; experimental vector drawing does not support them. References add processing time and memory usage. Images are normalized to at most 1024 pixels per side for analysis and generation; originals remain unchanged. The server checks access to every selected image again when generation starts.
+
+## Faster model loading from an internal drive
+
+If the project is on an external drive, run `python scripts/cache_local_art.py` on the server computer. It copies the three installed model files (about 9 GB) to `%LOCALAPPDATA%/InHouseDnD/image-model-cache` on Windows, verifies each copy with SHA-256, and records the location in `local-art/model-cache.json`. A different destination can be supplied as the first argument. The original installation stays intact. This is a one-time disk copy, not a model download or quality change.
+
+The renderer uses the verified cache while source and cached file sizes and timestamps match. If files change or the cache is unavailable, it falls back to the original installation. Re-run the script after replacing models. Keep at least 2 GB free beyond the model size during setup. Deleting `local-art/model-cache.json` disables the cache; cached copies can then be removed normally.
+
+Chat image preparation searches relevant campaign candidates before asking the helper to select records. The helper stays loaded between search batches and the final prompt rewrite instead of reloading for each call. Portrait/reference images still receive vision analysis and are passed to the image engine. The chat shows preparation and engine progress. Successful engine timing details are kept in `local-art/last-render.log`, and server logs include prompt-preparation and total image-job duration.
+
+On the RTX 4070 host, a September 30, 2026 test with a 512-pixel portrait prompt and one image reference took 38.44 seconds inside the engine and 66.11 seconds including process startup when using the verified internal SSD cache. An earlier external-drive render logged 229.47 engine seconds, mostly model reads. These are renderer measurements, not full chat latency: campaign prompt research, vision analysis, queueing and other machine activity add time. Prompts and references differed between the two measurements.

@@ -26,12 +26,18 @@
   <script>try{if(localStorage.getItem('in-house-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(error){}</script>
   <link rel="stylesheet" href="map-workspace.css?v=20260920-square-palette">
   <link rel="stylesheet" href="audio-library.css?v=20260917">
-  <link rel="stylesheet" href="realm-layout.css?v=20260919-compact-layout">
-  <link rel="stylesheet" href="map-image-picker.css?v=20260920-square-cards">
+  <link rel="stylesheet" href="realm-layout.css?v=inline-chat-20260919-compact-layout">
+  <link rel="stylesheet" href="map-image-picker.css?v=20260930-shared">
+  <link rel="stylesheet" href="chat-images.css?v=20260930">
+  <link rel="stylesheet" href="character-memory.css?v=20260930-memory">
+  <link rel="stylesheet" href="chat-art.css?v=20260930-editor">
+  <link rel="stylesheet" href="chat-format.css?v=20260930">
+  <link rel="stylesheet" href="chat-fullscreen.css?v=20260930-header-style">
   <link rel="stylesheet" href="map-splines.css?v=20260920-detail-scale">
   <link rel="stylesheet" href="map-opening.css?v=20260920-open-checks-final">
   <link rel="stylesheet" href="map-part-cards.css?v=20260919-catalog">
   <link rel="stylesheet" href="campaign-transfer.css?v=20260930-layout">
+  <link rel="stylesheet" href="card-images.css?v=20260930">
 </head>
 <body>
   <div class="mist"></div>
@@ -128,7 +134,9 @@
       </div>
       <div class="campaign-view d-none" id="campaignView">
         <header class="campaign-view-head">
-          <button class="campaign-back" id="campaignBack" type="button">← All campaigns</button>
+          <div class="campaign-header-left"><button class="campaign-back" id="campaignBack" type="button">← All campaigns</button>
+            <div id="aiConversationStyle" class="campaign-conversation-style d-none"><label for="aiConversationMode">Conversation style</label><select id="aiConversationMode" class="form-select" aria-describedby="aiConversationModeHelp"><option value="dnd">D&amp;D table conversation</option><option value="medieval">Medieval conversation</option><option value="modern">Modern conversation</option></select><small id="aiConversationModeHelp" class="visually-hidden"></small></div>
+          </div>
           <div class="campaign-title-block"><p class="eyebrow mb-2">CAMPAIGN</p><h2 id="activeCampaignName"></h2></div>
         </header>
         <section class="party-shelf">
@@ -153,9 +161,12 @@
               <div class="ai-persona-dock" id="aiPersonaDock" aria-label="Choose who Ollama answers as"></div>
               <form class="ai-chat-form" id="aiChatForm">
                 <div class="ai-undo-delete d-none" id="aiUndoDelete"><span>Message deleted.</span><button type="button">Undo</button></div>
-                <div class="ai-chat-compose"><div class="ai-speaker-picker"><button id="aiSpeakerButton" type="button" aria-expanded="false" title="Choose who you write as">♙</button><div class="ai-speaker-menu d-none" id="aiSpeakerMenu"></div></div><textarea id="aiChatInput" rows="3" maxlength="12000" placeholder="Write dialogue, an action, or table talk…" required></textarea><button class="ai-address-button" type="submit">Send</button></div>
+                <div class="ai-chat-compose"><div class="ai-speaker-picker"><button id="aiSpeakerButton" type="button" aria-expanded="false" title="Choose who you write as">♙</button><div class="ai-speaker-menu d-none" id="aiSpeakerMenu"></div></div><textarea id="aiChatInput" rows="3" maxlength="12000" placeholder="Write dialogue, an action, or table talk…"></textarea><button class="ai-address-button" type="submit">Send</button></div>
+                <details id="aiChatExtras" class="chat-compose-extras" open><summary>Images &amp; writing options <span id="aiChatImageCount"></span></summary>
+                <div id="aiChatImages"></div>
                 <div class="ai-chat-options"><span><label class="ai-address-toggle"><input id="aiAddressToggle" type="checkbox" checked> Address this message to Ollama</label><details class="ai-chat-audience"><summary>Who can hear this?</summary><div id="aiChatAudience"></div></details></span><small>Send only posts the message. Click a character card above when you want Ollama to answer; unchecked table talk is ignored.</small></div>
                 <p class="form-error" id="aiChatError" role="alert"></p>
+                </details>
               </form>
             </section>
             <div class="map-placeholder map-world d-none" id="mapPlaceholder" hidden inert>
@@ -331,7 +342,7 @@
   <div class="modal fade" id="recordDetailModal" tabindex="-1" aria-labelledby="detailTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"><div class="modal-content detail-scroll">
       <div class="modal-header"><div><div class="record-type-badge mb-2" id="detailType"></div><h2 class="modal-title" id="detailTitle"></h2></div><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div>
-      <div class="modal-body">
+      <div class="modal-body"><button id="detailMemoryToggle" class="memory-page-toggle" type="button" aria-expanded="false" hidden>Memories ▸</button><div id="detailFront">
         <div class="detail-hero d-none" id="detailHero"><img id="detailImage" alt=""></div>
         <p class="detail-description" id="detailDescription"></p>
         <div class="detail-facts" id="detailFacts"></div>
@@ -344,6 +355,7 @@
           <p class="form-error" id="detailError" role="alert"></p>
         </div>
       </div>
+      <section id="detailMemoryPage" class="character-memory" hidden aria-label="Character memories"></section></div>
       <div class="modal-footer"><button class="btn btn-outline-light d-none" id="detailCopyReference" type="button">Create playable copy</button><button class="btn btn-outline-light" id="detailEditButton" type="button">Edit record</button><button class="btn btn-accent" id="detailSaveNotes" type="button">Save notes</button></div>
     </div></div>
   </div>
@@ -362,7 +374,7 @@
   </div>
   <div class="modal fade" id="mapIconModal" tabindex="-1" aria-labelledby="mapIconTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-dialog-scrollable"><div class="modal-content"><form id="mapIconForm"><div class="modal-header"><h2 class="modal-title fs-5" id="mapIconTitle">Create map icon</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><div class="image-uploader"><div class="image-preview" id="mapIconPreview"><span>⌖</span></div><div><strong>Icon image</strong><small>Choose the marker shown over checkpoints.</small><label class="image-pick">Choose image<input name="image_file" type="file" accept="image/png,image/jpeg,image/gif,image/webp"></label></div><input name="image_id" type="hidden"></div><label>Name<input class="form-control" name="name" required maxlength="60"></label><label class="important-toggle"><input type="checkbox" name="important"><span>Mark as important</span><small>Uses a brighter legendary marker.</small></label><label>Description<textarea class="form-control" name="description" rows="4" maxlength="500"></textarea></label><p class="form-error" id="mapIconError"></p></div><div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit">Create icon</button></div></form></div></div></div>
   <div class="modal fade" id="mapCheckpointModal" tabindex="-1" aria-labelledby="mapCheckpointTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><form id="mapCheckpointForm"><div class="modal-header"><h2 class="modal-title fs-5" id="mapCheckpointTitle">Map checkpoint</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><input name="object_id" type="hidden"><label>Checkpoint icon<select class="form-control" name="icon_id"><option value="">No icon</option></select></label><p class="modal-intro">Assign an icon to this map object. Players control its visibility with the icon filter.</p></div><div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit">Save checkpoint</button></div></form></div></div></div>
-  <div class="modal fade" id="aiMessageModal" tabindex="-1" aria-labelledby="aiMessageModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><form id="aiMessageModalForm"><div class="modal-header"><h2 class="modal-title fs-5" id="aiMessageModalTitle">Edit message</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><input name="message_id" type="hidden"><input name="action" type="hidden"><label id="aiMessageModalLabel">Message<textarea class="form-control" name="text" rows="7" maxlength="12000" required></textarea></label><p class="modal-intro" id="aiMessageModalHelp"></p><p class="form-error" id="aiMessageModalError" role="alert"></p></div><div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit" id="aiMessageModalSubmit">Save</button></div></form></div></div></div>
+  <div class="modal fade" id="aiMessageModal" tabindex="-1" aria-labelledby="aiMessageModalTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered"><div class="modal-content"><form id="aiMessageModalForm"><div class="modal-header"><h2 class="modal-title fs-5" id="aiMessageModalTitle">Edit message</h2><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body"><input name="message_id" type="hidden"><input name="action" type="hidden"><label id="aiMessageModalLabel">Message<textarea class="form-control" name="text" rows="7" maxlength="12000" required></textarea></label><div id="aiMessageEditImages" class="chat-image-tray"></div><p class="modal-intro" id="aiMessageModalHelp"></p><p class="form-error" id="aiMessageModalError" role="alert"></p></div><div class="modal-footer"><button class="btn btn-outline-dark" type="button" data-bs-dismiss="modal">Cancel</button><button class="btn btn-accent" type="submit" id="aiMessageModalSubmit">Save</button></div></form></div></div></div>
   <div class="modal fade" id="diceModal" tabindex="-1" aria-labelledby="diceTitle" aria-hidden="true"><div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h2 class="modal-title fs-5" id="diceTitle">Dice &amp; Table Rules</h2><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body">
     <form id="diceForm"><div class="tt-grid"><label>Dice expression<input class="form-control" id="diceExpression" value="1d20 + 0" maxlength="100" required></label><label>D20 mode<select class="form-control" id="diceMode"><option value="normal">Normal</option><option value="advantage">Advantage</option><option value="disadvantage">Disadvantage</option></select></label><button class="btn btn-accent" type="submit">Roll dice</button></div><div class="tt-actions"><button type="button" data-dice="4">d4</button><button type="button" data-dice="6">d6</button><button type="button" data-dice="8">d8</button><button type="button" data-dice="10">d10</button><button type="button" data-dice="12">d12</button><button type="button" data-dice="20">d20</button><button type="button" data-dice="100">d100</button></div><output id="diceResult" class="tt-dice-total" aria-live="polite">—</output><p class="form-error" id="diceError" role="alert"></p></form>
     <p class="tt-help">Local rolls, visible on this device only. Announce the total to the table. This tray does not apply damage or spend resources.</p><ol id="diceHistory" class="tt-roll-history" aria-label="Recent local rolls"></ol>
@@ -382,7 +394,7 @@
   <script src="spell-equations.js?v=20260915"></script>
 <script src="spell-preview.js?v=20260915"></script>
 <script src="spell-atelier.js?v=20260915"></script>
-<script src="art-atelier.js?v=20260919-cutout-check"></script>
+<script src="art-atelier.js?v=20260930-shared-picker"></script>
   <script src="map-mobile-raster.js?v=20260920-spline-repair3"></script>
   <script src="map-tile-paint.js?v=20260920-walk-over"></script>
   <script src="map-art.js?v=20260920-spline-repair3"></script>
@@ -408,7 +420,7 @@
   <script src="map-opening.js?v=20260929-two-gates"></script>
   <script src="map-open-roll.js?v=20260929-loot-opening"></script>
   <script src="map-part-cards.js?v=20260922-existing-types"></script>
-  <script src="map-image-picker.js?v=20260920-square-cards"></script>
+  <script src="map-image-picker.js?v=20260930-shared"></script>
   <script src="map-tiled-parts.js?v=20260919-outdoor-final"></script>
   <script src="map-materials.js?v=20260920-spline-repair3"></script>
   <script src="map-effects.js?v=20260919-ripple-flow"></script>
@@ -430,10 +442,17 @@
   <script src="starter-art.js?v=20260922-existing-types"></script>
   <script src="equipment.js?v=20260919-shared-cards"></script>
   <script src="campaign-transfer.js?v=20260930"></script>
-  <script src="app.js?v=20260930-campaign-transfer"></script>
+  <script src="chat-images.js?v=20260930"></script>
+  <script src="chat-format.js?v=20260930-texting"></script>
+  <script src="chat-art.js?v=20260930-progress"></script>
+  <script src="chat-speaker-menu.js?v=20260930"></script>
+  <script src="chat-fullscreen.js?v=20260930"></script>
+  <script src="character-memory.js?v=20260930-memory"></script>
+  <script src="chat-editor.js?v=20260930-end-continuation"></script>
+  <script src="app.js?v=20260930-header-style"></script>
   <script src="audio-library.js?v=20260917"></script>
-  <script src="realm-resize.js?v=20260919"></script>
-  <script src="realm-container-resize.js?v=20260919-outer-frame"></script>
+  <script src="realm-resize.js?v=20260930-chat"></script>
+  <script src="realm-container-resize.js?v=inline-chat-20260919-outer-frame"></script>
 </body>
 </html>
 

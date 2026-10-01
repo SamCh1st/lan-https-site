@@ -1,0 +1,50 @@
+.chat-fullscreen-entry{display:flex;justify-content:flex-end;flex:0 0 auto;padding:5px 9px;border-bottom:1px solid #89613255}
+.chat-fullscreen-entry button,#chatFullscreenBar button{border:1px solid #896132;background:#302315;color:#ead29b;padding:6px 10px;font:12px Georgia,serif}
+#chatFullscreenBar{display:none}
+#campaignDashboard.chat-fullscreen{display:grid!important;grid-template-columns:240px minmax(0,1fr) 240px!important;grid-template-rows:auto minmax(0,1fr)!important;width:100vw!important;max-width:none!important;height:100dvh!important;min-height:0!important;max-height:none!important;margin:0!important;padding:8px!important;gap:8px!important;box-sizing:border-box;overflow:hidden;background:var(--realm-panel,#20150e)}
+#campaignDashboard.chat-fullscreen-fallback{position:fixed!important;inset:0;z-index:3000}
+#campaignDashboard.chat-fullscreen.chat-hide-left{grid-template-columns:0 minmax(0,1fr) 240px!important}
+#campaignDashboard.chat-fullscreen.chat-hide-right{grid-template-columns:240px minmax(0,1fr) 0!important}
+#campaignDashboard.chat-fullscreen.chat-hide-left.chat-hide-right{grid-template-columns:0 minmax(0,1fr) 0!important}
+#campaignDashboard.chat-fullscreen>#chatFullscreenBar{display:flex;grid-column:1/-1;grid-row:1;align-items:center;gap:8px;min-width:0}
+#chatFullscreenBar strong{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--realm-ink,#ead29b)}
+#campaignDashboard.chat-fullscreen>.map-stage{grid-column:2!important;grid-row:2!important;height:100%!important;min-height:0!important;min-width:0!important;width:100%!important;overflow:hidden}
+#campaignDashboard.chat-fullscreen #aiCampaignPanel{height:100%!important;min-height:0!important;max-height:none!important}
+#campaignDashboard.chat-fullscreen #aiChatLog{min-height:0!important;overflow:auto;flex:1 1 0}
+#campaignDashboard.chat-fullscreen #aiChatForm{max-height:45dvh;overflow:auto;flex:0 0 auto}
+#campaignDashboard.chat-fullscreen #aiChatInput{max-height:20dvh}
+#campaignDashboard.chat-fullscreen .chat-fullscreen-entry{display:none}
+#campaignDashboard.chat-fullscreen>[data-chat-active=true]{display:flex!important;flex-direction:column;grid-row:2!important;height:100%!important;min-height:0!important;max-height:none!important;overflow:auto;width:100%!important}
+#campaignDashboard.chat-fullscreen>[data-chat-side=left]{grid-column:1!important}
+#campaignDashboard.chat-fullscreen>[data-chat-side=right]{grid-column:3!important}
+#campaignDashboard.chat-fullscreen>[data-chat-active=false],#campaignDashboard.chat-fullscreen.chat-hide-left>[data-chat-side=left],#campaignDashboard.chat-fullscreen.chat-hide-right>[data-chat-side=right]{display:none!important}
+#campaignDashboard.chat-fullscreen.chat-compact-panels{grid-template-columns:minmax(0,1fr)!important;position:relative}
+#campaignDashboard.chat-fullscreen.chat-compact-panels.chat-hide-left.chat-hide-right{grid-template-columns:minmax(0,1fr)!important}
+#campaignDashboard.chat-fullscreen-fallback.chat-compact-panels{position:fixed!important}
+#campaignDashboard.chat-fullscreen.chat-compact-panels>.map-stage{grid-column:1!important}
+#campaignDashboard.chat-fullscreen.chat-compact-panels>[data-chat-active=true]{position:absolute;top:58px;bottom:8px;width:min(310px,calc(100% - 48px))!important;height:auto!important;z-index:20;box-shadow:0 8px 28px #0009;background:var(--realm-panel,#20150e)}
+#campaignDashboard.chat-fullscreen.chat-compact-panels>[data-chat-side=left]{left:8px}#campaignDashboard.chat-fullscreen.chat-compact-panels>[data-chat-side=right]{right:8px}
+@media(max-width:600px){#chatFullscreenBar strong{display:none}#chatFullscreenBar{justify-content:space-between}#chatFullscreenBar button{padding:7px;font-size:11px}}
+
+body:has(#campaignDashboard.chat-fullscreen) .realm-menu-button{display:none!important}
+
+.chat-compose-extras{margin-top:7px;min-width:0}.chat-compose-extras>summary{cursor:pointer;padding:5px 0;font-size:12px;color:inherit}.chat-compose-extras[open]>summary{margin-bottom:8px}#aiChatImageCount{font-size:11px}
+
+/* Use the shared drag sizes once the desktop splitter has measured the visible rails. */
+#campaignDashboard.chat-fullscreen.realm-resizable-columns:not(.chat-compact-panels){grid-template-columns:var(--realm-columns)!important;position:relative}
+#campaignDashboard.chat-fullscreen-fallback.realm-resizable-columns{position:fixed!important}
+
+
+#aiSpeakerMenu{position:fixed;inset:auto;margin:0;z-index:4000;box-sizing:border-box;overscroll-behavior:contain}
+#aiSpeakerMenu::backdrop{background:transparent;pointer-events:none}
+#aiChatForm.speaker-menu-fallback:has(#aiSpeakerMenu:not(.d-none)){position:relative;z-index:60;overflow:visible!important}
+
+.campaign-header-left{display:grid;justify-items:start;gap:8px;min-width:0}
+.campaign-conversation-style{width:220px;max-width:100%}
+.campaign-conversation-style label{display:block;margin-bottom:5px;color:var(--realm-accent,#d9b66b);font:11px Georgia,serif;letter-spacing:.08em;text-transform:uppercase}
+html #aiConversationMode{width:100%;min-height:36px;padding:7px 30px 7px 10px;border:1px solid var(--realm-border,#896132);border-radius:3px;background-color:var(--realm-panel,#211711);color:var(--realm-ink,#ead29b);font:13px Georgia,serif;box-shadow:inset 0 1px 4px #0002;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='m2 2 4 4 4-4' fill='none' stroke='%23b18c4e' stroke-width='1.5'/%3E%3C/svg%3E");background-size:12px 8px;background-position:right 10px center;background-repeat:no-repeat}
+html #aiConversationMode:hover:not(:disabled),html #aiConversationMode:focus{border-color:var(--realm-gold,#cba65b)}
+html #aiConversationMode:focus-visible{outline:2px solid var(--realm-gold,#cba65b);outline-offset:2px}
+html #aiConversationMode:disabled{opacity:.65;cursor:default}
+html #aiConversationMode option{background:var(--realm-panel,#211711);color:var(--realm-ink,#ead29b)}
+@media(max-width:600px){.campaign-header-left{width:100%}.campaign-conversation-style{width:min(260px,100%)}}

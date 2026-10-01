@@ -1,6 +1,7 @@
 """Local pixel artwork, isolated from the website and serialized on the GPU."""
 from pathlib import Path
 from contextlib import ExitStack
+import json
 import secrets
 import subprocess
 import tempfile
@@ -21,11 +22,23 @@ def stop_process(process):
 def ready():
     return all((ROOT / p).is_file() for p in ('bin/sd-cli.exe', 'diffusion.gguf', 'encoder.gguf', 'vae.safetensors'))
 
+def model_directory():
+    # A copied project or updated model automatically falls back to its installed files.
+    try:
+        manifest=json.loads((ROOT/'model-cache.json').read_text(encoding='utf-8'))
+        directory=Path(manifest['directory'])
+        for name in ('diffusion.gguf','encoder.gguf','vae.safetensors'):
+            source=(ROOT/name).stat();cached=(directory/name).stat();entry=manifest['files'][name]
+            if (source.st_size,source.st_mtime_ns,cached.st_size,cached.st_mtime_ns)!=(entry['source_size'],entry['source_mtime'],entry['cached_size'],entry['cached_mtime']):return ROOT
+        return directory
+    except (OSError,ValueError,KeyError,TypeError):return ROOT
+
+
 class ImageMemoryError(ValueError):
     pass
 
 
-def render(prompt, source=None, size=512):
+def render(prompt, source=None, size=512, references=None):
     if not ready():
         raise ValueError('Local image models are not installed. Run scripts/setup_local_art.py on the server computer first.')
     if size not in (512, 768, 1024):
@@ -34,15 +47,15 @@ def render(prompt, source=None, size=512):
         yield {'event': 'status', 'message': 'Waiting for the local image engine…'}
     try:
         try:
-            yield from _render_once(prompt, source, size, cpu_vae=False)
+            yield from _render_once(prompt, source, size, cpu_vae=False, references=references)
         except ImageMemoryError:
             yield {'event': 'status', 'message': 'GPU memory is tight. Retrying with slower CPU image decoding…'}
-            yield from _render_once(prompt, source, size, cpu_vae=True)
+            yield from _render_once(prompt, source, size, cpu_vae=True, references=references)
     finally:
         GPU.release()
 
 
-def _render_once(prompt, source, size, cpu_vae):
+def _render_once(prompt, source, size, cpu_vae, references=None):
     process = None
     try:
         with ExitStack() as cleanup:
@@ -51,14 +64,16 @@ def _render_once(prompt, source, size, cpu_vae):
             output = folder / 'image.png'
             prompt_file = folder / 'prompt.txt'
             prompt_file.write_text(prompt, encoding='utf-8')
-            args = [str(ROOT / 'bin/sd-cli.exe'), '--diffusion-model', str(ROOT / 'diffusion.gguf'),
-                    '--llm', str(ROOT / 'encoder.gguf'), '--vae', str(ROOT / 'vae.safetensors'),
+            models=model_directory()
+            args = [str(ROOT / 'bin/sd-cli.exe'), '--diffusion-model', str(models / 'diffusion.gguf'),
+                    '--llm', str(models / 'encoder.gguf'), '--vae', str(models / 'vae.safetensors'),
                     '--prompt-file', str(prompt_file), '--output', str(output), '--width', str(size),
                     '--height', str(size), '--cfg-scale', '1', '--steps', '4', '--sampling-method', 'euler',
                     '--offload-to-cpu', '--backend', 'te=cpu,vae='+('cpu' if cpu_vae else 'cuda0')+',diffusion=cuda0',
                     '--max-vram', '-1', '--diffusion-fa', '--vae-tiling', '--seed', str(secrets.randbelow(2**31)),
                     '--disable-image-metadata']
             if source: args += ['--ref-image', str(source)]
+            for reference in references or []: args += ['--ref-image', str(reference)]
             yield {'event': 'status', 'message': 'Loading local image model (CPU text encoding, '+('CPU' if cpu_vae else 'GPU')+' image decoding)…'}
             log = cleanup.enter_context((folder / 'engine.log').open('w+b'))
             process = subprocess.Popen(args, stdout=log, stderr=subprocess.STDOUT,
@@ -77,13 +92,35 @@ def _render_once(prompt, source, size, cpu_vae):
                     raise ImageMemoryError('The image engine ran out of available memory. Stop other GPU-heavy tasks or try 512 pixels, then retry. Details: local-art/last-error.log. Your artwork is unchanged.')
                 raise ValueError('Local image generation failed. See local-art/last-error.log on the server computer. Your artwork is unchanged.')
             if not output.is_file(): raise ValueError('The local engine did not produce an image.')
+            log.flush();log.seek(0)
+            (ROOT / 'last-render.log').write_bytes(log.read())
             image = output.read_bytes()
             if not image.startswith(b'\x89PNG\r\n\x1a\n'): raise ValueError('The engine returned an invalid image.')
             yield {'event': 'pixels', 'data': image}
     finally:
         stop_process(process)
 
-def design(prompt, source, size, helpers, stream_ai, use_references=True, transparent_background=True):
+def design(prompt, source, size, helpers, stream_ai, use_references=True, transparent_background=True, image_references=None, vision_model=None):
+    # Keep normalized reference files alive through rendering and cancellation.
+    import art_references
+    with tempfile.TemporaryDirectory(prefix='art-references-') as folder:
+        paths, descriptions = [], []
+        for index, reference in enumerate(image_references or []):
+            yield {'event': 'status', 'message': f'Reading reference {index + 1}: {reference["name"]}...'}
+            path = art_references.prepare(reference, Path(folder) / f'reference-{index + 1}.png')
+            description = art_references.describe(reference, path, prompt, vision_model, stream_ai)
+            paths.append(path)
+            descriptions.append(f'Reference {index + 1}: {reference["name"]}. User guidance: {reference["note"]}. Observed: {description}')
+            yield {'event': 'image_reference', 'index': index, 'name': reference['name'], 'description': description, 'model': vision_model}
+        guidance = ''
+        if paths:
+            guidance = '\nUse the supplied reference images together with these observations. Follow the user request and per-image guidance; do not reproduce a collage or unrelated elements.\n' + '\n'.join(descriptions)
+            if source:
+                guidance += '\nThe first supplied image is the canvas to edit. Reference 1 onward refers to the subsequent images.'
+        yield from _design(prompt + guidance, source, size, helpers, stream_ai, use_references, transparent_background, paths)
+
+
+def _design(prompt, source, size, helpers, stream_ai, use_references=True, transparent_background=True, reference_paths=None):
     import art_designer
     if not ready(): raise ValueError('Local image model setup is not complete yet. Run scripts/setup_local_art.py on the server computer.')
     sources = []
@@ -116,7 +153,7 @@ def design(prompt, source, size, helpers, stream_ai, use_references=True, transp
     if transparent_background:
         from background_removal import PROMPT, remove_background
         brief += '\nOutput requirements: ' + PROMPT
-    for event in render(brief, source, size):
+    for event in render(brief, source, size, references=reference_paths) if reference_paths else render(brief, source, size):
         if transparent_background and event.get('event') == 'pixels':
             yield {'event': 'status', 'message': 'Removing the background with local AI…'}
             event = {**event, 'data': remove_background(event['data'])}

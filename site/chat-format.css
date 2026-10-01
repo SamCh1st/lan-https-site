@@ -1,0 +1,5 @@
+.chat-style-thought{color:#c4aacd;font-style:italic}.chat-style-emphasis{color:#ffdc86;font-weight:700}.chat-style-speech{color:#f4e2bc}.chat-style-whisper{color:#c8b6ed;font-style:italic}
+.chat-style-scene{color:#bfdfd8;background:#24413d;padding:2px 5px;border-radius:3px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+.chat-style-written,.chat-style-written-block{color:#f1dcab;background:#433521;border:1px solid #766140;padding:2px 5px;border-radius:3px;font-family:ui-monospace,monospace;box-decoration-break:clone;-webkit-box-decoration-break:clone;white-space:pre-wrap}
+.chat-style-written-block{display:block;margin:8px 0;padding:12px;overflow-wrap:anywhere}
+.chat-format-guide{margin-top:7px;font-size:12px}.chat-format-guide>summary{cursor:pointer}.chat-format-guide[open]{max-height:260px;overflow:auto}.chat-format-example{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5px;align-items:center;margin:8px 0}.chat-format-example>span:last-child{grid-column:1/-1}.chat-format-example button{white-space:pre-wrap;overflow-wrap:anywhere;text-align:left}.chat-format-guide p{font-size:12px;line-height:1.5}

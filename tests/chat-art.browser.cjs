@@ -1,0 +1,51 @@
+const {chromium}=require(process.env.TABLETOP_PLAYWRIGHT||'C:/Users/eric_/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const assert=require('node:assert/strict');
+(async()=>{
+ const browser=await chromium.launch({channel:'msedge',headless:true});
+ try{
+  const base='https://127.0.0.1:8770',context=await browser.newContext({ignoreHTTPSErrors:true,viewport:{width:1280,height:1000}});
+  assert.equal((await context.request.post(base+'/api/login',{data:{username:'Player',password:'Test password 12345'}})).status(),200);
+  const work=async()=>(await(await context.request.get(base+'/api/work')).json()).items;
+  const records=await work(),campaign=records.find(r=>r.content.category==='campaign'),pc=records.find(r=>r.title==='Elara');
+  const state=async()=>(await(await context.request.get(base+'/api/campaign/'+campaign.id+'/ai')).json()).messages;
+  const page=await context.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.goto(base);await page.locator('.campaign-row').filter({hasText:campaign.title}).click();
+  const dictionary=page.locator('#aiChatForm .chat-format-guide');assert.equal(await dictionary.getAttribute('open'),null);
+  await dictionary.locator('summary').click();await dictionary.getByRole('button',{name:'`Meet me at sunrise.`',exact:true}).click();assert.equal(await page.locator('#aiChatInput').inputValue(),'`Meet me at sunrise.`');
+  await dictionary.locator('summary').click();
+  const text='Opening **important** #She opens the door.# \'Keep quiet.\' Don\'t panic. `A book says <image>not a command</image>.` <image>Elara in her red cloak</image> Between pictures. <image>a blue moon above a forest</image> Closing words.';
+  await page.locator('#aiChatInput').fill(text);await page.locator('#aiChatForm button[type=submit]').click();
+  await page.locator('.ai-message').filter({hasText:'Opening'}).last().waitFor();
+  const messageId=await page.locator('.ai-message').filter({hasText:'Opening'}).last().getAttribute('data-message-id');
+  const message=page.locator('.ai-message[data-message-id="'+messageId+'"]');
+  await message.locator('.chat-art img').nth(1).waitFor({timeout:20000});
+  const order=await message.locator('.ai-message-copy').evaluate(el=>[...el.children].map(e=>e.tagName==='FIGURE'?'IMAGE':e.textContent));
+  assert.equal(order.length,5);assert.equal(order[1],'IMAGE');assert.equal(order[3],'IMAGE');assert.match(order[2],/Between pictures/);assert.match(order[4],/Closing words/);
+  assert.equal(await message.locator('.chat-style-written').count(),1);assert.equal(await message.locator('.chat-style-scene').count(),1);assert.equal(await message.locator('.chat-style-whisper').count(),1);assert.match(order[0],/Don't panic/);
+  assert.equal(await message.locator('.chat-art').count(),2);
+  const first=message.locator('.chat-art').first(),original=await first.locator('img').getAttribute('src');
+  await first.getByRole('button',{name:'Save to artwork catalog',exact:true}).click();await first.locator('.chat-art-status').filter({hasText:'Saved to Artwork'}).waitFor();
+  const saved=(await work()).find(r=>r.content.category==='artwork'&&original.endsWith('/api/uploads/'+r.content.image_id));assert(saved);
+  await first.getByRole('button',{name:'Edit image',exact:true}).click();await first.locator('textarea').fill('Add a blue hat.');await first.getByRole('button',{name:'Apply changes',exact:true}).click();
+  await page.waitForFunction(original=>{const image=document.querySelector('.chat-art img');return image&&image.getAttribute('src')!==original;},original);
+  const edited=await first.locator('img').getAttribute('src');assert.notEqual(edited,original);
+  assert.equal((await work()).find(r=>r.id===saved.id).content.image_id,saved.content.image_id);
+  await first.getByRole('button',{name:'Regenerate',exact:true}).click();await page.waitForFunction(edited=>document.querySelector('.chat-art img')?.getAttribute('src')!==edited,edited);
+  const regenerated=await first.locator('img').getAttribute('src');
+  await page.reload();await page.locator('.campaign-row').filter({hasText:campaign.title}).click();await first.locator('img').waitFor();assert.equal(await first.locator('img').getAttribute('src'),regenerated);
+  await message.screenshot({path:'tests/artifacts/chat-inline-art.png'});
+  await page.setViewportSize({width:390,height:844});
+  assert(await first.evaluate(el=>{const frame=el.closest('.ai-message').getBoundingClientRect(),image=el.querySelector('img').getBoundingClientRect();return image.left>=frame.left&&image.right<=frame.right;}));
+  await message.screenshot({path:'tests/artifacts/chat-inline-art-mobile.png'});
+  await page.setViewportSize({width:1280,height:1000});
+  await message.locator('[data-ai-message-action=edit]').click();await message.locator('.chat-message-draft').fill('Opening <image>Elara in her red cloak</image> Closing');await message.getByRole('button',{name:'Save',exact:true}).click();
+  await page.waitForFunction(()=>document.querySelectorAll('.chat-art').length===1);
+  assert.equal(await first.locator('img').getAttribute('src'),regenerated);
+  // The selected AI character can emit an image tag, which generates once after completion.
+  const response=await context.request.post(base+'/api/campaign/'+campaign.id+'/ai/respond',{data:{reply_as_type:'character',reply_as_id:pc.id},timeout:30000});assert.equal(response.status(),201,await response.text());
+  await page.locator('.ai-message').filter({hasText:'Before the portrait.'}).locator('.chat-art img').waitFor({timeout:15000});
+  assert.equal((await state()).filter(m=>m.role==='assistant').at(-1).art.length,1);
+  assert.deepEqual(errors,[]);
+  console.log('PASS: exact inline placement, multiple images, literal tags, formatting dictionary, save, edit, regenerate, reload reuse, prompt removal, mobile containment, AI-authored image.');
+ }finally{await browser.close();}
+})().catch(e=>{console.error(e);process.exitCode=1;});

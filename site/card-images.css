@@ -1,0 +1,9 @@
+/* Shared catalog and profile image geometry, in every campaign. */
+#recordDetailModal .detail-hero{height:auto;min-height:0;margin:0 0 22px;padding:12px;display:grid;place-items:center;overflow:hidden;border:1px solid #89613255}
+#recordDetailModal .detail-hero img{display:block;width:auto;height:auto;max-width:100%;max-height:min(360px,42vh);object-fit:contain;object-position:center;margin:0 auto;padding:0;box-sizing:border-box}
+html .card-art.has-image{display:grid;place-items:center;overflow:hidden}
+html .card-art.has-image img,html .rail-entry-image img{object-fit:contain;object-position:center;display:block;margin:0;padding:0;box-sizing:border-box}
+html .work-card:hover .card-art.has-image img{transform:none}
+html .ai-message-head>span:first-child,html .campaign-circle,html .party-portrait,html .saved-character-portrait,html .image-preview{position:relative;min-width:0;min-height:0}
+html .ai-message-head img,html .campaign-circle img,html .party-portrait img,html .saved-character-portrait img,html .image-preview img{display:block;width:100%;height:100%;min-width:0;min-height:0;object-fit:cover;object-position:50% 50%;margin:0;padding:0;box-sizing:border-box;align-self:stretch;justify-self:stretch}
+html .account-avatar,html #aiSpeakerButton img{object-fit:cover;object-position:center;display:inline-block;padding:0;box-sizing:border-box;vertical-align:middle}

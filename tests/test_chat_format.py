@@ -6,6 +6,47 @@ import chat_format
 
 
 class ChatFormatTests(unittest.TestCase):
+    def test_typed_passages_render_using_library_styles(self):
+        passages=[{'style':style,'text':text} for style,text in [
+            ('action','#She opens the door.#'),('dialogue','Welcome. **Come in.**'),
+            ('thought','*That was unexpected.*'),('whisper',"Don't wake him."),
+            ('written','Meet me tomorrow. 🙂'),('plain','A rules explanation.')]]
+        self.assertEqual(chat_format.render_reply(passages),
+            '#She opens the door.#\n\n"Welcome. **Come in.**"\n\n*That was unexpected.*\n\n'
+            "'Don't wake him.'\n\n`Meet me tomorrow. 🙂`\n\nA rules explanation.")
+
+    def test_images_are_outside_styles_but_written_examples_stay_inert(self):
+        import chat_art
+        reply=chat_format.render_reply([
+            {'style':'dialogue','text':'Here it is. <image>a cat</image>'},
+            {'style':'written','text':'Example: <image>a dog</image>\nJust an example.'},
+            {'style':'image','text':'<image>a forest</image>'}])
+        self.assertIn('"Here it is." <image>a cat</image>',reply)
+        self.assertIn('```Example:',reply)
+        self.assertEqual([t['prompt'] for t in chat_art.tags(reply)],['a cat','a forest'])
+
+    def test_invalid_passages_do_not_leak_json_to_readers(self):
+        self.assertEqual(chat_format.render_reply(None),'')
+        self.assertEqual(chat_format.render_reply([None,{'style':'unknown','text':'secret'},
+            {'style':'dialogue','text':{}},{'style':'action','text':'  '},
+            {'style':'image','text':'<image>bad nesting'}]),'')
+
+    def test_partial_passages_stream_without_machine_fields_or_half_images(self):
+        from server import partial_json_string_field
+        raw=json.dumps({'reply':[{'style':'action','text':'She waves.'},
+            {'style':'dialogue','text':'Hello, "friend".\nWelcome!'},
+            {'style':'image','text':'A forest at dawn'}]},ensure_ascii=True)
+        for end in range(len(raw)+1):
+            visible=chat_format.partial_reply(raw[:end],partial_json_string_field)
+            self.assertNotIn('"style":',visible)
+            self.assertNotIn('"text":',visible)
+            self.assertNotIn('"reply":',visible)
+            self.assertEqual(visible.count('<image>'),visible.count('</image>'))
+        self.assertEqual(chat_format.partial_reply(raw,partial_json_string_field),
+            chat_format.render_reply(json.loads(raw)['reply']))
+        partial='{"reply":[{"style":"action","text":"She waves."},{"style":"dialogue","text":"Welcome'
+        self.assertEqual(chat_format.partial_reply(partial,partial_json_string_field),'#She waves.#\n\n"Welcome"')
+
     def test_balanced_nested_reply_needs_no_extra_call(self):
         request=Mock();text='`A letter with *a thought* and **emphasis**.` #An action.#'
         self.assertEqual(chat_format.prepare_reply(text,request,'model'),text);request.assert_not_called()
@@ -25,6 +66,32 @@ class ChatFormatTests(unittest.TestCase):
     def test_failed_repair_hides_unmatched_markers_and_preserves_escapes(self):
         result=chat_format.prepare_reply('`Text with **emphasis** and \\#literal',Mock(side_effect=OSError('offline')),'model')
         self.assertEqual(result,'Text with **emphasis** and \\#literal')
+
+
+class ReplyLengthTests(unittest.TestCase):
+    def test_sparse_roleplay_expands_once_without_replaying_effects(self):
+        longer='I enjoy the careful work. '+('Every piece needs patience and a steady hand. '*18)
+        request=Mock(return_value={'message':{'content':json.dumps({'reply':[{'style':'dialogue','text':longer}]})}})
+        result=chat_format.develop_short_reply('"I enjoy my work."',[{'message':'What do you enjoy?'}],[],request,'test')
+        self.assertGreater(len(result.split()),120)
+        self.assertEqual(request.call_count,1)
+        self.assertEqual(request.call_args.kwargs['timeout'],30)
+        self.assertEqual(request.call_args.args[1]['format']['required'],['reply'])
+
+    def test_long_texting_rules_and_explicit_brief_replies_need_no_expansion(self):
+        request=Mock()
+        for text,latest in [('"'+('Word '*150)+'"','Hello'),('`On my way.`','`Where are you?`'),
+                ('"Yes."','Answer in one sentence.'),('"Oui."','Une phrase, s’il vous plaît.'),
+                ('Roll a d20.','How do I roll?'),('"Yes."','OOC: explain that rule briefly.')]:
+            self.assertEqual(chat_format.develop_short_reply(text,[{'message':latest}],[],request,'test'),text)
+        request.assert_not_called()
+
+    def test_expansion_failure_or_changed_image_keeps_the_original(self):
+        original='"Here it is." <image>a cat</image>'
+        for request in [Mock(side_effect=TimeoutError('slow')),Mock(return_value={'message':{'content':'invalid'}}),
+                Mock(return_value={'message':{'content':json.dumps({'reply':[{'style':'dialogue','text':'Many more words. '*100}]})}})]:
+            self.assertEqual(chat_format.develop_short_reply(original,[{'message':'Show me.'}],[],request,'test'),original)
+            self.assertEqual(request.call_count,1)
 
 
 class DeliveryTests(unittest.TestCase):

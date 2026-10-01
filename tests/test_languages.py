@@ -33,6 +33,23 @@ class LanguageTests(unittest.TestCase):
             callback('/api/chat',{'messages':[]})
             self.assertEqual(request.call_args.kwargs['language'],'fr-CA')
 
+    def test_late_system_turns_reach_templates_that_only_read_initial_system(self):
+        payload={'messages':[{'role':'system','content':'Writing styles'},
+            {'role':'user','content':'Look at this.','images':['pixels']},
+            {'role':'assistant','content':'I see it.'},
+            {'role':'user','content':'Tell me more.'},
+            {'role':'system','content':'Character reminder'},
+            {'role':'system','content':'Develop the reply.'}]}
+        original=copy.deepcopy(payload)
+        changed=ai_language.localized_payload(payload,'en')
+        self.assertEqual(payload,original)
+        self.assertEqual([m['role'] for m in changed['messages']],['system','user','assistant','user'])
+        self.assertIn('Writing styles',changed['messages'][0]['content'])
+        self.assertIn('Character reminder',changed['messages'][0]['content'])
+        self.assertTrue(changed['messages'][0]['content'].endswith('Develop the reply.'))
+        self.assertEqual(changed['messages'][1]['images'],['pixels'])
+        self.assertEqual(changed['messages'][-1]['content'],'Tell me more.')
+
     def test_both_ollama_paths_include_language(self):
         payload={'model':'test','messages':[{'role':'user','content':'Bonjour'}]}
         for stream in (False,True):

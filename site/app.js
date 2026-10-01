@@ -49,6 +49,8 @@ $(function () {
   let visibleCharacterItemId = null;
   let aiSyncTimer = null;
   let aiSyncBusy = false;
+  let aiSyncController = null, aiScopeVersion = 0;
+  const aiReplyRequests = new Map();
   let aiReplyBusy = false;
   let aiState = null;
   let aiMessageSignature = '';
@@ -126,7 +128,9 @@ $(function () {
 
   async function api(path, options) {
     options = options || {};
+    const timeout = AbortSignal.timeout(options.timeoutMs || (options.method && options.method !== 'GET' ? 300000 : 15000));
     const response = await fetch(path, Object.assign({}, options, {
+      signal: options.signal ? AbortSignal.any([options.signal,timeout]) : timeout,
       headers: Object.assign({ 'Content-Type': 'application/json' }, options.headers || {})
     }));
     const data = await response.json();
@@ -433,6 +437,10 @@ $(function () {
 
   async function requestAiResponse(persona) {
     if (aiReplyBusy || !activeCampaignId || !persona) return;
+    const campaignId=activeCampaignId, chatId=activeAiChatId, scope=campaignId+':'+(chatId||0);
+    const requestToken={};
+    aiReplyRequests.set(scope,requestToken);
+    const current=()=>campaignId===activeCampaignId&&chatId===activeAiChatId;
     aiReplyBusy = true;
     activeAiReplyPersona = persona;
     clearAiUndo();
@@ -443,21 +451,26 @@ $(function () {
       aiState.messages.push({ id: 'local-streaming', user_id: null, persona_type: persona.type, persona_id: persona.id, persona_name: persona.name, role: 'assistant', addressed_to_ai: true, audience_user_ids: [], message: '', generation_status: 'streaming', created_at: 'Generating now' });
       renderAiMessages(aiState.messages, true);
     }
-    const progressTimer = setInterval(function () { loadAiCampaign(true); }, 200);
+    const progressTimer = setInterval(function () { if(current())loadAiCampaign(true); }, 1000);
     try {
-      const result = await api('/api/campaign/' + activeCampaignId + '/ai/respond', {
-        method: 'POST',
-        body: JSON.stringify({ chat_id: activeAiChatId, reply_as_type: persona.type, reply_as_id: persona.id })
+      const result = await api('/api/campaign/' + campaignId + '/ai/respond', {
+        method: 'POST', timeoutMs:360000,
+        body: JSON.stringify({ chat_id: chatId, reply_as_type: persona.type, reply_as_id: persona.id })
       });
+      if(!current())return;
       if (result.cards && result.cards.length) await loadWork();
       await loadAiCampaign(false);
     } catch (error) {
+      if(!current())return;
       $('#aiChatError').text(error.message);
       await loadAiCampaign(true);
     } finally {
       clearInterval(progressTimer);
-      aiReplyBusy = false;
-      renderAiPersonas();
+      if(aiReplyRequests.get(scope)===requestToken)aiReplyRequests.delete(scope);
+      if(current()){
+        aiReplyBusy = (aiState?.messages||[]).some(entry=>entry.generation_status==='streaming'&&entry.id!=='local-streaming');
+        renderAiPersonas();
+      }
     }
   }
 
@@ -512,8 +525,9 @@ $(function () {
     }
   }
 
-  async function loadAiStatus() {
+  async function loadAiStatus(version=aiScopeVersion) {
     const status = await api('/api/ai/status');
+    if(version!==aiScopeVersion)return;
     const models = status.models || [];
     const select = $('#aiModel').empty();
     const helpers = $('#aiHelperModels').empty();
@@ -527,25 +541,39 @@ $(function () {
 
   async function loadAiCampaign(silent) {
     if (!activeCampaignId || !isAiCampaign() || aiSyncBusy) return;
+    const version=aiScopeVersion, campaignId=activeCampaignId, chatId=activeAiChatId;
+    const controller=new AbortController();aiSyncController=controller;
     aiSyncBusy = true;
     try {
-      const state = await api('/api/campaign/' + activeCampaignId + '/ai' + (activeAiChatId ? '?chat_id=' + activeAiChatId : ''));
+      const state = await api('/api/campaign/' + campaignId + '/ai' + (chatId ? '?chat_id=' + chatId : ''), {signal:controller.signal});
+      if(version!==aiScopeVersion)return;
       const signature = JSON.stringify({ messages: (state.messages || []).map(function (entry) { return [entry.id, entry.message, entry.generation_status, entry.image_ids, entry.art]; }), world: state.world || {}, mode: state.conversation_mode, canChangeMode: state.can_change_mode, participants: state.chat?.content?.participant_ids });
       const firstLoad = !aiState;
       aiState = state;
+      if($('#aiChatError').text().startsWith('Could not refresh this conversation.'))$('#aiChatError').text('');
+      aiReplyBusy=aiReplyRequests.has(campaignId+':'+(chatId||0))||(state.messages||[]).some(entry=>entry.generation_status==='streaming');
       if (aiUndoDeletion && Number(aiUndoDeletion.chatId || 0) === Number(activeAiChatId || 0)) {
         const newestId = (state.messages || []).reduce(function (latest, entry) { return Math.max(latest, Number(entry.id) || 0); }, 0);
         if (newestId > aiUndoDeletion.guardId) clearAiUndo();
       }
       if (firstLoad || signature !== aiMessageSignature || !silent) renderAiState(firstLoad || !silent || !state.creator, firstLoad || !silent);
       aiMessageSignature = signature;
-      if (firstLoad || !silent) await loadAiStatus();
+      if (firstLoad || !silent) loadAiStatus(version).catch(error=>{if(version===aiScopeVersion)$('#aiDmConnection').text('Ollama status unavailable: '+error.message);});
     } catch (error) {
-      $('#aiChatError').text(error.message);
-    } finally { aiSyncBusy = false; }
+      if(version===aiScopeVersion&&error.name!=='AbortError')$('#aiChatError').text('Could not refresh this conversation. Retrying automatically. '+error.message);
+    } finally { if(aiSyncController===controller){aiSyncController=null;aiSyncBusy=false;} }
+  }
+
+  function resetAiRequests() {
+    aiScopeVersion++;
+    if(aiSyncController)aiSyncController.abort();
+    aiSyncController=null;aiSyncBusy=false;
+    aiReplyBusy=aiReplyRequests.has(activeCampaignId+':'+(activeAiChatId||0));
+    $('#aiChatError').text('');
   }
 
   function stopAiSync() {
+    resetAiRequests();
     messageEditors.clear();
     window.ChatFullscreen?.exit();
     chatAttachments.clear();
@@ -554,15 +582,20 @@ $(function () {
     aiSyncBusy = false;
     aiState = null;
     aiMessageSignature = '';
+    $('#aiChatLog').empty();
+    $('#aiPersonaDock').empty();
   }
 
   async function selectAiChat(chatId) {
     chatAttachments.clear();
     clearAiUndo();
     activeAiChatId = Number(chatId) || null;
+    resetAiRequests();
     activeSection = null;
     aiState = null;
     aiMessageSignature = '';
+    $('#aiChatLog').empty().append($('<p>').text('Loading conversation…'));
+    $('#aiPersonaDock').empty();
     renderWork();
     setRealmMenu(false);
     await loadAiCampaign(false);
@@ -888,6 +921,7 @@ $(function () {
     activeAiChatId = null;
     clearInterval(mapSyncTimer); mapSyncTimer = null;
     activeCampaignId = campaign.id;
+    resetAiRequests();
     activeAiToolsPersona = { type: 'dm', id: null, name: 'AI Dungeon Master' };
     activeSection = null;
     $('#campaignLanding, .landing-hero, .landing-details').addClass('d-none');
@@ -917,9 +951,9 @@ $(function () {
       if (window.campaignMap) window.campaignMap.deactivate();
       $('#mapPlaceholder').addClass('d-none');
       $('#aiCampaignPanel').removeClass('d-none');
-      loadAiCampaign(false).then(function () {
-        aiSyncTimer = setInterval(function () { loadAiCampaign(true); }, 1200);
-      });
+      clearInterval(aiSyncTimer);
+      aiSyncTimer = setInterval(function () { loadAiCampaign(true); }, 1200);
+      loadAiCampaign(false);
     }
     renderParty();
     renderDashboard();

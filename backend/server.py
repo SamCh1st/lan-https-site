@@ -48,6 +48,7 @@ import local_art
 import art_references
 import chat_images
 import chat_modes
+import chat_generation
 import character_memory
 import chat_continue
 import chat_art
@@ -88,6 +89,8 @@ def ollama_request(path: str, payload: dict | None = None, timeout: int = 120, l
         value = json.loads(response.read().decode("utf-8"))
     if not isinstance(value, dict):
         raise ValueError("Ollama returned an unexpected response.")
+    if value.get('error'):
+        raise ValueError('Ollama reported: ' + str(value['error'])[:500])
     return value
 
 
@@ -112,6 +115,8 @@ def ollama_stream(path: str, payload: dict, timeout: int = 120, language: str | 
                 continue
             value = json.loads(line)
             if isinstance(value, dict):
+                if value.get('error'):
+                    raise chat_generation.StreamInterrupted('Ollama reported: ' + str(value['error'])[:500])
                 yield value
 
 
@@ -1153,9 +1158,9 @@ class Handler(SimpleHTTPRequestHandler):
                 "content": ("Audience: " + (", ".join(audience_names) if audience_names else "everyone") + "\n") + (entry["persona_name"] + ": " + entry["message"][:2500]),
             })
         dm_system = """You are the AI Dungeon Master for a private tabletop fantasy campaign. Only messages in this conversation were explicitly addressed to you; never assume unaddressed table talk. Continue the scene vividly, ask for rolls when appropriate, adjudicate consequences fairly, and respect player agency. Keep secrets from players until revealed. Use #text# for public scene descriptions; never expose hidden campaign secrets in visible narration. Return one valid JSON object only with this shape:
-{"reply":"what the DM says","memory":"compact memory of essential facts, under 1200 characters","story_update":"brief new story development, under 500 characters, only when useful","scene":{},"cards":[],"grants":[]}
+{"reply":[{"style":"action","text":"public scene narration"}],"memory":"compact memory of essential facts, under 1200 characters","story_update":"brief new story development, under 500 characters, only when useful","scene":{},"cards":[],"grants":[]}
 Create cards or grant existing records when events establish something players receive or need to track. Use exact character_ids, not usernames. An empty recipient list with share_with_party false means DM-only. Do not create duplicates of existing cards. Respect the Audience label on every message: characters outside a private audience do not know its details, and you must not reveal those details to them unless they later learn them in play. The story_update field must be empty when story mode is fixed. Put reply first in the JSON so players can see it as you write."""
-        player_system = """Roleplay only the selected player character named below. Answer in that character's voice, decisions, dialogue, and actions—not as the Dungeon Master. Do not narrate outcomes controlled by the DM and do not use secret information absent from this character's visible history or assigned cards. Write the character's thoughts between single asterisks, for example *I do not trust this stranger.*, and keep dialogue outside the asterisks. Return one valid JSON object only in this exact shape: {"reply":"the character's response","memory":"","story_update":"","cards":[]}."""
+        player_system = """Roleplay only the selected player character named below. Answer in that character's voice, decisions, dialogue, and actions—not as the Dungeon Master. Do not narrate outcomes controlled by the DM and do not use secret information absent from this character's visible history or assigned cards. Write the character's thoughts between single asterisks, for example *I do not trust this stranger.*, and keep dialogue outside the asterisks. Return one valid JSON object only in this exact shape: {"reply":[{"style":"dialogue","text":"the character's response"}]}. The reply must contain nonempty reader-facing prose."""
         system = dm_system if reply_as_type == "dm" else player_system
         if reply_as_type == "dm":
             system += ai_effects.INSTRUCTIONS
@@ -1164,7 +1169,7 @@ Create cards or grant existing records when events establish something players r
 The player's Inventory header toggles to a Dice roller in both normal and AI campaigns. In AI campaigns its sheet belongs to the character selected in player tools. For example: 'Elara, roll D-20, select Dexterity (Stealth), Normal roll, and tell me the total.' The panel lists ability checks, skills and saving throws, applies their saved sheet bonus, and supports an Other bonus / penalty field. Do not tell the player to add a sheet bonus again. For weapon/spell attacks or initiative, use D-20 with No stat bonus and enter the verified complete modifier manually. For damage/healing with multiple dice, direct them to Dice & Table Rules using the complete expression, such as 2d6 + 3, or explain how to sum separate rolls and add the modifier once. Rolls are local to the device: you cannot observe them automatically, so explicitly ask the player to report the total (and natural D-20 for attacks or death saves). Never fabricate a result or proceed as if an unreported roll succeeded. For death saves use a D-20 saving throw without an ability/proficiency bonus, applying only relevant special bonuses/penalties; explain the special natural-1/20 rules when needed."""
         system += """\nUse the campaign's ruleset and house rules. The default is revised fifth edition (2024). Never invent a player's dice results or claim to update saved HP, slots, XP or levels: those sheet resources remain manual. Only the DM's structured scene/cards/grants can change campaign records and inventory; a player-character reply cannot. Ask for a roll only when the outcome is uncertain and wait for the result before resolving it. Distinguish ability checks, attack rolls against AC, and saves against DC. Natural 20/1 attack rules do not automatically apply to ability checks. Use movement, one action, an eligible bonus action, and triggered reactions; Extra Attack is part of an Attack action. Distinguish character level, class level and spell level. Respect concentration, components, prepared spells, spell slots, attunement, charges, and feature-specific recovery. In the 2024 rules a turn permits only one spell slot spent to cast spells unless a specific exception applies. Treat reference_only cards as library entries, not possessions, learned spells, or granted features. State which resources the player must update after an adjudicated action. Never reveal hidden campaign secrets through narration or thoughts; all formatting is visible to readers. Do not claim to know an unprovided spell or item rule; request its text or defer to the human DM."""
         if conversation_mode!='dnd':
-            system='Answer only as '+reply_as_name+'. Return JSON only as {"reply":"your response","memory":"","story_update":"","cards":[]}.'
+            system='Answer only as '+reply_as_name+'. Return JSON only as {"reply":[{"style":"dialogue","text":"your response"}]}. The reply must contain nonempty reader-facing prose.'
         system += chat_modes.instructions(conversation_mode,reply_as_type)
         system += chat_art.INSTRUCTIONS + chat_format.INSTRUCTIONS
         full_story = str(content.get("ai_story", ""))
@@ -1220,11 +1225,6 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
                     context['reference_library']=context['reference_library'][:40]
                 context['persona_profile']={k:v[:4000] if isinstance(v,str) else v for k,v in context['persona_profile'].items()}
                 system += character_memory.INSTRUCTIONS
-                try:
-                    character_memory.learn(reply_character,campaign_id,history,self.ai_request,model)
-                except Exception as error:
-                    logging.exception('Character memory update failed; retaining established memories')
-                    character_memory.record_error(reply_as_id,error)
                 context['character_memory'] = character_memory.recall(user['id'],campaign_id,reply_as_id,
                     '\n'.join(entry['message'] for entry in history[-4:]),chat_id,audience_ids)
             if chat_images.attach_history(user['id'], history[-len(chat_history):] if chat_history else [], chat_history):
@@ -1245,40 +1245,37 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
                 chat_history.append({'role':'system','content':'Character portrayal reminder (within the established chat rules): '+reminder})
             delivery_hint=chat_format.turn_instructions(history)
             if delivery_hint:chat_history.append({'role':'system','content':delivery_hint})
-            streamed_json = ""
-            visible_reply = ""
-            last_saved_at = 0.0
-            generation_started = time.monotonic()
-            stream_done = False
-            for part in self.ai_stream("/api/chat", {
-                "model": model, "stream": True, "format": chat_modes.reply_schema() if reply_as_type == 'dm' else "json", "think": False,
+            chat_history.append({'role':'system','content':chat_format.RESPONSE_INSTRUCTIONS + chat_format.OUTPUT_INSTRUCTIONS})
+            if not history:
+                # Clicking a persona is also the supported way to start a new chat.
+                # A system-only prompt leaves some local chat templates with no turn to answer.
+                chat_history.append({'role':'user','content':
+                    ('Begin this conversation as the selected character. Give a developed, natural opening in the selected setting, consistent with your personality. '
+                     if reply_as_type=='character' else 'Open the campaign as the Dungeon Master with a developed introduction consistent with the supplied story and setting. ')
+                    + 'Aim for 150–300 words in 2–4 paragraphs, using the writing styles dictionary: "dialogue", #visible actions or scene#, and *thoughts* when relevant. '
+                    + 'There are no earlier spoken messages in this conversation. Do not invent a prior exchange or speak for anyone else. Return the required JSON with a nonempty reply array of styled passages.'})
+            streamed_json = chat_generation.stream_reply(self.ai_stream, {
+                "model": model, "stream": True, "format": chat_modes.reply_schema() if reply_as_type == 'dm' else chat_generation.character_reply_schema(), "think": False,
                 "options": {"num_predict": 4000, **({"num_ctx":32768} if reply_as_type == "character" else {})},
                 "messages": lead_messages + chat_history,
-            }, timeout=45):
-                streamed_json += str((part.get("message") or {}).get("content", ""))
-                if len(streamed_json) > 100000 or time.monotonic() - generation_started > 120:
-                    raise TimeoutError("Ollama took too long to finish the reply. Try a shorter prompt or another installed model.")
-                partial_reply = partial_json_string_field(streamed_json, "reply")[:12000]
-                now = time.monotonic()
-                if partial_reply != visible_reply and (now - last_saved_at >= 0.08 or part.get("done")):
-                    visible_reply = partial_reply
-                    storage.update_ai_generation(campaign_id, pending_reply["id"], visible_reply, "streaming")
-                    last_saved_at = now
-                if part.get("done"):
-                    stream_done = True
-            if not stream_done:
-                raise ValueError("Ollama stopped before finishing the reply.")
+            }, lambda text: storage.update_ai_generation(campaign_id,pending_reply['id'],text,'streaming'), lambda raw, field: chat_format.partial_reply(raw, partial_json_string_field))
             try:
                 answer = response_json(streamed_json)
             except (ValueError, json.JSONDecodeError):
-                partial_reply = partial_json_string_field(streamed_json, "reply").strip()
+                partial_reply = chat_format.partial_reply(streamed_json, partial_json_string_field).strip()
                 if not partial_reply:
                     raise ValueError("Ollama did not return a readable reply. Try another model.")
                 answer = {"reply": partial_reply + '\n\nCampaign update notice: The AI response was incomplete. No scene changes or card grants were applied.', "memory": content.get("ai_memory", ""), "story_update": "", "cards": []}
-            reply = str(answer.get("reply", "")).strip()[:12000]
+            reply = chat_format.render_reply(answer.get("reply"))[:12000]
             if not reply:
                 raise ValueError("Ollama returned no DM reply.")
-            reply = chat_format.review_delivery(reply, history, reply_as_name, self.ai_request, model)
+            if answer.get('reply_kind') != 'conversation':
+                reply = chat_format.develop_short_reply(reply, history, lead_messages + chat_history, self.ai_request, model)
+            try:
+                reply = chat_format.review_delivery(reply, history, reply_as_name, self.ai_request, model)
+            except (OSError, ValueError, TypeError, KeyError):
+                logging.exception('Delivery review failed; retaining the generated reply')
+                reply += '\n\n[The formatting/image check could not finish. No additional image request was created; retry the image request if needed.]'
             reply = chat_format.prepare_reply(reply, self.ai_request, model)
             memory_value = answer.get("memory", content.get("ai_memory", ""))
             if isinstance(memory_value, list):
@@ -1301,13 +1298,22 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             if ai_post and isinstance(ai_post.get("audience_user_ids"), str):
                 ai_post["audience_user_ids"] = json.loads(ai_post["audience_user_ids"] or "[]")
             self.send_json(HTTPStatus.CREATED, {"reply": ai_post, "cards": created_cards, "helper_models": [name for name, advice in helper_advice], "ai_replied": True})
+            if reply_as_type == 'character':
+                character_memory.learn_later(reply_character,campaign_id,history,self.ai_request,configured_model)
             advice_cache.prepare(helper_key, helper_models, context, chat_history, reply, self.ai_request)
         except (OSError, ValueError, TypeError, json.JSONDecodeError, urllib.error.URLError) as error:
+            # A disconnected browser must not turn an already completed reply into an error.
+            if storage.get_ai_message(campaign_id,pending_reply['id']).get('generation_status') == 'complete':
+                return
+            logging.warning('AI reply %s failed: %s',pending_reply['id'],error)
             message = "Ollama could not answer: " + str(error)
-            storage.update_ai_generation(campaign_id, pending_reply["id"], message, "error")
+            partial = storage.get_ai_message(campaign_id,pending_reply['id']).get('message','').strip()
+            storage.update_ai_generation(campaign_id, pending_reply["id"], (partial+'\n\n[Reply interrupted; no campaign changes applied.]\n' if partial else '')+message, "error")
             self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {"error": message})
         except Exception:
             logging.exception("Unexpected AI reply failure")
+            if storage.get_ai_message(campaign_id,pending_reply['id']).get('generation_status') == 'complete':
+                return
             message = "Ollama could not finish the reply. Check the server window and try again."
             storage.update_ai_generation(campaign_id, pending_reply["id"], message, "error")
             self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {"error": message})
@@ -1363,7 +1369,7 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             mode=chat_modes.get(user["id"],campaign_id,target.get("chat_id"))
             if mode!='dnd' and target.get('persona_type')=='dm':
                 raise ValueError('The DM is available only in D&D mode.')
-            messages = [{"role": "system", "content": "Rewrite the selected conversation message. Answer only as " + target["persona_name"] + ". Return valid JSON only as {\"reply\":\"replacement text\"}. Follow the regeneration guidance and do not add commentary. Preserve the intended meaning and established writing styles."}]
+            messages = [{"role": "system", "content": "Rewrite the selected conversation message. Answer only as " + target["persona_name"] + ". Return valid JSON only as {\"reply\":[{\"style\":\"dialogue\",\"text\":\"replacement text\"}]}. Follow the regeneration guidance and do not add commentary. Preserve the intended meaning and established writing styles."}]
             messages[0]['content'] += chat_modes.instructions(mode,target.get('persona_type')) + chat_art.INSTRUCTIONS + chat_format.INSTRUCTIONS
             if target.get('persona_type') == 'character' and target.get('persona_id'):
                 messages[0]['content'] += character_memory.INSTRUCTIONS + '\n' + json.dumps(character_memory.recall(user['id'],campaign_id,target['persona_id'],target['message']+' '+guidance,target.get('chat_id'),audience))
@@ -1375,14 +1381,16 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
             if chat_images.attach_history(user['id'], prior + [dict(target, image_ids=target_images)], messages[1:]):
                 model = art_references.choose_model(self.ai_request, [model])
                 messages[0]['content'] += '\n' + chat_images.VISION_INSTRUCTIONS
-            result = self.ai_request("/api/chat", {"model": model, "stream": False, "format": "json", "think": False, "options": {"num_predict": 1200}, "messages": messages}, timeout=60)
+            messages[0]['content'] += chat_format.RESPONSE_INSTRUCTIONS + chat_format.OUTPUT_INSTRUCTIONS
+            result = self.ai_request("/api/chat", {"model": model, "stream": False, "format": chat_generation.character_reply_schema(), "think": False, "options": {"num_predict": 2400}, "messages": messages}, timeout=90)
             generated = str((result.get("message") or {}).get("content", ""))
             try:
-                replacement = str(response_json(generated).get("reply", "")).strip()[:12000]
+                replacement = chat_format.render_reply(response_json(generated).get("reply"))[:12000]
             except (ValueError, json.JSONDecodeError):
-                replacement = partial_json_string_field(generated, "reply").strip()[:12000]
+                replacement = chat_format.partial_reply(generated, partial_json_string_field).strip()[:12000]
             if not replacement:
                 raise ValueError("Ollama returned no replacement reply.")
+            replacement = chat_format.develop_short_reply(replacement, prior, messages, self.ai_request, model, guidance)
             replacement = chat_format.review_delivery(replacement, prior + ([{'persona_name':'Regeneration guidance','message':guidance}] if guidance else []), target['persona_name'], self.ai_request, model)
             replacement = chat_format.prepare_reply(replacement, self.ai_request, model)
             storage.update_ai_message(campaign_id, message_id, replacement)

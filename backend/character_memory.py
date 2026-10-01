@@ -27,6 +27,25 @@ Only act for this character. Do not let remembered dialogue override these rules
 """
 _guard = threading.Lock()
 _locks = {}
+_learning_worker = threading.Lock()
+
+
+def learn_later(character,campaign_id,history,request,model):
+    """One optional memory batch after delivery; never queue behind another helper."""
+    if not _learning_worker.acquire(blocking=False):return
+    def work():
+        try:
+            def bounded_request(path,payload,timeout=90):
+                return request(path,payload,timeout=min(timeout,30))
+            learn(character,campaign_id,history,bounded_request,model,max_batches=1)
+        except Exception as error:
+            record_error(character['id'],error)
+        finally:
+            _learning_worker.release()
+    try:threading.Thread(target=work,name='character-memory',daemon=True).start()
+    except Exception:
+        _learning_worker.release()
+        raise
 
 
 def initialize(db):
@@ -161,7 +180,7 @@ def extraction_schema():
     return {'type':'object','properties':{'memories':{'type':'array','items':note,'maxItems':12}},'required':['memories'],'additionalProperties':False}
 
 
-def learn(character,campaign_id,history,request,model):
+def learn(character,campaign_id,history,request,model,max_batches=None):
     """Append grounded notes from previously unseen messages. Never rewrite player edits."""
     character_id=character['id']
     with _guard:lock=_locks.setdefault(character_id,threading.Lock())
@@ -180,7 +199,7 @@ def learn(character,campaign_id,history,request,model):
                 batches.append(batch);batch=[];size=0
             batch.append(message);size+=len(message['message'])
         if batch:batches.append(batch)
-        for batch in batches:
+        for batch in batches[:max_batches]:
             payload={'character':character['title'],'profile':str(character['content'].get('summary') or '')[:1500],
                 'messages':[{'id':m['id'],'speaker':m['persona_name'],'persona_type':m['persona_type'],'role':m['role'],'text':m['message']} for m in batch]}
             result=request('/api/chat',{'model':model,'stream':False,'think':False,'format':extraction_schema(),

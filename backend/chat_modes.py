@@ -2,6 +2,7 @@
 import json
 import storage
 import ai_effects
+import chat_format
 
 MODES=('dnd','medieval','modern')
 
@@ -32,7 +33,7 @@ def set_mode(user_id,campaign_id,mode,chat_id=None):
 
 
 def instructions(mode,persona_type='character'):
-    common='\nThe selected conversation mode takes priority over the tone of older messages. Track the actual named speakers and participants. Never assume a single permanent conversation partner. Preserve character identity and relevant memories. Dialogue should sound like this specific person responding to what was actually said. Match the current pace: a short message may deserve a short answer; linger when a scene warrants it. Avoid repetitive smiles, stock gestures, ornate metaphors, or the same opening every turn. Do not insert narration, thoughts, and dialogue into every reply just to use all the styles. Preserve the communication medium: texting stays written, spoken conversation stays spoken unless the scene changes it.\n'
+    common='\nThe selected conversation mode takes priority over the tone of older messages. Track the actual named speakers and participants. Never assume a single permanent conversation partner. Preserve character identity and relevant memories. Dialogue should sound like this specific person responding to what was actually said. Develop meaningful reactions and dialogue at the current scene pace; a short incoming message does not by itself require a one-line reply. Avoid repetitive smiles, stock gestures, ornate metaphors, or the same opening every turn. Use the writing dictionary for the dialogue, actions and thoughts you include. Preserve the communication medium: texting stays written, spoken conversation stays spoken unless the scene changes it.\n'
     if mode=='dnd':
         return common+"""D&D TABLE CONVERSATION:
 The Dungeon Master is also an approachable game facilitator, not permanently locked inside an NPC.
@@ -61,7 +62,7 @@ in this mode. Do not narrate other participants' choices or claim to change camp
     return common+"""MODERN CHARACTER CONVERSATION:
 Have a natural contemporary conversation as the selected character, guided by their description,
 personality, reminder and memories. Respond to what people actually say, with fitting emotion, humor,
-curiosity and individual speech habits. Casual conversation can be short and direct. Use contractions
+curiosity and individual speech habits. Develop the conversation with specific, personal responses. Use contractions
 and present-day language naturally, without making everyone share the same slang or personality.
 Roleplay, gestures or more descriptive scenes are welcome when participants invite them; do not force
 scene narration into every answer. Ask relevant questions and introduce a fitting topic when useful,
@@ -74,6 +75,7 @@ There is no DM persona in this mode and no game-state mutations. Respect names a
 
 def reply_schema():
     schema=ai_effects.schema()
+    schema['properties']['reply']=chat_format.reply_value_schema()
     schema['properties']['reply_kind']={'type':'string','enum':['conversation','scene']}
     schema['required'].append('reply_kind')
     return schema

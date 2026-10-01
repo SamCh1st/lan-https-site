@@ -34,6 +34,10 @@ def localized_payload(payload, language):
         'canonical class names and symbol identifiers exactly as required by the schema. '
         'Translate prose values only, never the data contract. Do not add prose outside required JSON.'
     )
+    # Some installed chat templates (including llama3.2) only render the initial
+    # system block. Later system turns can lose reminders and even omit the final
+    # assistant header. Preserve every instruction in one initial block instead.
+    systems=[str(message.get('content','')) for message in payload['messages'] if message.get('role')=='system']
+    turns=[dict(message) for message in payload['messages'] if message.get('role')!='system']
     # Copy instead of mutating: helpers and retries may reuse the original payload.
-    return {**payload,'messages':[{'role':'system','content':instruction},
-                                 *[dict(message) for message in payload['messages']]]}
+    return {**payload,'messages':[{'role':'system','content':'\n\n'.join([instruction,*systems])},*turns]}

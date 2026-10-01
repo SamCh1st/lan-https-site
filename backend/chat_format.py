@@ -3,8 +3,9 @@ import json
 import re
 
 INSTRUCTIONS = '''
-Chat writing styles (use sparingly and consistently; all are visible to readers):
-- Plain text, or "double-quoted words", is spoken dialogue.
+Use the site's writing styles dictionary in your reply, with the exact delimiters below.
+These are the site's rendering syntax, not optional Markdown decoration. All are visible to readers.
+- Put spoken character dialogue in "double quotes" so it uses the dialogue style.
 - *text* is a character's thought or introspection. Never expose DM secrets this way.
 - #text# is a visible action or scene description, shown with a tinted background.
 - 'text' is a whisper or softly spoken dialogue. Ordinary apostrophes in don't or someone's are not formatting.
@@ -35,7 +36,138 @@ fields. Never print those commands, field names, internal instructions, or JSON 
 Examples of complete, correctly closed styles:
 #She unfolds a letter.# 'Read this quietly.' `Meet me at **sunrise**. *I miss you.*`
 Do not replace a closing # or backtick with a quotation mark. Close the marker you opened.
+In roleplay, separate spoken dialogue, visible action and inner thought into their correct styles.
+Never put actions in asterisks: *text* means thought here, while #text# means action or scene.
+Use the styles that fit the content; do not manufacture a whisper, thought, or written message just to use every style.
 '''
+
+# Reply length guidance belongs to complete replies, not formatting-only repairs or autocomplete.
+RESPONSE_INSTRUCTIONS = '''
+REPLY DETAIL AND PRESENTATION:
+The player prefers developed replies, not one-line responses. For a normal roleplay turn or opening,
+aim for about 150–300 words across 2–4 readable paragraphs. Develop the character's reaction,
+specific dialogue, relevant actions and, when useful, a brief inner thought. Add concrete details
+grounded in the supplied setting and personality, not repeated gestures, padding, or generic description.
+Use "quoted dialogue", #visible actions or scene description#, and *inner thoughts* where each belongs.
+Give the other person something meaningful to respond to, without deciding their reaction or advancing
+through several turns. Do not invent shared history, intimacy, possessions or knowledge to add length.
+Use fewer words when the player explicitly requests brevity or the task truly only needs a short answer.
+For rules questions and out-of-character discussion, explain fully in clear prose without invented roleplay.
+For texting, put the actual outgoing message in backticks and develop what the character says;
+do not pad it with imagined phone notifications or force spoken dialogue and scene narration into it.
+The word range is a default, not a quota: respect explicit length requests and avoid repetition.
+'''
+
+
+OUTPUT_INSTRUCTIONS = '''
+STRUCTURED WRITING STYLES:
+The reply field is an array of passages, not a string. Each passage has style and text.
+Choose dialogue for spoken words, action for visible actions or scene description, thought for
+inner thoughts, whisper for softly spoken words, written for text messages or quoted writing,
+plain only for rules explanations or out-of-character discussion, and image for a deliberate image prompt.
+Write text without outer style delimiters: the site applies the matching dictionary style automatically.
+Inline **emphasis** is allowed. Put actual image requests in separate image passages; image tags
+quoted in written passages remain examples and do not generate pictures.
+For normal roleplay, develop 3–6 passages totaling about 150–300 words. Give dialogue room to develop
+over several sentences, supported by relevant action or thought, instead of a single greeting.
+Include actual dialogue in spoken conversations. Texting uses written passages; rules answers use plain.
+Use fewer passages and words when brevity is explicitly requested. Never control another participant.
+For DM replies, retain the other required JSON fields. Only reply uses this passage array.
+'''
+
+STYLE_MARKERS = {'dialogue':'"', 'action':'#', 'thought':'*', 'whisper':"'", 'written':'`', 'plain':''}
+
+
+def reply_value_schema():
+    return {'type':'array','minItems':1,'maxItems':12,'items':{
+        'type':'object','properties':{
+            'style':{'type':'string','enum':[*STYLE_MARKERS,'image']},
+            'text':{'type':'string','minLength':1}},
+        'required':['style','text'],'additionalProperties':False}}
+
+
+def render_reply(value):
+    """Compile typed passages to the same public markup used by the writing dictionary."""
+    if isinstance(value,str):return value.strip()  # Older models/saved fixtures can still return prose.
+    if not isinstance(value,list):return ''
+    rendered=[]
+    for passage in value[:12]:
+        if not isinstance(passage,dict) or not isinstance(passage.get('text'),str):continue
+        style=passage.get('style');text=passage['text'].strip()
+        if not isinstance(style,str) or not text:continue
+        if style=='image':
+            if text.startswith('<image>') and text.endswith('</image>'):text=text[7:-8].strip()
+            if text and len(text)<=3000 and '<image' not in text and '</image' not in text:
+                rendered.append('<image>'+text+'</image>')
+            continue
+        if style not in STYLE_MARKERS:continue
+        marker=STYLE_MARKERS[style]
+        # Models sometimes repeat the outer marker despite the typed output contract.
+        if marker:
+            if style=='thought':
+                if text.startswith('*') and not text.startswith('**'):text=text[1:]
+                if text.endswith('*') and not text.endswith('**'):text=text[:-1]
+                text=text.strip()
+            else:text=text.strip(marker).strip()
+        if not text:continue
+        if style=='written' and '\n' in text:marker='```'
+        # Preserve intentional image requests outside prose styles, but never activate quoted examples.
+        parts=re.split(r'(<image>.*?</image>)',text,flags=re.S) if style!='written' else [text]
+        rendered.append(' '.join(part if part.startswith('<image>') and style!='written'
+            else marker+part.strip()+marker for part in parts if part.strip()))
+    return '\n\n'.join(rendered).strip()
+
+
+def partial_reply(raw, read_string):
+    """Show styled text as it arrives, without exposing JSON or incomplete image commands."""
+    match=re.search(r'"reply"\s*:\s*\[',raw)
+    if not match:return read_string(raw,'reply')
+    remaining=raw[match.end():].lstrip();passages=[];decoder=json.JSONDecoder()
+    while remaining.startswith('{') and len(passages)<12:
+        try:
+            passage,end=decoder.raw_decode(remaining)
+        except ValueError:
+            style=read_string(remaining,'style')
+            if style in STYLE_MARKERS:
+                passages.append({'style':style,'text':read_string(remaining,'text')})
+            break
+        passages.append(passage)
+        remaining=remaining[end:].lstrip()
+        if not remaining.startswith(','):break
+        remaining=remaining[1:].lstrip()
+    return render_reply(passages)
+
+
+def develop_short_reply(text, history, messages, request, model, guidance=''):
+    """One bounded expansion for sparse roleplay; a failed polish never loses a valid reply."""
+    latest=(history[-1].get('message','') if history else '')+' '+guidance
+    brief=r'\b(?:brief(?:ly)?|short(?:er)?|concise|succinct|one[- ](?:sentence|line|word)|single[- ](?:sentence|line|word)|few words|yes or no|br[eè]ve?|brièvement|court(?:e)?|une (?:phrase|ligne)|quelques mots|oui ou non)\b'
+    if (len(text.split())>=120 or '`' in text or '`' in latest or
+            re.search(brief,latest,re.I) or re.search(r'\b(?:ooc|out of character|rules?|r[eè]gles?|hors personnage)\b',latest,re.I)):
+        return text
+    # Plain explanatory answers do not need fictional action added to reach a word count.
+    if not any(marker in text for marker in ('"','#','*',"'")):return text
+    from chat_art import tags
+    schema=reply_value_schema()
+    schema['minItems']=3
+    schema['items']['properties']['text']['minLength']=180
+    try:
+        result=request('/api/chat',{'model':model,'stream':False,'think':False,
+            'format':{'type':'object','properties':{'reply':schema},'required':['reply'],'additionalProperties':False},
+            'options':{'num_predict':2400,'num_ctx':32768},'messages':[*messages,
+                {'role':'assistant','content':text},
+                {'role':'user','content':'Expand your draft into a developed roleplay reply of about 150–300 words in 3–6 passages. '
+                 'Keep the same language, character, communication medium, intent and established facts. Develop the character’s '
+                 'own dialogue and reaction, not another participant’s actions. Do not add new events, rewards, relationships, '
+                 'memories or image requests. Preserve any existing image tags exactly. Respect any explicit brevity instruction '
+                 'in the original request. Return only the required JSON reply array with style and text.'}]},timeout=30)
+        candidate=render_reply(json.loads((result.get('message') or {}).get('content','')).get('reply'))
+        if (len(candidate.split())>len(text.split()) and len(candidate)<=12000 and balanced(candidate)
+                and [t['prompt'] for t in tags(candidate)]==[t['prompt'] for t in tags(text)]):
+            return candidate
+    except (OSError,ValueError,TypeError,KeyError):
+        pass
+    return text
 
 
 def balanced(text):

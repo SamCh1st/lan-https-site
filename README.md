@@ -167,6 +167,8 @@ Open the collapsible **Writing styles dictionary** under the composer or in the 
 
 The formatting takes inspiration from [Perchance's published chat source snapshot](https://github.com/therealwestninja/perchance-hero-chat/blob/main/vendor/perchance-ai-character-chat/perchance_2.txt), with explicit roleplay meanings and nested styles for this site. The AI receives these same conventions. For example, a written passage can contain italic thoughts and bold emphasis. Image tags inside backticks stay quoted text rather than starting a drawing. Internal JSON updates and image-command prompts are not displayed as dialogue. The AI gets a formatting-only repair pass if it leaves style markers unclosed.
 
+AI replies and regenerated messages use typed passages, which the server converts into the dictionary's styles while streaming and when saving. Dialogue, actions, thoughts, whispers, written text and image requests have separate types; rules/OOC explanations can remain plain prose. Normal roleplay aims for 150–300 words. An unusually short roleplay draft can receive one bounded expansion; explicit brevity, texting and rules answers are exempt, and a failed expansion keeps the original reply. System guidance is consolidated into one initial message for local models whose templates ignore later system turns.
+
 Use **Fullscreen chat** for the same fullscreen behavior as the 2D workspace, including Escape, an exit button, and side-panel toggles. On small screens the side panels start collapsed and open as drawers. Message editing and image controls remain available in fullscreen. Everything below Send is grouped under **Images & writing options**, which automatically collapses in fullscreen and shows how many images are attached.
 
 ## Development
@@ -296,6 +298,10 @@ Before a character answers, its local chat model reviews new, addressed messages
 On the memory page you can search, add, correct, pin or forget a memory, or turn automatic learning off while keeping existing recall. Player corrections take priority over automatic notes. Automatic notes become inactive when their source message is edited or deleted; saving a correction explicitly preserves that corrected memory. Characters can recall relevant memories and search recent dialogue from other campaign chats they are included in. The requester must still have access, and the current reply audience must fit the source chat and message audience. Private information is excluded from public replies. Corrected or forgotten memories are not reintroduced through their old source quotations. Other characters’ personal memory pages are not included in an AI’s context.
 
 Memories and portrayal settings persist in the server’s local `data/site.db` and are included when backing up that database. Campaign ZIP export/import does not currently include these new memory tables. AI extraction and portrayal remain model-dependent; the editable archive lets you correct missed or inaccurate interpretations.
+
+Chat refreshes have a timeout and resume automatically after a failed load. Changing conversations cancels the old refresh and ignores late responses; each conversation has its own reply lock. Interrupted Ollama streams retry once within the same message before any campaign effects are applied. A failed retry preserves available partial text and reports the underlying Ollama error. Memory extraction runs one bounded batch in the background after delivery, with no queued backlog blocking the next reply. Unprocessed memories remain eligible for a later update.
+
+Clicking a persona in an empty chat explicitly asks it to open the conversation. Character replies use a schema requiring a nonempty `reply` field, avoiding system-only requests and arbitrary JSON output that can make small local models loop or return no dialogue.
 
 ### Conversation styles and chat panels
 

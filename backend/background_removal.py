@@ -7,7 +7,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent / 'local-art'
 LOCK = threading.Lock()
 _session = None
-PROMPT = ('Draw only the requested subject, fully inside the frame with a little margin, '
+PROMPT = ('The user selected a transparent cutout; this overrides any earlier scenery or backdrop request. '
+          'Draw only the requested subject, fully inside the frame with a little margin, '
           'against a simple neutral backdrop. No scenery, floor, cast ground shadow, text, '
           'watermarks, borders or checkerboard patterns. A separate AI will remove the backdrop.')
 
@@ -49,7 +50,7 @@ def remove_background(data):
         prediction = (prediction-prediction.min())/span
         mask = Image.fromarray((prediction.clip(0,1)*255).astype(np.uint8)).resize(image.size, Image.Resampling.LANCZOS)
         alpha = np.asarray(mask, dtype=np.float32)*np.asarray(image.getchannel('A'), dtype=np.float32)/255
-        if not (alpha > 128).any() or not (alpha < 10).any():
+        if not (alpha > 128).any() or float((alpha < 10).mean()) < .01:
             raise ValueError('Background removal could not produce a usable cutout. Your artwork is unchanged.')
         image.putalpha(Image.fromarray(alpha.astype(np.uint8)))
         output = io.BytesIO(); image.save(output, format='PNG')

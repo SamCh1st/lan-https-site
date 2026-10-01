@@ -680,11 +680,11 @@ $(function () {
     if (window.ArtAtelier) window.ArtAtelier.setActive(activeSection === 'art' && !!activeCampaignId, activeCampaignId, user && user.id, {
       referenceRecords: items.filter(item => Number(item.content?.campaign_id) === Number(activeCampaignId) && Number(item.content?.image_id) > 0),
       records: items.filter(item => user && ['item','character','npc'].includes((item.content || {}).category) && Number(item.content.campaign_id) === activeCampaignId && (item.user_id === user.id || Number(item.content.owner_user_id) === Number(user.id) || items.find(c => c.id === activeCampaignId)?.membership_role === 'creator')),
-      archive: async function(title, description, blob) {
+      archive: async function(title, description, blob, recipe) {
         const campaignId=artworkCampaignId;
         if(!campaignId)throw new Error('Open a campaign first.');
         const image=await uploadImage(blob);
-        await api('/api/work',{method:'POST',body:JSON.stringify({title,content:{category:'artwork',campaign_id:campaignId,summary:description,image_id:image.image_id}})});
+        await api('/api/work',{method:'POST',body:JSON.stringify({title,content:{category:'artwork',campaign_id:campaignId,summary:description,image_id:image.image_id,...(recipe?{art_recipe:recipe}:{})}})});
         await loadWork();
       },
       save: async function(id, blob) {

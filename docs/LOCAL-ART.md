@@ -16,9 +16,42 @@ Run `python scripts/setup_local_art.py` once with internet access. The script do
 
 If generation fails, check `local-art/last-error.log`. Stop other GPU-heavy work or try 512 pixels if memory is insufficient. Missing model files produce an explicit setup error; the site does not silently substitute primitive shapes.
 
-The default is 512 pixels for faster generation. Choose 768 or 1024 for more
-detail. Optional reference lookup and helper advice start disabled; enable their
+After installation, run `python scripts/verify_local_art.py` with the site's Python interpreter.
+It generates a real 384×512 portrait image, removes its background, checks the PNG's alpha
+channel, and writes `local-art/setup-check.png`. This requires no Ollama call. On the
+RTX PRO 500 Blackwell laptop GPU with 6 GB VRAM, the September 30, 2026 setup check took
+32.6 seconds including background removal; the engine itself reported 24.65 seconds.
+This is one setup measurement, not a promise for other prompts or sizes.
+
+The default is one image at 512 pixels for faster generation. Choose 768 or 1024 for more
+detail. The size is the longest edge: portrait and landscape preserve their aspect ratio,
+including when opened in the drawing studio. Optional reference lookup and helper advice start disabled; enable their
 checkboxes when wanted. The default image request does not contact Ollama.
+
+## Styles, backgrounds, and repeatable variations
+
+Art Atelier offers ten visual treatments plus **As described**. Style recipes add concrete
+guidance about linework, materials, shading, and color while preserving the requested subject
+and scene. They do not switch models. Select square, portrait, or landscape independently.
+
+**No background — transparent PNG** starts unchecked. When checked, it deliberately overrides
+scenery instructions: the renderer requests an isolated subject, then local AI removes the
+backdrop before the PNG is saved. A failed removal reports an error instead of publishing an
+opaque replacement. Leave it unchecked for scenes with backgrounds.
+
+Leave **Seed** blank for random variations, or enter a whole number to repeat a render.
+Batch variations use consecutive seeds. **Prompt & settings** shows the exact engine prompt,
+seed, dimensions, and background choice. Download the recipe or reuse its controls; keeping
+an image in the archive also saves its recipe with the artwork record. Reproduction requires the
+same references, source canvas, helper output, model, and engine; seed alone is not an identity lock.
+
+Reference descriptions are cached in server memory for up to ten minutes (at most 64 entries),
+separately per user and keyed by image contents, guidance, prompt, and vision model. Access is
+still checked on every request. Concurrent identical analyses share the cached result. The
+renderer still starts a process per image; these changes do not claim a measured rendering speedup.
+
+Chat images offer **Image size & shape** for the next regeneration or edit, with settings retained
+for later edits. The requester and campaign creator can inspect the completed image's prompt recipe.
 
 Text encoding runs on the CPU; diffusion and tiled VAE decoding run on CUDA.
 `--max-vram -1` reserves 1 GiB of free GPU memory. Model weights remain in system

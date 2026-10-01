@@ -7,7 +7,7 @@ html #artAtelier .aa-studio-header h2{margin:0;font-size:28px}
 html #artAtelier .aa-composer{margin-block:24px;padding:clamp(14px,2vw,24px);background:var(--realm-panel,#ead7af);border:1px solid var(--realm-border,#a78751);border-radius:16px}
 html #artAtelier .aa-prompt{gap:10px;font-weight:600;margin-top:0}
 html #artAtelier #aaPrompt{font:18px/1.55 system-ui;min-height:140px;resize:vertical;border-radius:12px;padding:16px;width:100%;box-sizing:border-box}
-html #artAtelier .aa-quick-controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-block:18px}
+html #artAtelier .aa-quick-controls{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:12px;margin-block:18px}
 html #artAtelier .aa-quick-controls label{display:flex;flex-direction:column;align-items:stretch;gap:8px;min-width:0;padding:12px;background:var(--realm-inset,#fff5dc);border-radius:12px}
 html #artAtelier .aa-quick-controls select{width:100%;min-width:0;min-height:44px;border-radius:24px;padding:8px 12px}
 html #artAtelier .aa-generation,html #artAtelier .aa-reference-options{margin:0;padding:12px 0;border:0;border-top:1px solid var(--realm-rule,#b79c70);background:none}
@@ -47,3 +47,5 @@ html #artAtelier .aa-reference-detail label{display:flex;flex-direction:column;a
 html #artAtelier .aa-reference-detail textarea{width:100%;box-sizing:border-box}
 @media(max-width:850px){html #artAtelier .aa-results{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){html #artAtelier .aa-quick-controls{grid-template-columns:1fr 1fr;gap:8px}html #artAtelier .aa-quick-controls label:first-child{grid-column:1/-1}html #artAtelier .aa-results{grid-template-columns:minmax(0,1fr)}html #artAtelier #aaEditor{grid-template-columns:minmax(0,1fr)}html #artAtelier .aa-canvas-panel{grid-row:2}html #artAtelier .aa-tool-panel{grid-row:1;max-height:none}html #artAtelier #aaCanvas{height:360px;min-height:280px}html #artAtelier #aaDrawing{padding:10px}html #artAtelier .aa-composer{padding:12px}html #artAtelier .aa-studio-header h2{font-size:24px}html #artAtelier .aa-result-actions button{font-size:14px}}
+
+html #artAtelier .aa-result pre{font-size:12px;max-height:240px;overflow:auto}html #artAtelier .aa-style-hint{font-size:13px;opacity:.8}

@@ -45,6 +45,9 @@ def initialize(db):
         UNIQUE(message_id, slot_key))''')
     if 'progress' not in {r['name'] for r in db.execute('PRAGMA table_info(campaign_chat_art)')}:
         db.execute("ALTER TABLE campaign_chat_art ADD COLUMN progress TEXT NOT NULL DEFAULT ''")
+    for column in ('render_settings_json', 'recipe_json'):
+        if column not in {r['name'] for r in db.execute('PRAGMA table_info(campaign_chat_art)')}:
+            db.execute(f"ALTER TABLE campaign_chat_art ADD COLUMN {column} TEXT NOT NULL DEFAULT '{{}}'")
     db.execute("UPDATE campaign_chat_art SET status='error', error='Drawing was interrupted. Regenerate to try again.' WHERE status IN ('queued','running')")
 
 
@@ -112,6 +115,8 @@ def for_messages(user_id, campaign_id, messages):
         message['art'].append({key: row[key] for key in ('id', 'prompt', 'occurrence', 'revision', 'status', 'error', 'image_id', 'progress')} | {
             'saved': bool(row['saved_record_id'] and row['saved_image_id'] == row['image_id']),
             'can_change': creator or message.get('user_id') == user_id or row['requested_by'] == user_id,
+            'render_settings': json.loads(row['render_settings_json']),
+            'recipe': json.loads(row['recipe_json']) if creator or row['requested_by'] == user_id else {},
         })
 
 
@@ -169,6 +174,8 @@ def references(user_id, campaign_id, message, prompt, selected_ids=None):
     for record in records:
         card, title = record['content'], record['title']
         if card.get('category') not in ('character', 'npc', 'item', 'artwork', 'location'):
+            continue
+        if selected_ids is not None and record['id'] not in selected_ids:
             continue
         title_words = set(re.findall(r'\w+', title.casefold()))
         exact = bool(re.search(r'(?<!\w)' + re.escape(title.casefold()) + r'(?!\w)', prompt.casefold()))
@@ -274,7 +281,7 @@ def research_prompt(user_id, campaign_id, message, prompt, request):
     return final.strip(), refs
 
 
-def enqueue(user_id, campaign_id, art_id, action, guidance, revision, request, stream):
+def enqueue(user_id, campaign_id, art_id, action, guidance, revision, request, stream, render_settings=None):
     row = get_row(art_id)
     if not row or not row['active']:
         raise PermissionError('That image is no longer in the message.')
@@ -287,6 +294,13 @@ def enqueue(user_id, campaign_id, art_id, action, guidance, revision, request, s
         raise ValueError('This image is already being drawn.')
     if revision is not None and revision != row['revision']:
         raise ValueError('This image changed. Reload the chat before trying again.')
+    import art_styles
+    settings = json.loads(row['render_settings_json'])
+    if render_settings is not None:
+        if not isinstance(render_settings, dict):
+            raise ValueError('Choose valid image settings.')
+        settings.update({k: v for k, v in render_settings.items() if k in ('size', 'shape')})
+    art_styles.dimensions(settings.get('size', 512), settings.get('shape', 'square'))
     if action == 'edit' and (not row['image_id'] or not 1 <= len(guidance.strip()) <= 3000):
         raise ValueError('Describe the image changes in 1–3,000 characters.')
     effective = row['effective_prompt'] or row['prompt']
@@ -299,8 +313,8 @@ def enqueue(user_id, campaign_id, art_id, action, guidance, revision, request, s
     brief, refs = references(user_id, campaign_id, message, effective)
     with storage.connect() as db:
         changed = db.execute('''UPDATE campaign_chat_art SET status='queued',error='',progress='',revision=revision+1,
-            effective_prompt=?,source_image_id=?,references_json=? WHERE id=? AND revision=? AND status NOT IN ('queued','running')''',
-            (effective, source, json.dumps(refs), art_id, row['revision'])).rowcount
+            effective_prompt=?,source_image_id=?,references_json=?,render_settings_json=? WHERE id=? AND revision=? AND status NOT IN ('queued','running')''',
+            (effective, source, json.dumps(refs), json.dumps(settings), art_id, row['revision'])).rowcount
     if not changed:
         raise ValueError('This image is already being changed. Reload the chat.')
     job = (art_id, row['revision'] + 1, user_id, campaign_id, brief, refs, source, request, stream)
@@ -367,8 +381,10 @@ def run_job(job):
             if source_id:
                 reference = art_references.resolve(user_id, [{'image_id': source_id}])[0]
                 source = art_references.prepare(reference, Path(folder) / 'edit.png')
-            events = local_art.design(brief, source, 512, [], stream, False, False, image_references=resolved, vision_model=model)
+            settings = json.loads(get_row(art_id)['render_settings_json'])
+            events = local_art.design(brief, source, settings.get('size',512), [], stream, False, False, image_references=resolved, vision_model=model, shape=settings.get('shape','square'), cache_scope=user_id)
             pixels = None
+            recipe = {}
             for event in events:
                 if not current():
                     update(status='error', error='The message changed before drawing finished.')
@@ -377,11 +393,13 @@ def run_job(job):
                     update(progress=str(event.get('message',''))[:250])
                 if event.get('event') == 'pixels':
                     pixels = event['data']
+                if event.get('event') == 'recipe':
+                    recipe = event
             if not pixels:
                 raise ValueError('The image engine returned no image. Regenerate to try again.')
             if current():
                 image_id = storage.save_upload(user_id, pixels, '.png', 'image/png')
-                update(image_id=image_id, status='complete', error='',progress='')
+                update(image_id=image_id, status='complete', error='',progress='',recipe_json=json.dumps(recipe))
                 logging.info('Chat artwork %s complete: %.1fs',art_id,time.monotonic()-started)
     except Exception as error:
         logging.exception('Inline artwork failed')

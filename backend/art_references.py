@@ -1,10 +1,36 @@
 """Authorized image references and focused local vision analysis for Art Atelier."""
 import base64
 import time
+import hashlib
+import threading
+from collections import OrderedDict
 from PIL import Image, ImageOps
 import storage
 
 MAX_REFERENCES = 3
+_descriptions = OrderedDict()
+_description_lock = threading.Lock()
+
+
+def describe_cached(reference, path, prompt, model, stream_ai, scope=None):
+    # Callers still resolve access and normalize current pixels before reaching this cache.
+    if scope is None:
+        return describe(reference, path, prompt, model, stream_ai)
+    key = (scope, hashlib.sha256(path.read_bytes()).digest(), reference['name'], reference['note'], prompt, model)
+    # Coalesce concurrent variations instead of loading the same vision model twice.
+    with _description_lock:
+        now = time.monotonic()
+        for old in list(_descriptions):
+            if now - _descriptions[old][0] > 600:
+                del _descriptions[old]
+        if key in _descriptions:
+            _descriptions.move_to_end(key)
+            return _descriptions[key][1]
+        result = describe(reference, path, prompt, model, stream_ai)
+        _descriptions[key] = (time.monotonic(), result)
+        while len(_descriptions) > 64:
+            _descriptions.popitem(last=False)
+        return result
 
 def resolve(user_id, values):
     if not isinstance(values, list) or len(values) > MAX_REFERENCES:

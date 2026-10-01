@@ -40,7 +40,7 @@ class ReferenceTests(unittest.TestCase):
                 self.assertTrue(raw.startswith(b'\x89PNG'))
                 self.assertIn('red metal', payload['messages'][1]['content'])
                 yield {'message': {'content': 'Red armor with rounded plates.'}, 'done': True}
-            def render(prompt, source, size, references=None):
+            def render(prompt, source, size, references=None, seed=None):
                 self.assertIn('rounded plates', prompt)
                 self.assertIn('Use the red metal', prompt)
                 self.assertIn('a knight', prompt)

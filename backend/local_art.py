@@ -38,24 +38,29 @@ class ImageMemoryError(ValueError):
     pass
 
 
-def render(prompt, source=None, size=512, references=None):
+def render(prompt, source=None, size=512, references=None, seed=None):
     if not ready():
         raise ValueError('Local image models are not installed. Run scripts/setup_local_art.py on the server computer first.')
-    if size not in (512, 768, 1024):
+    allowed = {(512,512),(768,768),(1024,1024),(384,512),(512,384),(512,768),(768,512),(768,1024),(1024,768)}
+    dimensions = (size, size) if type(size) is int else size
+    if not isinstance(dimensions, tuple) or any(type(n) is not int for n in dimensions) or dimensions not in allowed:
         raise ValueError('Choose a supported image size.')
+    if seed is not None and (type(seed) is not int or not 0 <= seed < 2**31):
+        raise ValueError('Seed must be a whole number from 0 to 2147483647.')
+    seed = secrets.randbelow(2**31) if seed is None else seed
     while not GPU.acquire(timeout=1):
         yield {'event': 'status', 'message': 'Waiting for the local image engine…'}
     try:
         try:
-            yield from _render_once(prompt, source, size, cpu_vae=False, references=references)
+            yield from _render_once(prompt, source, dimensions, cpu_vae=False, references=references, seed=seed)
         except ImageMemoryError:
             yield {'event': 'status', 'message': 'GPU memory is tight. Retrying with slower CPU image decoding…'}
-            yield from _render_once(prompt, source, size, cpu_vae=True, references=references)
+            yield from _render_once(prompt, source, dimensions, cpu_vae=True, references=references, seed=seed)
     finally:
         GPU.release()
 
 
-def _render_once(prompt, source, size, cpu_vae, references=None):
+def _render_once(prompt, source, size, cpu_vae, references=None, seed=None):
     process = None
     try:
         with ExitStack() as cleanup:
@@ -67,10 +72,10 @@ def _render_once(prompt, source, size, cpu_vae, references=None):
             models=model_directory()
             args = [str(ROOT / 'bin/sd-cli.exe'), '--diffusion-model', str(models / 'diffusion.gguf'),
                     '--llm', str(models / 'encoder.gguf'), '--vae', str(models / 'vae.safetensors'),
-                    '--prompt-file', str(prompt_file), '--output', str(output), '--width', str(size),
-                    '--height', str(size), '--cfg-scale', '1', '--steps', '4', '--sampling-method', 'euler',
+                    '--prompt-file', str(prompt_file), '--output', str(output), '--width', str(size[0]),
+                    '--height', str(size[1]), '--cfg-scale', '1', '--steps', '4', '--sampling-method', 'euler',
                     '--offload-to-cpu', '--backend', 'te=cpu,vae='+('cpu' if cpu_vae else 'cuda0')+',diffusion=cuda0',
-                    '--max-vram', '-1', '--diffusion-fa', '--vae-tiling', '--seed', str(secrets.randbelow(2**31)),
+                    '--max-vram', '-1', '--diffusion-fa', '--vae-tiling', '--seed', str(seed),
                     '--disable-image-metadata']
             if source: args += ['--ref-image', str(source)]
             for reference in references or []: args += ['--ref-image', str(reference)]
@@ -100,15 +105,21 @@ def _render_once(prompt, source, size, cpu_vae, references=None):
     finally:
         stop_process(process)
 
-def design(prompt, source, size, helpers, stream_ai, use_references=True, transparent_background=True, image_references=None, vision_model=None):
+def design(prompt, source, size, helpers, stream_ai, use_references=True, transparent_background=True, image_references=None, vision_model=None, style='', shape='square', seed=None, cache_scope=None):
     # Keep normalized reference files alive through rendering and cancellation.
     import art_references
+    import art_styles
+    dimensions = art_styles.dimensions(size, shape)
+    prompt = art_styles.compose(prompt, style)
+    if seed is not None and (type(seed) is not int or not 0 <= seed < 2**31):
+        raise ValueError('Seed must be a whole number from 0 to 2147483647.')
+    seed = secrets.randbelow(2**31) if seed is None else seed
     with tempfile.TemporaryDirectory(prefix='art-references-') as folder:
         paths, descriptions = [], []
         for index, reference in enumerate(image_references or []):
             yield {'event': 'status', 'message': f'Reading reference {index + 1}: {reference["name"]}...'}
             path = art_references.prepare(reference, Path(folder) / f'reference-{index + 1}.png')
-            description = art_references.describe(reference, path, prompt, vision_model, stream_ai)
+            description = art_references.describe_cached(reference, path, prompt, vision_model, stream_ai, cache_scope)
             paths.append(path)
             descriptions.append(f'Reference {index + 1}: {reference["name"]}. User guidance: {reference["note"]}. Observed: {description}')
             yield {'event': 'image_reference', 'index': index, 'name': reference['name'], 'description': description, 'model': vision_model}
@@ -117,10 +128,10 @@ def design(prompt, source, size, helpers, stream_ai, use_references=True, transp
             guidance = '\nUse the supplied reference images together with these observations. Follow the user request and per-image guidance; do not reproduce a collage or unrelated elements.\n' + '\n'.join(descriptions)
             if source:
                 guidance += '\nThe first supplied image is the canvas to edit. Reference 1 onward refers to the subsequent images.'
-        yield from _design(prompt + guidance, source, size, helpers, stream_ai, use_references, transparent_background, paths)
+        yield from _design(prompt + guidance, source, dimensions, helpers, stream_ai, use_references, transparent_background, paths, seed)
 
 
-def _design(prompt, source, size, helpers, stream_ai, use_references=True, transparent_background=True, reference_paths=None):
+def _design(prompt, source, size, helpers, stream_ai, use_references=True, transparent_background=True, reference_paths=None, seed=None):
     import art_designer
     if not ready(): raise ValueError('Local image model setup is not complete yet. Run scripts/setup_local_art.py on the server computer.')
     sources = []
@@ -153,7 +164,8 @@ def _design(prompt, source, size, helpers, stream_ai, use_references=True, trans
     if transparent_background:
         from background_removal import PROMPT, remove_background
         brief += '\nOutput requirements: ' + PROMPT
-    for event in render(brief, source, size, references=reference_paths) if reference_paths else render(brief, source, size):
+    yield {'event': 'recipe', 'prompt': brief, 'seed': seed, 'width': size[0], 'height': size[1], 'model': 'FLUX.2 Klein 4B Q8', 'transparent_background': transparent_background}
+    for event in render(brief, source, size, references=reference_paths, seed=seed):
         if transparent_background and event.get('event') == 'pixels':
             yield {'event': 'status', 'message': 'Removing the background with local AI…'}
             event = {**event, 'data': remove_background(event['data'])}

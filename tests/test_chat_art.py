@@ -25,7 +25,7 @@ class ChatArtTests(unittest.TestCase):
         def request(path, payload=None, **kwargs):
             if path == '/api/tags': return {'models':[{'name':'test'}]}
             data = json.loads(payload['messages'][-1]['content'])
-            return {'message':{'content':json.dumps({'ids':[]} if 'records' in data else {'prompt':data['campaign_context']})}}
+            return {'message':{'content':json.dumps({'ids':[r['id'] for r in data['records']]} if 'records' in data else {'prompt':data['campaign_context']})}}
         self.request, self.stream = Mock(side_effect=request), Mock()
 
     def tearDown(self):
@@ -67,6 +67,21 @@ class ChatArtTests(unittest.TestCase):
         self.assertEqual([(t['prompt'],t['occurrence']) for t in chat_art.tags(text)], [('cat',0),('cat',1)])
         self.assertEqual(len(chat_art.tags('<image>cat</image>'*9)),3)
         self.assertFalse(chat_art.tags('<image></image><image>unfinished'))
+
+    def test_research_rejected_records_do_not_return_through_name_matching(self):
+        storage.create_work(self.player,'Blue Knight',{'category':'artwork','campaign_id':self.cid,'summary':'Unwanted armored warrior','image_id':self.image})
+        message=self.message('<image>a blue vase</image>')
+        raw=storage.get_ai_message(self.cid,message['id'])
+        brief,refs=chat_art.references(self.player,self.cid,raw,'a blue vase',selected_ids=[])
+        self.assertEqual(brief,'a blue vase');self.assertEqual(refs,[])
+
+    def test_chat_size_and_shape_persist_and_reach_renderer(self):
+        message=self.message('<image>a cat</image>');self.sync(message);self.finish_job();art=self.art(message)[0]
+        chat_art.enqueue(self.player,self.cid,art['id'],'regenerate','',art['revision'],self.request,self.stream,render_settings={'size':1024,'shape':'portrait'})
+        def check(args,kwargs):
+            self.assertEqual(args[2],1024);self.assertEqual(kwargs['shape'],'portrait')
+        self.finish_job(check)
+        self.assertEqual(self.art(message)[0]['render_settings'],{'size':1024,'shape':'portrait'})
 
     def test_reopen_and_prose_edits_reuse_images(self):
         message = self.message('Before <image>a cat</image> between <image>a cat</image> after')

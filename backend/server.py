@@ -761,7 +761,7 @@ class Handler(SimpleHTTPRequestHandler):
         except (OSError,ValueError):installed=set()
         helpers=list(dict.fromkeys(h for h in configured if isinstance(h,str) and h in installed and h!=model))[:3]
         if image_mode:
-            events=local_art.design(prompt.strip(),source,data.get('image_size',512),helpers,self.ai_stream,data.get('research') is True,data.get('transparent_background') is not False, image_references=image_references, vision_model=vision_model)
+            events=local_art.design(prompt.strip(),source,data.get('image_size',512),helpers,self.ai_stream,data.get('research') is True,data.get('transparent_background') is True, image_references=image_references, vision_model=vision_model, style=data.get('style',''), shape=data.get('image_shape','square'), seed=data.get('seed'), cache_scope=user['id'])
         else:
             events=art_editor.edit(prompt.strip(),model,self.ai_stream,data.get('layers'),helpers,data.get('selected')) if data.get('edit') is True else art_designer.design(prompt.strip(),model,self.ai_stream,data.get('research') is not False,helper_models=helpers)
         try:
@@ -969,7 +969,7 @@ class Handler(SimpleHTTPRequestHandler):
                 record_id = chat_art.save(user['id'], campaign_id, art_id, str(data.get('title') or ''), revision)
                 self.send_json(HTTPStatus.OK, {'record_id': record_id})
             elif action in ('regenerate', 'edit'):
-                chat_art.enqueue(user['id'], campaign_id, art_id, action, str(data.get('prompt') or ''), revision, self.ai_request, self.ai_stream)
+                chat_art.enqueue(user['id'], campaign_id, art_id, action, str(data.get('prompt') or ''), revision, self.ai_request, self.ai_stream, render_settings=data.get('render_settings'))
                 self.send_json(HTTPStatus.ACCEPTED, {'ok': True})
             else:
                 raise ValueError('Choose save, regenerate, or edit.')

@@ -1,6 +1,6 @@
 /* Render image slots at the tag's exact position. Rendering never starts a job. */
 (function () {
-  const drafts = new Map(), pending = new Set(), errors = new Map();
+  const drafts = new Map(), pending = new Set(), errors = new Map(), settingsDrafts = new Map();
   function render(host, entry, options) {
     const text = entry.message || '';
     let cursor = 0, count = 0;
@@ -32,7 +32,7 @@
       const busy = ['queued', 'running'].includes(art.status) || pending.has(art.id);
       if (art.image_id) {
         const link = document.createElement('a'); link.href = '/api/uploads/' + art.image_id; link.target = '_blank'; link.rel = 'noopener'; link.setAttribute('aria-label', 'Open generated image');
-        const image = new Image(); image.src = link.href; image.alt = 'Generated artwork'; image.width = 512; image.height = 512; link.append(image); frame.append(link);
+        const image = new Image(); image.src = link.href; image.alt = 'Generated artwork'; image.style.height='auto'; link.append(image); frame.append(link);
       }
       const status = document.createElement('p'); status.className = 'chat-art-status'; status.setAttribute('role', 'status');
       status.textContent = errors.get(art.id) || art.error || (busy ? (art.status === 'running' ? (art.progress || 'Drawing…') : 'Waiting to draw…') : art.saved ? 'Saved to Artwork' : '');
@@ -44,7 +44,8 @@
         frame.querySelectorAll('button').forEach(button => button.disabled = true);
         status.textContent = action === 'save' ? 'Saving…' : 'Starting drawing…';
         try {
-          await options.action(art.id, {action, revision: art.revision, ...extra});
+          await options.action(art.id, {action, revision: art.revision, ...(action==='save'?{}:{render_settings:settingsDrafts.get(art.id)||art.render_settings||{}}), ...extra});
+          settingsDrafts.delete(art.id);
           if (action === 'edit') drafts.delete(art.id);
         } catch (error) {errors.set(art.id, error.message);}
         finally {pending.delete(art.id); await options.refresh();}
@@ -55,6 +56,14 @@
       }
       if (art.image_id) button('Save to artwork catalog', () => act('save'), busy || art.saved);
       if (art.can_change) {
+        const settings=document.createElement('details'),heading=document.createElement('summary');heading.textContent='Image size & shape';settings.append(heading);
+        const values=settingsDrafts.get(art.id)||art.render_settings||{};
+        for(const [key,title,choices,fallback] of [['size','Size',[[512,'512 · Quick'],[768,'768 · Balanced'],[1024,'1024 · Detailed']],512],['shape','Shape',[['square','Square'],['portrait','Portrait'],['landscape','Landscape']],'square']]){
+          const label=document.createElement('label'),select=document.createElement('select');label.textContent=title;select.disabled=busy;
+          for(const [value,name] of choices){const option=document.createElement('option');option.value=value;option.textContent=name;select.append(option);}
+          select.value=values[key]??fallback;select.onchange=()=>settingsDrafts.set(art.id,{...(settingsDrafts.get(art.id)||art.render_settings||{}),[key]:key==='size'?Number(select.value):select.value});label.append(select);settings.append(label);
+        }
+        frame.append(settings);
         button(art.image_id ? 'Regenerate' : 'Retry', () => act('regenerate'), busy);
         if (art.image_id) {
           const editor = document.createElement('div'); editor.className = 'chat-art-editor'; editor.hidden = !drafts.has(art.id);
@@ -69,6 +78,7 @@
           button('Edit image', () => {editor.hidden = !editor.hidden; if (!editor.hidden) {drafts.set(art.id, input.value); input.focus();} else drafts.delete(art.id);}, busy);
         }
       }
+      if(art.recipe?.prompt){const details=document.createElement('details'),summary=document.createElement('summary'),text=document.createElement('pre');summary.textContent='Prompt & settings';text.style.whiteSpace='pre-wrap';text.style.overflowWrap='anywhere';text.textContent=JSON.stringify(art.recipe,null,2);details.append(summary,text);frame.append(details);}
     }
     prose(text.slice(cursor));
   }

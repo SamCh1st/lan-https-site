@@ -120,7 +120,11 @@ Ollama helpers receive the preferred language and instructions to understand mul
 
 Install Ollama and the models you want to use on the host computer, then select a model in the campaign. Model files are separate from this repository.
 
-The storyteller can narrate, update permitted scene fields, create campaign records, and grant cards. HP, XP, levels, spell slots, and equipment effects remain sheet actions. **Create from an idea** generates a character draft for you to review and save; it does not automatically grant equipment or create a portrait.
+The storyteller can narrate, update permitted scene fields, create campaign records, and grant cards. HP, XP, levels, spell slots, and equipment effects remain sheet actions. **Create from an idea** generates characters, NPCs, and encounters for review before saving. Open it from a new record or the creation buttons under AI chat. NPC and encounter creation requires the campaign creator. Generation follows the active chat's **Modern**, **Medieval**, or **D&D** style, falling back to the campaign setting; regular campaigns use D&D. Modern and medieval drafts focus on people and situations without generating D&D classes or mechanics. Generation does not automatically grant equipment or create a portrait.
+
+New characters include editable portrayal guidance and a short reminder, saved to their **Memories** page when the character is created. Existing characters have **Draft character guidance with AI** on that page: it uses their sheet and current unsaved guidance, preserves identity, and leaves the result for review. Use **Restore previous guidance** to undo the draft, or **Save character guidance** to keep it. Generation never writes learned memories.
+
+Characters and NPCs share a name namespace within each campaign; encounter titles must also be distinct. Saving and AI story effects reject duplicates even if capitalization, accents, spacing or punctuation differ. The generator considers visible campaign records and retries a conflicting name once. Transactional save checks cover simultaneous requests and hidden records without revealing their contents. Existing duplicate records are not merged or deleted.
 
 Story helpers prepare short continuity notes in the background. The storyteller uses available notes without waiting for a new helper response. Notes expire after five minutes and are cleared on restart; GPU contention can still affect speed.
 

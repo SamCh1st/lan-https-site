@@ -31,6 +31,7 @@ from cryptography.x509.oid import NameOID
 import storage
 import audio_library
 import character_generator
+import record_generator
 import ai_effects
 import campaign_maps
 import campaign_transfer
@@ -569,7 +570,11 @@ class Handler(SimpleHTTPRequestHandler):
                 else:
                     content["owner_user_id"] = user["id"]
                 content["assigned_user_ids"] = [content["owner_user_id"]] if content["owner_user_id"] in valid_members else []
-            item = storage.create_work(user["id"], title, content)
+            try:
+                item = storage.create_work(user["id"], title, content)
+            except ValueError as error:
+                self.send_json(HTTPStatus.CONFLICT, {'error':str(error)})
+                return
             self.send_json(HTTPStatus.CREATED, {"item": item})
         elif re.fullmatch(r"/api/campaign/\d+/equipment", path):
             user = self.require_user()
@@ -878,18 +883,32 @@ class Handler(SimpleHTTPRequestHandler):
     def generate_character(self, user: dict, campaign_id: int, data: dict) -> None:
         campaign = storage.campaign_record(user['id'], campaign_id)
         if not campaign:
-            self.send_json(HTTPStatus.FORBIDDEN, {'error':'Join a campaign to generate a character.'})
+            self.send_json(HTTPStatus.FORBIDDEN, {'error':'Join a campaign to generate a draft.'})
+            return
+        category = data.get('category','character')
+        if category not in ('character','npc','encounter'):
+            self.send_json(HTTPStatus.BAD_REQUEST, {'error':'Choose a character, NPC or encounter.'})
+            return
+        if category != 'character' and storage.campaign_role(user['id'],campaign_id) != 'creator':
+            self.send_json(HTTPStatus.FORBIDDEN, {'error':'Only the campaign creator can generate NPCs or encounters.'})
             return
         prompt = data.get('prompt')
         if not isinstance(prompt, str) or not 1 <= len(prompt.strip()) <= 6000:
-            self.send_json(HTTPStatus.BAD_REQUEST, {'error':'Describe your character in 1–6,000 characters.'})
+            self.send_json(HTTPStatus.BAD_REQUEST, {'error':'Describe your idea in 1–6,000 characters.'})
             return
         try:
             model = self.ai_model(campaign['content'].get('ai_model'))
-            draft = character_generator.generate(prompt.strip(), campaign['content'], model, self.ai_request, response_json, normalize_character_stats)
+            mode = chat_modes.get(user['id'],campaign_id,data.get('chat_id')) if campaign['content'].get('ai_dm') else 'dnd'
+            known = [r for r in storage.list_work(user['id']) if r['content'].get('campaign_id') == campaign_id and r['content'].get('category') in ('character','npc','encounter','location')]
+            draft = record_generator.generate(prompt.strip(),category,campaign['content'],mode,known,model,self.ai_request,response_json,normalize_character_stats)
+            from record_identity import ensure_unique
+            with storage.connect() as db:
+                ensure_unique(db,draft['title'],dict(draft['content'],campaign_id=campaign_id))
             self.send_json(HTTPStatus.OK, {'draft':draft})
+        except PermissionError as error:
+            self.send_json(HTTPStatus.FORBIDDEN, {'error':str(error)})
         except (ValueError, TypeError, KeyError, urllib.error.URLError, TimeoutError, OSError) as error:
-            self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {'error':'Character generation could not finish: '+str(error).rstrip('. ')+'. Your form has not been changed.'})
+            self.send_json(HTTPStatus.SERVICE_UNAVAILABLE, {'error':'Draft generation could not finish: '+str(error).rstrip('. ')+'. Your form has not been changed.'})
 
     def ai_model(self, requested: object) -> str:
         models = ollama_models()
@@ -982,12 +1001,25 @@ class Handler(SimpleHTTPRequestHandler):
         user=self.require_user()
         if not user:return
         try:
+            if data and data.get('action') == 'generate':
+                character = character_memory.access(user['id'],campaign_id,character_id)
+                campaign = storage.campaign_record(user['id'],campaign_id)
+                mode = chat_modes.get(user['id'],campaign_id,data.get('chat_id')) if campaign['content'].get('ai_dm') else 'dnd'
+                prompt = data.get('prompt','')
+                current = data.get('current')
+                if not isinstance(prompt,str) or len(prompt)>6000 or not isinstance(current,dict) or any(not isinstance(current.get(k,''),str) or len(current.get(k,''))>limit for k,limit in (('core',12000),('reminder',1000))):
+                    raise ValueError('Use up to 6,000 characters for the request, 12,000 for guidance and 1,000 for the reminder.')
+                draft = record_generator.guidance(character,mode,prompt,{k:current.get(k,'') for k in ('core','reminder')},self.ai_model(campaign['content'].get('ai_model')),self.ai_request,response_json)
+                self.send_json(HTTPStatus.OK,{'draft':draft})
+                return
             result=character_memory.state(user['id'],campaign_id,character_id) if data is None else character_memory.change(user['id'],campaign_id,character_id,data)
             self.send_json(HTTPStatus.OK,result)
         except PermissionError as error:
             self.send_json(HTTPStatus.FORBIDDEN,{'error':str(error)})
         except (ValueError,TypeError) as error:
             self.send_json(HTTPStatus.BAD_REQUEST,{'error':str(error)})
+        except (OSError,TimeoutError) as error:
+            self.send_json(HTTPStatus.SERVICE_UNAVAILABLE,{'error':'Guidance generation could not finish. Your saved guidance is unchanged. '+str(error)})
 
     def ai_message(self, user: dict, campaign_id: int, data: dict) -> None:
         campaign = storage.campaign_record(user["id"], campaign_id)
@@ -1626,7 +1658,11 @@ The player's Inventory header toggles to a Dice roller in both normal and AI cam
                     if owner_id in valid_members and owner_id not in content["assigned_user_ids"]:
                         content["assigned_user_ids"].append(owner_id)
                 content["participant_ids"] = participants
-        saved = storage.update_work(user["id"], item_id, title, content)
+        try:
+            saved = storage.update_work(user["id"], item_id, title, content)
+        except ValueError as error:
+            self.send_json(HTTPStatus.CONFLICT, {'error':str(error)})
+            return
         self.send_json(HTTPStatus.OK if saved else HTTPStatus.NOT_FOUND, {"ok": saved})
 
     def update_account(self, user: dict, data: dict) -> None:

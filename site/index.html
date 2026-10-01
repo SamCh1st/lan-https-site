@@ -165,6 +165,7 @@
                 <div class="ai-chat-compose"><div class="ai-speaker-picker"><button id="aiSpeakerButton" type="button" aria-expanded="false" title="Choose who you write as">♙</button><div class="ai-speaker-menu d-none" id="aiSpeakerMenu"></div></div><textarea id="aiChatInput" rows="3" maxlength="12000" placeholder="Write dialogue, an action, or table talk…"></textarea><button class="ai-address-button" type="submit">Send</button></div>
                 <details id="aiChatExtras" class="chat-compose-extras" open><summary>Images &amp; writing options <span id="aiChatImageCount"></span></summary>
                 <div id="aiChatImages"></div>
+                <div class="tt-actions" id="aiChatGenerators" aria-label="Create for this conversation"><button type="button" data-generate-record="character">Create character</button><button type="button" data-generate-record="npc">Create NPC</button><button type="button" data-generate-record="encounter">Create encounter</button></div>
                 <div class="ai-chat-options"><span><label class="ai-address-toggle"><input id="aiAddressToggle" type="checkbox" checked> Address this message to Ollama</label><details class="ai-chat-audience"><summary>Who can hear this?</summary><div id="aiChatAudience"></div></details></span><small>Send only posts the message. Click a character card above when you want Ollama to answer; unchecked table talk is ignored.</small></div>
                 <p class="form-error" id="aiChatError" role="alert"></p>
                 </details>
@@ -298,7 +299,7 @@
             <input name="image_id" type="hidden">
           </div></div>
         </div>
-        <details id="characterGenerator" class="tt-section d-none" aria-label="Generate a character"><summary>Create from an idea</summary><label for="characterGenerationPrompt">Character prompt<textarea id="characterGenerationPrompt" class="form-control" rows="3" maxlength="6000" placeholder="A level-1 elven wizard who studies forgotten ruins; shy, curious, and fiercely loyal…"></textarea></label><p class="tt-help">Describe their class, level, appearance and personality. Your campaign’s local AI will fill this form. Review the draft, then Save to create the character. Equipment and spells are proposed in notes.</p><div class="tt-actions"><button id="generateCharacterButton" type="button">Generate character</button></div><p id="characterGenerationStatus" role="status" class="tt-help"></p><p id="characterGenerationError" role="alert" class="form-error"></p></details>
+        <details id="characterGenerator" class="tt-section d-none" aria-label="Generate a character, NPC or encounter"><summary>Create from an idea</summary><label for="characterGenerationPrompt">Describe your idea<textarea id="characterGenerationPrompt" class="form-control" rows="3" maxlength="6000" placeholder="A curious city mechanic, a medieval innkeeper, or a tense meeting at a ruined bridge…"></textarea></label><p class="tt-help">Describe the person or encounter you need. The AI follows the active conversation setting and checks existing campaign names. Review the draft, then Save.</p><p id="characterGenerationMode" class="tt-help"></p><div id="generatedCharacterGuidance" class="d-none"><label>Character description, personality &amp; roleplay guidelines<textarea id="generatedCharacterCore" class="form-control" rows="5" maxlength="12000"></textarea></label><label>Character reminder note<textarea id="generatedCharacterReminder" class="form-control" rows="2" maxlength="1000"></textarea></label><p class="tt-help">Saved to the character’s guidance page when you create the character. These are stable traits, not learned memories.</p></div><div class="tt-actions"><button id="generateCharacterButton" type="button">Generate draft</button></div><p id="characterGenerationStatus" role="status" class="tt-help"></p><p id="characterGenerationError" role="alert" class="form-error"></p></details>
         <div id="structuredFields"></div>
         <section class="record-audience d-none" id="recordAudience"><strong>Give this card to specific players</strong><small>Only selected players receive it in their campaign tools. “Revealed to players” still shares it with everyone.</small><div id="recordAudiencePlayers"></div></section>
         <section class="character-template-import d-none" id="characterTemplateImport">
@@ -448,9 +449,9 @@
   <script src="chat-art.js?v=20260930-options"></script>
   <script src="chat-speaker-menu.js?v=20260930"></script>
   <script src="chat-fullscreen.js?v=20260930"></script>
-  <script src="character-memory.js?v=20260930-memory"></script>
+  <script src="character-memory.js?v=20261001-generation"></script>
   <script src="chat-editor.js?v=20260930-end-continuation"></script>
-  <script src="app.js?v=20260930-art-recipes"></script>
+  <script src="app.js?v=20261001-generation"></script>
   <script src="audio-library.js?v=20260917"></script>
   <script src="realm-resize.js?v=20260930-chat"></script>
   <script src="realm-container-resize.js?v=inline-chat-20260919-outer-frame"></script>

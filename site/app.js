@@ -501,6 +501,7 @@ $(function () {
     $('#aiConversationModeHelp').text({dnd:'Talk with the DM, ask questions, or continue the adventure.',medieval:'Natural character conversation in a medieval world.',modern:'Everyday contemporary conversation, guided by each character’s personality.'}[aiState.conversation_mode || 'dnd'] + (aiState.can_change_mode ? '' : ' The campaign creator sets this chat’s style.'));
     $('#aiConversationMode').attr('title', $('#aiConversationModeHelp').text());
     $('#aiStoryToggle').toggleClass('d-none', !aiState.creator);
+    $('#aiChatGenerators [data-generate-record]').each(function () { $(this).toggleClass('d-none', this.dataset.generateRecord !== 'character' && !aiState.creator); });
     if (displayedAiWorld !== JSON.stringify([activeCampaignId, aiState.world || {}]) && !$('.ai-world-rail input,.ai-world-rail select').is(':focus')) setAiWorld(aiState.world || {});
     if (forceFields) {
       $('#aiStory').val(aiState.story || '');
@@ -1379,16 +1380,24 @@ $(function () {
     characterGenerationVersion++;
     if (characterGenerationController) characterGenerationController.abort();
     characterGenerationController = null;
-    $('#generateCharacterButton').prop('disabled', false).text('Generate character');
+    $('#generateCharacterButton').prop('disabled', false).text('Generate draft');
     $('#workForm button[type=submit]').prop('disabled', false);
     $('#characterGenerationStatus, #characterGenerationError').text('');
   }
   $('#workModal').on('hidden.bs.modal', resetCharacterGeneration);
+  $('#aiChatGenerators').on('click', '[data-generate-record]', function () {
+    const category=this.dataset.generateRecord;
+    if(category!=='character'&&!aiState?.creator)return;
+    openRecord(category);
+    document.getElementById('characterGenerator').open=true;
+    $('#workModal').one('shown.bs.modal',()=>$('#characterGenerationPrompt').trigger('focus'));
+  });
   $('#generateCharacterButton').on('click', async function () {
     const prompt = $('#characterGenerationPrompt').val().trim();
-    if (!prompt) { $('#characterGenerationError').text('Describe the character you want to create.'); return; }
+    if (!prompt) { $('#characterGenerationError').text('Describe the person or encounter you want to create.'); return; }
     const campaign = activeCampaign();
-    if (!campaign || $('#workForm [name=id]').val() || $('#workForm [name=category]').val() !== 'character') return;
+    const category=$('#workForm [name=category]').val();
+    if (!campaign || $('#workForm [name=id]').val() || !['character','npc','encounter'].includes(category) || characterGenerationController) return;
     resetCharacterGeneration();
     const version = characterGenerationVersion;
     characterGenerationController = new AbortController();
@@ -1396,23 +1405,28 @@ $(function () {
     $('#workForm button[type=submit]').prop('disabled', true);
     $('#characterGenerationStatus').text('Creating your draft with the campaign’s local AI. This may take a few minutes.');
     try {
-      const result = await api('/api/campaign/' + campaign.id + '/characters/generate', {method:'POST',signal:characterGenerationController.signal,body:JSON.stringify({prompt:prompt})});
+      const result = await api('/api/campaign/' + campaign.id + '/characters/generate', {method:'POST',signal:characterGenerationController.signal,body:JSON.stringify({prompt:prompt,category,chat_id:activeAiChatId||null})});
       if (version !== characterGenerationVersion) return;
       const draft = result.draft, content = draft && draft.content;
       if (!draft || !content || typeof content !== 'object') throw new Error('The AI returned an incomplete draft. Please try again.');
       $('#workForm [name=title]').val(draft.title);
       setStructuredValues(content);
+      if(category==='character'){
       // Rebuild the supplemental sheet so regenerating cannot keep a previous class's resources.
       $('#characterStatsFields .tt-panel').remove();
       $('#characterStatsFields').append(Tabletop.fields('character', content, campaign.content || {}));
       setStructuredValues(content);
       updateCharacterStatMath();Tabletop.hydrate(content);
       editableRecordContent.tabletop = JSON.parse(JSON.stringify(content.tabletop || {}));
-      $('#characterGenerationStatus').text('Draft ready. Review the appearance, background, stats, equipment and spells below, then Save. Class and source choices still need DM review.');
+      }
+      editableRecordContent.generation_mode=content.generation_mode;
+      $('#generatedCharacterGuidance').toggleClass('d-none',category!=='character');
+      $('#generatedCharacterCore').val(draft.guidance?.core||'');$('#generatedCharacterReminder').val(draft.guidance?.reminder||'');
+      $('#characterGenerationStatus').text('Draft ready in '+({dnd:'D&D',modern:'Modern',medieval:'Medieval'}[content.generation_mode]||'D&D')+' style. Review the draft, then Save. Nothing has been created yet.');
     } catch (error) {
       if (version === characterGenerationVersion && error.name !== 'AbortError') { $('#characterGenerationStatus').text(''); $('#characterGenerationError').text(error.message); }
     } finally {
-      if (version === characterGenerationVersion) { characterGenerationController = null; $('#generateCharacterButton').prop('disabled', false).text('Generate character'); $('#workForm button[type=submit]').prop('disabled', false); }
+      if (version === characterGenerationVersion) { characterGenerationController = null; $('#generateCharacterButton').prop('disabled', false).text('Generate draft'); $('#workForm button[type=submit]').prop('disabled', false); }
     }
   });
 
@@ -1432,7 +1446,9 @@ $(function () {
     $('#recordNotesLabel').contents().first()[0].textContent = config.notes;
     const campaign = items.find(function (value) { return value.id === activeCampaignId; });
     $('.creator-visibility').toggleClass('d-none', type !== 'chat' || !campaign || campaign.membership_role !== 'creator');
-    $('#characterGenerator').toggleClass('d-none', !!item || type !== 'character' || !campaign);
+    $('#characterGenerator').toggleClass('d-none', !!item || !['character','npc','encounter'].includes(type) || !campaign);
+    $('#characterGenerationMode').text('Setting: '+({dnd:'D&D',modern:'Modern',medieval:'Medieval'}[aiState?.conversation_mode||campaign?.content?.ai_chat_mode||'dnd'])+' · follows the active conversation.');
+    $('#generatedCharacterGuidance').addClass('d-none');$('#generatedCharacterCore,#generatedCharacterReminder').val('');
     const content = item ? item.content || {} : {};
     editableRecordContent = JSON.parse(JSON.stringify(content));
     if (item && type !== 'map_part' && StarterArt.fallback(item)) editableRecordContent.default_art = StarterArt.fallback(item);
@@ -2004,8 +2020,10 @@ $(function () {
     } catch (error) { $('#detailError').text(error.message); }
   });
 
+  let recordSavePending=false;
   $('#workForm').on('submit', async function (event) {
     event.preventDefault();
+    if(recordSavePending||characterGenerationController)return;
     const formData = new FormData(this);
     const values = Object.fromEntries(formData);
     let characterRig = null;
@@ -2098,6 +2116,8 @@ $(function () {
         if ((priorItem.content || {})[key] !== undefined) content[key] = (priorItem.content || {})[key];
       });
     }
+    if(values.category==='character'&&!values.id&&!$('#generatedCharacterGuidance').hasClass('d-none'))content.character_guidance={core:$('#generatedCharacterCore').val(),reminder:$('#generatedCharacterReminder').val()};
+    recordSavePending=true;$('#workForm button[type=submit]').prop('disabled',true);
     try {
       await api(values.id ? '/api/work/' + values.id : '/api/work', {
         method: values.id ? 'PUT' : 'POST',
@@ -2112,6 +2132,7 @@ $(function () {
       workSaveClosePending = true;
       workModal.hide();
     } catch (error) { $('#workError').text(error.message); }
+    finally{recordSavePending=false;$('#workForm button[type=submit]').prop('disabled',false);}
   });
 
   $('#workForm').on('input change', '[name=character_level],[name=strength],[name=dexterity],[name=constitution],[name=intelligence],[name=wisdom],[name=charisma],[name^=tt_]', function () { updateCharacterStatMath(); Tabletop.update(); });

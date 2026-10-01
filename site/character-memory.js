@@ -59,6 +59,20 @@ window.CharacterMemory = (() => {
       const label=make('label',undefined,'memory-check'),enabled=make('input');enabled.type='checkbox';enabled.checked=profile.enabled;
       label.append(enabled,document.createTextNode(' Learn memories from conversations automatically'));core.append(label);
       const remember=()=>{coreDraft={core:coreInput.value,reminder:reminderInput.value,enabled:enabled.checked};};coreInput.oninput=remember;reminderInput.oninput=remember;enabled.onchange=remember;
+      const ai=make('details',undefined,'memory-entry');ai.append(make('summary','Draft character guidance with AI'));
+      const [ideaWrap,idea]=field('What should the AI develop or change?','');idea.maxLength=6000;idea.placeholder='Develop their voice, motivations and mannerisms while keeping their identity…';ai.append(ideaWrap);
+      ai.append(make('p','Uses this character’s sheet, your current guidance and the active conversation setting. Review the draft before saving. It does not create memories or another character.'));
+      button('Generate guidance draft',async()=>{
+        if(busy)return;remember();busy=true;error.textContent='Drafting guidance…';
+        host.querySelectorAll('button,input,textarea,select').forEach(el=>el.disabled=true);
+        try{const result=await api(endpoint,{method:'POST',body:JSON.stringify({action:'generate',prompt:idea.value,current:{core:coreDraft.core,reminder:coreDraft.reminder},chat_id:options.chatId||null})});
+          if(token!==epoch)return;
+          if(!result.draft||typeof result.draft.core!=='string'||typeof result.draft.reminder!=='string')throw Error('The AI returned an incomplete draft.');
+          const previous={...coreDraft};coreDraft={...coreDraft,...result.draft};render();error.textContent='Draft ready. Review it, then Save character guidance.';
+          button('Restore previous guidance',()=>{coreDraft=previous;render();error.textContent='Previous unsaved guidance restored.';},error);
+        }catch(e){if(token===epoch)error.textContent=e.message;}
+        finally{busy=false;if(token===epoch)host.querySelectorAll('button,input,textarea,select').forEach(el=>el.disabled=false);}
+      },ai);core.append(ai);
       button('Save character guidance',()=>{remember();save({action:'profile',revision:state.profile.revision,...coreDraft},'profile');},core);
       host.append(core,error);
       if(state.profile.error)host.append(make('p','The last automatic memory update could not finish. Existing memories are safe. It will retry with the next character reply. '+state.profile.error,'memory-error'));

@@ -446,6 +446,10 @@ def create_work(user_id: int, title: str, content: object) -> dict:
     from map_part_catalog import validate
     validate(content)
     with connect() as db:
+        db.execute('BEGIN IMMEDIATE')
+        from record_identity import ensure_unique
+        ensure_unique(db, title, content)
+        guidance = content.pop('character_guidance', None)
         if content.get('category')=='character' and content.get('campaign_id'):
             creator=db.execute("SELECT 1 FROM campaign_members WHERE campaign_id=? AND user_id=? AND role='creator' AND status='accepted'",(content['campaign_id'],user_id)).fetchone()
             if not creator:
@@ -469,6 +473,9 @@ def create_work(user_id: int, title: str, content: object) -> dict:
             "SELECT id, title, content, created_at, updated_at FROM work_items WHERE id = ?",
             (cursor.lastrowid,),
         ).fetchone()
+        if content.get('category') == 'character' and isinstance(guidance, dict):
+            db.execute('INSERT INTO character_memory_profiles(character_id,core,reminder) VALUES(?,?,?)',
+                       (row['id'],str(guidance.get('core') or '')[:12000],str(guidance.get('reminder') or '')[:1000]))
         if isinstance(content, dict) and content.get("category") == "campaign":
             db.execute(
                 """INSERT INTO campaign_members(campaign_id, user_id, role, status, invited_by)
@@ -493,8 +500,9 @@ def update_work(user_id: int, item_id: int, title: str, content: object) -> bool
     from map_part_catalog import validate
     validate(content)
     with connect() as db:
+        db.execute('BEGIN IMMEDIATE')
         existing = db.execute(
-            "SELECT user_id, content FROM work_items WHERE id = ?", (item_id,)
+            "SELECT user_id, title, content FROM work_items WHERE id = ?", (item_id,)
         ).fetchone()
         if not existing:
             return False
@@ -538,6 +546,9 @@ def update_work(user_id: int, item_id: int, title: str, content: object) -> bool
             content["category"] = "character_template"
             content["owner_user_id"] = existing["user_id"]
             content["campaign_id"] = None
+        from record_identity import ensure_unique
+        if title != existing['title'] or content.get('campaign_id') != previous_content.get('campaign_id') or content.get('category') != previous_content.get('category'):
+            ensure_unique(db, title, content, item_id)
         normalize_map_image_scale(content)
         economy.normalize(content)
         normalize_character_grants(db, content)

@@ -32,7 +32,7 @@ You can now APPLY changes through structured output, not narration alone. Return
 scene is a PATCH of public scene controls: location, time, weather, visibility, temperature, danger, pace, mood. Use the allowed values in the schema. Change the scene when established events move the party, advance time, alter the weather, start/end danger or change the atmosphere. Do not overwrite unaffected fields. Private conversations cannot change the global public scene.
 cards creates a new campaign record, or updates an existing non-reference record with record_id. Supported categories: item (including weapons), spell, attack (abilities), encounter, quest, npc, location, faction, lore, session, chronicle. Give a descriptive title, summary and notes. Weapons use category item and item_type Weapon, with damage, damage_type, quantity, rarity and tabletop.item_properties. Spells include spell_level, school, casting_time, range, duration and tabletop components/concentration/resolution. Encounters use participant character_ids, state, difficulty and notes. Quests use state, notes and assigned character_ids. Include exact mechanical details only when known; label invented material as homebrew.
 character_ids must contain actual character record IDs from character_sheets/character_directory, never user IDs. Assign rewards to the characters who actually receive them. Empty character_ids and share_with_party false keeps a new record DM-only. Public visibility shares knowledge, not ownership. Existing quantities/settings are shared if one card has multiple recipients; create distinct cards for independent copies. Never turn a reference card into a possession by updating it in place.
-grants gives an EXISTING record to characters: {"record_id":123,"character_ids":[456],"quantity":1}. A reference is copied into a playable card, leaving the library intact. A non-reference adds these recipients without duplicating the card. To create a customized copy from a reference use a card with source_id, category, title and character_ids. Reuse existing record IDs when updating a quest, encounter or previously awarded item; do not duplicate cards every turn. Only award things established by the story or explicitly instructed by the human DM, not merely because a player demands them. Private replies may grant only to characters controlled by their audience and cannot reveal new records to the whole party.
+grants gives an EXISTING record to characters: {"record_id":123,"character_ids":[456],"quantity":1}. A reference is copied into a playable card, leaving the library intact. A non-reference adds these recipients without duplicating the card. To create a customized copy from a reference use a card with source_id, category, title and character_ids. Check both character_directory and record_directory before introducing an NPC. Never recreate a player character as an NPC or make a second person with an existing name. Use record_id for an established NPC or encounter. Reuse existing record IDs when updating a quest, encounter or previously awarded item; do not duplicate cards every turn. Only award things established by the story or explicitly instructed by the human DM, not merely because a player demands them. Private replies may grant only to characters controlled by their audience and cannot reveal new records to the whole party.
 On successful processing, scene changes and cards/grants are saved automatically and appear in the appropriate character panels. Your prose must agree with the structured actions. HP, spell slots, XP and character levels are still manual; never claim those changed. Creating a spell card does not bypass preparation, class access, attunement or other prerequisites. Do not create player character sheets through cards; use npc for a new creature/person in the story. Narration edits/regeneration do not replay these effects.
 '''
 
@@ -93,6 +93,8 @@ def apply(campaign_id, message_id, answer, normalize, is_dm=True):
             else:
                 content['assigned_user_ids']=sorted({integer(characters[cid]['content'].get('owner_user_id')) for cid in content[key]}-{0})
         def save(title, content, existing=None):
+            from record_identity import ensure_unique
+            ensure_unique(db,title,content,(existing or {}).get('id'))
             normalize(content)
             storage.normalize_character_grants(db,content)
             if existing:
@@ -149,6 +151,9 @@ def apply(campaign_id, message_id, answer, normalize, is_dm=True):
                     if outside or existing['content'].get('player_visible') or not set(existing['content'].get('assigned_user_ids',[])).issubset(audience): raise ValueError('Private reply cannot update a shared card')
                 title=str(proposal.get('title') or (existing or source or {}).get('title','')).strip()[:120]
                 if not title: raise ValueError('Card title missing')
+                if category in ('npc','encounter'):
+                    from record_identity import ensure_unique
+                    ensure_unique(db,title,{'category':category,'campaign_id':campaign_id},(existing or {}).get('id'))
                 # Repeated new-card proposals reuse an identical prior AI award.
                 if not existing:
                     key='owner_ids' if category=='item' else 'user_ids' if category in ('spell','attack') else 'participant_ids'

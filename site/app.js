@@ -1,3 +1,7 @@
+/**
+ * Main browser coordinator: campaign state, API requests, forms and feature modules.
+ * See [README: browser interface](../README.md#browser-interface).
+ */
 $(function () {
   const accountModal = new bootstrap.Modal('#accountModal');
   const workModal = new bootstrap.Modal('#workModal');
@@ -289,6 +293,10 @@ $(function () {
     });
   }
 
+  /**
+   * Render conversation updates and wire message controls while preserving the active editing state.
+   * See [README](../README.md#chat-response-flow).
+   */
   function renderAiMessages(messages, forceLatest) {
     const log = $('#aiChatLog');
     const imageCampaignId = activeCampaignId;
@@ -1001,6 +1009,10 @@ $(function () {
     return !!user && item.content?.category === 'character' && Number(item.content.owner_user_id) === Number(user.id);
   }
 
+  /**
+   * Build the active campaign's compact character cards; the summary preview does not expand their height.
+   * See [README](../README.md#browser-interface).
+   */
   function renderParty() {
     const party = items.filter(function (item) {
       const c = item.content || {};
@@ -1019,7 +1031,7 @@ $(function () {
       if (c.image_id) $('<img alt="">').attr('src', '/api/uploads/' + c.image_id).on('error', function () { this.src = c.owner_user_id ? '/api/avatars/' + c.owner_user_id : 'assets/profile-placeholder.svg'; }).appendTo(card.find('.party-portrait'));
       else if (c.owner_user_id) $('<img alt="">').attr('src', '/api/avatars/' + c.owner_user_id).on('error', function () { this.src = 'assets/profile-placeholder.svg'; }).appendTo(card.find('.party-portrait'));
       else card.find('.party-portrait').text('♙');
-      card.find('strong').text(character.title);
+      card.find('strong').text(character.title).attr('title', character.title);
       card.find('em').text(isOwnCharacter(character) ? 'Your character' : 'Party member');
       card.find('small').text(c.summary || c.affiliation || 'Party member');
       card.on('click', function () { openDetail(character); });
@@ -1027,6 +1039,10 @@ $(function () {
     });
   }
 
+  /**
+   * Refresh the visible campaign workspace from current application state.
+   * See [README](../README.md#browser-interface).
+   */
   function renderDashboard() {
     const aiCampaign = isAiCampaign(activeCampaign());
     const playerTools = aiCampaign && (activeAiSpeaker.type === 'character' || aiState?.conversation_mode && aiState.conversation_mode !== 'dnd');
@@ -1464,6 +1480,10 @@ $(function () {
     }
   });
 
+  /**
+   * Populate the record form for creation or editing; persistence happens on form submission.
+   * See [README](../README.md#character-creation-flow).
+   */
   function openRecord(type, item) {
     window.MapImagePicker?.setArtwork(items.filter(r=>r.content?.category==='artwork' && Number(r.content.campaign_id)===Number(activeCampaignId) && Number(r.content.image_id)>0));
     resetCharacterGeneration();

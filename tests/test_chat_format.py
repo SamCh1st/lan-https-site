@@ -6,14 +6,77 @@ import chat_format
 
 
 class ChatFormatTests(unittest.TestCase):
+    def test_numbered_paragraph_object_tail_and_editorial_commentary_are_removed(self):
+        text = 'Could you listen to this? — paragraph 2”}]} 158 words. 2 paragraphs. Adding gentle sarcasm.'
+        self.assertEqual(chat_format.render_reply([{'style':'dialogue','text':text}]),
+                         '"Could you listen to this?"')
+        self.assertEqual(chat_format.render_reply([{'style':'written','text':text}]), '`' + text + '`')
+        self.assertEqual(chat_format.clean_passage('Please read paragraph 2 before signing.', 'dialogue'),
+                         'Please read paragraph 2 before signing.')
+
+    def test_mixed_stage_directions_are_reclassified_without_editorial_leak(self):
+        value = [{'style':'dialogue','text':'(Eira leans forward.) “What did you change?” — paragraph 1”}, {'}]
+        answer = [{'style':'action','text':'Eira leans forward.'},
+                  {'style':'dialogue','text':'What did you change?'}]
+        request = Mock(return_value={'message':{'content':json.dumps({'reply':answer})}})
+        self.assertEqual(chat_format.repair_mixed_reply(value,request,'model','Eira'),
+                         '#Eira leans forward.# "What did you change?"')
+        self.assertEqual(request.call_count, 1)
+        self.assertNotIn('paragraph 1', request.call_args.args[1]['messages'][1]['content'])
+        fallback = chat_format.repair_mixed_reply(value,Mock(side_effect=TimeoutError),'model','Eira')
+        self.assertNotIn('paragraph 1', fallback)
+
+    def test_generated_tutorial_labels_and_object_tail_are_not_dialogue(self):
+        reply = chat_format.render_reply([
+            {'style':'action','text':'She puts down the pen. #visible action#'},
+            {'style':'action','text':'emphasis'},
+            {'style':'dialogue','text':'Let us check the **lighting** first.'},
+            {'style':'thought','text':'I need a plan. *inner thought* , paragraph: false}'}])
+        self.assertEqual(reply, '#She puts down the pen.# "Let us check the **lighting** first." *I need a plan.*')
+        literal = 'The label #visible action# is printed in this book.'
+        self.assertIn('visible action', chat_format.render_reply([{'style':'written','text':literal}]))
+        self.assertIn('emphasis', chat_format.render_reply([{'style':'dialogue','text':'The emphasis should be on comfort.'}]))
+
     def test_typed_passages_render_using_library_styles(self):
         passages=[{'style':style,'text':text} for style,text in [
             ('action','#She opens the door.#'),('dialogue','Welcome. **Come in.**'),
             ('thought','*That was unexpected.*'),('whisper',"Don't wake him."),
             ('written','Meet me tomorrow. 🙂'),('plain','A rules explanation.')]]
         self.assertEqual(chat_format.render_reply(passages),
-            '#She opens the door.#\n\n"Welcome. **Come in.**"\n\n*That was unexpected.*\n\n'
-            "'Don't wake him.'\n\n`Meet me tomorrow. 🙂`\n\nA rules explanation.")
+            '#She opens the door.# "Welcome. **Come in.**" *That was unexpected.* '
+            "'Don't wake him.' `Meet me tomorrow. 🙂` A rules explanation.")
+
+    def test_paragraphs_are_independent_of_style_changes(self):
+        passages=[{'style':'action','text':'She waves.'},
+            {'style':'dialogue','text':'Hello.'},
+            {'style':'dialogue','text':'Another thing.','paragraph':True},
+            {'style':'thought','text':'I nearly forgot.'}]
+        self.assertEqual(chat_format.render_reply(passages),
+            '#She waves.# "Hello."\n\n"Another thing." *I nearly forgot.*')
+        from server import partial_json_string_field
+        raw=json.dumps({'reply':passages})
+        self.assertEqual(chat_format.partial_reply(raw,partial_json_string_field),chat_format.render_reply(passages))
+        raw='{"reply":[{"style":"action","text":"She waves."},{"style":"dialogue","paragraph":true,"text":"Hello'
+        self.assertEqual(chat_format.partial_reply(raw,partial_json_string_field),'#She waves.#\n\n"Hello"')
+
+    def test_typed_style_wins_over_accidental_outer_markers(self):
+        self.assertEqual(chat_format.render_reply([
+            {'style':'written','text':"'On my way.'"},
+            {'style':'action','text':'*She waves.*'},
+            {'style':'dialogue','text':'`Hello.`'},
+            {'style':'action','text':'##She smiles.##'},
+            {'style':'thought','text':'**Really?**'}]),
+            '`On my way.` #She waves.# "Hello." #She smiles.# ***Really?***')
+
+    def test_interior_delimiters_cannot_close_the_passage(self):
+        self.assertEqual(chat_format.render_reply([{'style':'dialogue','text':'We need *warm* light.'}]),
+            '"We need **warm** light."')
+        self.assertEqual(chat_format.render_reply([
+            {'style':'dialogue','text':'You said "tomorrow", right?'},
+            {'style':'action','text':'She points to door #4.'}]),
+            '"You said \\"tomorrow\\", right?" #She points to door \\#4.#')
+        self.assertEqual(chat_format.render_reply([{'style':'dialogue','text':'You said "tomorrow"'}]),
+            '"You said \\"tomorrow\\""')
 
     def test_images_are_outside_styles_but_written_examples_stay_inert(self):
         import chat_art
@@ -24,6 +87,14 @@ class ChatFormatTests(unittest.TestCase):
         self.assertIn('"Here it is." <image>a cat</image>',reply)
         self.assertIn('```Example:',reply)
         self.assertEqual([t['prompt'] for t in chat_art.tags(reply)],['a cat','a forest'])
+
+    def test_backticks_inside_written_text_do_not_activate_image_examples(self):
+        import chat_art
+        for text in ['Use `<image>a cat</image>` as an example.',
+                'A longer example:\nUse `<image>a cat</image>` here.']:
+            reply=chat_format.render_reply([{'style':'written','text':text},
+                {'style':'image','text':'a forest'}])
+            self.assertEqual([t['prompt'] for t in chat_art.tags(reply)],['a forest'])
 
     def test_invalid_passages_do_not_leak_json_to_readers(self):
         self.assertEqual(chat_format.render_reply(None),'')
@@ -45,7 +116,7 @@ class ChatFormatTests(unittest.TestCase):
         self.assertEqual(chat_format.partial_reply(raw,partial_json_string_field),
             chat_format.render_reply(json.loads(raw)['reply']))
         partial='{"reply":[{"style":"action","text":"She waves."},{"style":"dialogue","text":"Welcome'
-        self.assertEqual(chat_format.partial_reply(partial,partial_json_string_field),'#She waves.#\n\n"Welcome"')
+        self.assertEqual(chat_format.partial_reply(partial,partial_json_string_field),'#She waves.# "Welcome"')
 
     def test_balanced_nested_reply_needs_no_extra_call(self):
         request=Mock();text='`A letter with *a thought* and **emphasis**.` #An action.#'

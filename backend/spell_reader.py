@@ -2,7 +2,8 @@
 
 The manga does not supply a complete solver. Calculations describe the drawing;
 novel effects are explicitly interpreted by Ollama, not certified as canon.
-"""
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 from __future__ import annotations
 
 from pathlib import Path

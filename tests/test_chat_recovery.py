@@ -139,7 +139,7 @@ class ReplyRecoveryTests(unittest.TestCase):
             {'done':True,'message':{'content':raw}}])),patch.object(server,'ollama_request',return_value={'message':{'content':raw}}),patch.object(character_memory,'learn_later'):
             self.respond()
         message=storage.list_ai_messages(self.player,self.cid)[-1]
-        self.assertEqual(message['message'],'#She waves.#\n\n"Welcome."')
+        self.assertEqual(message['message'],'#She waves.# "Welcome."')
         replacement=json.dumps({'reply':[{'style':'written','text':'See you tomorrow. 🙂'}]})
         with patch.object(server,'ollama_request',return_value={'message':{'content':replacement}}) as request:
             self.handler.ai_regenerate({'id':self.dm},self.cid,{'message_id':message['id'],'guidance':'Reply as a text message.'})

@@ -1,3 +1,7 @@
+/**
+ * Interpret the site's roleplay markers as safe inline DOM elements, including partial streamed text.
+ * See [README: chat response flow](../README.md#chat-response-flow).
+ */
 /* Small, literal-safe roleplay markup. No message text is inserted as HTML. */
 (function () {
   const rules = [
@@ -30,6 +34,10 @@
     }
     return -1;
   }
+  /**
+   * Append styled text nodes without treating message content as HTML.
+   * See [README](../README.md#chat-response-flow).
+   */
   function append(host, text, depth=0, partial=false) {
     let plain='', at=0;
     const flush=()=>{if(plain){host.append(document.createTextNode(plain));plain='';}};
@@ -49,8 +57,12 @@
     }
     flush();
   }
+  /**
+   * Find image tags while respecting escaped markers and written-text regions.
+   * See [README](../README.md#message-editing-and-images).
+   */
   function imageMatches(text, options={}) {
-    const written=[...text.matchAll(/```[\s\S]*?```|`[^`]*`/g)].filter(m=>!escaped(text,m.index));
+    const written=[...text.matchAll(/```(?:\\[\s\S]|(?!```)[^\\])*```|`(?:\\[\s\S]|[^`\\])*`/g)].filter(m=>!escaped(text,m.index));
     const allowed=at=>!escaped(text,at)&&!written.some(w=>at>=w.index&&at<w.index+w[0].length);
     const matches=[...text.matchAll(/<image>([\s\S]*?)<\/image>/g)].filter(m=>allowed(m.index));
     if(options.incomplete){
@@ -77,7 +89,19 @@
     const nested=document.createElement('div');nested.className='chat-format-example';
     const syntax=document.createElement('code');syntax.textContent='`The note says: *I miss you.* Come **home**.`';
     const preview=document.createElement('span');append(preview,syntax.textContent);nested.append(syntax,preview);details.append(nested);
-    const note=document.createElement('p');note.textContent='Click an example to insert it. Styles can nest: the inner style stands out and all formatting markers disappear. Triple backticks frame a longer written passage. Text-message replies use backticks too; emojis can be included naturally. All styles are visible to readers. Use <image>description</image> outside backticks to draw at that point in the message. Ellipses (…) remain ordinary pauses.';details.append(note);host.append(details);
+    const note=document.createElement('p');note.textContent='Click an example to insert it. Mix styles on the same line; use a blank line only for a new paragraph. This is a custom dictionary: #action# is an action, not a heading; *thought* is unspoken, and **emphasis** highlights words. Styles can nest: the inner style stands out and all formatting markers disappear. Triple backticks frame a longer written passage. Text-message replies use backticks too; emojis can be included naturally. All styles are visible to readers. Use <image>description</image> outside backticks to draw at that point in the message. Ellipses (…) remain ordinary pauses.';details.append(note);host.append(details);
   }
-  window.ChatFormat={append,imageMatches,guide};
+  /**
+   * Hide recognized generated-output artifacts while preserving literal writing and image content.
+   * See [README](../README.md#chat-response-flow).
+   */
+  function cleanGenerated(text) {
+    if(text.includes('`') || text.includes('<image>'))return text;
+    const tail=/(?:["']?\s*,\s*["']?paragraph["']?\s*:\s*(?:false|true)\s*[,}\]"'*{]+|[—–-]?\s*paragraph\s+\d+\s*["'”’]*\s*[}\]][\s\S]*)/i.exec(text);
+    if(!tail)return text;
+    let cleaned=text.slice(0,tail.index).replace(/[ ,—–-]+$/,'');
+    if(cleaned.startsWith('"') && (cleaned.match(/(?<!\\)"/g)||[]).length%2)cleaned+='"';
+    return cleaned;
+  }
+  window.ChatFormat={append,imageMatches,guide,cleanGenerated};
 })();

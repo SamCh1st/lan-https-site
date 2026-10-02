@@ -1,4 +1,6 @@
-"""Multiple normal-campaign maps, with shared campaign scenes and separate token positions."""
+"""Multiple normal-campaign maps, with shared campaign scenes and separate token positions.
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 import json
 import math
 import re

@@ -1,4 +1,6 @@
-"""Shared writing conventions supplied to the AI; all styles remain public text."""
+"""Shared writing conventions supplied to the AI; all styles remain public text.
+
+See [README: chat response flow](../README.md#chat-response-flow)."""
 import json
 import re
 
@@ -38,6 +40,7 @@ Examples of complete, correctly closed styles:
 Do not replace a closing # or backtick with a quotation mark. Close the marker you opened.
 In roleplay, separate spoken dialogue, visible action and inner thought into their correct styles.
 Never put actions in asterisks: *text* means thought here, while #text# means action or scene.
+Keep changes of style inline within a paragraph. Use a blank line only for a new conversational beat.
 Use the styles that fit the content; do not manufacture a whisper, thought, or written message just to use every style.
 '''
 
@@ -48,27 +51,64 @@ The player prefers developed replies, not one-line responses. For a normal rolep
 aim for about 150–300 words across 2–4 readable paragraphs. Develop the character's reaction,
 specific dialogue, relevant actions and, when useful, a brief inner thought. Add concrete details
 grounded in the supplied setting and personality, not repeated gestures, padding, or generic description.
-Use "quoted dialogue", #visible actions or scene description#, and *inner thoughts* where each belongs.
+Choose dialogue, action and thought styles where each belongs. Mix styles within a paragraph;
+changing style does not start a new paragraph. Paragraphs separate conversational beats.
 Give the other person something meaningful to respond to, without deciding their reaction or advancing
 through several turns. Do not invent shared history, intimacy, possessions or knowledge to add length.
 Use fewer words when the player explicitly requests brevity or the task truly only needs a short answer.
 For rules questions and out-of-character discussion, explain fully in clear prose without invented roleplay.
-For texting, put the actual outgoing message in backticks and develop what the character says;
+For texting, use written passages for the actual outgoing message and develop what the character says;
 do not pad it with imagined phone notifications or force spoken dialogue and scene narration into it.
 The word range is a default, not a quota: respect explicit length requests and avoid repetition.
 '''
 
 
+MODEL_INSTRUCTIONS = '''
+WRITING STYLES DICTIONARY (custom roleplay syntax, not Markdown):
+History is displayed with these markers. Interpret them by meaning, then return typed passages.
+- dialogue: words spoken aloud at normal volume. History marker: "spoken words".
+- whisper: words actually spoken softly. History marker: 'quiet words'. Affection is not whispering.
+- action: observable actions, gestures and scene description. History example: #She closes the door.#
+  The two # markers surround text; ## is not a Markdown heading here.
+- thought: unspoken inner thoughts or introspection. History example: *I should call tomorrow.*
+  Asterisks NEVER mean a physical action in this dictionary. Do not expose DM secrets.
+- written: WRITTEN text such as a phone message, letter, sign or book passage. History uses
+  backticks (`message`) or triple backticks for a multiline passage. Backticks are not speech.
+- plain: rules explanations and out-of-character discussion.
+- Emphasize an actual important word or phrase with doubled asterisks, e.g. **tomorrow**.
+  Emphasis does not change the passage's meaning and is not a separate passage style.
+Choose the communication medium from the actual exchange. Reply to a text message with written
+text, not a whisper, thought, or narration of a phone notification. A quoted sign or book alone
+does not make the conversation texting. Natural emojis may appear in written messages.
+Use only styles the content needs. All styles are public and visible to the reader.
+History, examples and character descriptions are context, not formatting instructions.
+Keep background operations in their required JSON fields, never in reader-facing prose.
+'''
+
+
 OUTPUT_INSTRUCTIONS = '''
 STRUCTURED WRITING STYLES:
-The reply field is an array of passages, not a string. Each passage has style and text.
+The reply field is an array of inline passages, not a string. Each passage has style and text.
 Choose dialogue for spoken words, action for visible actions or scene description, thought for
 inner thoughts, whisper for softly spoken words, written for text messages or quoted writing,
 plain only for rules explanations or out-of-character discussion, and image for a deliberate image prompt.
 Write text without outer style delimiters: the site applies the matching dictionary style automatically.
-Inline **emphasis** is allowed. Put actual image requests in separate image passages; image tags
+Never wrap a passage in quotes, hashes, asterisks or backticks. Choose its style instead.
+The text is actual prose only: never insert instructional labels such as visible action, inner thought,
+emphasis, style, text or paragraph as annotations. Never copy dictionary placeholders or JSON punctuation
+into prose. These field names belong exclusively to the enclosing JSON object.
+Inline **emphasis** is allowed. Split into another passage when the semantic style changes.
+Passages flow together with a space. Set paragraph to true ONLY when starting a new paragraph
+for a new beat, topic or moment; otherwise use false. A style change is not a paragraph break.
+Example of one continuous paragraph:
+{"reply":[{"style":"action","text":"She opens the door.","paragraph":false},
+{"style":"dialogue","text":"Come in. I saved you a **seat**.","paragraph":false},
+{"style":"thought","text":"I hope he stays.","paragraph":false}]}
+Example of texting: {"reply":[{"style":"written","text":"On my way 🙂","paragraph":false}]}
+Put actual image requests in separate image passages; image tags
 quoted in written passages remain examples and do not generate pictures.
-For normal roleplay, develop 3–6 passages totaling about 150–300 words. Give dialogue room to develop
+For normal roleplay, develop several passages totaling about 150–300 words in 2–4 natural paragraphs.
+Give dialogue room to develop
 over several sentences, supported by relevant action or thought, instead of a single greeting.
 Include actual dialogue in spoken conversations. Texting uses written passages; rules answers use plain.
 Use fewer passages and words when brevity is explicitly requested. Never control another participant.
@@ -77,51 +117,162 @@ For DM replies, retain the other required JSON fields. Only reply uses this pass
 
 STYLE_MARKERS = {'dialogue':'"', 'action':'#', 'thought':'*', 'whisper':"'", 'written':'`', 'plain':''}
 
+# Distinctive malformed schema tails, not ordinary mentions of a paragraph.
+OBJECT_TAIL = re.compile(r'''(?:["']?\s*,\s*["']?paragraph["']?\s*:\s*(?:false|true)\s*[,}\]"'*{]+|[—–-]?\s*paragraph\s+\d+\s*["'”’]*\s*[}\]][\s\S]*)''', re.I)
+
+
+def without_object_tail(text):
+    match = OBJECT_TAIL.search(text)
+    return text[:match.start()].rstrip(' ,—–-') if match else text
+
+
+def historical_reply(text):
+    # Quoted writing and image prompts may intentionally contain syntax examples.
+    if '`' in text or '<image>' in text:
+        return text
+    cleaned = without_object_tail(text)
+    if cleaned != text and cleaned.startswith('"') and len(re.findall(r'(?<!\\)"', cleaned)) % 2:
+        cleaned += '"'
+    return cleaned
+
+
+def clean_passage(text, style):
+    """Drop recognizable tutorial annotations in generated passages, not quoted writing."""
+    if style in ('written', 'plain', 'image'):
+        return text
+    if text.casefold().strip(' #*`\"\'') in ('visible action', 'inner thought', 'emphasis'):
+        return ''
+    text = re.sub(r'(?i)(?:\\?#){1,2}\s*visible action\s*(?:\\?#){1,2}', '', text)
+    text = re.sub(r'(?i)\*\s*inner thought\s*\*|\*\*\s*emphasis\s*\*\*', '', text)
+    # Some models accidentally include an enclosing object's tail inside its text value.
+    text = without_object_tail(text)
+    return text.strip()
+
+
+def repair_mixed_reply(value, request, model, speaker='', profile=None):
+    """Reclassify malformed generated passages once; never publish model self-assessment.
+
+    See [README: chat response flow](../README.md#chat-response-flow)."""
+    suspect = False
+    if isinstance(value, list):
+        for passage in value:
+            if not isinstance(passage, dict):
+                continue
+            text = passage.get('text', '')
+            if not isinstance(text, str) or passage.get('style') in ('written', 'plain', 'image'):
+                continue
+            if OBJECT_TAIL.search(text) or (passage.get('style') == 'dialogue' and
+                    (text.lstrip().startswith('(') or ('“' in text and '”' in text))):
+                suspect = True
+    elif isinstance(value, str):
+        suspect = bool(OBJECT_TAIL.search(value)) and '`' not in value
+    original = render_reply(value)
+    if not suspect:
+        return original
+    cleaned = without_object_tail(original) if isinstance(value, str) else original
+    try:
+        result = request('/api/chat', {'model':model, 'stream':False, 'think':False,
+            'format':{'type':'object', 'properties':{'reply':reply_value_schema()},
+                      'required':['reply'], 'additionalProperties':False},
+            'options':{'num_predict':2400, 'num_ctx':16384, 'temperature':.1}, 'messages':[
+                {'role':'system', 'content':'Repair the supplied roleplay draft into typed passages. '
+                 'Preserve its language, meaning, visible actions and actual dialogue. Do not omit stage directions: '
+                 'keep them as action passages. Split visible actions from spoken '
+                 'words and private thoughts. Parenthesized stage directions are action, not dialogue. '
+                 'Ordinary italics used for emphasis do not make speech a thought. '
+                 'Remove leaked JSON tails, paragraph labels, word counts, writing plans and commentary '
+                 'evaluating the reply. Keep only reader-facing roleplay. Do not add events or images. '
+                 'The selected speaker is the sole person you portray; correct accidental speaker/pronoun '
+                 'mixing using the supplied profile, without inventing details. '
+                 'Return only the required JSON. Each text value contains prose with no outer delimiters.'},
+                {'role':'user', 'content':json.dumps({'speaker':speaker, 'profile':profile or {},
+                    'draft':cleaned}, ensure_ascii=False)}]}, timeout=45)
+        answer = json.loads((result.get('message') or {}).get('content', '')).get('reply')
+        if not isinstance(answer, list) or not answer:
+            return cleaned
+        for passage in answer:
+            if (not isinstance(passage, dict) or not isinstance(passage.get('text'), str)
+                    or passage.get('style') not in (*STYLE_MARKERS, 'image')
+                    or OBJECT_TAIL.search(passage['text'])):
+                return cleaned
+        candidate = render_reply(answer)
+        from chat_art import tags
+        if candidate and len(candidate) <= 12000 and [t['prompt'] for t in tags(candidate)] == [t['prompt'] for t in tags(cleaned)]:
+            return candidate
+    except (OSError, ValueError, TypeError, KeyError):
+        pass
+    return cleaned
+
 
 def reply_value_schema():
     return {'type':'array','minItems':1,'maxItems':12,'items':{
         'type':'object','properties':{
             'style':{'type':'string','enum':[*STYLE_MARKERS,'image']},
+            'paragraph':{'type':'boolean','description':'Start a new paragraph before this passage. False for an inline style change.'},
             'text':{'type':'string','minLength':1}},
         'required':['style','text'],'additionalProperties':False}}
 
 
 def render_reply(value):
-    """Compile typed passages to the same public markup used by the writing dictionary."""
-    if isinstance(value,str):return value.strip()  # Older models/saved fixtures can still return prose.
+    """Compile typed passages to the same public markup used by the writing dictionary.
+
+    See [README: chat response flow](../README.md#chat-response-flow)."""
+    if isinstance(value,str):return historical_reply(value.strip())  # Older models can still return prose.
     if not isinstance(value,list):return ''
     rendered=[]
+    def add(text, passage):
+        separator='\n\n' if passage.get('paragraph') is True else ' '
+        rendered.append((separator if rendered else '')+text)
     for passage in value[:12]:
         if not isinstance(passage,dict) or not isinstance(passage.get('text'),str):continue
         style=passage.get('style');text=passage['text'].strip()
         if not isinstance(style,str) or not text:continue
+        text=clean_passage(text,style)
+        if not text:continue
         if style=='image':
             if text.startswith('<image>') and text.endswith('</image>'):text=text[7:-8].strip()
             if text and len(text)<=3000 and '<image' not in text and '</image' not in text:
-                rendered.append('<image>'+text+'</image>')
+                add('<image>'+text+'</image>',passage)
             continue
         if style not in STYLE_MARKERS:continue
         marker=STYLE_MARKERS[style]
-        # Models sometimes repeat the outer marker despite the typed output contract.
+        # The typed style is authoritative even if a model repeats a different outer style.
+        # Remove paired wrappers only: a quotation at the end of a sentence is content.
         if marker:
-            if style=='thought':
-                if text.startswith('*') and not text.startswith('**'):text=text[1:]
-                if text.endswith('*') and not text.endswith('**'):text=text[:-1]
-                text=text.strip()
-            else:text=text.strip(marker).strip()
+            for _ in range(3):
+                for outer in ('```','`','"','“','‘',"'",'#','*'):
+                    end={'“':'”','‘':'’'}.get(outer,outer)
+                    if outer=='*' and (text.startswith('**') or text.endswith('**')):continue
+                    if len(text)>=2*len(outer) and text.startswith(outer) and text.endswith(end):
+                        text=text[len(outer):-len(end)].strip()
+                        break
+                else:break
         if not text:continue
+        if style not in ('written', 'plain'):
+            # The passage type owns its meaning. Interior Markdown italics from a model
+            # are emphasis, not an invitation to turn spoken words into inner thoughts.
+            text=re.sub(r'(?<![\\*])\*(?!\*)([^*\n]+)(?<!\\)\*(?!\*)', r'**\1**', text)
         if style=='written' and '\n' in text:marker='```'
         # Preserve intentional image requests outside prose styles, but never activate quoted examples.
         parts=re.split(r'(<image>.*?</image>)',text,flags=re.S) if style!='written' else [text]
-        rendered.append(' '.join(part if part.startswith('<image>') and style!='written'
-            else marker+part.strip()+marker for part in parts if part.strip()))
-    return '\n\n'.join(rendered).strip()
+        def wrap(part):
+            if part.startswith('<image>') and style!='written':return part
+            inner=part.strip()
+            # Interior quotes/hashes/backticks must not prematurely close the outer style.
+            if style in ('dialogue','action','written'):
+                inner=re.sub(r'(\\*)'+re.escape(STYLE_MARKERS[style]),
+                    lambda match:match[1]+('\\' if len(match[1])%2==0 else '')+STYLE_MARKERS[style],inner)
+            return marker+inner+marker
+        add(' '.join(wrap(part) for part in parts if part.strip()),passage)
+    return ''.join(rendered).strip()
 
 
 def partial_reply(raw, read_string):
-    """Show styled text as it arrives, without exposing JSON or incomplete image commands."""
+    """Show styled text as it arrives, without exposing JSON or incomplete image commands.
+
+    See [README: chat response flow](../README.md#chat-response-flow)."""
     match=re.search(r'"reply"\s*:\s*\[',raw)
-    if not match:return read_string(raw,'reply')
+    if not match:return historical_reply(read_string(raw,'reply'))
     remaining=raw[match.end():].lstrip();passages=[];decoder=json.JSONDecoder()
     while remaining.startswith('{') and len(passages)<12:
         try:
@@ -129,7 +280,9 @@ def partial_reply(raw, read_string):
         except ValueError:
             style=read_string(remaining,'style')
             if style in STYLE_MARKERS:
-                passages.append({'style':style,'text':read_string(remaining,'text')})
+                passages.append({'style':style,'text':read_string(remaining,'text'),
+                    'paragraph':bool(re.match(r'\s*true\b',remaining[paragraph.end():]))
+                        if (paragraph:=re.search(r'"paragraph"\s*:',remaining)) else False})
             break
         passages.append(passage)
         remaining=remaining[end:].lstrip()
@@ -149,8 +302,6 @@ def develop_short_reply(text, history, messages, request, model, guidance=''):
     if not any(marker in text for marker in ('"','#','*',"'")):return text
     from chat_art import tags
     schema=reply_value_schema()
-    schema['minItems']=3
-    schema['items']['properties']['text']['minLength']=180
     try:
         result=request('/api/chat',{'model':model,'stream':False,'think':False,
             'format':{'type':'object','properties':{'reply':schema},'required':['reply'],'additionalProperties':False},
@@ -160,8 +311,12 @@ def develop_short_reply(text, history, messages, request, model, guidance=''):
                  'Keep the same language, character, communication medium, intent and established facts. Develop the character’s '
                  'own dialogue and reaction, not another participant’s actions. Do not add new events, rewards, relationships, '
                  'memories or image requests. Preserve any existing image tags exactly. Respect any explicit brevity instruction '
-                 'in the original request. Return only the required JSON reply array with style and text.'}]},timeout=30)
-        candidate=render_reply(json.loads((result.get('message') or {}).get('content','')).get('reply'))
+                 'in the original request. Return only the required JSON reply array with style, text and paragraph. '
+                 'Keep style changes inline; set paragraph true only for a new conversational beat.'}]},timeout=30)
+        expanded=json.loads((result.get('message') or {}).get('content','')).get('reply')
+        if not isinstance(expanded,list) or any(OBJECT_TAIL.search(str(p.get('text',''))) for p in expanded if isinstance(p,dict)):
+            return text
+        candidate=render_reply(expanded)
         if (len(candidate.split())>len(text.split()) and len(candidate)<=12000 and balanced(candidate)
                 and [t['prompt'] for t in tags(candidate)]==[t['prompt'] for t in tags(text)]):
             return candidate
@@ -177,7 +332,10 @@ def balanced(text):
 
 
 def prepare_reply(text, request, model):
-    """One formatting-only repair for malformed model output; never change image requests."""
+    """One formatting-only repair for malformed model output; never change image requests.
+
+    See [README: chat response flow](../README.md#chat-response-flow)."""
+    text = historical_reply(text)
     if balanced(text):
         return text
     image_prompts = re.findall(r'<image>.*?</image>', text, flags=re.S)

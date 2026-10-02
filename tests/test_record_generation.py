@@ -9,14 +9,22 @@ import chat_modes
 import record_generator
 import server
 import storage
+from portrayal_fixtures import portrayal
 from test_ai_effects import AIEffectsTests
 
 
 class DraftTests(unittest.TestCase):
+    def setUp(self):
+        # Draft validation is independent of online research; its pipeline has dedicated tests.
+        research = patch.object(record_generator.character_research, 'research',
+            return_value={'queries': [], 'sources': [], 'unavailable_queries': []})
+        research.start()
+        self.addCleanup(research.stop)
+
     def generate(self, category='character', mode='modern', names=(), replies=None):
         self.calls = []
         responses = iter(replies or [{'title':'Nadia Park', 'summary':'A city mechanic.',
-            'notes':'Repairs bicycles; dislikes waste.', 'core':'Practical, patient, observant.',
+            'notes':'Repairs bicycles; dislikes waste.', 'core':portrayal('Practical, patient, observant.'),
             'reminder':'Speak plainly and ask precise questions.', 'owner_user_id':999}])
         def request(path, body, timeout):
             self.calls.append(body)
@@ -33,6 +41,22 @@ class DraftTests(unittest.TestCase):
         self.assertIn('patient', draft['guidance']['core'])
         self.assertIn('Contemporary', self.calls[0]['messages'][0]['content'])
         self.assertEqual(json.loads(self.calls[0]['messages'][1]['content'])['table_rules'], {})
+        self.assertIn('MODERN REAL-WORLD REFERENCES', self.calls[0]['messages'][0]['content'])
+
+    def test_third_person_examples_are_retried_in_first_person(self):
+        incorrect = portrayal()
+        incorrect['behavior_examples'][0]['action'] = 'She sets a cup beside the visitor.'
+        base = {'title':'Nadia', 'summary':'A mechanic.', 'notes':'Repairs bicycles.',
+                'core':incorrect, 'reminder':'Speak plainly.'}
+        draft = self.generate(replies=[base,dict(base,core=portrayal())])
+        self.assertEqual(len(self.calls),2)
+        self.assertIn('first-person narration', self.calls[1]['messages'][-1]['content'])
+        self.assertIn('1. *I set a cup', draft['guidance']['core'])
+
+    def test_modern_realism_is_shared_by_generation_and_conversation(self):
+        self.assertIn(record_generator.chat_modes.MODERN_REALISM, record_generator.SETTINGS['modern'])
+        self.assertIn(record_generator.chat_modes.MODERN_REALISM, record_generator.chat_modes.instructions('modern'))
+        self.assertNotIn('MODERN REAL-WORLD REFERENCES', record_generator.chat_modes.instructions('dnd'))
 
     def test_medieval_npc_keeps_portrayal_in_notes(self):
         draft = self.generate(category='npc', mode='medieval')
@@ -48,7 +72,7 @@ class DraftTests(unittest.TestCase):
         self.assertEqual(self.calls[0]['format']['required'], ['title','summary','notes'])
 
     def test_duplicate_name_repairs_once_and_rejects_repeated_collision(self):
-        base = {'title':'LEON-DUMONT', 'summary':'Summary', 'notes':'Notes', 'core':'Core', 'reminder':'Reminder'}
+        base = {'title':'LEON-DUMONT', 'summary':'Summary', 'notes':'Notes', 'core':portrayal(), 'reminder':'Reminder'}
         draft = self.generate(names=['Léon Dumont'], replies=[base, dict(base,title='Maya Chen')])
         self.assertEqual(draft['title'], 'Maya Chen')
         self.assertIn('previous draft reused', self.calls[1]['messages'][1]['content'])
@@ -59,10 +83,10 @@ class DraftTests(unittest.TestCase):
         calls = []
         def request(path, body, timeout):
             calls.append(body)
-            return {'message':{'content':json.dumps([] if len(calls)==1 else {'core':'Preserved identity','reminder':'Be concise'})}}
+            return {'message':{'content':json.dumps([] if len(calls)==1 else {'core':portrayal('Preserved identity'),'reminder':'Be concise'})}}
         draft = record_generator.guidance({'title':'Léon', 'content':{'summary':'Gray eyes','notes':'Baker'}},
             'medieval','Develop his voice',{'core':'Never lies','reminder':'Quiet'},'model',request,server.response_json)
-        self.assertEqual(draft['core'],'Preserved identity')
+        self.assertIn('# Léon Personality:\nPreserved identity',draft['core'])
         self.assertEqual(len(calls),2)
         self.assertEqual(json.loads(calls[0]['messages'][1]['content'])['current_guidance']['core'],'Never lies')
         self.assertIn('Do not invent shared history',calls[0]['messages'][0]['content'])
@@ -71,7 +95,7 @@ class DraftTests(unittest.TestCase):
         calls=[]
         def request(path,body,timeout):
             calls.append(body)
-            return {'message':{'content':json.dumps({'title':'Mira','content':{'character_class':'Fighter','species':'Human','portrayal':'Patient fighter','reminder':'Measured voice'}})}}
+            return {'message':{'content':json.dumps({'title':'Mira','content':{'character_class':'Fighter','species':'Human','portrayal':portrayal('Patient fighter'),'reminder':'Measured voice'}})}}
         draft=record_generator.generate('A loyal guard','character',{},'dnd',
             [{'title':'Existing Hero','content':{'category':'character'}}],
             'model',request,server.response_json,server.normalize_character_stats)
@@ -173,6 +197,18 @@ class IdentityAndRouteTests(unittest.TestCase):
             handler.character_memory_request(self.cid,self.pc2['id'],data)
             self.assertEqual(self.responses[-1][0],403)
             generate.assert_not_called()
+
+    def test_ai_unavailable_preserves_records_and_explains_recovery(self):
+        handler = self.handler(self.player)
+        before = len(storage.list_work(self.dm))
+        with patch.object(handler, 'ai_model', side_effect=server.ai_service.Unavailable(
+                'The local AI service (Ollama) is unavailable. Open Ollama on the hosting computer, then try again.')):
+            handler.generate_character({'id':self.player}, self.cid, {'prompt':'improvise'})
+        status, body = self.responses[-1]
+        self.assertEqual(status, 503)
+        self.assertIn('Open Ollama', body['error'])
+        self.assertIn('Your form has not been changed', body['error'])
+        self.assertEqual(len(storage.list_work(self.dm)), before)
 
 
 if __name__=='__main__':unittest.main()

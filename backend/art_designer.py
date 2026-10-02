@@ -1,4 +1,6 @@
-"""Reference-informed, editable vector artwork streamed from the campaign model."""
+"""Reference-informed, editable vector artwork streamed from the campaign model.
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 import concurrent.futures
 import functools
 import json

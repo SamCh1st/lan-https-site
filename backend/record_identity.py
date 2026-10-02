@@ -1,5 +1,23 @@
-"""Campaign-scoped identity checks shared by forms and AI effects."""
+"""Campaign-scoped identity checks shared by forms and AI effects.
+
+See [README: character creation flow](../README.md#character-creation-flow)."""
 import unicodedata
+import re
+
+
+def generated_name(value):
+    """Remove model field labels without rewriting a player's stored record.
+
+    See [README: character creation flow](../README.md#character-creation-flow)."""
+    if not isinstance(value, str) or '\n' in value.strip() or '\r' in value.strip():
+        raise ValueError('Return only the character or encounter name in title')
+    title = value.strip().strip('`*# ').strip('"“” ')
+    title = re.sub(r'^(?:(?:character|npc|encounter)(?:\s+(?:reference|profile|name))?|name|title)\s*:\s*',
+                   '', title, flags=re.IGNORECASE).strip().strip('`*"“” ')
+    if (not 1 <= len(title) <= 120 or not name_key(title) or '{{' in title
+            or re.match(r'^(?:visual description|personality|roleplay behavior examples)\s*:', title, re.I)):
+        raise ValueError('Return a name without headings, placeholders or instructions')
+    return title
 
 
 def name_key(title):

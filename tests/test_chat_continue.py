@@ -11,6 +11,24 @@ class ContinuationTests(unittest.TestCase):
     setUp = ChatImagesTests.setUp
     tearDown = ChatImagesTests.tearDown
 
+    def test_open_image_tag_generates_prompt_and_closes_tag_without_saving(self):
+        message = storage.add_ai_message(self.cid,self.player,'dm',None,'Player','user',True,'old')
+        draft = 'Show the rain outside the studio. <image>'
+        request = Mock(return_value={'message':{'content':json.dumps({'prompt':'A studio window overlooking a rain-soaked street, evening light.'})}})
+        suffix = chat_continue.complete(self.player,self.cid,message['id'],draft,request,'test')
+        self.assertEqual(suffix,'A studio window overlooking a rain-soaked street, evening light.</image>')
+        self.assertEqual(len(chat_art.tags(draft + suffix)),1)
+        self.assertEqual(request.call_args.args[1]['format']['required'],['prompt'])
+        self.assertEqual(storage.get_ai_message(self.cid,message['id'])['message'],'old')
+        with storage.connect() as db:
+            self.assertEqual(db.execute('SELECT count(*) FROM campaign_chat_art').fetchone()[0],0)
+
+    def test_literal_image_tag_does_not_switch_completion_mode(self):
+        for draft in ('`Example: <image>', '```Example\n<image>', '\\<image>', '<image>a cat</image>'):
+            self.assertFalse(chat_continue.ends_with_image_request(draft), draft)
+        for draft in ('<image>', '`Here is the picture.` <image>', '<image>   '):
+            self.assertTrue(chat_continue.ends_with_image_request(draft), draft)
+
     def test_suffix_preserves_draft_and_does_not_save(self):
         message = storage.add_ai_message(self.cid, self.player, 'dm', None, 'Player', 'user', True, 'old text')
         request = Mock(return_value={'message':{'content':json.dumps({'continuation':' Harold. I live nearby.'})}})

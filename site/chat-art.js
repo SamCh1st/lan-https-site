@@ -1,8 +1,17 @@
+/**
+ * Render persisted image slots and controls in message order; rendering itself never launches artwork.
+ * See [README: message editing and images](../README.md#message-editing-and-images).
+ */
 /* Render image slots at the tag's exact position. Rendering never starts a job. */
 (function () {
   const drafts = new Map(), pending = new Set(), errors = new Map(), settingsDrafts = new Map();
+  /**
+   * Split prose around image slots and connect explicit artwork actions through callbacks.
+   * See [README](../README.md#message-editing-and-images).
+   */
   function render(host, entry, options) {
-    const text = entry.message || '';
+    const raw = entry.message || '';
+    const text = entry.role === 'assistant' ? ChatFormat.cleanGenerated(raw) : raw;
     let cursor = 0, count = 0;
     const occurrences = new Map();
     function prose(value) {

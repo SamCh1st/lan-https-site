@@ -1,3 +1,7 @@
+/**
+ * Coordinate native or fallback chat fullscreen and side-panel visibility.
+ * See [README: browser interface](../README.md#browser-interface).
+ */
 /* Same native-fullscreen / viewport-fallback behavior as the 2D workspace. */
 (function () {
   const root=document.querySelector('#campaignDashboard'),panel=document.querySelector('#aiCampaignPanel');
@@ -15,6 +19,10 @@
     toggles[side]=button;bar.append(button);
   }
   const leave=document.createElement('button');leave.type='button';leave.textContent='Exit fullscreen';leave.onclick=()=>exit();bar.append(leave);root.prepend(bar);
+  /**
+   * Synchronize fullscreen controls and panel state with the current browser layout.
+   * See [README](../README.md#browser-interface).
+   */
   function refresh(){
     const player=root.classList.contains('ai-player-tools-active');lastPlayer=player;
     root.classList.toggle('chat-compact-panels',compact.matches);

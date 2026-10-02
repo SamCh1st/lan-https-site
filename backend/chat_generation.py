@@ -1,6 +1,30 @@
-"""Bounded recovery for a reply stream, before any campaign effects are applied."""
+"""Bounded recovery for a reply stream, before any campaign effects are applied.
+
+See [README: chat response flow](../README.md#chat-response-flow)."""
 import time
 import chat_format
+
+
+def history_role(entry, persona_type, persona_id=None):
+    """Only the selected persona's own generated turns are assistant examples.
+
+    See [README: chat response flow](../README.md#chat-response-flow)."""
+    same_persona = entry.get('persona_type') == persona_type
+    if persona_type == 'character':
+        same_persona = same_persona and str(entry.get('persona_id')) == str(persona_id)
+    return 'assistant' if same_persona and entry.get('role') == 'assistant' else 'user'
+
+
+def speaker_instructions(name, persona_type='character'):
+    if persona_type != 'character':
+        return ''
+    return ('\nCURRENT SPEAKER: ' + name + '. Write only this person’s next turn. '
+        'Other named speakers in history are other participants, even when their text was AI-generated. '
+        'Respond to their meaning; do not repeat their dialogue as your own or inherit their gestures, '
+        'possessions, gender, memories or first-person identity. Narrate only your own actions and thoughts. '
+        'Do not invent prior conversations or things you previously told someone to fill out the reply. '
+        'Other people’s written inner thoughts are not audible information your character can answer. '
+        'Advance one conversational beat without scripting the other participant’s response.\n')
 
 
 class StreamInterrupted(ValueError):
@@ -14,6 +38,9 @@ def character_reply_schema():
 
 
 def stream_reply(stream, payload, progress, read_reply, budget=180):
+    """Stream a reply with bounded recovery, reporting progress before campaign effects are applied.
+
+    See [README: chat response flow](../README.md#chat-response-flow)."""
     started = time.monotonic()
     last_partial = ''
     for attempt in range(2):

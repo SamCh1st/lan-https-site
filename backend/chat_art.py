@@ -1,4 +1,6 @@
-"""Persistent inline chat artwork. Jobs belong to message slots, never browser renders."""
+"""Persistent inline chat artwork. Jobs belong to message slots, never browser renders.
+
+See [README: message editing and images](../README.md#message-editing-and-images)."""
 import hashlib
 import json
 import logging
@@ -61,7 +63,7 @@ def _escaped(text, at):
 
 def tags(text):
     counts, result = {}, []
-    written = [(m.start(), m.end()) for m in re.finditer(r'```[\s\S]*?```|`[^`]*`', text or '') if not _escaped(text, m.start())]
+    written = [(m.start(), m.end()) for m in re.finditer(r'```(?:\\[\s\S]|(?!```)[^\\])*```|`(?:\\[\s\S]|[^`\\])*`', text or '') if not _escaped(text, m.start())]
     for match in TAG.finditer(text or ''):
         if _escaped(text, match.start()) or any(start <= match.start() < end for start, end in written):
             continue
@@ -121,7 +123,9 @@ def for_messages(user_id, campaign_id, messages):
 
 
 def reconcile(user_id, campaign_id, message_id, request, stream):
-    """Called only after a message is committed, not from polling or during token streaming."""
+    """Called only after a message is committed, not from polling or during token streaming.
+
+    See [README: message editing and images](../README.md#message-editing-and-images)."""
     message = visible_message(user_id, campaign_id, message_id)
     if message['generation_status'] != 'complete':
         return
@@ -151,7 +155,9 @@ def get_row(art_id):
 
 
 def campaign_records(user_id, campaign_id, message):
-    """Resolve explicit entities first, then relevant owned items, without exposing hidden cards."""
+    """Resolve explicit entities first, then relevant owned items, without exposing hidden cards.
+
+    See [README: message editing and images](../README.md#message-editing-and-images)."""
     records = [r for r in storage.list_work(user_id) if r['content'].get('campaign_id') == campaign_id]
     persona_id = message.get('persona_id') if message['persona_type'] == 'character' else None
     if persona_id:
@@ -347,6 +353,9 @@ def _work():
 
 
 def run_job(job):
+    """Process a queued artwork job and persist its progress and result while checking whether it is still current.
+
+    See [README: message editing and images](../README.md#message-editing-and-images)."""
     art_id, revision, user_id, campaign_id, brief, refs, source_id, request, stream = job
     def current():
         row = get_row(art_id)

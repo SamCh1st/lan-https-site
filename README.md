@@ -2,17 +2,49 @@
 
 A local multiplayer tabletop site for campaigns, characters, maps, inventories, dice, and optional AI storytelling and artwork. One computer hosts the Python server; players connect through their browsers on the same network.
 
+![Dark-mode campaign workspace with compact party cards, styled dialogue and player tools](docs/images/campaign-dark.png)
+
+The running site's dark theme, shown with isolated sample records. Screenshots are browser captures, not generated illustrations; see [screenshot notes](docs/images/README.md).
+
+<!-- omit from toc -->
 ## Contents
 
-- [Quick start](#quick-start)
-- [First-time setup](#first-time-setup)
-- [Playing and creating](#playing-and-creating)
-- [Optional AI tools](#optional-ai-tools)
-- [Development](#development)
-- [Project layout](#project-layout)
-- [Backups and moving computers](#backups-and-moving-computers)
-- [GitHub](#github)
-- [Troubleshooting](#troubleshooting)
+- [LAN HTTPS Site](#lan-https-site)
+  - [Quick start](#quick-start)
+  - [First-time setup](#first-time-setup)
+    - [Windows](#windows)
+    - [macOS or Linux](#macos-or-linux)
+  - [Playing and creating](#playing-and-creating)
+    - [Campaigns, characters, and the Archive](#campaigns-characters-and-the-archive)
+    - [Maps and player tools](#maps-and-player-tools)
+    - [Inventory, equipment, and dice](#inventory-equipment-and-dice)
+    - [Spell Atelier](#spell-atelier)
+    - [Languages](#languages)
+  - [Optional AI tools](#optional-ai-tools)
+    - [Storytelling and character drafts](#storytelling-and-character-drafts)
+    - [Local image generation](#local-image-generation)
+    - [Images in AI chat](#images-in-ai-chat)
+    - [Inline AI artwork and writing styles](#inline-ai-artwork-and-writing-styles)
+    - [Editing and continuing chat messages](#editing-and-continuing-chat-messages)
+    - [Character memory and portrayal](#character-memory-and-portrayal)
+    - [Conversation styles and chat panels](#conversation-styles-and-chat-panels)
+  - [Development](#development)
+    - [VS Code](#vs-code)
+    - [Maintaining the README](#maintaining-the-readme)
+    - [Visual Studio](#visual-studio)
+    - [Editing and testing](#editing-and-testing)
+    - [Code guide](#code-guide)
+      - [Startup and persistence](#startup-and-persistence)
+      - [Character creation flow](#character-creation-flow)
+      - [Chat response flow](#chat-response-flow)
+      - [Character memory flow](#character-memory-flow)
+      - [Message editing and images](#message-editing-and-images)
+      - [World rules and artwork](#world-rules-and-artwork)
+      - [Browser interface](#browser-interface)
+  - [Project layout](#project-layout)
+  - [Backups and moving computers](#backups-and-moving-computers)
+  - [GitHub](#github)
+  - [Troubleshooting](#troubleshooting)
 
 ## Quick start
 
@@ -20,7 +52,7 @@ A local multiplayer tabletop site for campaigns, characters, maps, inventories, 
 
 1. Double-click **[START SITE.cmd](START%20SITE.cmd)**.
 2. Keep the server terminal open.
-3. On the host computer, open **https://localhost:8443**.
+3. On the host computer, open **[https://localhost:8443](https://localhost:8443)**.
 4. Give players the **Other devices** address printed in the terminal, such as `https://SamuelPortable:8443`. Their devices must be on the same LAN or Wi-Fi. The address uses the hosting computer’s current name automatically; on another host, it uses that computer’s name. Restart after renaming the computer. If a device cannot resolve the name, use the printed **IP fallback** address. HTTPS certificates are refreshed automatically when the host name or LAN IP changes. Switching from an IP address to the computer-name URL requires signing in again because browsers treat them as separate sites; browser-local drawing drafts remain at the old address.
 5. Press **Ctrl+C** in the server terminal when you want to stop the site.
 
@@ -118,11 +150,19 @@ Ollama helpers receive the preferred language and instructions to understand mul
 
 ### Storytelling and character drafts
 
+![Dark-mode character draft form with named description sections and first-person roleplay examples](docs/images/character-draft-dark.png)
+
+The character draft form with a deterministic sample profile. Generated drafts remain editable before Save.
+
 Install Ollama and the models you want to use on the host computer, then select a model in the campaign. Model files are separate from this repository.
+
+On Windows, an AI request automatically starts an already-installed Ollama service if the default local connection is refused. Startup waits up to ten seconds; it does not install software, download models, or start a service for a custom/remote address. If startup fails, the form explains how to open Ollama and retry without losing your inputs.
 
 The storyteller can narrate, update permitted scene fields, create campaign records, and grant cards. HP, XP, levels, spell slots, and equipment effects remain sheet actions. **Create from an idea** generates characters, NPCs, and encounters for review before saving. Open it from a new record or the creation buttons under AI chat. NPC and encounter creation requires the campaign creator. Generation follows the active chat's **Modern**, **Medieval**, or **D&D** style, falling back to the campaign setting; regular campaigns use D&D. Modern and medieval drafts focus on people and situations without generating D&D classes or mechanics. Generation does not automatically grant equipment or create a portrait.
 
 New characters include editable portrayal guidance and a short reminder, saved to their **Memories** page when the character is created. Existing characters have **Draft character guidance with AI** on that page: it uses their sheet and current unsaved guidance, preserves identity, and leaves the result for review. Use **Restore previous guidance** to undo the draft, or **Save character guidance** to keep it. Generation never writes learned memories.
+
+Character creation draws relevant excerpts from the researched [D&D](docs/character-creation/01-DND-CHARACTER-GUIDE.md), [medieval](docs/character-creation/02-MEDIEVAL-PEOPLE-GUIDE.md), and [modern life and folklore](docs/character-creation/03-MODERN-LIFE-AND-FOLKLORE-GUIDE.md) guides. Every character, NPC, or encounter draft also performs a separate online research pass: the local model selects public factual topics, and the server retrieves bounded Wikipedia reference extracts. This needs internet access, but no API key. Retrieved source links or an explicit lookup-failure notice appear in the draft notes. References inform original people; they do not establish new campaign facts, override the concept, or grant D&D abilities. Existing portrayals are supplied for comparison to discourage repetitive personalities. Chat and regeneration receive relevant guide excerpts for voice and context, with each participant's identity kept separate.
 
 Characters and NPCs share a name namespace within each campaign; encounter titles must also be distinct. Saving and AI story effects reject duplicates even if capitalization, accents, spacing or punctuation differ. The generator considers visible campaign records and retries a conflicting name once. Transactional save checks cover simultaneous requests and hidden records without revealing their contents. Existing duplicate records are not merged or deleted.
 
@@ -155,6 +195,8 @@ Each generated picture offers **Save to artwork catalog**, **Regenerate**, and *
 
 Open the collapsible **Writing styles dictionary** under the composer or in the message editor for meanings and clickable examples. Styles can nest, and matched markers disappear in the displayed chat:
 
+Styles flow together within a paragraph; changing from an action to speech or thought does not add a blank line. AI replies choose paragraph breaks separately for new conversational beats. The chat keeps its workspace size as replies grow, with messages scrolling above the composer. Message cards use a consistent reading width capped at 52rem, shrink to fit phones, and wrap long words. Generated tutorial labels and accidental object-field tails are removed from typed roleplay passages; quoted written examples remain literal.
+
 | Markers | Meaning |
 | --- | --- |
 | `"dialogue"` | Spoken dialogue |
@@ -171,17 +213,69 @@ AI replies and regenerated messages use typed passages, which the server convert
 
 Use **Fullscreen chat** for the same fullscreen behavior as the 2D workspace, including Escape, an exit button, and side-panel toggles. On small screens the side panels start collapsed and open as drawers. Message editing and image controls remain available in fullscreen. Everything below Send is grouped under **Images & writing options**, which automatically collapses in fullscreen and shows how many images are attached.
 
+### Editing and continuing chat messages
+
+Double-click a message you can edit (or use its pencil) to edit inside its original box. The editor exposes style markers and the original `<image>...</image>` prompts. Attachments can be removed. **Auto-complete** always appends to the end of the draft, regardless of the cursor position; it finishes incomplete sentences and may add fitting detail. **Undo completion** restores the draft before the last completion. Nothing is saved or drawn until **Save**. **Cancel** discards the draft.
+
+Chat image generation first searches permitted campaign cards for relevant characters, objects and places, then asks the chat model to write a visual prompt from the request and those facts. Relevant portraits and attachments still guide the image engine. The original image command remains editable; changes to its prompt create a new drawing in that same position. Prompt preparation requires an installed Ollama chat model.
+
+### Character memory and portrayal
+
+Open a character card, then use **Memories ▸** to turn from the normal sheet to its memory page. Only the character’s assigned player and the campaign creator can read or edit this page. The **Character description, personality & roleplay guidelines** field accepts appearance, temperament, values, fears, speech patterns and behavior examples. **Character reminder note** reinforces short guidance on each reply (ideally under 100 words). Use actual names or plain wording; no name placeholders are substituted. Examples guide portrayal and are not treated as past events.
+
+After a character's reply is delivered, its local chat model can review new, addressed messages from that conversation in one bounded background batch. It records important facts, experiences, relationships, promises, goals, preferences, beliefs and feelings, keeping supporting quotations and speaker names. Previously reviewed messages are not repeatedly summarized. The entire archive stays in SQLite; relevant memories and pinned notes are selected before the next reply alongside recent conversation and the character’s guidance. Regeneration and autocomplete also use saved recall. A busy worker can skip the update; later turns can retry failures without replacing existing memories.
+
+On the memory page you can search, add, correct, pin or forget a memory, or turn automatic learning off while keeping existing recall. Player corrections take priority over automatic notes. Automatic notes become inactive when their source message is edited or deleted; saving a correction explicitly preserves that corrected memory. Characters can recall relevant memories and search recent dialogue from other campaign chats they are included in. The requester must still have access, and the current reply audience must fit the source chat and message audience. Private information is excluded from public replies. Corrected or forgotten memories are not reintroduced through their old source quotations. Other characters’ personal memory pages are not included in an AI’s context.
+
+Memories and portrayal settings persist in the server’s local `data/site.db` and are included when backing up that database. Campaign ZIP export/import does not currently include these new memory tables. AI extraction and portrayal remain model-dependent; the editable archive lets you correct missed or inaccurate interpretations.
+
+Chat refreshes have a timeout and resume automatically after a failed load. Changing conversations cancels the old refresh and ignores late responses; each conversation has its own reply lock. Interrupted Ollama streams retry once within the same message before any campaign effects are applied. A failed retry preserves available partial text and reports the underlying Ollama error. Memory extraction runs one bounded batch in the background after delivery, with no queued backlog blocking the next reply. Unprocessed memories remain eligible for a later update.
+
+Clicking a persona in an empty chat explicitly asks it to open the conversation. Character replies use a schema requiring a nonempty `reply` field, avoiding system-only requests and arbitrary JSON output that can make small local models loop or return no dialogue.
+
+Generated character guidance uses three Markdown sections headed with the actual character name: Visual Description, Personality, and Roleplay Behavior Examples. Five numbered examples pair a first-person action with the character’s own dialogue. First person includes “I,” “my,” “me,” “mine,” “myself,” and natural plural forms such as “we,” “us,” “our,” “ours” and “ourselves” when there is established shared context. Plural wording must not invent shared ownership, relationships, agreement or another participant’s actions. The generator validates the structured fields before formatting them, and removes labels such as “Character Reference:” from generated names. Existing saved descriptions remain editable; generate a guidance draft to update their format. Profile examples are hypothetical, and their action notation is translated to the chat dictionary when used as context.
+
+Modern character generation and conversation use existing products, services and places, appropriate to the scene's date and the person's circumstances. The research planner can check a relevant product as a third topic. Unknown model names remain generic (“my phone”) instead of being fabricated; chat preserves established possessions.
+
+Party cards have a consistent height, with a two-line name and a three-line description preview; open the character for the full text. Malformed AI paragraph/object endings and the attached writing commentary are hidden in chat display and excluded from subsequent dialogue context. Mixed stage directions and speech receive a bounded formatting repair before saving new replies.
+
+In double-click message editing, a draft ending in an unescaped `<image>` outside backticks switches Auto-complete to image-prompt writing. It appends a visual description and `</image>`, preserving the draft prefix. Completion remains a draft: artwork starts only after saving the edited message. Quoted or escaped image examples keep ordinary text continuation.
+
+### Conversation styles and chat panels
+
+On the left of the campaign header, choose **D&D table conversation**, **Medieval conversation**, or **Modern conversation**. The campaign creator sets the main chat style; included players can set a private chat’s style. Each private chat can keep its own setting. D&D allows direct questions and discussion with the DM without forcing an NPC performance or advancing the scene. Medieval emphasizes natural preindustrial voices; Modern supports ordinary contemporary character conversation. Character descriptions, reminders, memories and image commands remain available in every style. Outside D&D, the DM is removed from the writer and reply choices; existing messages are preserved.
+
+The side panels follow the character selected beside the writing box: characters show their inventory, dice, attacks and spells, while the DM shows scene controls. Clicking an AI reply character does not change your writing tools. Desktop fullscreen panel widths can be dragged and are remembered separately from the 2D fullscreen layout. Shared card artwork is contained without cropping, and round portraits use centered image frames.
+
+Text-message exchanges keep their outgoing text inside backticks, including any natural character-appropriate emojis. Whisper quotes mean actual quiet speech, not texting. The AI receives a reminder of the current communication medium; a final delivery check repairs missed text formatting or an agreed picture request before saving the reply. Picture commands remain outside written spans so they create real inline artwork. Image discussions, refusals and requests not to send pictures do not require generation.
+
+For slow chat image generation when the project is on an external drive, see [the verified internal-drive model cache](docs/LOCAL-ART.md#faster-model-loading-from-an-internal-drive). It keeps the same image model and quality. Chat artwork now displays its preparation and rendering stages while working.
+
 ## Development
+
+Keep this README current in the same change as the implementation. Whenever behavior, setup, controls, configuration or limitations change, update the relevant section and any linked guide. Documentation updates are part of completing the work, not a later cleanup task.
 
 ### VS Code
 
 1. Open [LAN-HTTPS-Site.code-workspace](LAN-HTTPS-Site.code-workspace).
-2. Install the recommended Microsoft Python and Python Debugger extensions.
+2. Open Extensions and search `@recommended` to see this workspace's Python and Markdown tools.
 3. Run **Terminal → Run Task → Setup Python environment (Windows)** if you have not completed setup.
 4. Run **Python: Select Interpreter** and select `.venv/Scripts/python.exe` (`.venv/bin/python` on macOS/Linux).
 5. Press **F5** and select **LAN site: HTTPS (8443)**. Stop any other server using that port first.
 
 Tasks also include **Run LAN site**, **Install Python dependencies**, and **Python unit tests**.
+
+For documentation, install [Markdown All in One](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) for editing shortcuts and table-of-contents support, and [markdownlint](https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint) for Markdown consistency checks. Both are listed in [.vscode/extensions.json](.vscode/extensions.json). With them installed, the workspace settings keep the contents list updated and apply available Markdown fixes when you explicitly save a Markdown file.
+
+VS Code already includes a [Markdown preview](https://code.visualstudio.com/docs/languages/markdown): press **Ctrl+Shift+V**, or **Ctrl+K V** for a side-by-side preview. This also previews the README's local screenshots. The recommended Microsoft Python, Pylance and Python Debugger extensions cover Python navigation, function descriptions and debugging.
+
+### Maintaining the README
+
+- Save the README to refresh its contents list with Markdown All in One. The list includes second- and third-level headings, uses GitHub-compatible links, and excludes the Contents heading itself.
+- To rebuild the list manually, run **Markdown All in One: Update Table of Contents** from the Command Palette. Keep code-guide headings stable because function comments link to them.
+- Markdownlint reports formatting issues in **Problems** (**Ctrl+Shift+M**). Available fixes run on explicit Save; review any remaining diagnostics.
+- [.markdownlint.jsonc](.markdownlint.jsonc) defines shared rules. Long prose and links use editor word wrapping instead of a hard line-length limit; other default checks stay enabled.
+- Keep the site's dark-mode screenshots current using the [screenshot notes](docs/images/README.md). Preview the README to check their appearance after edits.
 
 ### Visual Studio
 
@@ -222,6 +316,50 @@ If you edit the main Sass file, compile it with a separately installed Sass CLI:
 sass site/styles.scss site/styles.css --style=compressed
 ```
 
+### Code guide
+
+Start here when tracing a feature. Module summaries and comments above the main functions link back to these sections. Python function descriptions also appear in editor hover help. Each summary explains the function's responsibility and important effects; the code remains the source of truth for exact validation and limits.
+
+When changing a flow, update its function description and this guide together. Keep these heading anchors stable because source comments link to them. Explain decisions, ownership and side effects rather than repeating individual statements.
+
+#### Startup and persistence
+
+[server.py](server.py) launches [backend/server.py](backend/server.py). Its `main` initializes storage, prepares the local certificate and serves HTTPS. Request handlers check the signed-in user and route operations to feature modules. [storage.py](backend/storage.py) owns SQLite connections, schema initialization and record/message persistence. `create_work` saves a record and supplied character guidance together; `update_ai_generation` updates the pending message row as a reply streams. Authorization belongs at the request and feature boundaries, not in every database helper.
+
+#### Character creation flow
+
+The Generate draft button in [app.js](site/app.js) calls `Handler.generate_character` in [server.py](backend/server.py). [record_generator.generate](backend/record_generator.py) combines the active setting, visible existing records, guide excerpts from [character_knowledge.py](backend/character_knowledge.py), and a required research attempt from [character_research.py](backend/character_research.py). Research plans public topics, retrieves bounded encyclopedia references and records sources or unavailable lookups honestly. It does not guarantee every invented biographical detail is verified.
+
+D&D player sheets pass through [character_generator.py](backend/character_generator.py); other modes use the record generator's setting guidance. [character_portrayal.py](backend/character_portrayal.py) validates structured appearance, personality and five behavior examples, then renders named Markdown headings and first-person actions. [record_identity.py](backend/record_identity.py) cleans generated identity labels and compares names. The result fills a reviewable form; only Save persists it. Regenerating an existing person's guidance preserves their identity and uses the guides without launching the new-record research flow.
+
+The reference library is maintained in the [D&D guide](docs/character-creation/01-DND-CHARACTER-GUIDE.md), [medieval guide](docs/character-creation/02-MEDIEVAL-PEOPLE-GUIDE.md) and [modern life and folklore guide](docs/character-creation/03-MODERN-LIFE-AND-FOLKLORE-GUIDE.md). Guide excerpts supply background understanding; example lives are excluded from retrieval so they do not become campaign facts.
+
+#### Chat response flow
+
+`Handler.ai_message` in [server.py](backend/server.py) assembles permitted conversation context, the active speaker, mode, guides and recalled memories. [chat_modes.py](backend/chat_modes.py) supplies setting guidance; [chat_generation.py](backend/chat_generation.py) keeps the selected speaker's own turns separate from other participants and bounds stream recovery. [ai_service.py](backend/ai_service.py) handles connections to the model service, including limited startup recovery for the default local Ollama endpoint.
+
+[chat_format.py](backend/chat_format.py) converts typed passages into the site's dialogue, action, thought, whisper, writing and emphasis markers. It also handles partial output and bounded repairs. The server persists the final reply before scheduling artwork and memory work. [chat-format.js](site/chat-format.js) renders those markers into safe text nodes and inline elements; [chat-art.js](site/chat-art.js) places image slots within that prose. `renderAiMessages` in [app.js](site/app.js) connects rendering, streaming updates and editing controls. See [Conversation styles and chat panels](#conversation-styles-and-chat-panels) for the user-facing syntax.
+
+#### Character memory flow
+
+[character_memory.py](backend/character_memory.py) separates player-authored portrayal from learned experience. `recall` selects relevant saved knowledge before an answer, subject to source and audience checks. `learn_later` attempts one bounded background extraction after delivery; it can skip a busy worker. Learned claims retain evidence and speaker attribution, and changed source messages can invalidate them. [character-memory.js](site/character-memory.js) provides the editor for guidance and memories. See [Character memory and portrayal](#character-memory-and-portrayal) for how these affect play.
+
+#### Message editing and images
+
+[chat-editor.js](site/chat-editor.js) opens a raw-text draft in the message card. `Handler.ai_continue` calls [chat_continue.complete](backend/chat_continue.py), which checks access and returns only a suffix. An unescaped trailing `<image>` outside written text requests an image description and closing tag. Autocomplete changes the draft; Save commits it. Undo completion restores the previous draft.
+
+After a message is saved, [chat_art.reconcile](backend/chat_art.py) matches complete image tags to persistent slots and queues eligible jobs. Rendering and polling do not start jobs. The worker uses permitted campaign references to refine prompts and runs artwork through the art services, including [local_art.py](backend/local_art.py) for local image models. [chat-images.js](site/chat-images.js) handles uploaded attachments separately. See [Editing and continuing chat messages](#editing-and-continuing-chat-messages).
+
+#### World rules and artwork
+
+[campaign_maps.py](backend/campaign_maps.py) coordinates campaign maps, travel and interactions; [equipment.py](backend/equipment.py) owns loadouts and [economy.py](backend/economy.py) commits trades with their money and goods. [tabletop.py](backend/tabletop.py) normalizes rule fields. Start from [map-workspace.js](site/map-workspace.js) and [map2d.js](site/map2d.js) for the map interface.
+
+[spell_reader.py](backend/spell_reader.py) combines measured geometry with reference-informed spell interpretation. [spell_designer.py](backend/spell_designer.py) turns streamed drawing instructions into validated steps. [art_designer.py](backend/art_designer.py) handles editable vector artwork; [local_art.py](backend/local_art.py) manages the separate local image engine. For installation, see [Artwork setup](docs/LOCAL-ART.md).
+
+#### Browser interface
+
+[index.html](site/index.html) defines panels and forms; [app.js](site/app.js) coordinates events, API calls and shared UI state. `renderDashboard` refreshes the active campaign and `renderParty` builds its compact character cards. Feature modules own their individual editors and renderers. [chat-fullscreen.js](site/chat-fullscreen.js) coordinates fullscreen state and side panels. Layout lives in [styles.scss](site/styles.scss) and feature stylesheets such as [realm-layout.css](site/realm-layout.css) and [chat-fullscreen.css](site/chat-fullscreen.css).
+
 ## Project layout
 
 | Path | Purpose |
@@ -230,7 +368,7 @@ sass site/styles.scss site/styles.css --style=compressed
 | `site/` | Browser UI, translations, bundled libraries, catalog assets |
 | `scripts/` | Environment setup and optional model installers |
 | `tests/` | Unit tests, browser checks, preview fixtures, artifacts |
-| `docs/` | [Artwork setup](docs/LOCAL-ART.md) and [catalog guide](docs/BUSINESS-CATALOG.md) |
+| `docs/` | Character reference guides, README screenshots, [artwork setup](docs/LOCAL-ART.md) and [catalog guide](docs/BUSINESS-CATALOG.md) |
 | `data/` | Local accounts, campaigns, uploads, audio |
 | `.cert/` | Local HTTPS certificate and private key |
 | `local-art/` | Downloaded image engine and models |
@@ -282,33 +420,3 @@ If a remote already exists, inspect it with `git remote -v` instead of adding `o
 | Campaigns are missing after moving computers | Stop the server and check that the original `data/` folder was restored, rather than just copying the source files. |
 
 [Back to contents](#contents)
-
-### Editing and continuing chat messages
-
-Double-click a message you can edit (or use its pencil) to edit inside its original box. The editor exposes style markers and the original `<image>...</image>` prompts. Attachments can be removed. **Auto-complete** always appends to the end of the draft, regardless of the cursor position; it finishes incomplete sentences and may add fitting detail. **Undo completion** restores the draft before the last completion. Nothing is saved or drawn until **Save**. **Cancel** discards the draft.
-
-Chat image generation first searches permitted campaign cards for relevant characters, objects and places, then asks the chat model to write a visual prompt from the request and those facts. Relevant portraits and attachments still guide the image engine. The original image command remains editable; changes to its prompt create a new drawing in that same position. Prompt preparation requires an installed Ollama chat model.
-
-### Character memory and portrayal
-
-Open a character card, then use **Memories ▸** to turn from the normal sheet to its memory page. Only the character’s assigned player and the campaign creator can read or edit this page. The **Character description, personality & roleplay guidelines** field accepts appearance, temperament, values, fears, speech patterns and behavior examples. **Character reminder note** reinforces short guidance on each reply (ideally under 100 words). Use actual names or plain wording; no name placeholders are substituted. Examples guide portrayal and are not treated as past events.
-
-Before a character answers, its local chat model reviews new, addressed messages from that conversation. It records important facts, experiences, relationships, promises, goals, preferences, beliefs and feelings, keeping supporting quotations and speaker names. Previously reviewed messages are not repeatedly summarized. The entire archive stays in SQLite; relevant memories and pinned notes are selected for the next reply alongside recent conversation and the character’s guidance. Regeneration and autocomplete also use saved recall. Automatic updates retry after failures without replacing existing memories.
-
-On the memory page you can search, add, correct, pin or forget a memory, or turn automatic learning off while keeping existing recall. Player corrections take priority over automatic notes. Automatic notes become inactive when their source message is edited or deleted; saving a correction explicitly preserves that corrected memory. Characters can recall relevant memories and search recent dialogue from other campaign chats they are included in. The requester must still have access, and the current reply audience must fit the source chat and message audience. Private information is excluded from public replies. Corrected or forgotten memories are not reintroduced through their old source quotations. Other characters’ personal memory pages are not included in an AI’s context.
-
-Memories and portrayal settings persist in the server’s local `data/site.db` and are included when backing up that database. Campaign ZIP export/import does not currently include these new memory tables. AI extraction and portrayal remain model-dependent; the editable archive lets you correct missed or inaccurate interpretations.
-
-Chat refreshes have a timeout and resume automatically after a failed load. Changing conversations cancels the old refresh and ignores late responses; each conversation has its own reply lock. Interrupted Ollama streams retry once within the same message before any campaign effects are applied. A failed retry preserves available partial text and reports the underlying Ollama error. Memory extraction runs one bounded batch in the background after delivery, with no queued backlog blocking the next reply. Unprocessed memories remain eligible for a later update.
-
-Clicking a persona in an empty chat explicitly asks it to open the conversation. Character replies use a schema requiring a nonempty `reply` field, avoiding system-only requests and arbitrary JSON output that can make small local models loop or return no dialogue.
-
-### Conversation styles and chat panels
-
-On the left of the campaign header, choose **D&D table conversation**, **Medieval conversation**, or **Modern conversation**. The campaign creator sets the main chat style; included players can set a private chat’s style. Each private chat can keep its own setting. D&D allows direct questions and discussion with the DM without forcing an NPC performance or advancing the scene. Medieval emphasizes natural preindustrial voices; Modern supports ordinary contemporary character conversation. Character descriptions, reminders, memories and image commands remain available in every style. Outside D&D, the DM is removed from the writer and reply choices; existing messages are preserved.
-
-The side panels follow the character selected beside the writing box: characters show their inventory, dice, attacks and spells, while the DM shows scene controls. Clicking an AI reply character does not change your writing tools. Desktop fullscreen panel widths can be dragged and are remembered separately from the 2D fullscreen layout. Shared card artwork is contained without cropping, and round portraits use centered image frames.
-
-Text-message exchanges keep their outgoing text inside backticks, including any natural character-appropriate emojis. Whisper quotes mean actual quiet speech, not texting. The AI receives a reminder of the current communication medium; a final delivery check repairs missed text formatting or an agreed picture request before saving the reply. Picture commands remain outside written spans so they create real inline artwork. Image discussions, refusals and requests not to send pictures do not require generation.
-
-For slow chat image generation when the project is on an external drive, see [the verified internal-drive model cache](docs/LOCAL-ART.md#faster-model-loading-from-an-internal-drive). It keeps the same image model and quality. Chat artwork now displays its preparation and rendering stages while working.

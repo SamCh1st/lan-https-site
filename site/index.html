@@ -26,13 +26,13 @@
   <script>try{if(localStorage.getItem('in-house-theme')==='dark')document.documentElement.dataset.theme='dark'}catch(error){}</script>
   <link rel="stylesheet" href="map-workspace.css?v=20260920-square-palette">
   <link rel="stylesheet" href="audio-library.css?v=20260917">
-  <link rel="stylesheet" href="realm-layout.css?v=inline-chat-20260919-compact-layout">
+  <link rel="stylesheet" href="realm-layout.css?v=20261002-party-cards">
   <link rel="stylesheet" href="map-image-picker.css?v=20260930-shared">
   <link rel="stylesheet" href="chat-images.css?v=20260930">
   <link rel="stylesheet" href="character-memory.css?v=20260930-memory">
   <link rel="stylesheet" href="chat-art.css?v=20260930-options">
   <link rel="stylesheet" href="chat-format.css?v=20260930">
-  <link rel="stylesheet" href="chat-fullscreen.css?v=20260930-header-style">
+  <link rel="stylesheet" href="chat-fullscreen.css?v=20261001-contained-dialogue">
   <link rel="stylesheet" href="map-splines.css?v=20260920-detail-scale">
   <link rel="stylesheet" href="map-opening.css?v=20260920-open-checks-final">
   <link rel="stylesheet" href="map-part-cards.css?v=20260919-catalog">
@@ -299,7 +299,7 @@
             <input name="image_id" type="hidden">
           </div></div>
         </div>
-        <details id="characterGenerator" class="tt-section d-none" aria-label="Generate a character, NPC or encounter"><summary>Create from an idea</summary><label for="characterGenerationPrompt">Describe your idea<textarea id="characterGenerationPrompt" class="form-control" rows="3" maxlength="6000" placeholder="A curious city mechanic, a medieval innkeeper, or a tense meeting at a ruined bridge…"></textarea></label><p class="tt-help">Describe the person or encounter you need. The AI follows the active conversation setting and checks existing campaign names. Review the draft, then Save.</p><p id="characterGenerationMode" class="tt-help"></p><div id="generatedCharacterGuidance" class="d-none"><label>Character description, personality &amp; roleplay guidelines<textarea id="generatedCharacterCore" class="form-control" rows="5" maxlength="12000"></textarea></label><label>Character reminder note<textarea id="generatedCharacterReminder" class="form-control" rows="2" maxlength="1000"></textarea></label><p class="tt-help">Saved to the character’s guidance page when you create the character. These are stable traits, not learned memories.</p></div><div class="tt-actions"><button id="generateCharacterButton" type="button">Generate draft</button></div><p id="characterGenerationStatus" role="status" class="tt-help"></p><p id="characterGenerationError" role="alert" class="form-error"></p></details>
+        <details id="characterGenerator" class="tt-section d-none" aria-label="Generate a character, NPC or encounter"><summary>Create from an idea</summary><label for="characterGenerationPrompt">Describe your idea<textarea id="characterGenerationPrompt" class="form-control" rows="3" maxlength="6000" placeholder="A curious city mechanic, a medieval innkeeper, or a tense meeting at a ruined bridge…"></textarea></label><p class="tt-help">Describe the person or encounter you need. The AI follows the active conversation setting and checks existing campaign names. Review the draft, then Save.</p><p id="characterGenerationMode" class="tt-help"></p><div id="generatedCharacterGuidance" class="d-none"><label>Character description, personality &amp; roleplay guidelines<textarea id="generatedCharacterCore" class="form-control" rows="14" maxlength="12000"></textarea></label><label>Character reminder note<textarea id="generatedCharacterReminder" class="form-control" rows="2" maxlength="1000"></textarea></label><p class="tt-help">Saved to the character’s guidance page when you create the character. These are stable traits, not learned memories.</p></div><div class="tt-actions"><button id="generateCharacterButton" type="button">Generate draft</button></div><p id="characterGenerationStatus" role="status" class="tt-help"></p><p id="characterGenerationError" role="alert" class="form-error"></p></details>
         <div id="structuredFields"></div>
         <section class="record-audience d-none" id="recordAudience"><strong>Give this card to specific players</strong><small>Only selected players receive it in their campaign tools. “Revealed to players” still shares it with everyone.</small><div id="recordAudiencePlayers"></div></section>
         <section class="character-template-import d-none" id="characterTemplateImport">
@@ -445,18 +445,16 @@
   <script src="equipment.js?v=20260919-shared-cards"></script>
   <script src="campaign-transfer.js?v=20260930"></script>
   <script src="chat-images.js?v=20260930"></script>
-  <script src="chat-format.js?v=20260930-texting"></script>
-  <script src="chat-art.js?v=20260930-options"></script>
+  <script src="chat-format.js?v=20261002-clean-generated"></script>
+  <script src="chat-art.js?v=20261002-clean-generated"></script>
   <script src="chat-speaker-menu.js?v=20260930"></script>
   <script src="chat-fullscreen.js?v=20260930"></script>
-  <script src="character-memory.js?v=20261001-generation"></script>
-  <script src="chat-editor.js?v=20260930-end-continuation"></script>
-  <script src="app.js?v=20261001-chat-recovery"></script>
+  <script src="character-memory.js?v=20261002-first-person-profiles"></script>
+  <script src="chat-editor.js?v=20261002-image-completion"></script>
+  <script src="app.js?v=20261002-profile-cards"></script>
   <script src="audio-library.js?v=20260917"></script>
   <script src="realm-resize.js?v=20260930-chat"></script>
   <script src="realm-container-resize.js?v=inline-chat-20260919-outer-frame"></script>
 </body>
 </html>
-
-
 

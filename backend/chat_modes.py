@@ -1,10 +1,28 @@
-"""Conversation settings shared by a chat, with a campaign default for the main table."""
+"""Conversation settings shared by a chat, with a campaign default for the main table.
+
+See [README: chat response flow](../README.md#chat-response-flow)."""
 import json
 import storage
 import ai_effects
 import chat_format
 
 MODES=('dnd','medieval','modern')
+
+MODERN_REALISM = '''
+MODERN REAL-WORLD REFERENCES:
+Use real, existing products, brands, apps, tools, vehicles, services and public places. Do not invent
+commercial names or model numbers to make an ordinary object sound distinctive. When a specific
+model matters, use its correct real name and verify uncertain details through available research.
+Choose things that fit the story's year, location, occupation and budget; an older or second-hand
+device is normal. Do not give everyone the same brand, premium equipment or the latest model.
+If the exact model is unknown or unverified, use a familiar generic term such as "my phone" or
+"my laptop". Do not guess specifications, product capabilities, local landmarks or current prices.
+In an existing conversation, preserve established possessions and experience: do not silently give
+the character a new device or expert knowledge just to name a real product. Brand names are details,
+not advertisements; ordinary dialogue need not repeat full model names. Original people and their
+personal stories may be invented. Fictional technology needs an explicitly fictional/alternate-world
+premise, not an assumption that Modern mode is science fiction.
+'''
 
 def get(user_id,campaign_id,chat_id=None):
     campaign=storage.campaign_record(user_id,campaign_id)
@@ -70,7 +88,7 @@ but do not invent shared history, instant intimacy, or control anyone else's tho
 This is not a D&D session: do not impose dice, quests, combat turns, spell slots, character-sheet rules,
 medieval settings or a Dungeon Master. Discuss such topics normally only if someone brings them up.
 There is no DM persona in this mode and no game-state mutations. Respect names and roles in group chats.
-"""
+""" + MODERN_REALISM
 
 
 def reply_schema():

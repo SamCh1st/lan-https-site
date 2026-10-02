@@ -2,7 +2,8 @@
 
 All values are passed as SQL parameters. Browser input is never concatenated
 into a statement, and this module exposes no arbitrary SQL execution endpoint.
-"""
+
+See [README: startup and persistence](../README.md#startup-and-persistence)."""
 from __future__ import annotations
 
 import base64
@@ -30,6 +31,9 @@ PUBLIC_ARCHIVE_CATEGORIES = frozenset({
 
 
 def connect() -> sqlite3.Connection:
+    """Open a row-based SQLite connection with foreign keys enabled; callers manage transactions and close it.
+
+    See [README: startup and persistence](../README.md#startup-and-persistence)."""
     DB_PATH.parent.mkdir(exist_ok=True)
     db = sqlite3.connect(DB_PATH, timeout=10)
     db.row_factory = sqlite3.Row
@@ -38,6 +42,9 @@ def connect() -> sqlite3.Connection:
 
 
 def initialize() -> None:
+    """Create or migrate application tables before request handling begins.
+
+    See [README: startup and persistence](../README.md#startup-and-persistence)."""
     UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
     with connect() as db:
         db.executescript("""
@@ -443,6 +450,9 @@ def normalize_map_image_scale(content):
 
 
 def create_work(user_id: int, title: str, content: object) -> dict:
+    """Create a record and any supplied character guidance in one transaction, checking record identity rules.
+
+    See [README: startup and persistence](../README.md#startup-and-persistence)."""
     from map_part_catalog import validate
     validate(content)
     with connect() as db:
@@ -944,6 +954,9 @@ def update_ai_message(campaign_id: int, message_id: int, message: str, image_ids
 
 
 def update_ai_generation(campaign_id: int, message_id: int, message: str, status: str = "streaming") -> bool:
+    """Update the existing pending message so streamed chunks do not become separate conversation turns.
+
+    See [README: chat response flow](../README.md#chat-response-flow)."""
     safe_status = status if status in ("streaming", "complete", "error") else "streaming"
     safe_message = message[:12000] if message else " "
     with connect() as db:

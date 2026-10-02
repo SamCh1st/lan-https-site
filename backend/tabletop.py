@@ -1,4 +1,6 @@
-"""Normalize tabletop records without changing the database schema."""
+"""Normalize tabletop records without changing the database schema.
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 import math
 
 ABILITIES = ('strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma')

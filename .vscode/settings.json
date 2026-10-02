@@ -1,4 +1,16 @@
 {
+  "markdown.extension.toc.levels": "2..3",
+  "markdown.extension.toc.slugifyMode": "github",
+  "markdown.extension.toc.updateOnSave": true,
+  "markdown.extension.toc.unorderedList.marker": "-",
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.markdownlint": "explicit"
+    }
+  },
   "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
   "python.testing.unittestEnabled": true,
   "python.testing.pytestEnabled": false,

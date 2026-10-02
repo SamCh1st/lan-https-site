@@ -1,4 +1,12 @@
 .chat-fullscreen-entry{display:flex;justify-content:flex-end;flex:0 0 auto;padding:5px 9px;border-bottom:1px solid #89613255}
+/* Content scrolls inside the existing workspace size, including outside fullscreen. */
+#aiCampaignPanel{min-width:0;min-height:0;height:100%;max-height:100%;overflow:hidden}
+#aiCampaignPanel #aiChatLog{min-width:0;min-height:0;flex:1 1 0;overflow:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+#aiCampaignPanel #aiChatForm{min-height:0;max-height:45%;overflow:auto;flex:0 0 auto}
+#aiChatLog .ai-message{box-sizing:border-box;width:100%;max-width:52rem;min-width:0;margin:0 auto 14px;overflow-wrap:anywhere;padding:14px 16px}
+#aiChatLog .ai-message-copy{min-width:0;max-width:100%}
+#aiChatLog .ai-message-text{font-size:15px;line-height:1.7}
+@media(max-width:600px){#aiChatLog{padding-inline:8px}#aiChatLog .ai-message{padding:11px 12px}}
 .chat-fullscreen-entry button,#chatFullscreenBar button{border:1px solid #896132;background:#302315;color:#ead29b;padding:6px 10px;font:12px Georgia,serif}
 #chatFullscreenBar{display:none}
 #campaignDashboard.chat-fullscreen{display:grid!important;grid-template-columns:240px minmax(0,1fr) 240px!important;grid-template-rows:auto minmax(0,1fr)!important;width:100vw!important;max-width:none!important;height:100dvh!important;min-height:0!important;max-height:none!important;margin:0!important;padding:8px!important;gap:8px!important;box-sizing:border-box;overflow:hidden;background:var(--realm-panel,#20150e)}

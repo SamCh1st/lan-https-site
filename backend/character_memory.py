@@ -1,9 +1,12 @@
-"""Character-owned, evidence-backed memory; never a replacement for the conversation log."""
+"""Character-owned, evidence-backed memory; never a replacement for the conversation log.
+
+See [README: character memory flow](../README.md#character-memory-flow)."""
 import hashlib
 import json
 import re
 import threading
 import storage
+import character_portrayal
 
 KINDS = ('fact', 'event', 'relationship', 'goal', 'promise', 'preference', 'belief', 'feeling')
 INSTRUCTIONS = """
@@ -31,7 +34,9 @@ _learning_worker = threading.Lock()
 
 
 def learn_later(character,campaign_id,history,request,model):
-    """One optional memory batch after delivery; never queue behind another helper."""
+    """One optional memory batch after delivery; never queue behind another helper.
+
+    See [README: character memory flow](../README.md#character-memory-flow)."""
     if not _learning_worker.acquire(blocking=False):return
     def work():
         try:
@@ -181,7 +186,9 @@ def extraction_schema():
 
 
 def learn(character,campaign_id,history,request,model,max_batches=None):
-    """Append grounded notes from previously unseen messages. Never rewrite player edits."""
+    """Append grounded notes from previously unseen messages. Never rewrite player edits.
+
+    See [README: character memory flow](../README.md#character-memory-flow)."""
     character_id=character['id']
     with _guard:lock=_locks.setdefault(character_id,threading.Lock())
     with lock:
@@ -299,6 +306,9 @@ def other_conversations(user_id,campaign_id,character_id,query,chat_id,audience)
 
 
 def recall(user_id,campaign_id,character_id,query,chat_id=None,audience=None):
+    """Select relevant portrayal and remembered context while checking source validity and conversation visibility.
+
+    See [README: character memory flow](../README.md#character-memory-flow)."""
     settings=profile(character_id)
     audience=set(audience or [])
     words=set(re.findall(r'\w+',query.casefold()))
@@ -317,7 +327,7 @@ def recall(user_id,campaign_id,character_id,query,chat_id=None,audience=None):
         if len(notes)>=32 or size+len(row['text'])>14000:continue
         notes.append({'kind':row['kind'],'memory':row['text'],'recorded':row['created_at'],'corrected_by_player':bool(row['manual']),'remembered_from':list(dict.fromkeys(e.get('speaker','') for e in json.loads(row['evidence']) if e.get('speaker')))})
         size+=len(row['text'])
-    return {'core_traits':settings['core'],'reminder':settings['reminder'],'relevant_memories':notes,'other_conversations':other_conversations(user_id,campaign_id,character_id,query,chat_id,audience)}
+    return {'core_traits':character_portrayal.for_chat(settings['core']),'reminder':settings['reminder'],'relevant_memories':notes,'other_conversations':other_conversations(user_id,campaign_id,character_id,query,chat_id,audience)}
 
 
 def record_error(character_id,error):

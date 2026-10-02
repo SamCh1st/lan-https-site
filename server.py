@@ -1,4 +1,6 @@
-"""Stable launcher for the website; implementation lives in backend/."""
+"""Stable launcher for the website; implementation lives in backend/.
+
+See [README: startup and persistence](README.md#startup-and-persistence)."""
 from pathlib import Path
 import sys
 

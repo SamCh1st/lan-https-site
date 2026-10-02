@@ -2,7 +2,8 @@
 
 Free-form features are never interpreted as permissions. Unmodelled rules require
 explicit DM review; derived values do not overwrite manually maintained sheets.
-"""
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 import json
 import math
 import re

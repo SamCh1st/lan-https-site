@@ -105,6 +105,19 @@ html .party-scroll .party-card, html[data-theme] .party-scroll .party-card {
   border-radius: 5px; background: var(--realm-panel); box-shadow: none; color: var(--realm-ink);
 }
 html .party-scroll .party-portrait { width: 46px; height: 46px; }
+/* Keep biography length from setting the height of every party card. */
+html .party-scroll { align-items: flex-start; }
+html .party-scroll .party-card, html[data-theme] .party-scroll .party-card {
+  height: 156px; min-height: 156px; box-sizing: border-box; overflow: hidden;
+}
+html .party-scroll .party-card > span:last-child { min-width: 0; flex: 1; }
+html #partyScroll .party-card strong,
+html #partyScroll .party-card small {
+  display: -webkit-box; -webkit-box-orient: vertical; overflow: hidden;
+  overflow-wrap: anywhere; white-space: normal;
+}
+html #partyScroll .party-card strong { -webkit-line-clamp: 2; line-height: 1.35; max-height: 2.7em; }
+html #partyScroll .party-card small { -webkit-line-clamp: 3; line-height: 1.45; max-height: 4.35em; }
 html .party-card em { color: var(--realm-gold); }
 html .party-scroll .party-card.important-card,
 html[data-theme] .party-scroll .party-card.important-card {

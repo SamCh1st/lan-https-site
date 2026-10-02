@@ -1,8 +1,16 @@
+/**
+ * Edit character portrayal and evidence-backed memories through the character-memory API.
+ * See [README: character memory flow](../README.md#character-memory-flow).
+ */
 /* The reverse side of a character sheet. All memory text is rendered as text. */
 window.CharacterMemory = (() => {
   let epoch = 0;
   const kinds = ['fact','event','relationship','goal','promise','preference','belief','feeling'];
   const make = (tag, text, cls) => {const el = document.createElement(tag); if(text !== undefined) el.textContent=text; if(cls) el.className=cls; return el;};
+  /**
+   * Mount the guidance and memory editor for one character, guarding against stale asynchronous updates.
+   * See [README](../README.md#character-memory-flow).
+   */
   function mount(item, api, options) {
     const token=++epoch, toggle=document.getElementById('detailMemoryToggle'), host=document.getElementById('detailMemoryPage'), front=document.getElementById('detailFront');
     const footer=document.querySelector('#recordDetailModal .modal-footer');
@@ -51,8 +59,8 @@ window.CharacterMemory = (() => {
       host.append(make('h3',item.title+' — memories'),make('p','Only this character’s player and the campaign creator can edit this page. Stable traits apply in every conversation. Private experiences stay in their original conversation.'));
       const core=make('section',undefined,'memory-core');
       const profile=coreDraft||{core:state.profile.core,reminder:state.profile.reminder||'',enabled:!!state.profile.enabled};
-      const [coreWrap,coreInput]=field('Character description, personality & roleplay guidelines',profile.core);coreInput.rows=5;coreInput.maxLength=12000;
-      core.append(coreWrap,make('small','Describe appearance, personality, values, fears, speech and behavior examples using actual names or plain wording. Examples guide portrayal, not remembered history. Keep private events in chat-specific memories.'));
+      const [coreWrap,coreInput]=field('Character description, personality & roleplay guidelines',profile.core);coreInput.rows=14;coreInput.maxLength=12000;
+      core.append(coreWrap,make('small','Use the character’s name in the Visual Description, Personality and Roleplay Behavior Examples headings. Write the five example actions in first person: I, my, I’m. Examples guide portrayal, not remembered history. Keep private events in chat-specific memories.'));
       const [reminderWrap,reminderInput]=field('Character reminder note',profile.reminder);reminderInput.maxLength=1000;reminderInput.rows=2;
       reminderInput.placeholder='A short reminder for every reply: voice, mannerisms, boundaries or writing preferences…';
       core.append(reminderWrap,make('small','Keep this brief—ideally under 100 words. It reinforces the character on every reply.'));

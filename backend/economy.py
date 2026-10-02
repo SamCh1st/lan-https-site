@@ -1,4 +1,6 @@
-"""Integer copper accounting; all map trades commit money and goods together."""
+"""Integer copper accounting; all map trades commit money and goods together.
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 import json
 import re
 from decimal import Decimal

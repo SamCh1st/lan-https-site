@@ -1,4 +1,6 @@
-"""Stream validated drawing operations from Ollama as each JSON step completes."""
+"""Stream validated drawing operations from Ollama as each JSON step completes.
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 from __future__ import annotations
 
 import json

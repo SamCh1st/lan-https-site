@@ -1,0 +1,7 @@
+{
+  "default": true,
+  // Prose and source links use editor wrapping; avoid arbitrary hard line breaks.
+  "MD013": false,
+  "MD004": { "style": "dash" },
+  "MD007": { "indent": 2 }
+}

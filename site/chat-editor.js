@@ -1,5 +1,13 @@
+/**
+ * Keep raw message edits local until Save; autocomplete appends a reviewable suffix.
+ * See [README: message editing and images](../README.md#message-editing-and-images).
+ */
 /* Raw, same-card editing. Continuation always appends at the end of the draft. */
 window.ChatEditor = {
+  /**
+   * Open the same-card editor and connect completion, undo, save and cancel callbacks.
+   * See [README](../README.md#message-editing-and-images).
+   */
   open(card, entry, options) {
     if (card.classList.contains('ai-message-editing')) return;
     card.classList.add('ai-message-editing');
@@ -12,7 +20,7 @@ window.ChatEditor = {
     field.className = 'chat-message-draft'; field.value = entry.message; field.maxLength = 12000;
     field.setAttribute('aria-label', 'Edit raw message');
     const help = document.createElement('small');
-    help.textContent = 'Edit text, style markers and <image>prompts</image>. Autocomplete continues from the end.';
+    help.textContent = 'Autocomplete continues from the end. End with <image> to draft an image description and close its tag. Review the text, then Save.';
     const controls = document.createElement('div'); controls.className = 'chat-editor-controls';
     const error = document.createElement('div'); error.className = 'chat-editor-error'; error.setAttribute('role', 'status');
     let images = [...(entry.image_ids || [])], closed = false, busy = false, undo = null;

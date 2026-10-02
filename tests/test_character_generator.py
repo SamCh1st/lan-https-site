@@ -7,10 +7,12 @@ from unittest.mock import patch
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import character_generator
 import server
+from portrayal_fixtures import portrayal
 
 class CharacterGenerationTests(unittest.TestCase):
     def test_starting_fighter_hp_and_review_notes(self):
         raw={'title':'Harold Grandalf','content':{'character_class':'Fighter','species':'Dwarf','character_level':1,'constitution':14,'hp_max':26,'subclass':'Battle Master'}}
+        raw['content']['portrayal'] = portrayal()
         draft=character_generator.generate('A dwarf knight',{'tabletop':{'ruleset':'2024'}},'model',lambda *a,**k:{'message':{'content':json.dumps(raw)}},server.response_json,server.normalize_character_stats)
         self.assertEqual(draft['content']['hp_max'],13)
         self.assertEqual(draft['content']['hp_current'],13)
@@ -36,6 +38,7 @@ class CharacterGenerationTests(unittest.TestCase):
             self.assertIsInstance(body['format'],dict)
             self.assertEqual(body['format']['required'],['title','content'])
             raw = {'reply':'A dwarf knight'} if len(calls)==1 else {'title':'Harold Grandalf','content':{'character_class':'Paladin','species':'Dwarf'}}
+            if 'content' in raw: raw['content']['portrayal'] = portrayal()
             return {'message':{'content':json.dumps(raw)}}
         draft=character_generator.generate('Harold Grandalf, a 62 year old dwarf knight.',{},'model',request,server.response_json,server.normalize_character_stats)
         self.assertEqual(len(calls),2)
@@ -45,6 +48,7 @@ class CharacterGenerationTests(unittest.TestCase):
 
     def test_draft_fields_resources_and_privileged_fields(self):
         payload={'title':'Mira','content':{'owner_user_id':999,'campaign_id':99,'image_id':42,'player_visible':True,'character_level':5,'dexterity':16,'wisdom':14,'hp_max':30,'character_class':'Wizard','tabletop':{'skill_perception':2,'slot_1_max':4,'slot_1_remaining':99,'condition_poisoned':True,'spell_ability':'intelligence','unknown':'ignore'}}}
+        payload['content']['portrayal'] = portrayal()
         def request(path, body, timeout):
             self.assertEqual(path,'/api/chat')
             self.assertEqual(body['model'],'test-model')

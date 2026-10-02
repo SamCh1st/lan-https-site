@@ -1,5 +1,13 @@
+/**
+ * Manage uploaded chat attachments separately from generated image slots.
+ * See [README: message editing and images](../README.md#message-editing-and-images).
+ */
 /* Thumbnail-only chat attachments, using the catalog artwork chooser. */
 (function () {
+  /**
+   * Build an attachment tray whose changes are returned through the caller's callbacks.
+   * See [README](../README.md#message-editing-and-images).
+   */
   function create(host, options) {
     host.innerHTML = '<div class="chat-image-tools"><label class="image-pick">Import images<input type="file" accept="image/png,image/jpeg,image/webp" multiple aria-label="Import chat images"></label><div class="chat-image-picker"></div></div><div class="chat-image-tray" aria-label="Attached images" hidden></div>';
     const input = host.querySelector('input'), tray = host.querySelector('.chat-image-tray');
@@ -42,6 +50,10 @@
       setScope(next, records) {if (next !== scope) {this.clear(); scope = next;} picker.setArtwork(records);}
     };
   }
+  /**
+   * Render saved uploaded images for a message.
+   * See [README](../README.md#message-editing-and-images).
+   */
   function display(host, ids) {
     if (!ids?.length) return;
     const tray = document.createElement('div'); tray.className = 'chat-image-tray chat-message-images';

@@ -1,4 +1,6 @@
-"""Local pixel artwork, isolated from the website and serialized on the GPU."""
+"""Local pixel artwork, isolated from the website and serialized on the GPU.
+
+See [README: world rules and artwork](../README.md#world-rules-and-artwork)."""
 from pathlib import Path
 from contextlib import ExitStack
 import json
